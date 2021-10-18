@@ -8,4 +8,4 @@ const routes: Routes = [{ path: 'login', component: LoginPageComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class GeneralRoutingModule {}
+export class PagesRoutingModule {}
