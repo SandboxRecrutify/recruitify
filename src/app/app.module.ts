@@ -18,7 +18,8 @@ import { SharedModule } from './shared/shared.module';
     NzCardModule,
     PagesModule,
     SharedModule,
-    FormsModule ],
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
