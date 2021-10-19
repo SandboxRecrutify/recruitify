@@ -8,7 +8,6 @@
   width: 100vw;
   height: 100vh;
   &_container {
-    text-align: center;
     background-color: white;
     // border: 1px solid hsl(0, 0%, 80%);
     max-width: 30rem;
@@ -18,6 +17,7 @@
     flex-grow: 1;
     // color: red;
     h2 {
+      text-align: center;
       color: $primaryColor;
       font-weight: 700;
     }
