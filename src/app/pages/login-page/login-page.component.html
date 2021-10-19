@@ -10,7 +10,7 @@
     >
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your email!">
-          <nz-input-group nzPrefixIcon="user">
+          <nz-input-group>
             <input
               type="text"
               nz-input
@@ -21,8 +21,8 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
+        <nz-form-control nzErrorTip="Please input your password!">
+          <nz-input-group>
             <input
               type="password"
               nz-input
@@ -33,7 +33,7 @@
         </nz-form-control>
       </nz-form-item>
 
-      <button class="loginPage_btn" nz-button [nzType]="'primary'">
+      <button class="loginPage_btn" type="submit" nz-button nzType="primary">
         Log in
       </button>
     </form>
