@@ -8,6 +8,8 @@ import { RatingStarsComponent } from './rating-stars/rating-stars.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { FormsModule } from '@angular/forms';
+import { PagesRoutingModule } from '../pages/pages-routing.module';
+import { PagesModule } from '../pages/pages.module';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     SharedRoutingModule,
     NzRateModule,
     NzIconModule,
-    FormsModule
+    FormsModule,
+    PagesModule
   ],
   exports: [RatingStarsComponent]
 })

@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule } from '@angular/forms';
-
+import { PagesModule as SharedPagesModule } from './shared/pages/pages.module';
 import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,9 @@ import { SharedModule } from './shared/shared.module';
     PagesModule,
     SharedModule,
     FormsModule,
+    SharedPagesModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],
