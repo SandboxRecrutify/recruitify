@@ -14,10 +14,11 @@ import { SandboxComponent } from './pages/sandboxes-page/sandbox/sandbox.compone
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { ParticipantsComponent } from './pages/sandboxes-page/participants/participants.component';
 
 @NgModule({
   declarations: [
-    SharedComponent, RatingStarsComponent, SandboxesPageComponent, SandboxesListComponent, SandboxComponent
+    SharedComponent, RatingStarsComponent, SandboxesPageComponent, SandboxesListComponent, SandboxComponent, ParticipantsComponent
   ],
   imports: [
     CommonModule,
