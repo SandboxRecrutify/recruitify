@@ -1,0 +1,6 @@
+@use "../globals" as *;
+.app-container {
+  background-color: $bgColor;
+  width: 100vw;
+  height: 100vh;
+}
