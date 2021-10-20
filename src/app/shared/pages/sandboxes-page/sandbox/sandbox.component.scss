@@ -1,0 +1,26 @@
+nz-card {
+  box-shadow: 10px 5px 5px rgb(167, 164, 164);
+  &:hover {
+    box-shadow: 15px 10px 10px rgb(167, 164, 164);
+    transition: all 0.3s;
+  }
+
+  .info {
+    display: flex;
+  }
+  .sandbox-info {
+    color: #0082ca;
+  }
+  .canditates-count {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 5px;
+    }
+  }
+
+  nz-tabset {
+    padding-bottom: 10px;
+  }
+}

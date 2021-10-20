@@ -8,18 +8,26 @@ import { RatingStarsComponent } from './rating-stars/rating-stars.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { FormsModule } from '@angular/forms';
-
+import { SandboxesPageComponent } from './pages/sandboxes-page/sandboxes-page.component';
+import { SandboxesListComponent } from './pages/sandboxes-page/sandboxes-list/sandboxes-list.component';
+import { SandboxComponent } from './pages/sandboxes-page/sandbox/sandbox.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @NgModule({
   declarations: [
-    SharedComponent, RatingStarsComponent
+    SharedComponent, RatingStarsComponent, SandboxesPageComponent, SandboxesListComponent, SandboxComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
+    FormsModule,
     NzRateModule,
     NzIconModule,
-    FormsModule
+    NzButtonModule,
+    NzCardModule,
+    NzTabsModule
   ],
   exports: [RatingStarsComponent]
 })
