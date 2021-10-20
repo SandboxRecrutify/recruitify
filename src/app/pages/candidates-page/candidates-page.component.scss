@@ -1,0 +1,44 @@
+@use "../../../globals" as *;
+
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  color: $primaryColor;
+}
+
+.header {
+  position: relative;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .candidatesCount {
+    position: absolute;
+    top: 10px;
+    left: 0;
+  }
+
+  h3 {
+    margin: 0;
+    color: $primaryColor;
+  }
+}
