@@ -8,15 +8,12 @@
       <nz-tab nzTitle="Info">
         <div class="info">
           <div class="sandbox-info">
-          <p>Technjlogies:</p>
+          <p>Technologies: JS, .NET </p>
           <p>Status: {{ card.status }}</p>
           <p>Start: {{ card.start }}</p>
           <p>Finish: {{ card.finish }}</p>
         </div>
-        <div class="canditates-count">
-          <img src="../../../../../assets/images/Group.png" alt="pic" />
-          <span>{{ card.count }}</span>
-        </div>
+        <app-participants [registered]="card.count.registered" [required]="card.count.required"></app-participants>
         </div>
       </nz-tab>
       <nz-tab nzTitle="Staff">
