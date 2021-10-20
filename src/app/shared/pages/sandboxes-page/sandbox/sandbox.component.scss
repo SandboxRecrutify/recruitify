@@ -1,37 +1,26 @@
-.card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-  padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
-  background: #fff;
-  color: #0082ca;
-  font-weight: 600;
-  border-radius: 5px;
+nz-card {
   box-shadow: 10px 5px 5px rgb(167, 164, 164);
   &:hover {
     box-shadow: 15px 10px 10px rgb(167, 164, 164);
     transition: all 0.3s;
   }
 
-  h2 {
-    margin-bottom: 0.5rem;
+  .info {
+    display: flex;
+  }
+  .sandbox-info {
     color: #0082ca;
   }
   .canditates-count {
+    margin: 0 auto;
     display: flex;
     align-items: center;
     span {
       margin-left: 5px;
     }
   }
-  .control {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    button {
-      margin-left: 30px;
-    }
+
+  nz-tabset {
+    padding-bottom: 10px;
   }
 }

@@ -13,6 +13,7 @@ import { SandboxesListComponent } from './pages/sandboxes-page/sandboxes-list/sa
 import { SandboxComponent } from './pages/sandboxes-page/sandbox/sandbox.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzIconModule,
     NzButtonModule,
     NzCardModule,
+    NzTabsModule
   ],
   exports: [RatingStarsComponent]
 })

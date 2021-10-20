@@ -1,15 +1,37 @@
-<div class="card">
-  <div class="info">
-    <h2>{{ card.title }}</h2>
-    <p>Status: {{ card.status }}</p>
-    <p>Start: {{ card.start }}</p>
-    <p>Finish: {{ card.finish }}</p>
-  </div>
-  <div class="canditates-count">
-    <img src="../../assets/images/Group.png" alt="pic">
-    <span>{{card.count}}</span></div>
-  <div class="control">
-    <p>Manager: {{card.manager}}</p>
-    <button nz-button nzType="primary">Open</button>
-  </div>
-</div>
+<nz-card
+  style="width: 100%"
+  nzTitle="{{ card.title }}"
+  [nzExtra]="extraTemplate"
+>
+  <nz-card-tab>
+    <nz-tabset nzSize="large" [(nzSelectedIndex)]="index1">
+      <nz-tab nzTitle="Info">
+        <div class="info">
+          <div class="sandbox-info">
+          <p>Technjlogies:</p>
+          <p>Status: {{ card.status }}</p>
+          <p>Start: {{ card.start }}</p>
+          <p>Finish: {{ card.finish }}</p>
+        </div>
+        <div class="canditates-count">
+          <img src="../../../../../assets/images/Group.png" alt="pic" />
+          <span>{{ card.count }}</span>
+        </div>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="Staff">
+        <p>Managers: Lionel Messi</p>
+        <p>Mentors: Lionel Messi, Cristiano Ronaldo, Diego Maradonna</p>
+        <p>Interviewers: Gomer Simpson, Tony Montana</p>
+        <p>Recruters: Lionel Messi, Lionel Mess</p>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card-tab>
+  <a>Edit project</a>
+</nz-card>
+<ng-template #extraTemplate>
+  <button nz-button nzType="primary" (click)="showCandidates()">
+    View candidates
+  </button>
+</ng-template>
+<br />
