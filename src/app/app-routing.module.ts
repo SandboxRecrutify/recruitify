@@ -1,4 +1,4 @@
-import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
+import { CandidatesPageComponent } from './shared/pages/candidates-page/candidates-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';

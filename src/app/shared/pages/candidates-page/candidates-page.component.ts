@@ -1,5 +1,5 @@
-import { FacadeService } from './../../core/facade/facade.service';
-import { CandidateItem, CandidateService } from 'src/app/core/services/candidate.service';
+import { CandidatesPageFacade } from './candidates-page.facade';
+import { CandidateItem } from 'src/app/core/services/candidate.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ export class CandidatesPageComponent implements OnInit {
 
   listOfData: CandidateItem[] = [];
 
-  constructor(private facadeService: FacadeService) { }
+  constructor(private candidatesPageFacade: CandidatesPageFacade) { }
 
   listOfFilter = [...this.listOfData.map(item => {
     const newobj = {text: '', value: ''}
@@ -34,7 +34,7 @@ export class CandidatesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.facadeService.candidatesList
+    this.candidatesPageFacade.getCandidates()
       .subscribe(response => this.listOfData = response)
   }
 }
