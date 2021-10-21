@@ -1,3 +1,5 @@
 .sandboxes {
-  margin: 60px auto;
+  &_head {
+    margin-bottom: 1rem;
+  }
 }
