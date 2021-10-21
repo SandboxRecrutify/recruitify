@@ -1,22 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { CandidatesService } from './../../services/candidates.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
-export interface CandidateItem {
-  name: string;
-  location: string;
-  skill: string;
-  status: string;
-  feedback1: number;
-  feedback2: number;
-}
 
 @Injectable()
 
 export class CandidatesPageFacade {
-  constructor(private candidates: HttpClient) { }
+  constructor(private candidatesService: CandidatesService) {}
 
-  getCandidates(): Observable<CandidateItem[]> {
-    return this.candidates.get<CandidateItem[]>('assets/candidates.json')
-  }
+  candidateList$ = this.candidatesService.getCandidates()
 }

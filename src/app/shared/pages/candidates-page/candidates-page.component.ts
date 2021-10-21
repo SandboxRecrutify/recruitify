@@ -1,6 +1,16 @@
+import { Candidate } from './../../services/candidates.service';
 import { CandidatesPageFacade } from './candidates-page.facade';
-import { CandidateItem } from 'src/app/core/services/candidate.service';
+// import { CandidateItem } from 'src/app/core/services/candidate.service';
 import { Component, OnInit } from '@angular/core';
+
+// export interface CandidateItem {
+//   name: string;
+//   location: string;
+//   skill: string;
+//   status: string;
+//   feedback1: number;
+//   feedback2: number;
+// }
 
 @Component({
   selector: 'app-candidates-page',
@@ -12,7 +22,7 @@ export class CandidatesPageComponent implements OnInit {
   searchValue = '';
   visible = false;
 
-  listOfData: CandidateItem[] = [];
+  listOfData: Candidate[] = [];
 
   constructor(private candidatesPageFacade: CandidatesPageFacade) { }
 
@@ -21,7 +31,7 @@ export class CandidatesPageComponent implements OnInit {
     newobj.text = newobj.value = item.location
     return newobj
   })]
-  filterFn = (list: string[], item: CandidateItem) => list.some(location => item.location.indexOf(location) !== -1)
+  filterFn = (list: string[], item: Candidate) => list.some(location => item.location.indexOf(location) !== -1)
 
   reset(): void {
     this.searchValue = '';
@@ -30,11 +40,11 @@ export class CandidatesPageComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfData = this.listOfData.filter((item: CandidateItem) => item.name.indexOf(this.searchValue) !== -1);
+    this.listOfData = this.listOfData.filter((item: Candidate) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
-    this.candidatesPageFacade.getCandidates()
+    this.candidatesPageFacade.candidateList$
       .subscribe(response => this.listOfData = response)
   }
 }

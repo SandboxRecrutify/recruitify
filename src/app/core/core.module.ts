@@ -10,7 +10,6 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './components/header/header.component';
-
 import { MainLayoutFacade } from './main-layout/main-layout.facade';
 
 @NgModule({

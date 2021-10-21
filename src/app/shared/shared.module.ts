@@ -1,3 +1,4 @@
+import { CandidatesService } from './services/candidates.service';
 import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -56,6 +57,6 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzSwitchModule,
   ],
   exports: [RatingStarsComponent],
-  providers: [CandidatesPageFacade]
+  providers: [CandidatesService, CandidatesPageFacade]
 })
 export class SharedModule {}

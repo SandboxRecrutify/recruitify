@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface CandidateItem {
+export interface Candidate {
   name: string;
   location: string;
   skill: string;
@@ -13,10 +13,10 @@ export interface CandidateItem {
 
 @Injectable()
 
-export class CandidateService {
+export class CandidatesService {
   constructor(private candidates: HttpClient) { }
 
-  getCandidates(): Observable<CandidateItem[]> {
-    return this.candidates.get<CandidateItem[]>('assets/candidates.json')
+  getCandidates(): Observable<Candidate[]> {
+    return this.candidates.get<Candidate[]>('assets/candidates.json')
   }
 }
