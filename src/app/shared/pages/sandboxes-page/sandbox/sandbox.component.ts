@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../sandboxes-list/sandboxes-list.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sandbox',
@@ -10,12 +11,13 @@ export class SandboxComponent implements OnInit {
   index1 = 0;
   index2 = 0;
 
-  showCandidates() {
-    console.log('candidates page')
-  }
   @Input() card!: Card;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  showCandidates() {
+    this.router.navigate(['candidates']);
+  }
 }

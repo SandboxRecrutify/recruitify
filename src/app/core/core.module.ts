@@ -10,11 +10,12 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { FacadeService } from './facade/facade.service';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { HeaderComponent } from './components/header/header.component';
 
 import { CandidateService } from './services/candidate.service';
 
 @NgModule({
-  declarations: [MainLayoutComponent, LoginPageComponent],
+  declarations: [MainLayoutComponent, LoginPageComponent, HeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
