@@ -8,6 +8,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
+import { FacadeService } from './facade/facade.service';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 @NgModule({
@@ -23,5 +24,6 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     NzGridModule,
     ReactiveFormsModule,
   ],
+  providers: [FacadeService],
 })
 export class CoreModule {}
