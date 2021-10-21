@@ -1,7 +1,6 @@
-import { FacadeService } from './../../core/facade/facade.service';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 import { CandidateService } from 'src/app/core/services/candidate.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 interface DataItem {
   name: string;
@@ -19,29 +18,12 @@ interface DataItem {
 })
 
 export class CandidatesPageComponent implements OnInit {
-  constructor(private facadeService: FacadeService) { }
+  constructor(private candidates: HttpClient) { }
 
   searchValue = '';
   visible = false;
 
-  listOfData: DataItem[] = [
-    {
-      name: 'Sergei Chura',
-      location: 'Minsk, Belarus',
-      skill: 'Frontend',
-      status: 'New',
-      feedback1: 2,
-      feedback2: 4,
-    },
-    {
-      name: 'Lionel Messi',
-      location: 'Barcelona, Spain',
-      skill: '.NET',
-      status: 'New',
-      feedback1: 4,
-      feedback2: 4,
-    },
-  ];
+  listOfData: DataItem[] = [];
 
   listOfDisplayData = [...this.listOfData];
 
@@ -63,5 +45,10 @@ export class CandidatesPageComponent implements OnInit {
     this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    // this.candidates.get('assets/candidates.json')
+    //   .subscribe(response => {
+    //     this.listOfData  = response
+    //   })
+  }
 }
