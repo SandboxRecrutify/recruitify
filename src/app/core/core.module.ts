@@ -10,6 +10,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { FacadeService } from './facade/facade.service';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { CandidateService } from './services/candidate.service';
 
 @NgModule({
   declarations: [MainLayoutComponent, LoginPageComponent],
@@ -24,6 +25,6 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     NzGridModule,
     ReactiveFormsModule,
   ],
-  providers: [FacadeService],
+  providers: [FacadeService, CandidateService],
 })
 export class CoreModule {}

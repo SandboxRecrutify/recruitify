@@ -21,6 +21,7 @@ registerLocaleData(en);
 
 /** config ng-zorro-antd i18n **/
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { HttpClientModule } from '@angular/common/http';
 
 /** set the default i18n config **/
 
@@ -28,6 +29,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
   declarations: [AppComponent, CandidatesPageComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     CoreModule,
     NzCardModule,

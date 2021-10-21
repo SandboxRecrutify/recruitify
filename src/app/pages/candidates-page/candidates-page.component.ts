@@ -1,4 +1,7 @@
+import { FacadeService } from './../../core/facade/facade.service';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CandidateService } from 'src/app/core/services/candidate.service';
 
 interface DataItem {
   name: string;
@@ -16,7 +19,7 @@ interface DataItem {
 })
 
 export class CandidatesPageComponent implements OnInit {
-  constructor() { }
+  constructor(private facadeService: FacadeService) { }
 
   searchValue = '';
   visible = false;
@@ -60,5 +63,5 @@ export class CandidatesPageComponent implements OnInit {
     this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {  }
 }
