@@ -1,15 +1,6 @@
-import { CandidateService } from 'src/app/core/services/candidate.service';
+import { FacadeService } from './../../core/facade/facade.service';
+import { CandidateItem, CandidateService } from 'src/app/core/services/candidate.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-interface DataItem {
-  name: string;
-  location: string;
-  skill: string;
-  status: string;
-  feedback1: number;
-  feedback2: number;
-}
 
 @Component({
   selector: 'app-candidates-page',
@@ -18,22 +9,19 @@ interface DataItem {
 })
 
 export class CandidatesPageComponent implements OnInit {
-  constructor(private candidates: HttpClient) { }
-
   searchValue = '';
   visible = false;
 
-  listOfData: DataItem[] = [];
+  listOfData: CandidateItem[] = [];
 
-  listOfDisplayData = [...this.listOfData];
+  constructor(private facadeService: FacadeService) { }
 
   listOfFilter = [...this.listOfData.map(item => {
     const newobj = {text: '', value: ''}
     newobj.text = newobj.value = item.location
     return newobj
-  } )]
-
-  filterFn = (list: string[], item: DataItem) => list.some(location => item.location.indexOf(location) !== -1)
+  })]
+  filterFn = (list: string[], item: CandidateItem) => list.some(location => item.location.indexOf(location) !== -1)
 
   reset(): void {
     this.searchValue = '';
@@ -42,13 +30,11 @@ export class CandidatesPageComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+    this.listOfData = this.listOfData.filter((item: CandidateItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
-    // this.candidates.get('assets/candidates.json')
-    //   .subscribe(response => {
-    //     this.listOfData  = response
-    //   })
+    this.facadeService.candidatesList
+      .subscribe(response => this.listOfData = response)
   }
 }
