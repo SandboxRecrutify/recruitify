@@ -1,3 +1,13 @@
-<div class="sandboxes">
+<div class="sandboxes page_container">
+  <div class="sandboxes_head">
+    <button nz-button nzType="primary" (click)="showModal()">
+      Create Project
+    </button>
+  </div>
   <app-sandboxes-list></app-sandboxes-list>
+  <app-create-sandbox
+    (onCancel)="handleCancel()"
+    (onOk)="handleOk()"
+    [isVisible]="isVisible"
+  ></app-create-sandbox>
 </div>

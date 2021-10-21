@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +13,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './create-sandbox.component.html',
   styleUrls: ['./create-sandbox.component.scss'],
 })
-export class CreateSandboxComponent implements OnInit {
+export class CreateSandboxComponent implements OnInit, OnChanges {
+  @Input() isVisible!: boolean;
+  @Output() onOk = new EventEmitter<any>();
+  @Output() onCancel = new EventEmitter<any>();
   //staff groups
   groups: any[] = [
     { name: 'manager', staffs: [] },
@@ -37,22 +47,17 @@ export class CreateSandboxComponent implements OnInit {
     { label: 'JS', value: 'js' },
     { label: 'BA', value: 'ba' },
   ];
-  isVisible = true;
   form!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
-  showModal(): void {
-    this.isVisible = true;
-  }
-
   handleOk(): void {
     // this.isVisible = !this.isVisible;
-    this.submitForm();
+    this.onOk.emit();
   }
 
   handleCancel(): void {
-    this.isVisible = false;
+    this.onCancel.emit();
   }
 
   submitForm() {
@@ -85,5 +90,8 @@ export class CreateSandboxComponent implements OnInit {
       staffs: [[], [Validators.required]],
       isActive: ['', [Validators.required]],
     });
+  }
+  ngOnChanges(): void {
+    console.log(this.isVisible);
   }
 }

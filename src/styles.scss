@@ -5,3 +5,9 @@ body {
   margin: 0;
   background-color: #f4f4f4;
 }
+
+//add this class to all pages with header
+.page_container {
+  max-width: 1200px;
+  margin: 60px auto;
+}

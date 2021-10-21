@@ -1,8 +1,5 @@
-<button nz-button nzType="primary" (click)="showModal()">
-  <span>Show Modal</span>
-</button>
 <nz-modal
-  [nzVisible]="isVisible"
+  [(nzVisible)]="isVisible"
   nzTitle="Create new project"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
