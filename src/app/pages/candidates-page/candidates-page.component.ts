@@ -14,6 +14,7 @@ interface DataItem {
   templateUrl: './candidates-page.component.html',
   styleUrls: ['./candidates-page.component.scss']
 })
+
 export class CandidatesPageComponent implements OnInit {
   constructor() { }
 
@@ -38,18 +39,14 @@ export class CandidatesPageComponent implements OnInit {
       feedback2: 4,
     },
   ];
+
   listOfDisplayData = [...this.listOfData];
 
-  listOfFilter =[...this.listOfData.map(item => {
+  listOfFilter = [...this.listOfData.map(item => {
     const newobj = {text: '', value: ''}
-    newobj.text = item.location
-    newobj.value = item.location
+    newobj.text = newobj.value = item.location
     return newobj
   } )]
-
-
-
-
 
   filterFn = (list: string[], item: DataItem) => list.some(location => item.location.indexOf(location) !== -1)
 
@@ -63,10 +60,5 @@ export class CandidatesPageComponent implements OnInit {
     this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
-  ngOnInit(): void {
-    // console.log(this.listOfFilter1)
-    // console.log(this.listOfFilter)
-  }
-
-
+  ngOnInit(): void {}
 }
