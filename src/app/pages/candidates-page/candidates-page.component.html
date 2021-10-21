@@ -1,12 +1,12 @@
 <div class="container">
   <div class="header">
-    <div class="candidatesCount">candidatesCount</div>
+    <div class="candidatesCount">{{ listOfData.length }}</div>
     <h3>October 2021 JS, .NET, BA</h3>
   </div>
 
   <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
     <thead>
-      <tr class="thead">
+      <tr>
         <th nzWidth="45px"><input type="checkbox" /></th>
         <th nzCustomFilter>
           Name
@@ -19,7 +19,6 @@
           </nz-filter-trigger>
         </th>
         <th
-          nzSortOrder="null"
           [nzFilterMultiple]="true"
           [nzFilters]="listOfFilter"
           [nzFilterFn]="filterFn"
@@ -30,7 +29,7 @@
         <th>Status</th>
         <th nzWidth="145px">Recruter's feedback</th>
         <th nzWidth="145px">Interviewer's feedback</th>
-        <th nzWidth="75px"></th>
+        <th nzWidth="105px"></th>
       </tr>
     </thead>
     <tbody>
@@ -42,7 +41,16 @@
         <td>{{ data.status }}</td>
         <td><app-rating-stars></app-rating-stars></td>
         <td><app-rating-stars></app-rating-stars></td>
-        <td>button</td>
+        <td>
+          <button
+            nz-button
+            nzSize="small"
+            nzType="primary"
+            style="font-size: 12px"
+          >
+            view profile
+          </button>
+        </td>
       </tr>
     </tbody>
   </nz-table>

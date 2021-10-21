@@ -1,3 +1,4 @@
+import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
+  {
+    path: 'candidates',
+    component: CandidatesPageComponent
+  }
 ];
 
 @NgModule({
