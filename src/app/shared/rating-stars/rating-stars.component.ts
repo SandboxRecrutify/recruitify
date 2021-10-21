@@ -7,11 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RatingStarsComponent implements OnInit {
 
-  isDisabled = false
+  isDisabled = true
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

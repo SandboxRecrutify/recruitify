@@ -35,10 +35,18 @@
     position: absolute;
     top: 10px;
     left: 0;
+    height: 25px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    background: url(../../../assets/images/Group.png) no-repeat center left;
+    background-size: contain;
+    font-weight: 800;
   }
 
   h3 {
     margin: 0;
     color: $primaryColor;
+    font-weight: 700;
   }
 }
