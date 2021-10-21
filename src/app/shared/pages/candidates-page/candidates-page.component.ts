@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class CandidatesPageComponent implements OnInit {
   searchValue = '';
   visible = false;
-
   listOfData: Candidate[] = [];
 
   constructor(private candidatesPageFacade: CandidatesPageFacade) { }
