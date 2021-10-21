@@ -1,15 +1,7 @@
+import { Candidate } from '../models/Candidate';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export interface Candidate {
-  name: string;
-  location: string;
-  skill: string;
-  status: string;
-  feedback1: number;
-  feedback2: number;
-}
 
 @Injectable()
 

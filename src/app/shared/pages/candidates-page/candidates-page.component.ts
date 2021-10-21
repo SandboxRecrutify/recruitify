@@ -1,16 +1,6 @@
-import { Candidate } from './../../services/candidates.service';
+import { Candidate } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
-// import { CandidateItem } from 'src/app/core/services/candidate.service';
 import { Component, OnInit } from '@angular/core';
-
-// export interface CandidateItem {
-//   name: string;
-//   location: string;
-//   skill: string;
-//   status: string;
-//   feedback1: number;
-//   feedback2: number;
-// }
 
 @Component({
   selector: 'app-candidates-page',
