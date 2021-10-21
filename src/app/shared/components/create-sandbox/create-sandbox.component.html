@@ -1,0 +1,113 @@
+<button nz-button nzType="primary" (click)="showModal()">
+  <span>Show Modal</span>
+</button>
+<nz-modal
+  [nzVisible]="isVisible"
+  nzTitle="Create new project"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  nzOkText="Create"
+  nzCancelText="Cancel"
+>
+  <!-- nzWidth="700px" -->
+  <ng-container *nzModalContent>
+    <form [formGroup]="form" nz-form nzLayout="vertical" nz-row [nzGutter]="16">
+      <!-- project name -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="name">Project Name</nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="name" id="name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- technologies or primary skills -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="primarySkills"
+            >Technologies</nz-form-label
+          >
+          <nz-form-control>
+            <nz-select
+              nzMode="multiple"
+              nz-input
+              formControlName="primarySkills"
+              id="primarySkills"
+            >
+              <nz-option
+                *ngFor="let option of tOptions"
+                nzValue="{{ option.value }}"
+                nzLabel="{{ option.label }}"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- staff -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="staffs">Staff</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzMode="multiple"
+              nz-input
+              formControlName="staffs"
+              id="staffs"
+            >
+              <nz-option-group
+                *ngFor="let group of groups"
+                [nzLabel]="group.name"
+              >
+                <nz-option
+                  *ngFor="let staff of group.staffs"
+                  nzValue="{{ staff.id }}"
+                  nzLabel="{{ staff.name }}"
+                >
+                </nz-option>
+              </nz-option-group>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- dates -->
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="dates"
+            >Choose start-date and end-date</nz-form-label
+          >
+          <nz-form-control>
+            <nz-range-picker
+              formControlName="dates"
+              id="dates"
+            ></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- candidates' max count -->
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="plannedCandidatesCount"
+            >Max. candidates count</nz-form-label
+          >
+          <nz-form-control>
+            <input
+              type="number"
+              nz-input
+              formGroupName="plannedCandidatesCount"
+              id="plannedCandidatesCount"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- isActive -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="isActive">Status</nz-form-label>
+          <nz-form-control>
+            <nz-switch formGroupName="isActive" id="isActive"></nz-switch>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

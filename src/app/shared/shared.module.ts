@@ -7,7 +7,7 @@ import { RatingStarsComponent } from './rating-stars/rating-stars.component';
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRateModule } from 'ng-zorro-antd/rate';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SandboxesPageComponent } from './pages/sandboxes-page/sandboxes-page.component';
 import { SandboxesListComponent } from './pages/sandboxes-page/sandboxes-list/sandboxes-list.component';
 import { SandboxComponent } from './pages/sandboxes-page/sandbox/sandbox.component';
@@ -15,10 +15,25 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ParticipantsComponent } from './pages/sandboxes-page/participants/participants.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { CreateSandboxComponent } from './components/create-sandbox/create-sandbox.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [
-    SharedComponent, RatingStarsComponent, SandboxesPageComponent, SandboxesListComponent, SandboxComponent, ParticipantsComponent
+    SharedComponent,
+    RatingStarsComponent,
+    SandboxesPageComponent,
+    SandboxesListComponent,
+    SandboxComponent,
+    ParticipantsComponent,
+    CreateSandboxComponent,
   ],
   imports: [
     CommonModule,
@@ -28,8 +43,17 @@ import { ParticipantsComponent } from './pages/sandboxes-page/participants/parti
     NzIconModule,
     NzButtonModule,
     NzCardModule,
-    NzTabsModule
+    ReactiveFormsModule,
+    NzTabsModule,
+    NzTableModule,
+    NzGridModule,
+    NzInputModule,
+    NzModalModule,
+    NzFormModule,
+    NzSelectModule,
+    NzDatePickerModule,
+    NzSwitchModule,
   ],
-  exports: [RatingStarsComponent]
+  exports: [RatingStarsComponent],
 })
-export class SharedModule { }
+export class SharedModule {}
