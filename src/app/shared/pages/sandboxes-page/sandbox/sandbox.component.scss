@@ -1,8 +1,8 @@
 nz-card {
   box-shadow: 10px 5px 5px rgb(167, 164, 164);
+  transition: all 0.2s ease-in-out;
   &:hover {
     box-shadow: 15px 10px 10px rgb(167, 164, 164);
-    transition: all 0.3s;
   }
 
   .info {
