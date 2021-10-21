@@ -15,6 +15,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
+
+/** config ng-zorro-antd i18n **/
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+
+/** set the default i18n config **/
+
 @NgModule({
   declarations: [AppComponent, CandidatesPageComponent],
   imports: [
@@ -29,9 +38,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzDropDownModule,
     NzIconModule,
     NzButtonModule,
-    NzInputModule
+    NzInputModule,
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
