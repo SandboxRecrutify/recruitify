@@ -4,16 +4,16 @@
     "location": "Minsk, BY",
     "skill": "JavaScript",
     "status": "New",
-    "feedback1": "2",
-    "feedback2": "4"
+    "feedback1": "1",
+    "feedback2": "3"
   },
   {
     "name": "Viktor Ivanov",
     "location": "Gomel, BY",
     "skill": ".NET",
     "status": "Interview",
-    "feedback1": "2",
-    "feedback2": "4"
+    "feedback1": "4",
+    "feedback2": "2"
   },
   {
     "name": "Lionel Messi",
@@ -21,6 +21,6 @@
     "skill": "BA",
     "status": "New",
     "feedback1": "2",
-    "feedback2": "4"
+    "feedback2": "3"
   }
 ]

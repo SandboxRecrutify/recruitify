@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class CandidatesPageComponent implements OnInit {
   searchValue = '';
   visible = false;
-  listOfData: Candidate[] = [];
+  candidatesList: Candidate[] = [];
 
   constructor(private candidatesPageFacade: CandidatesPageFacade) { }
 
@@ -20,7 +20,7 @@ export class CandidatesPageComponent implements OnInit {
     {text: 'Gomel', value: 'Gomel'},
     {text: 'Barcelona', value: 'Barcelona'},
   ]
-  // listOfFilter = [...this.listOfData.map(item => {
+  // listOfFilter = [...this.candidatesList.map(item => {
   //   const newobj = {text: '', value: ''}
   //   newobj.text = newobj.value = item.location
   //   return newobj
@@ -34,11 +34,11 @@ export class CandidatesPageComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfData = this.listOfData.filter((item: Candidate) => item.name.indexOf(this.searchValue) !== -1);
+    this.candidatesList = this.candidatesList.filter((item: Candidate) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
     this.candidatesPageFacade.candidateList$
-      .subscribe(response => this.listOfData = response)
+      .subscribe(response => this.candidatesList = response)
   }
 }
