@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
+import { CandidatesPageComponent } from './shared/pages/candidates-page/candidates-page.component';
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -21,6 +21,7 @@ registerLocaleData(en);
 
 /** config ng-zorro-antd i18n **/
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { HttpClientModule } from '@angular/common/http';
 
 /** set the default i18n config **/
 
@@ -28,6 +29,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
   declarations: [AppComponent, CandidatesPageComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     CoreModule,
     NzCardModule,

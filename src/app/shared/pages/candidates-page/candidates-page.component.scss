@@ -1,4 +1,5 @@
-@use "../../../globals" as *;
+// @use "../../../globals" as *;
+@use "../../../../globals" as *;
 
 .search-box {
   padding: 8px;
@@ -37,7 +38,7 @@
     padding-left: 20px;
     display: flex;
     align-items: center;
-    background: url(../../../assets/images/Group.png) no-repeat center left;
+    background: url(../../../../assets/images/Group.png) no-repeat center left;
     background-size: contain;
     font-weight: 800;
   }
