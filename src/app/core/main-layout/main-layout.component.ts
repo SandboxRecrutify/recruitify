@@ -1,5 +1,5 @@
-import { MainLayoutFacade } from './main-layout.facade';
 import { Component, OnInit } from '@angular/core';
+import { MainLayoutFacade } from './main-layout.facade';
 
 @Component({
   selector: 'app-main-layout',
@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent implements OnInit {
-  constructor(private fc: MainLayoutFacade) {}
+  constructor(public fc: MainLayoutFacade) {}
 
-  ngOnInit(): void {
-    console.log(this.fc);
-  }
+  ngOnInit(): void {}
 }

@@ -1,4 +1,4 @@
-import { pathes } from './app-routing.constants';
+import { paths } from './app-routing.constants';
 import { CandidatesPageComponent } from './shared/pages/candidates-page/candidates-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,9 +7,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SandboxesPageComponent } from './shared/pages/sandboxes-page/sandboxes-page.component';
 
 const mainRouter: Routes = [
-  { path: pathes.login, component: LoginPageComponent },
-  { path: pathes.projects, component: SandboxesPageComponent },
-  { path: pathes.candidates, component: CandidatesPageComponent },
+  { path: paths.login, component: LoginPageComponent },
+  { path: paths.projects, component: SandboxesPageComponent },
+  { path: paths.candidates, component: CandidatesPageComponent },
 ];
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
     children: mainRouter,
   },
   {
-    path: pathes.shared,
+    path: paths.shared,
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },

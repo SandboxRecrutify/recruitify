@@ -1,5 +1,5 @@
 <div class="main_layout">
-  <app-header></app-header>
+  <app-header *ngIf="fc.isHeaderVisible"></app-header>
   <div class="main_container">
     <router-outlet></router-outlet>
   </div>
