@@ -61,6 +61,12 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzSwitchModule,
   ],
   exports: [RatingStarsComponent],
-  providers: [CandidatesService, CandidatesPageFacade, ProjectsService, ProjectsPageFacade]
+  providers: [
+    CandidatesService,
+    ProfilePageComponent,
+    CandidatesPageFacade,
+    ProjectsService,
+    ProjectsPageFacade
+  ]
 })
 export class SharedModule {}
