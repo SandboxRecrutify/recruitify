@@ -26,6 +26,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { ProjectsService } from './services/projects.service';
+import { ProjectsPageFacade } from './pages/sandboxes-page/sandboxes-page.facade';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,6 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzSwitchModule,
   ],
   exports: [RatingStarsComponent],
-  providers: [CandidatesService, CandidatesPageFacade]
+  providers: [CandidatesService, CandidatesPageFacade, ProjectsService, ProjectsPageFacade]
 })
 export class SharedModule {}
