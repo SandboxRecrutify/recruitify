@@ -1,3 +1,4 @@
+import { ProfilePageComponent } from './shared/pages/profile-page/profile-page.component';
 import { paths } from './app-routing.constants';
 import { CandidatesPageComponent } from './shared/pages/candidates-page/candidates-page.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
   { path: paths.projects, component: SandboxesPageComponent },
   { path: paths.candidates, component: CandidatesPageComponent },
+  { path: paths.profile, component: ProfilePageComponent },
 ];
 
 const routes: Routes = [

@@ -28,6 +28,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/sandboxes-page/sandboxes-page.facade';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ProjectsPageFacade } from './pages/sandboxes-page/sandboxes-page.facade
     SandboxComponent,
     ParticipantsComponent,
     CreateProjectComponent,
+    ProfilePageComponent,
   ],
   imports: [
     CommonModule,
