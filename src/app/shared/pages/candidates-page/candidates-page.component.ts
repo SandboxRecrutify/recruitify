@@ -11,15 +11,20 @@ import { Component, OnInit } from '@angular/core';
 export class CandidatesPageComponent implements OnInit {
   searchValue = '';
   visible = false;
-  listOfData: Candidate[] = [];
+  candidatesList: Candidate[] = [];
 
   constructor(private candidatesPageFacade: CandidatesPageFacade) { }
 
-  listOfFilter = [...this.listOfData.map(item => {
-    const newobj = {text: '', value: ''}
-    newobj.text = newobj.value = item.location
-    return newobj
-  })]
+  listOfFilter = [
+    {text: 'Minsk', value: 'Minsk'},
+    {text: 'Gomel', value: 'Gomel'},
+    {text: 'Barcelona', value: 'Barcelona'},
+  ]
+  // listOfFilter = [...this.candidatesList.map(item => {
+  //   const newobj = {text: '', value: ''}
+  //   newobj.text = newobj.value = item.location
+  //   return newobj
+  // })]
   filterFn = (list: string[], item: Candidate) => list.some(location => item.location.indexOf(location) !== -1)
 
   reset(): void {
@@ -29,11 +34,11 @@ export class CandidatesPageComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfData = this.listOfData.filter((item: Candidate) => item.name.indexOf(this.searchValue) !== -1);
+    this.candidatesList = this.candidatesList.filter((item: Candidate) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
     this.candidatesPageFacade.candidateList$
-      .subscribe(response => this.listOfData = response)
+      .subscribe(response => this.candidatesList = response)
   }
 }

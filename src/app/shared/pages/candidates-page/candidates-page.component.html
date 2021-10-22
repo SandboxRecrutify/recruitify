@@ -1,10 +1,10 @@
-<div class="container page_container">
+<div class="page_container">
   <div class="header">
-    <div class="candidatesCount">{{ listOfData.length }}</div>
+    <div class="candidatesCount">{{ candidatesList.length }}</div>
     <h3>October 2021 JS, .NET, BA</h3>
   </div>
 
-  <nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed">
+  <nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
     <thead>
       <tr>
         <th nzWidth="45px"><input type="checkbox" /></th>
@@ -25,22 +25,32 @@
         >
           Location
         </th>
-        <th>Skill</th>
+        <th>Stack</th>
         <th>Status</th>
         <th nzWidth="145px">Recruter's feedback</th>
         <th nzWidth="145px">Interviewer's feedback</th>
-        <th nzWidth="105px"></th>
+        <th nzWidth="110px"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of nzTable.data">
+      <tr *ngFor="let candidate of nzTable.data">
         <td><input type="checkbox" /></td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.location }}</td>
-        <td>{{ data.skill }}</td>
-        <td>{{ data.status }}</td>
-        <td><app-rating-stars></app-rating-stars></td>
-        <td><app-rating-stars></app-rating-stars></td>
+        <td>{{ candidate.name }}</td>
+        <td>{{ candidate.location }}</td>
+        <td>{{ candidate.skill }}</td>
+        <td>{{ candidate.status }}</td>
+        <td>
+          <app-rating-stars
+            [rate]="candidate.feedback1"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
+        <td>
+          <app-rating-stars
+            [rate]="candidate.feedback2"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
         <td>
           <button
             nz-button
