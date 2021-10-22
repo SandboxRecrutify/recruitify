@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Card } from '../sandboxes-list/sandboxes-list.component';
 import {Router} from '@angular/router';
+import { Projects } from 'src/app/shared/models/Projects';
 
 @Component({
   selector: 'app-sandbox',
@@ -8,10 +8,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./sandbox.component.scss'],
 })
 export class SandboxComponent implements OnInit {
-  index1 = 0;
-  index2 = 0;
+  cardIndex = 0;
 
-  @Input() card!: Card;
+  @Input() card!: Projects;
 
   constructor(private router: Router) {}
 

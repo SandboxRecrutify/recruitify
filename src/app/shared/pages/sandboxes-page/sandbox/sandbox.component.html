@@ -1,19 +1,19 @@
 <nz-card
   style="width: 100%"
-  nzTitle="{{ card.title }}"
+  nzTitle="{{ card.name }}"
   [nzExtra]="extraTemplate"
 >
   <nz-card-tab>
-    <nz-tabset nzSize="large" [(nzSelectedIndex)]="index1">
+    <nz-tabset nzSize="large" [(nzSelectedIndex)]="cardIndex">
       <nz-tab nzTitle="Info">
         <div class="info">
           <div class="sandbox-info">
           <p>Technologies: JS, .NET </p>
           <p>Status: {{ card.status }}</p>
-          <p>Start: {{ card.start }}</p>
-          <p>Finish: {{ card.finish }}</p>
+          <p>Start: {{ card.startDate }}</p>
+          <p>Finish: {{ card.endDate }}</p>
         </div>
-        <app-participants [registered]="card.count.registered" [required]="card.count.required"></app-participants>
+        <app-participants [registered]="card.currentCandidatesCount" [required]="card.plannedCandidatesCount"></app-participants>
         </div>
       </nz-tab>
       <nz-tab nzTitle="Staff">
