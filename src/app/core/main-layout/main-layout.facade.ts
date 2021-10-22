@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { paths } from 'src/app/app-routing.constants';
 
 @Injectable()
 export class MainLayoutFacade {
-  constructor() {}
-
   isHeaderVisible = true;
-  setIsHeaderVisible(isHeaderVisible: boolean) {
-    this.isHeaderVisible = isHeaderVisible;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.isHeaderVisible = event.url !== `/${paths.login}`;
+      });
   }
 }
