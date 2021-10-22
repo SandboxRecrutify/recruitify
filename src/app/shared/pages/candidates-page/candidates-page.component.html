@@ -1,13 +1,13 @@
-<div class="container page_container">
+<div class="page_container">
   <div class="header">
     <div class="candidatesCount">{{ listOfData.length }}</div>
     <h3>October 2021 JS, .NET, BA</h3>
   </div>
 
   <nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed">
-    <thead>
+    <thead style="font-size: 20px">
       <tr>
-        <th nzWidth="45px"><input type="checkbox" /></th>
+        <th class="t" nzWidth="45px"><input type="checkbox" /></th>
         <th nzCustomFilter>
           Name
           <nz-filter-trigger
@@ -25,11 +25,11 @@
         >
           Location
         </th>
-        <th>Skill</th>
+        <th>Stack</th>
         <th>Status</th>
         <th nzWidth="145px">Recruter's feedback</th>
         <th nzWidth="145px">Interviewer's feedback</th>
-        <th nzWidth="105px"></th>
+        <th nzWidth="110px"></th>
       </tr>
     </thead>
     <tbody>

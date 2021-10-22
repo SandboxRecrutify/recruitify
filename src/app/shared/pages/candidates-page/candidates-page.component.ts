@@ -15,11 +15,16 @@ export class CandidatesPageComponent implements OnInit {
 
   constructor(private candidatesPageFacade: CandidatesPageFacade) { }
 
-  listOfFilter = [...this.listOfData.map(item => {
-    const newobj = {text: '', value: ''}
-    newobj.text = newobj.value = item.location
-    return newobj
-  })]
+  listOfFilter = [
+    {text: 'Minsk', value: 'Minsk'},
+    {text: 'Gomel', value: 'Gomel'},
+    {text: 'Barcelona', value: 'Barcelona'},
+  ]
+  // listOfFilter = [...this.listOfData.map(item => {
+  //   const newobj = {text: '', value: ''}
+  //   newobj.text = newobj.value = item.location
+  //   return newobj
+  // })]
   filterFn = (list: string[], item: Candidate) => list.some(location => item.location.indexOf(location) !== -1)
 
   reset(): void {
