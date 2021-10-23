@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Projects } from 'src/app/shared/models/Projects';
-import { ProjectsPageFacade } from '../sandboxes-page.facade';
+import { ProjectsPageFacade } from '../projects-page.facade';
 
 @Component({
-  selector: 'app-sandboxes-list',
-  templateUrl: './sandboxes-list.component.html',
-  styleUrls: ['./sandboxes-list.component.scss']
+  selector: 'app-projects-list',
+  templateUrl: './projects-list.component.html',
+  styleUrls: ['./projects-list.component.scss']
 })
-export class SandboxesListComponent implements OnInit {
+export class ProjectsListComponent implements OnInit {
   cards: Projects[] = []
 
 

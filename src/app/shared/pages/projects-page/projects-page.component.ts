@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sandboxes-page',
-  templateUrl: './sandboxes-page.component.html',
-  styleUrls: ['./sandboxes-page.component.scss'],
+  selector: 'app-projects-page',
+  templateUrl: './projects-page.component.html',
+  styleUrls: ['./projects-page.component.scss'],
 })
-export class SandboxesPageComponent implements OnInit {
+export class ProjectsPageComponent implements OnInit {
   isVisible = false;
   showModal(): void {
     this.isVisible = true;

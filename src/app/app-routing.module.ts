@@ -5,11 +5,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SandboxesPageComponent } from './shared/pages/sandboxes-page/sandboxes-page.component';
+import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
 
 const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
-  { path: paths.projects, component: SandboxesPageComponent },
+  { path: paths.projects, component: ProjectsPageComponent },
   { path: paths.candidates, component: CandidatesPageComponent },
   { path: paths.profile, component: ProfilePageComponent },
 ];
