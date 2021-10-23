@@ -1,3 +1,5 @@
+import { Staff } from './Staff';
+
 export interface Project {
   name: string;
   status: string;
@@ -5,4 +7,6 @@ export interface Project {
   endDate: string;
   currentCandidatesCount: number;
   plannedCandidatesCount: number;
+  primarySkill: string
+  staff: Staff[]
 }

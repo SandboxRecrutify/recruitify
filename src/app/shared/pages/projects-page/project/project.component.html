@@ -8,7 +8,7 @@
       <nz-tab nzTitle="Info">
         <div class="info">
           <div class="project-info">
-          <p>Technologies: JS, .NET </p>
+          <p>Technologies: {{card.primarySkill}}</p>
           <p>Status: {{ card.status }}</p>
           <p>Start: {{ card.startDate }}</p>
           <p>Finish: {{ card.endDate }}</p>
@@ -17,10 +17,7 @@
         </div>
       </nz-tab>
       <nz-tab nzTitle="Staff">
-        <p>Managers: Lionel Messi</p>
-        <p>Mentors: Lionel Messi, Cristiano Ronaldo, Diego Maradonna</p>
-        <p>Interviewers: Gomer Simpson, Tony Montana</p>
-        <p>Recruters: Lionel Messi, Lionel Mess</p>
+        <p *ngFor="let item of card.staff" class="staff">{{item.role}}: {{item.users.join(', ')}}</p>
       </nz-tab>
     </nz-tabset>
   </nz-card-tab>
