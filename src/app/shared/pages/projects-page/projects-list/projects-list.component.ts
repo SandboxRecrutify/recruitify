@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Projects } from 'src/app/shared/models/Projects';
+import { Component, OnInit, Input } from '@angular/core';
+import { Project } from 'src/app/shared/models/Project';
 import { ProjectsPageFacade } from '../projects-page.facade';
 
 @Component({
@@ -8,14 +8,14 @@ import { ProjectsPageFacade } from '../projects-page.facade';
   styleUrls: ['./projects-list.component.scss']
 })
 export class ProjectsListComponent implements OnInit {
-  cards: Projects[] = []
+
+  @Input() cards: Project[] = []
 
 
-  constructor(private projectsPageFacade : ProjectsPageFacade) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.projectsPageFacade.projectsList$
-      .subscribe(response => this.cards = response)
+
   }
 
 }

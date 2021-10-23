@@ -4,7 +4,7 @@
       Create Project
     </button>
   </div>
-  <app-projects-list></app-projects-list>
+  <app-projects-list [cards]="projects"></app-projects-list>
   <app-create-project
     (onCancel)="handleCancel()"
     (onOk)="handleOk()"

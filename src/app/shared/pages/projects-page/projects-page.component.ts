@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Project} from '../../models/Project';
+import { ProjectsPageFacade } from './projects-page.facade';
 
 @Component({
   selector: 'app-projects-page',
@@ -19,7 +21,13 @@ export class ProjectsPageComponent implements OnInit {
     this.isVisible = false;
   }
 
-  constructor() {}
+  projects: Project[] = []
 
-  ngOnInit(): void {}
+
+  constructor(private projectsPageFacade : ProjectsPageFacade) { }
+
+  ngOnInit(): void {
+    this.projectsPageFacade.projectsList$
+      .subscribe(response => this.projects = response)
+  }
 }
