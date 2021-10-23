@@ -5,7 +5,14 @@
     "startDate": "11.10.2021",
     "endDate": "11.12.2021",
     "currentCandidatesCount": "130",
-    "plannedCandidatesCount": "400"
+    "plannedCandidatesCount": "400",
+    "primarySkill": ".NET, JS, BA",
+    "staff": [
+      { "id": "1", "role": "Managers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "2", "role": "Recruiters", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "3", "role": "Interviewers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "4", "role": "Mentors", "users": ["John Smith", "Joe White", "Jane Smith"] }
+    ]
   },
   {
     "name": "October 2021 Exadel Internship JS&.NET&BA",
@@ -13,7 +20,14 @@
     "startDate": "11.10.2021",
     "endDate": "11.12.2021",
     "currentCandidatesCount": "130",
-    "plannedCandidatesCount": "400"
+    "plannedCandidatesCount": "400",
+    "primarySkill": ".NET, JS, BA",
+    "staff":[
+      { "id": "1", "role": "Managers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "2", "role": "Recruiters", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "3", "role": "Interviewers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "4", "role": "Mentors", "users": ["John Smith", "Joe White", "Jane Smith"] }
+    ]
   },
   {
     "name": "October 2021 Exadel Internship JS&.NET&BA",
@@ -21,7 +35,14 @@
     "startDate": "11.10.2021",
     "endDate": "11.12.2021",
     "currentCandidatesCount": "130",
-    "plannedCandidatesCount": "400"
+    "plannedCandidatesCount": "400",
+    "primarySkill": ".NET, JS, BA",
+    "staff": [
+      { "id": "1", "role": "Managers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "2", "role": "Recruiters", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "3", "role": "Interviewers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "4", "role": "Mentors", "users": ["John Smith", "Joe White", "Jane Smith"] }
+    ]
   },
   {
     "name": "October 2021 Exadel Internship JS&.NET&BA",
@@ -29,6 +50,13 @@
     "startDate": "11.10.2021",
     "endDate": "11.12.2021",
     "currentCandidatesCount": "130",
-    "plannedCandidatesCount": "400"
+    "plannedCandidatesCount": "400",
+    "primarySkill": ".NET, JS, BA",
+    "staff": [
+      { "id": "1", "role": "Managers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "2", "role": "Recruiters", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "3", "role": "Interviewers", "users": ["John Smith", "Joe White", "Jane Smith"] },
+      { "id": "4", "role": "Mentors", "users": ["John Smith", "Joe White", "Jane Smith"] }
+    ]
   }
 ]
