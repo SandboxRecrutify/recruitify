@@ -1,3 +1,5 @@
+import { paths } from './../../../app-routing.constants';
+import { Router } from '@angular/router';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +18,11 @@ export class CandidatesPageComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
 
-  constructor(private candidatesPageFacade: CandidatesPageFacade) { }
+  constructor(private candidatesPageFacade: CandidatesPageFacade, private router: Router) { }
+
+  goToProfile() {
+    this.router.navigate([paths.profile])
+  }
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -55,7 +61,7 @@ export class CandidatesPageComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.candidatesList = this.candidatesList.filter((candidate: Candidate) => candidate.name.indexOf(this.searchValue) !== -1);
+    this.candidatesList = this.candidatesList.filter((candidate: Candidate) => candidate.lastname.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {

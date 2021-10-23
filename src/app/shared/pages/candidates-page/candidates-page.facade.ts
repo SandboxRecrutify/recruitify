@@ -10,7 +10,7 @@ export class CandidatesPageFacade {
     {text: 'Gomel', value: 'Gomel'},
     {text: 'Barcelona', value: 'Barcelona'},
   ]
-  filterFnLocation = (list: string[], item: Candidate) => list.some(location => item.location.indexOf(location) !== -1)
+  filterFnLocation = (list: string[], item: Candidate) => list.some(location => item.country.indexOf(location) !== -1)
 
   listOfFilterSkill = [
     {text: 'JS', value: 'JS'},

@@ -55,8 +55,8 @@
           [nzChecked]="setOfCheckedId.has(candidate.id)"
           (nzCheckedChange)="onItemChecked(candidate.id, $event)"
         ></td>
-        <td>{{ candidate.name }}</td>
-        <td>{{ candidate.location }}</td>
+        <td>{{ candidate.firstname }} {{ candidate.lastname }}</td>
+        <td>{{ candidate.city }}, {{ candidate.country }}</td>
         <td>{{ candidate.skill }}</td>
         <td>{{ candidate.status }}</td>
         <td>
@@ -77,6 +77,7 @@
             nzSize="small"
             nzType="primary"
             style="font-size: 12px"
+            (click)="goToProfile()"
           >
             view profile
           </button>
