@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { paths } from 'src/app/app-routing.constants';
 import {Router} from '@angular/router';
 import { Projects } from 'src/app/shared/models/Projects';
 
 @Component({
-  selector: 'app-sandbox',
-  templateUrl: './sandbox.component.html',
-  styleUrls: ['./sandbox.component.scss'],
+  selector: 'app-project',
+  templateUrl: './project.component.html',
+  styleUrls: ['./project.component.scss'],
 })
-export class SandboxComponent implements OnInit {
+export class ProjectComponent implements OnInit {
   cardIndex = 0;
 
   @Input() card!: Projects;
@@ -17,6 +18,6 @@ export class SandboxComponent implements OnInit {
   ngOnInit(): void {}
 
   showCandidates() {
-    this.router.navigate(['candidates']);
+    this.router.navigate([paths.candidates]);
   }
 }
