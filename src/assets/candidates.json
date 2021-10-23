@@ -1,12 +1,28 @@
 [
   {
     "id": "1",
-    "name": "Sergei Chura",
-    "location": "Minsk, BY",
+    "firstname": "Sergei",
+    "lastname": "Chura",
     "skill": "JS",
+    "country": "Belarus",
+    "city": "Minsk",
+    "skype": "live:.cid.85260a69ffa7010a",
+    "email": "chura.siarhei@gmail.com",
+    "phone": "375336908679",
+    "englishLvl": "Intermediate",
+    "language": "Russian",
+    "testResult": "100",
     "status": "New",
-    "feedback1": "1",
-    "feedback2": "3"
+    "Previous projects": "",
+    "feedback1": "",
+    "feedback2": "",
+    "applicationDate": "15.09.2021",
+    "timeToContacts": "13-17",
+    "comments": "",
+    "questions": "",
+    "job": "lolkek",
+    "certificates": "",
+    "join": "Yes!"
   },
   {
     "id": "2",

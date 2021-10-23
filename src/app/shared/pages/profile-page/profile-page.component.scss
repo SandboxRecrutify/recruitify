@@ -1,48 +1,77 @@
-p {
-  margin: 0;
-}
-
-span {
-  font-weight: 500;
-}
-
-.candidate-wrapp {
+.candidate-card {
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding: 50px 35px;
+  padding: 50px 30px;
   background: #ffffff;
   font-size: 16px;
   color: #0082ca;
-}
 
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 15px;
-  height: 15px;
-  background: url(../../../../assets/images/closeBtn.png) no-repeat center
-    center;
-  background-size: cover;
-  cursor: pointer;
-}
+  p {
+    margin: 0;
+  }
 
-.candidate-info {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  span {
+    font-weight: 500;
+  }
 
-.candidate-info div {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  .goback-btn {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    width: 25px;
+    height: 20px;
+    background: url(/assets/images/goBackArrow.svg) no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .candidate-info {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .heading {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .stack {
+      font-size: 18px;
+    }
+
+    .location {
+      font-weight: 500;
+    }
+
+    .add-info {
+      position: relative;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #0082ca;
+
+      &_title {
+        position: absolute;
+        top: -12px;
+        left: 10px;
+        padding: 0 3px;
+        font-weight: 600;
+        background: #ffffff;
+      }
+    }
+  }
 }
 
 .feedbacks {
-  width: 50%;
+  width: 48%;
 }
 
 .feedback {
@@ -65,9 +94,4 @@ span {
     height: 100px;
     margin-bottom: 5px;
   }
-}
-
-.candidate-name {
-  font-size: 18px;
-  font-weight: 600;
 }
