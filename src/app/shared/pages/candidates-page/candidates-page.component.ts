@@ -61,7 +61,6 @@ export class CandidatesPageComponent implements OnInit {
   ngOnInit(): void {
     this.candidatesPageFacade.candidateList$
       .subscribe(response => {
-        console.log('Candidates list', response)
         this.candidatesList = response
       })
   }
