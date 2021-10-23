@@ -7,7 +7,12 @@
   <nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
     <thead>
       <tr>
-        <th nzWidth="45px"><input type="checkbox" /></th>
+        <th
+          nzWidth="45px"
+          [(nzChecked)]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
         <th nzCustomFilter>
           Name
           <nz-filter-trigger
@@ -20,21 +25,36 @@
         </th>
         <th
           [nzFilterMultiple]="true"
-          [nzFilters]="listOfFilter"
-          [nzFilterFn]="filterFn"
+          [nzFilters]="listOfFilterLocation"
+          [nzFilterFn]="filterFnLocation"
         >
           Location
         </th>
-        <th>Stack</th>
-        <th>Status</th>
-        <th nzWidth="145px">Recruter's feedback</th>
-        <th nzWidth="145px">Interviewer's feedback</th>
+        <th
+          [nzFilterMultiple]="true"
+          [nzFilters]="listOfFilterSkill"
+          [nzFilterFn]="filterFnSkill"
+        >
+          Primary skill
+        </th>
+        <th
+          [nzFilterMultiple]="true"
+          [nzFilters]="listOfFilterStatus"
+          [nzFilterFn]="filterFnStatus"
+        >
+          Status
+        </th>
+        <th nzWidth="145px" nzSortOrder="null">Recruter's feedback</th>
+        <th nzWidth="145px" nzSortOrder="null">Interviewer's feedback</th>
         <th nzWidth="110px"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let candidate of nzTable.data">
-        <td><input type="checkbox" /></td>
+        <td
+          [nzChecked]="setOfCheckedId.has(candidate.id)"
+          (nzCheckedChange)="onItemChecked(candidate.id, $event)"
+        ></td>
         <td>{{ candidate.name }}</td>
         <td>{{ candidate.location }}</td>
         <td>{{ candidate.skill }}</td>

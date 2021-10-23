@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { SharedComponent } from './shared.component';
-import { RatingStarsComponent } from './rating-stars/rating-stars.component';
+import { RatingStarsComponent } from './components/rating-stars/rating-stars.component';
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRateModule } from 'ng-zorro-antd/rate';

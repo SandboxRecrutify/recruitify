@@ -1,13 +1,15 @@
 [
   {
+    "id": "1",
     "name": "Sergei Chura",
     "location": "Minsk, BY",
-    "skill": "JavaScript",
+    "skill": "JS",
     "status": "New",
     "feedback1": "1",
     "feedback2": "3"
   },
   {
+    "id": "2",
     "name": "Viktor Ivanov",
     "location": "Gomel, BY",
     "skill": ".NET",
@@ -16,6 +18,7 @@
     "feedback2": "2"
   },
   {
+    "id": "3",
     "name": "Lionel Messi",
     "location": "Barcelona, SPA",
     "skill": "BA",
