@@ -9,11 +9,11 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-sandbox',
-  templateUrl: './create-sandbox.component.html',
-  styleUrls: ['./create-sandbox.component.scss'],
+  selector: 'app-create-project',
+  templateUrl: './create-project.component.html',
+  styleUrls: ['./create-project.component.scss'],
 })
-export class CreateSandboxComponent implements OnInit, OnChanges {
+export class CreateProjectComponent implements OnInit, OnChanges {
   @Input() isVisible!: boolean;
   @Output() onOk = new EventEmitter<any>();
   @Output() onCancel = new EventEmitter<any>();

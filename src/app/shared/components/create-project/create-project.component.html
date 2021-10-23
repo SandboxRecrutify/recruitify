@@ -22,7 +22,7 @@
       <div nz-col [nzSpan]="24">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="primarySkills"
-            >Technologies</nz-form-label
+            >Primary Skills</nz-form-label
           >
           <nz-form-control>
             <nz-select
@@ -40,28 +40,48 @@
           </nz-form-control>
         </nz-form-item>
       </div>
-      <!-- staff -->
+      <!-- managers -->
       <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="staffs">Staff</nz-form-label>
+          <nz-form-label nzRequired nzFor="recruiters"
+            >Choose manager(s)</nz-form-label
+          >
           <nz-form-control>
             <nz-select
               nzMode="multiple"
               nz-input
-              formControlName="staffs"
-              id="staffs"
+              formControlName="managers"
+              id="managers"
             >
-              <nz-option-group
-                *ngFor="let group of groups"
-                [nzLabel]="group.name"
+              <nz-option
+                *ngFor="let staff of staffs"
+                nzValue="{{ staff.id }}"
+                nzLabel="{{ staff.name }}"
               >
-                <nz-option
-                  *ngFor="let staff of group.staffs"
-                  nzValue="{{ staff.id }}"
-                  nzLabel="{{ staff.name }}"
-                >
-                </nz-option>
-              </nz-option-group>
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- recruiters -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="recruiters"
+            >Choose recruiter(s)</nz-form-label
+          >
+          <nz-form-control>
+            <nz-select
+              nzMode="multiple"
+              nz-input
+              formControlName="recruiters"
+              id="recruiters"
+            >
+              <nz-option
+                *ngFor="let staff of staffs"
+                nzValue="{{ staff.id }}"
+                nzLabel="{{ staff.name }}"
+              >
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -70,7 +90,7 @@
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="dates"
-            >Choose start-date and end-date</nz-form-label
+            >Choose start and end date</nz-form-label
           >
           <nz-form-control>
             <nz-range-picker
@@ -99,7 +119,7 @@
       <!-- isActive -->
       <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="isActive">Status</nz-form-label>
+          <nz-form-label nzRequired nzFor="isActive">Active</nz-form-label>
           <nz-form-control>
             <nz-switch formGroupName="isActive" id="isActive"></nz-switch>
           </nz-form-control>

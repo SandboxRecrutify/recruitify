@@ -21,7 +21,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { CreateSandboxComponent } from './components/create-sandbox/create-sandbox.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -38,7 +38,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     SandboxesListComponent,
     SandboxComponent,
     ParticipantsComponent,
-    CreateSandboxComponent,
+    CreateProjectComponent,
     ProfilePageComponent,
   ],
   imports: [
@@ -61,6 +61,11 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzSwitchModule,
   ],
   exports: [RatingStarsComponent],
-  providers: [CandidatesService, CandidatesPageFacade, ProjectsService, ProjectsPageFacade]
+  providers: [
+    CandidatesService,
+    CandidatesPageFacade,
+    ProjectsService,
+    ProjectsPageFacade,
+  ],
 })
 export class SharedModule {}
