@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { paths } from 'src/app/app-routing.constants';
 import {Router} from '@angular/router';
-import { Projects } from 'src/app/shared/models/Projects';
+import { Project } from 'src/app/shared/models/Project';
 
 @Component({
   selector: 'app-project',
@@ -11,7 +11,7 @@ import { Projects } from 'src/app/shared/models/Projects';
 export class ProjectComponent implements OnInit {
   cardIndex = 0;
 
-  @Input() card!: Projects;
+  @Input() card!: Project;
 
   constructor(private router: Router) {}
 

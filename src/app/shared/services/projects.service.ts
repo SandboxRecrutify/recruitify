@@ -1,4 +1,4 @@
-import { Projects } from '../models/Projects';
+import { Project } from '../models/Project';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 
 export class ProjectsService {
-  constructor(private projects: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getProjects(): Observable<Projects[]> {
-    return this.projects.get<Projects[]>('assets/projects.json')
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('assets/projects.json')
   }
 }
