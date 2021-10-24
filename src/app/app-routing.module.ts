@@ -12,6 +12,7 @@ const mainRouter: Routes = [
   { path: paths.projects, component: ProjectsPageComponent },
   { path: paths.candidates, component: CandidatesPageComponent },
   { path: paths.profile, component: ProfilePageComponent },
+  { path: 'profile/:id', component: ProfilePageComponent }
 ];
 
 const routes: Routes = [

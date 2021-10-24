@@ -20,10 +20,6 @@ export class CandidatesPageComponent implements OnInit {
 
   constructor(private candidatesPageFacade: CandidatesPageFacade, private router: Router) { }
 
-  goToProfile() {
-    this.router.navigate([paths.profile])
-  }
-
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);

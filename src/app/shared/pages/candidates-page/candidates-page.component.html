@@ -77,7 +77,7 @@
             nzSize="small"
             nzType="primary"
             style="font-size: 12px"
-            (click)="goToProfile()"
+            [routerLink]="['/profile', candidate.id]"
           >
             view profile
           </button>

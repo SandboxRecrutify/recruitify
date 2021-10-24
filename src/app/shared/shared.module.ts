@@ -1,3 +1,4 @@
+import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesService } from './services/candidates.service';
 import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
 import { NgModule } from '@angular/core';
@@ -67,6 +68,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     CandidatesService,
     ProfilePageComponent,
     CandidatesPageFacade,
+    ProfilePageFacade,
     ProjectsService,
     ProjectsPageFacade
   ]

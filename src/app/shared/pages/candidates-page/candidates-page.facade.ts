@@ -5,27 +5,25 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class CandidatesPageFacade {
+  candidateList$ = this.candidatesService.getCandidates()
+
   listOfFilterLocation = [
     {text: 'Minsk', value: 'Minsk'},
-    {text: 'Gomel', value: 'Gomel'},
-    {text: 'Barcelona', value: 'Barcelona'},
+    {text: 'Vitebsk', value: 'Vitebsk'},
+    {text: 'Moscow', value: 'Moscow'},
   ]
-  filterFnLocation = (list: string[], item: Candidate) => list.some(location => item.country.indexOf(location) !== -1)
-
   listOfFilterSkill = [
     {text: 'JS', value: 'JS'},
     {text: '.NET', value: '.NET'},
     {text: 'BA', value: 'BA'},
   ]
-  filterFnSkill = (list: string[], item: Candidate) => list.some(skill => item.skill.indexOf(skill) !== -1)
-
   listOfFilterStatus = [
     {text: 'New', value: 'New'},
-    {text: 'Interview', value: 'Interview'},
   ]
-  filterFnStatus = (list: string[], item: Candidate) => list.some(status => item.status.indexOf(status) !== -1)
 
   constructor(private candidatesService: CandidatesService) {}
 
-  candidateList$ = this.candidatesService.getCandidates()
+  filterFnLocation = (filter: string[], candidateList: Candidate) => filter.some(item => candidateList.city.indexOf(item) !== -1)
+  filterFnSkill = (filter: string[], candidateList: Candidate) => filter.some(item => candidateList.skill.indexOf(item) !== -1)
+  filterFnStatus = (filter: string[], candidateList: Candidate) => filter.some(item => candidateList.status.indexOf(item) !== -1)
 }

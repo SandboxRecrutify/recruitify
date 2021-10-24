@@ -1,6 +1,9 @@
+import { filter, map } from 'rxjs/operators';
+import { ProfilePageFacade } from './profile-page.facade';
 import { paths } from './../../../app-routing.constants';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-profile-page',
@@ -9,13 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  candidate: any = {}
+
+  constructor(private profilePageFacade: ProfilePageFacade, private toCandidatesPage: Router, private router: ActivatedRoute) {}
 
   goToCandidatesList() {
-    this.router.navigate([paths.candidates])
+    this.toCandidatesPage.navigate([paths.candidates])
   }
 
   ngOnInit(): void {
+    this.profilePageFacade.candidatesList$
+      .subscribe(responce => {
+        this.router.params.subscribe(params => {
+          this.candidate = responce.find(item => item.id === params.id)
+        })
+      })
   }
-
 }
