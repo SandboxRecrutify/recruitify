@@ -1,5 +1,10 @@
 .projects {
   &_head {
     margin-bottom: 1rem;
+    display: flex;
+
+    .statusFilter {
+      margin-left: 20px;
+    }
   }
 }

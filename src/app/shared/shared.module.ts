@@ -17,6 +17,8 @@ import { ProjectsPageComponent } from './pages/projects-page/projects-page.compo
 import { ProjectsListComponent } from './pages/projects-page/projects-list/projects-list.component';
 import { ProjectComponent } from './pages/projects-page/project/project.component';
 
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -63,7 +65,9 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzSelectModule,
     NzDatePickerModule,
     NzSwitchModule,
-    BrowserAnimationsModule
+    NzDropDownModule,
+    BrowserAnimationsModule,
+
   ],
   exports: [RatingStarsComponent],
   providers: [

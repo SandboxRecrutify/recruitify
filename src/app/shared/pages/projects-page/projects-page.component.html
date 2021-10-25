@@ -3,6 +3,18 @@
     <button nz-button nzType="primary" (click)="showModal()">
       Create Project
     </button>
+    <div class="statusFilter">
+      <button nz-button nz-dropdown [nzDropdownMenu]="menu">
+        Status
+        <i nz-icon nzType="filter" nzTheme="outline"></i>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>Active</li>
+          <li nz-menu-item>Closed</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
   </div>
   <app-projects-list [cards]="projects"></app-projects-list>
   <app-create-project
