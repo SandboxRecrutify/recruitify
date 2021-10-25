@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesService } from './services/candidates.service';
 import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
@@ -62,6 +63,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzSelectModule,
     NzDatePickerModule,
     NzSwitchModule,
+    BrowserAnimationsModule
   ],
   exports: [RatingStarsComponent],
   providers: [
