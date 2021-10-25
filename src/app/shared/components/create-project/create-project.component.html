@@ -1,5 +1,5 @@
 <nz-modal
-  [(nzVisible)]="isVisible"
+  [nzVisible]="true"
   nzTitle="Create new project"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
@@ -13,7 +13,7 @@
       <div nz-col [nzSpan]="24">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="name">Project Name</nz-form-label>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="Please enter project's name">
             <input nz-input formControlName="name" id="name" />
           </nz-form-control>
         </nz-form-item>
@@ -22,19 +22,23 @@
       <div nz-col [nzSpan]="24">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="primarySkills"
-            >Primary Skills</nz-form-label
+            >Primary Skills
+          </nz-form-label>
+          <nz-form-control
+            nzErrorTip="Please choose any primary skill from the list"
           >
-          <nz-form-control>
             <nz-select
+              [nzLoading]="false"
+              [nzShowArrow]="true"
               nzMode="multiple"
               nz-input
               formControlName="primarySkills"
               id="primarySkills"
             >
               <nz-option
-                *ngFor="let option of tOptions"
-                nzValue="{{ option.value }}"
-                nzLabel="{{ option.label }}"
+                *ngFor="let primarySkill of data?.primarySkills"
+                nzValue="{{ primarySkill.value }}"
+                nzLabel="{{ primarySkill.label }}"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -43,18 +47,20 @@
       <!-- managers -->
       <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="recruiters"
-            >Choose manager(s)</nz-form-label
-          >
-          <nz-form-control>
+          <nz-form-label nzRequired nzFor="managers"
+            >Choose manager(s)
+          </nz-form-label>
+          <nz-form-control nzErrorTip="Please choose any manager from the list">
             <nz-select
+              [nzLoading]="false"
+              [nzShowArrow]="true"
               nzMode="multiple"
               nz-input
               formControlName="managers"
               id="managers"
             >
               <nz-option
-                *ngFor="let staff of staffs"
+                *ngFor="let staff of data?.staff?.managers"
                 nzValue="{{ staff.id }}"
                 nzLabel="{{ staff.name }}"
               >
@@ -67,17 +73,21 @@
       <div nz-col [nzSpan]="24">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="recruiters"
-            >Choose recruiter(s)</nz-form-label
+            >Choose recruiter(s)
+          </nz-form-label>
+          <nz-form-control
+            nzErrorTip="Please choose any recruiter from the list"
           >
-          <nz-form-control>
             <nz-select
+              [nzLoading]="false"
+              [nzShowArrow]="true"
               nzMode="multiple"
               nz-input
               formControlName="recruiters"
               id="recruiters"
             >
               <nz-option
-                *ngFor="let staff of staffs"
+                *ngFor="let staff of data?.staff?.recruiters"
                 nzValue="{{ staff.id }}"
                 nzLabel="{{ staff.name }}"
               >
@@ -90,8 +100,8 @@
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="dates"
-            >Choose start and end date</nz-form-label
-          >
+            >Choose start and end date
+          </nz-form-label>
           <nz-form-control>
             <nz-range-picker
               formControlName="dates"
@@ -104,13 +114,15 @@
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="plannedCandidatesCount"
-            >Max. candidates count</nz-form-label
+            >Max. candidates count
+          </nz-form-label>
+          <nz-form-control
+            nzErrorTip="Please enter planned number of candidated"
           >
-          <nz-form-control>
             <input
               type="number"
               nz-input
-              formGroupName="plannedCandidatesCount"
+              formControlName="plannedCandidatesCount"
               id="plannedCandidatesCount"
             />
           </nz-form-control>
@@ -121,7 +133,7 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="isActive">Active</nz-form-label>
           <nz-form-control>
-            <nz-switch formGroupName="isActive" id="isActive"></nz-switch>
+            <nz-switch formControlName="isActive" id="isActive"></nz-switch>
           </nz-form-control>
         </nz-form-item>
       </div>
