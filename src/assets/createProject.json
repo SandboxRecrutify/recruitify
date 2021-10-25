@@ -1,0 +1,39 @@
+{
+  "staff": {
+    "managers": [
+      { "id": 1, "group": "manager", "name": "John Smith" },
+      { "id": 2, "group": "recruiter", "name": "John Smith" },
+      { "id": 3, "group": "interviewer", "name": "Joe white" },
+      { "id": 4, "group": "mentor", "name": "smith Smith" },
+      { "id": 5, "group": "manager", "name": "joanna" },
+      { "id": 6, "group": "recruiter", "name": "Alina" },
+      { "id": 7, "group": "interviewer", "name": "Liza" },
+      { "id": 8, "group": "mentor", "name": "Alex" },
+      { "id": 9, "group": "manager", "name": "Sergei" },
+      { "id": 10, "group": "recruiter", "name": "Vladislav" },
+      { "id": 11, "group": "interviewer", "name": "Sonya" },
+      { "id": 12, "group": "mentor", "name": "Alice" },
+      { "id": 13, "group": "manager", "name": "Shaha" }
+    ],
+    "recruiters": [
+      { "id": 1, "group": "manager", "name": "John Smith" },
+      { "id": 2, "group": "recruiter", "name": "John Smith" },
+      { "id": 3, "group": "interviewer", "name": "Joe white" },
+      { "id": 4, "group": "mentor", "name": "smith Smith" },
+      { "id": 5, "group": "manager", "name": "joanna" },
+      { "id": 6, "group": "recruiter", "name": "Alina" },
+      { "id": 7, "group": "interviewer", "name": "Liza" },
+      { "id": 8, "group": "mentor", "name": "Alex" },
+      { "id": 9, "group": "manager", "name": "Sergei" },
+      { "id": 10, "group": "recruiter", "name": "Vladislav" },
+      { "id": 11, "group": "interviewer", "name": "Sonya" },
+      { "id": 12, "group": "mentor", "name": "Alice" },
+      { "id": 13, "group": "manager", "name": "Shaha" }
+    ]
+  },
+  "primarySkills": [
+    { "label": ".Net", "value": ".net" },
+    { "label": "JS", "value": "js" },
+    { "label": "BA", "value": "ba" }
+  ]
+}

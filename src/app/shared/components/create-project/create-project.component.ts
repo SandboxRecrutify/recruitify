@@ -7,6 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProjectsService } from '../../services/projects.service';
+import { CreateProject } from '../../models/CreateProject';
 
 @Component({
   selector: 'app-create-project',
@@ -17,43 +19,19 @@ export class CreateProjectComponent implements OnInit, OnChanges {
   @Input() isVisible!: boolean;
   @Output() onOk = new EventEmitter<any>();
   @Output() onCancel = new EventEmitter<any>();
-  //staff groups
-  groups: any[] = [
-    { name: 'manager', staffs: [] },
-    { name: 'recruiter', staffs: [] },
-    { name: 'interviewer', staffs: [] },
-    { name: 'mentor', staffs: [] },
-  ];
-  // staff array
-  staffs: any[] = [
-    { id: 1, group: 'manager', name: 'John Smith' },
-    //make another 10  staff objects
-    { id: 2, group: 'recruiter', name: 'John Smith' },
-    { id: 3, group: 'interviewer', name: 'Joe white' },
-    { id: 4, group: 'mentor', name: 'smigt Smith' },
-    { id: 5, group: 'manager', name: 'joanna' },
-    { id: 6, group: 'recruiter', name: 'Alina' },
-    { id: 7, group: 'interviewer', name: 'Liza' },
-    { id: 8, group: 'mentor', name: 'Alex' },
-    { id: 9, group: 'manager', name: 'Sergei' },
-    { id: 10, group: 'recruiter', name: 'Vladislav' },
-    { id: 11, group: 'interviewer', name: 'Sonya' },
-    { id: 12, group: 'mentor', name: 'Alice' },
-    { id: 13, group: 'manager', name: 'Shaha' },
-  ];
-  // primarySkills
-  tOptions: any[] = [
-    { label: '.Net', value: '.net' },
-    { label: 'JS', value: 'js' },
-    { label: 'BA', value: 'ba' },
-  ];
+
+  data!: CreateProject;
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private projectsService: ProjectsService
+  ) {}
 
   handleOk(): void {
     // this.isVisible = !this.isVisible;
-    this.onOk.emit();
+    // this.onOk.emit();
+    this.submitForm();
   }
 
   handleCancel(): void {
@@ -63,35 +41,32 @@ export class CreateProjectComponent implements OnInit, OnChanges {
   submitForm() {
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
+        console.log(this.form.controls[i].valid, this.form.controls[i].value);
         this.form.controls[i].markAsDirty();
         this.form.controls[i].updateValueAndValidity();
       }
     }
     if (this.form.valid) {
     }
+    // console.log(this.form.disable);
     console.log(this.form.value);
   }
 
   ngOnInit(): void {
-    //map staff to groups
-    this.staffs.forEach((staff) => {
-      this.groups.forEach((group) => {
-        if (staff.group === group.name) {
-          group.staffs.push(staff);
-        }
-      });
-    });
+    this.projectsService
+      .getCreateProjectData()
+      .subscribe((data) => (this.data = data));
     // init form
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       primarySkills: [[], [Validators.required]],
       dates: [[new Date(), new Date()], [Validators.required]],
-      plannedCandidatesCount: [0, [Validators.required]],
-      staffs: [[], [Validators.required]],
-      isActive: ['', [Validators.required]],
+      plannedCandidatesCount: [null, [Validators.required]],
+      recruiters: [[], [Validators.required]],
+      managers: [[], [Validators.required]],
+      isActive: [false, []],
     });
   }
-  ngOnChanges(): void {
-    console.log(this.isVisible);
-  }
+
+  ngOnChanges(): void {}
 }
