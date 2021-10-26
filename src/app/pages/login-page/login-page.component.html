@@ -9,8 +9,8 @@
       (ngSubmit)="submitForm()"
     >
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your email!">
-          <nz-input-group>
+        <nz-form-control nzHasFeedback [nzErrorTip]="emailError">
+          <nz-input-group nzPrefixIcon="mail">
             <input
               type="text"
               nz-input
@@ -18,11 +18,19 @@
               placeholder="E-mail"
             />
           </nz-input-group>
+          <ng-template #emailError let-control>
+            <ng-container *ngIf="control.hasError('email')">
+              Please enter a valid email address
+            </ng-container>
+            <ng-container *ngIf="control.hasError('required')">
+              Please enter your email address
+            </ng-container>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your password!">
-          <nz-input-group>
+        <nz-form-control nzHasFeedback [nzErrorTip]="passwordError">
+          <nz-input-group nzPrefixIcon="lock">
             <input
               type="password"
               nz-input
@@ -30,6 +38,17 @@
               placeholder="Password"
             />
           </nz-input-group>
+          <ng-template #passwordError let-control>
+            <ng-container *ngIf="control.hasError('maxlength')">
+              Max. length: 16 characters
+            </ng-container>
+            <ng-container *ngIf="control.hasError('required')">
+              Please enter your password
+            </ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">
+              Min. length: 6 characters
+            </ng-container>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 

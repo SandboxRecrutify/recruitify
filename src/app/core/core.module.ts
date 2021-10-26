@@ -25,8 +25,6 @@ import { MainLayoutFacade } from './main-layout/main-layout.facade';
     NzGridModule,
     ReactiveFormsModule,
   ],
-  providers: [
-    MainLayoutFacade,
-  ],
+  providers: [MainLayoutFacade],
 })
 export class CoreModule {}
