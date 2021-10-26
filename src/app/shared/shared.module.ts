@@ -1,3 +1,4 @@
+import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesService } from './services/candidates.service';
@@ -35,6 +36,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     ParticipantsComponent,
     CreateProjectComponent,
     ProfilePageComponent,
+    CalendarPageComponent,
   ],
   imports: [
     CommonModule,
@@ -65,18 +68,19 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzSelectModule,
     NzDatePickerModule,
     NzSwitchModule,
+    BrowserAnimationsModule,
     NzDropDownModule,
     BrowserAnimationsModule,
-
   ],
   exports: [RatingStarsComponent],
   providers: [
     CandidatesService,
     ProfilePageComponent,
     CandidatesPageFacade,
+    CalendarPageFacade,
     ProfilePageFacade,
     ProjectsService,
-    ProjectsPageFacade
-  ]
+    ProjectsPageFacade,
+  ],
 })
 export class SharedModule {}
