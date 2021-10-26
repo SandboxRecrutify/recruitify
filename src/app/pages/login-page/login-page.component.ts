@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   templateUrl: './login-page.component.html',
@@ -7,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   validateForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   submitForm() {
     for (const i in this.validateForm.controls) {
@@ -18,6 +19,11 @@ export class LoginPageComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       console.log(this.validateForm.value);
+      this.auth.logIn({
+        email: this.validateForm.value.email,
+        id: 'id_from_backend',
+        token: 'token_from_backend',
+      });
     }
   }
   ngOnInit(): void {
