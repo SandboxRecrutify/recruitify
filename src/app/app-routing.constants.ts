@@ -4,4 +4,5 @@ export const paths = {
   candidates: 'candidates',
   profile: 'profile',
   shared: 'shared',
+  calendar: 'calendar',
 };
