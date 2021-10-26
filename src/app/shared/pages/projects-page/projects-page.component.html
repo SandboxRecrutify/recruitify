@@ -1,6 +1,6 @@
 <div class="projects page_container">
   <div class="projects_head">
-    <button nz-button nzType="primary" (click)="showModal()">
+    <button nz-button nzType="primary" (click)="handleToggle(true)">
       Create Project
     </button>
     <div class="statusFilter">
@@ -18,8 +18,7 @@
   </div>
   <app-projects-list [cards]="projects"></app-projects-list>
   <app-create-project
-    (onCancel)="handleCancel()"
-    (onOk)="handleOk()"
+    (onToggle)="handleToggle($event)"
     [isVisible]="isVisible"
   ></app-create-project>
 </div>
