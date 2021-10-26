@@ -17,8 +17,7 @@ import { CreateProject } from '../../models/CreateProject';
 })
 export class CreateProjectComponent implements OnInit, OnChanges {
   @Input() isVisible!: boolean;
-  @Output() onOk = new EventEmitter<any>();
-  @Output() onCancel = new EventEmitter<any>();
+  @Output() onToggle = new EventEmitter<boolean>();
 
   data!: CreateProject;
   form!: FormGroup;
@@ -29,26 +28,23 @@ export class CreateProjectComponent implements OnInit, OnChanges {
   ) {}
 
   handleOk(): void {
-    // this.isVisible = !this.isVisible;
-    // this.onOk.emit();
     this.submitForm();
+    // this.onToggle.emit(false);
   }
 
   handleCancel(): void {
-    this.onCancel.emit();
+    this.onToggle.emit(false);
   }
 
   submitForm() {
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
-        console.log(this.form.controls[i].valid, this.form.controls[i].value);
         this.form.controls[i].markAsDirty();
         this.form.controls[i].updateValueAndValidity();
       }
     }
     if (this.form.valid) {
     }
-    // console.log(this.form.disable);
     console.log(this.form.value);
   }
 
@@ -65,6 +61,7 @@ export class CreateProjectComponent implements OnInit, OnChanges {
       recruiters: [[], [Validators.required]],
       managers: [[], [Validators.required]],
       isActive: [false, []],
+      description: ['', [Validators.maxLength(500)]],
     });
   }
 
