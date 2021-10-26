@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project} from '../../models/Project';
+import { Project } from '../../models/Project';
 import { ProjectsPageFacade } from './projects-page.facade';
 
 @Component({
@@ -9,25 +9,17 @@ import { ProjectsPageFacade } from './projects-page.facade';
 })
 export class ProjectsPageComponent implements OnInit {
   isVisible = false;
-  showModal(): void {
-    this.isVisible = true;
+  projects: Project[] = [];
+
+  handleToggle(isVisible: boolean): void {
+    this.isVisible = isVisible;
   }
 
-  handleOk(): void {
-    this.isVisible = !this.isVisible;
-  }
-
-  handleCancel(): void {
-    this.isVisible = false;
-  }
-
-  projects: Project[] = []
-
-
-  constructor(private projectsPageFacade : ProjectsPageFacade) { }
+  constructor(private projectsPageFacade: ProjectsPageFacade) {}
 
   ngOnInit(): void {
-    this.projectsPageFacade.projectsList$
-      .subscribe(response => this.projects = response)
+    this.projectsPageFacade.projectsList$.subscribe(
+      (response) => (this.projects = response)
+    );
   }
 }
