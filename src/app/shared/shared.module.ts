@@ -35,6 +35,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     ParticipantsComponent,
     CreateProjectComponent,
     ProfilePageComponent,
+    FourOFourComponent,
   ],
   imports: [
     CommonModule,
@@ -66,8 +69,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     NzDatePickerModule,
     NzSwitchModule,
     NzDropDownModule,
+    NzResultModule,
     BrowserAnimationsModule,
-
   ],
   exports: [RatingStarsComponent],
   providers: [
@@ -76,7 +79,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     CandidatesPageFacade,
     ProfilePageFacade,
     ProjectsService,
-    ProjectsPageFacade
-  ]
+    ProjectsPageFacade,
+  ],
 })
 export class SharedModule {}

@@ -7,6 +7,7 @@ import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
 import { AuthService } from './shared/services/auth.service';
+import { FourOFourComponent } from './shared/pages/four-o-four/four-o-four.component';
 
 const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
@@ -26,28 +27,28 @@ const mainRouter: Routes = [
     canActivate: [AuthService],
   },
   {
-    path: 'profile/:id',
+    path: `${paths.profile}/:id`,
     component: ProfilePageComponent,
     canActivate: [AuthService],
   },
   {
-    path: '',
+    path: paths.index,
     redirectTo: paths.projects,
     pathMatch: 'full',
   },
   {
-    path: '404',
-    component: CandidatesPageComponent,
+    path: paths.fof,
+    component: FourOFourComponent,
   },
   {
-    path: '**',
-    redirectTo: '404',
+    path: paths.rest,
+    redirectTo: paths.fof,
   },
 ];
 
 const routes: Routes = [
   {
-    path: '',
+    path: paths.index,
     component: MainLayoutComponent,
     children: mainRouter,
   },

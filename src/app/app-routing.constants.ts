@@ -4,4 +4,7 @@ export const paths = {
   candidates: 'candidates',
   profile: 'profile',
   shared: 'shared',
+  fof: '404',
+  index: '',
+  rest: '**',
 };
