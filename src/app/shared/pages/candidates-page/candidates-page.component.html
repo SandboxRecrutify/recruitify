@@ -3,7 +3,12 @@
     <div class="candidates_count">{{ candidatesList.length }}</div>
     <h3 class="candidates_title">October 2021 JS, .NET, BA</h3>
     <div class="candidates_filter-wrap">
-      <input nz-input placeholder="candidate's name" />
+      <input
+        nz-input
+        placeholder="candidate's name"
+        [(ngModel)]="searchValue"
+        (input)="searchName()"
+      />
       <div class="candidates_filter-btn"></div>
     </div>
   </div>
