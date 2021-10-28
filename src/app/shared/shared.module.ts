@@ -22,7 +22,6 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ParticipantsComponent } from './pages/projects-page/participants/participants.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -37,6 +36,9 @@ import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
+
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,6 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     NzButtonModule,
     NzCardModule,
     ReactiveFormsModule,
-    NzTabsModule,
     NzTableModule,
     NzGridModule,
     NzInputModule,
@@ -71,6 +72,8 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     BrowserAnimationsModule,
     NzDropDownModule,
     BrowserAnimationsModule,
+    NzDrawerModule,
+    NzCollapseModule
   ],
   exports: [RatingStarsComponent],
   providers: [
