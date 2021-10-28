@@ -8,4 +8,5 @@ export const paths = {
   index: '',
   rest: '**',
   slash: '/',
+  calendar: 'calendar',
 };

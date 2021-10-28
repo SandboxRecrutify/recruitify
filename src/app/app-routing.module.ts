@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { paths } from './app-routing.constants';
+// components
+import { CalendarPageComponent } from './shared/pages/calendar-page/calendar-page.component';
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './auth-guard';
@@ -8,6 +9,8 @@ import { CandidatesPageComponent } from './shared/pages/candidates-page/candidat
 import { FourOFourComponent } from './shared/pages/four-o-four/four-o-four.component';
 import { ProfilePageComponent } from './shared/pages/profile-page/profile-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
+// consts
+import { paths } from './app-routing.constants';
 
 const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
@@ -44,6 +47,7 @@ const mainRouter: Routes = [
     path: paths.rest,
     redirectTo: paths.fof,
   },
+  { path: paths.calendar, component: CalendarPageComponent },
 ];
 
 const routes: Routes = [

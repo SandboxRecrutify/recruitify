@@ -1,3 +1,4 @@
+import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesService } from './services/candidates.service';
@@ -37,6 +38,7 @@ import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     CreateProjectComponent,
     ProfilePageComponent,
     FourOFourComponent,
+    CalendarPageComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +71,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzSelectModule,
     NzDatePickerModule,
     NzSwitchModule,
+    BrowserAnimationsModule,
     NzDropDownModule,
     NzResultModule,
     BrowserAnimationsModule,
@@ -77,6 +81,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     CandidatesService,
     ProfilePageComponent,
     CandidatesPageFacade,
+    CalendarPageFacade,
     ProfilePageFacade,
     ProjectsService,
     ProjectsPageFacade,
