@@ -7,4 +7,5 @@ export const paths = {
   fof: '404',
   index: '',
   rest: '**',
+  slash: '/',
 };
