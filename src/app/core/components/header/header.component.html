@@ -1,17 +1,20 @@
 <header>
   <div class="header">
-    <div class="logo">
-      <img src="/assets/images/RecruitifyLogo.png" alt="" />
-    </div>
-    <div class="search">
-      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-        <input type="text" nz-input placeholder="input search text" />
-      </nz-input-group>
-      <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSize="large" nzSearch>
-          Search
-        </button>
-      </ng-template>
+    <div class="header-container">
+      <div class="logo">
+        <img src="/assets/images/RecruitifyLogo.png" alt="logo" />
+      </div>
+      <div class="menu">
+        <div class="menu_user-info">
+          <p class="menu_user-name">Igor Nikolaev</p>
+          <p class="menu_user-role">mentor</p>
+        </div>
+        <div class="menu_nav">
+          <div class="menu_icon menu_icon--projects"></div>
+          <div class="menu_icon menu_icon--candidates"></div>
+          <div class="menu_icon menu_icon--calendar"></div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
