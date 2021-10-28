@@ -36,6 +36,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
 @NgModule({
@@ -48,6 +50,7 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     ParticipantsComponent,
     CreateProjectComponent,
     ProfilePageComponent,
+    FourOFourComponent,
     CalendarPageComponent,
   ],
   imports: [
@@ -70,6 +73,7 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     NzSwitchModule,
     BrowserAnimationsModule,
     NzDropDownModule,
+    NzResultModule,
     BrowserAnimationsModule,
   ],
   exports: [RatingStarsComponent],
