@@ -2,9 +2,22 @@
   &_head {
     margin-bottom: 1rem;
     display: flex;
+    margin-left: 40px;
+    justify-content: space-between;
 
-    .statusFilter {
-      margin-left: 20px;
+    .menu {
+      display: flex;
+    }
+
+    .filter {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .search {
+      margin-right: 40px;
     }
   }
 }
