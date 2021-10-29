@@ -1,5 +1,7 @@
 .project-card {
-  min-width: 550px;
+  min-width: 590px;
+  color: #0082CA;
+  font-weight: 600;
   // box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
   // transition: all 0.2s ease-in-out;
   // &:hover {
@@ -11,16 +13,18 @@
     display: flex;
     justify-content: space-between;
   }
-  .description {
-    color: #0082ca;
-  }
+  // .description {
+  //   color: #0082ca;
+  // }
 
   app-participants {
     margin-bottom: 50%;
     display: flex;
     align-self: center;
+    &:hover {
+      transform: scale(1.1);
   }
-
+  }
   .project-buttons {
     display: flex;
     flex-direction: column;
@@ -31,4 +35,15 @@
       font-size: 0.8rem;
     }
   }
+}
+
+.card-title {
+  color: #0082CA;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.staff {
+  color: red;
 }

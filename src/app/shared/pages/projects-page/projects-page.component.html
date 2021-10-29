@@ -1,17 +1,14 @@
 <div class="projects page_container">
   <div class="projects_head">
-    <div class="menu">
-      <div class="filter">
-      <img src="assets/images/Vector.png" alt="" />
-    </div>
     <button nz-button nzType="primary" (click)="handleToggle(true)">
       Create Project
     </button>
-    </div>
-
     <div class="search">
+      <div class="filter">
+        <img src="assets/images/Vector.png" alt="filter" />
+      </div>
       <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="Search project" />
+        <input type="text" nz-input placeholder="Search project" [(ngModel)]="searchText"/>
       </nz-input-group>
       <ng-template #suffixIconSearch>
         <i nz-icon nzType="search"></i>
@@ -19,7 +16,7 @@
     </div>
   </div>
 
-  <app-projects-list [cards]="projects"></app-projects-list>
+  <app-projects-list [projects]="projects" [searchText]="searchText"></app-projects-list>
   <app-create-project
     (onToggle)="handleToggle($event)"
     [isVisible]="isVisible"

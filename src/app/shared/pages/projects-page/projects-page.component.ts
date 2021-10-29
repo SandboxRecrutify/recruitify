@@ -8,6 +8,7 @@ import { ProjectsPageFacade } from './projects-page.facade';
   styleUrls: ['./projects-page.component.scss'],
 })
 export class ProjectsPageComponent implements OnInit {
+  searchText: string = ''
   isVisible = false;
   projects: Project[] = [];
 
@@ -21,5 +22,6 @@ export class ProjectsPageComponent implements OnInit {
     this.projectsPageFacade.projectsList$.subscribe(
       (response) => (this.projects = response)
     );
+
   }
 }
