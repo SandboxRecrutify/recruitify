@@ -1,6 +1,6 @@
 <nz-card
   class="project-card"
-  nzTitle="{{ card.Name }}"
+  nzTitle="{{ card.name }}"
   [nzExtra]="extraTemplate"
   [nzHoverable]="true"
 >
@@ -8,16 +8,16 @@
     <div class="description">
       <p>
         Technologies:
-        <span *ngFor="let item of card.PrimarySkills"> {{ item.Name }}</span>
+        <span *ngFor="let item of card.primarySkills"> {{ item.name }}</span>
       </p>
-      <p>Status: {{ card.IsActive ? "Active" : "Closed" }}</p>
-      <p>Start: {{ card.StartDate }}</p>
-      <p>Finish: {{ card.EndDate }}</p>
+      <p>Status: {{ card.isActive ? "Active" : "Closed" }}</p>
+      <p>Start: {{ card.startDate }}</p>
+      <p>Finish: {{ card.endDate }}</p>
     </div>
     <div class="project-buttons">
       <app-participants
-        [registered]="card.CurrentApplicationsCount"
-        [required]="card.PlannedApplicationsCount"
+        [registered]="card.currentApplicationsCount"
+        [required]="card.plannedApplicationsCount"
         (click)="showCandidates()"
       ></app-participants>
       <button nz-button nzType="primary" class="edit-btn">Edit project</button>
@@ -39,19 +39,19 @@
   <ng-container *nzDrawerContent>
     <nz-collapse nzGhost>
       <nz-collapse-panel [nzHeader]="'Managers'">
-        <p *ngFor="let panel of card.Managers">{{ panel.UserName }}</p>
+        <p *ngFor="let panel of card.managers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
       <nz-collapse-panel [nzHeader]="'Interviewers'">
-        <p *ngFor="let panel of card.Interviewers">{{ panel.UserName }}</p>
+        <p *ngFor="let panel of card.interviewers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
       <nz-collapse-panel [nzHeader]="'Recruiters'">
-        <p *ngFor="let panel of card.Recruiters">{{ panel.UserName }}</p>
+        <p *ngFor="let panel of card.recruiters">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
       <nz-collapse-panel [nzHeader]="'Mentors'">
-        <p *ngFor="let panel of card.Mentors">{{ panel.UserName }}</p>
+        <p *ngFor="let panel of card.mentors">{{ panel.userName }}</p>
       </nz-collapse-panel>
     </nz-collapse>
   </ng-container>
