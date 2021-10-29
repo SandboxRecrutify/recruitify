@@ -1,13 +1,11 @@
-<nz-modal
-  [nzVisible]="isVisible"
+<nz-drawer
+  [nzVisible]="true"
   nzTitle="Create new project"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
-  nzOkText="Create"
-  nzCancelText="Cancel"
+  (nzOnClose)="handleCancel()"
+  [nzWidth]="600"
 >
   <!-- nzWidth="700px" -->
-  <ng-container *nzModalContent>
+  <ng-container *nzDrawerContent>
     <form [formGroup]="form" nz-form nzLayout="vertical" nz-row [nzGutter]="16">
       <!-- project name -->
       <div nz-col [nzSpan]="21">
@@ -46,8 +44,8 @@
             >
               <nz-option
                 *ngFor="let primarySkill of data?.primarySkills"
-                [nzValue]="primarySkill.value"
-                [nzLabel]="primarySkill.label"
+                [nzValue]="primarySkill.id"
+                [nzLabel]="primarySkill.name"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -70,8 +68,8 @@
             >
               <nz-option
                 *ngFor="let staff of data?.staff?.managers"
-                [nzValue]="staff.id"
-                [nzLabel]="staff.name"
+                [nzValue]="staff.userId"
+                [nzLabel]="staff.userName"
               >
               </nz-option>
             </nz-select>
@@ -97,8 +95,8 @@
             >
               <nz-option
                 *ngFor="let staff of data?.staff?.recruiters"
-                [nzValue]="staff.id"
-                [nzLabel]="staff.name"
+                [nzValue]="staff.userId"
+                [nzLabel]="staff.userName"
               >
               </nz-option>
             </nz-select>
@@ -162,4 +160,4 @@
       </div>
     </form>
   </ng-container>
-</nz-modal>
+</nz-drawer>

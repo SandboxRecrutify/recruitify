@@ -9,6 +9,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectsService } from '../../services/projects.service';
 import { CreateProject } from '../../models/CreateProject';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-create-project',
@@ -24,12 +25,12 @@ export class CreateProjectComponent implements OnInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private message: NzMessageService
   ) {}
 
   handleOk(): void {
     this.submitForm();
-    // this.onToggle.emit(false);
   }
 
   handleCancel(): void {
@@ -44,6 +45,7 @@ export class CreateProjectComponent implements OnInit, OnChanges {
       }
     }
     if (this.form.valid) {
+      this.message.success('Project created successfully');
     }
     console.log(this.form.value);
   }
