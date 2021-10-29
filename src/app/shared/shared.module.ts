@@ -1,3 +1,4 @@
+import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
 import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
@@ -38,6 +39,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
+import { FilterModalComponent } from './pages/candidates-page/filter-modal/filter-modal.component';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
@@ -55,6 +57,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     ProfilePageComponent,
     FourOFourComponent,
     CalendarPageComponent,
+    CandidatesPageComponent,
+    FilterModalComponent,
     FilterPipe,
   ],
   imports: [
