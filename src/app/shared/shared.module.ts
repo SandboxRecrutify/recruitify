@@ -41,6 +41,7 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     ProfilePageComponent,
     FourOFourComponent,
     CalendarPageComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
