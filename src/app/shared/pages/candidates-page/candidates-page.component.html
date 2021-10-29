@@ -1,52 +1,35 @@
-<div class="page_container">
-  <div class="header">
-    <div class="candidatesCount">{{ candidatesList.length }}</div>
-    <h3>October 2021 JS, .NET, BA</h3>
+<div class="page_container candidates_container">
+  <div class="candidates_heading">
+    <div class="candidates_count">{{ candidatesList.length }}</div>
+    <h3 class="candidates_title">October 2021 JS, .NET, BA</h3>
+    <div class="candidates_filter-wrap">
+      <input
+        nz-input
+        placeholder="candidate's name"
+        [(ngModel)]="searchValue"
+        (input)="searchName()"
+      />
+      <div class="candidates_filter-btn"></div>
+    </div>
   </div>
 
   <nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
     <thead>
       <tr>
         <th
-          nzWidth="45px"
+          nzWidth="40px"
           [(nzChecked)]="checked"
           [nzIndeterminate]="indeterminate"
           (nzCheckedChange)="onAllChecked($event)"
         ></th>
-        <th nzCustomFilter>
-          Name
-          <nz-filter-trigger
-            [(nzVisible)]="visible"
-            [nzActive]="searchValue.length > 0"
-            [nzDropdownMenu]="menu"
-          >
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-        </th>
-        <th
-          [nzFilterMultiple]="true"
-          [nzFilters]="listOfFilterLocation"
-          [nzFilterFn]="filterFnLocation"
-        >
-          Location
-        </th>
-        <th
-          [nzFilterMultiple]="true"
-          [nzFilters]="listOfFilterSkill"
-          [nzFilterFn]="filterFnSkill"
-        >
-          Primary skill
-        </th>
-        <th
-          [nzFilterMultiple]="true"
-          [nzFilters]="listOfFilterStatus"
-          [nzFilterFn]="filterFnStatus"
-        >
-          Status
-        </th>
-        <th nzWidth="145px" nzSortOrder="null">Recruter's feedback</th>
-        <th nzWidth="145px" nzSortOrder="null">Interviewer's feedback</th>
-        <th nzWidth="110px"></th>
+        <th nzCustomFilter nzSortOrder="null">Name</th>
+        <th nzSortOrder="null">Location</th>
+        <th nzSortOrder="null">Primary skill</th>
+        <th nzSortOrder="null">Status</th>
+        <th nzSortOrder="null">Recruter's feedback</th>
+        <th nzSortOrder="null">Interviewer's feedback</th>
+        <th nzWidth="100px" nzSortOrder="null">Test result</th>
+        <th nzWidth="120px"></th>
       </tr>
     </thead>
     <tbody>
@@ -71,6 +54,7 @@
             [isDisabled]="true"
           ></app-rating-stars>
         </td>
+        <td>10</td>
         <td>
           <button
             nz-button
@@ -85,26 +69,6 @@
       </tr>
     </tbody>
   </nz-table>
-  <nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input
-          type="text"
-          nz-input
-          placeholder="Search name"
-          [(ngModel)]="searchValue"
-        />
-        <button
-          nz-button
-          nzSize="small"
-          nzType="primary"
-          (click)="search()"
-          class="search-button"
-        >
-          Search
-        </button>
-        <button nz-button nzSize="small" (click)="reset()">Reset</button>
-      </div>
-    </div>
-  </nz-dropdown-menu>
+
+  <!-- <app-filter-modal></app-filter-modal> -->
 </div>

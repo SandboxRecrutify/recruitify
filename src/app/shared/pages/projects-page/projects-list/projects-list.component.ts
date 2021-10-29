@@ -9,7 +9,8 @@ import { ProjectsPageFacade } from '../projects-page.facade';
 })
 export class ProjectsListComponent implements OnInit {
 
-  @Input() cards: Project[] = []
+  @Input() projects: Project[] = []
+  @Input() searchText!: string
 
 
   constructor() { }

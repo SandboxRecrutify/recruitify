@@ -1,6 +1,6 @@
 <nz-card
   class="project-card"
-  nzTitle="{{ card.name }}"
+  [nzTitle]="titleTemplate"
   [nzExtra]="extraTemplate"
   [nzHoverable]="true"
 >
@@ -24,12 +24,8 @@
     </div>
   </div>
 </nz-card>
-<ng-template #extraTemplate>
-  <button nz-button nzType="primary" (click)="openStaff()">View Staff</button>
-</ng-template>
 
 <nz-drawer
-  class="staff"
   [nzClosable]="true"
   [nzVisible]="isVisible"
   nzPlacement="right"
@@ -56,3 +52,11 @@
     </nz-collapse>
   </ng-container>
 </nz-drawer>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="primary" (click)="openStaff()">View Staff</button>
+</ng-template>
+
+<ng-template #titleTemplate>
+  <p class="card-title">{{ card.name }}</p>
+</ng-template>
