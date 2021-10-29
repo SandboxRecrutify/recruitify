@@ -44,6 +44,7 @@ import { FilterModalComponent } from './pages/candidates-page/filter-modal/filte
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { FilterPipe } from './pipes/filter.pipe';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     NzResultModule,
     BrowserAnimationsModule,
     NzDrawerModule,
-    NzCollapseModule
+    NzCollapseModule,
+    NzTabsModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
