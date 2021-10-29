@@ -3,20 +3,20 @@
     <button nz-button nzType="primary" (click)="handleToggle(true)">
       Create Project
     </button>
-    <div class="statusFilter">
-      <button nz-button nz-dropdown [nzDropdownMenu]="menu">
-        Status
-        <i nz-icon nzType="filter" nzTheme="outline"></i>
-      </button>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item>Active</li>
-          <li nz-menu-item>Closed</li>
-        </ul>
-      </nz-dropdown-menu>
+    <div class="search">
+      <div class="filter">
+        <img src="assets/images/Vector.png" alt="filter" />
+      </div>
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="Search project" [(ngModel)]="searchText"/>
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
     </div>
   </div>
-  <app-projects-list [cards]="projects"></app-projects-list>
+
+  <app-projects-list [projects]="projects" [searchText]="searchText"></app-projects-list>
   <app-create-project
     (onToggle)="handleToggle($event)"
     [isVisible]="isVisible"

@@ -23,7 +23,6 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ParticipantsComponent } from './pages/projects-page/participants/participants.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -42,6 +41,10 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { FilterModalComponent } from './pages/candidates-page/filter-modal/filter-modal.component';
 
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { FilterPipe } from './pipes/filter.pipe';
+
 @NgModule({
   declarations: [
     SharedComponent,
@@ -56,6 +59,7 @@ import { FilterModalComponent } from './pages/candidates-page/filter-modal/filte
     CalendarPageComponent,
     CandidatesPageComponent,
     FilterModalComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
@@ -66,7 +70,6 @@ import { FilterModalComponent } from './pages/candidates-page/filter-modal/filte
     NzButtonModule,
     NzCardModule,
     ReactiveFormsModule,
-    NzTabsModule,
     NzTableModule,
     NzGridModule,
     NzInputModule,
@@ -79,6 +82,8 @@ import { FilterModalComponent } from './pages/candidates-page/filter-modal/filte
     NzDropDownModule,
     NzResultModule,
     BrowserAnimationsModule,
+    NzDrawerModule,
+    NzCollapseModule
   ],
   exports: [RatingStarsComponent],
   providers: [
