@@ -1,34 +1,77 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
-export abstract class ApiService<T> {
-  constructor(private http: HttpClient) {}
+export const GET = 'Get';
+export const POST = 'Post';
+export const CREATE = 'Create';
+export const DELETE = 'Delete';
+export const UPDATE = 'Update';
 
-   readData<T>(url: string): Observable<T> {
-    return this.http.get<T>(url)
-    // return this.http.get<T>(`${this.getApiUrl()}${url}`)
-    // .pipe(map(result => result as T));
+export abstract class ApiService {
+  private readonly serviceName: string;
+  private readonly apiPath: string;
+
+  protected constructor(
+    private http: HttpClient,
+    apiPath: string,
+    serviceName: string = ApiService.name
+  ) {
+    this.apiPath = apiPath;
+    this.serviceName = serviceName;
   }
 
-  createData<T>(url: string): Observable<T> {
-    return this.http.post<T>(url, {})
+  get<T>(params: string = ''): Observable<T> {
+    return this.wrapRequest<T>(
+      this.http.get<T>(this.getApiUrl() + params),
+      GET
+    );
   }
 
-  updateData<T>(url: string): Observable<T> {
-    return this.http.put<T>(url, {})
+  createData<T, B>(url: string, body: B): Observable<T> {
+    return this.wrapRequest<T>(
+      this.http.post<T>(this.getApiUrl(), body),
+      CREATE
+    );
+  }
+
+  updateData<T, B>(url: string, body: B): Observable<T> {
+    return this.wrapRequest<T>(
+      this.http.put<T>(this.getApiUrl(), body),
+      UPDATE
+    );
   }
 
   deleteData<T>(url: string): Observable<T> {
-    return this.http.delete<T>(url, {})
+    return this.wrapRequest<T>(this.http.delete<T>(this.getApiUrl()), DELETE);
   }
 
   protected getApiUrl(): string {
-    return environment.url;
+    return environment.apiUrl + this.apiPath;
+  }
+
+  private wrapRequest<T>(
+    observable: Observable<T>,
+    info: string = 'ApiService logger'
+  ): Observable<T> {
+    return observable.pipe(
+      tap(
+        (result) => {
+          this.log(result, info);
+        },
+        (error) => {
+          this.log(error, info);
+        }
+      )
+    );
+  }
+
+  private log(message: any, method: string) {
+    if (!environment.production) {
+      console.group(method + ' [' + this.serviceName + ']:');
+      console.info(message);
+      console.groupEnd();
+    }
   }
 }

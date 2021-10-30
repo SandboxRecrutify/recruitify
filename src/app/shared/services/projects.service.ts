@@ -5,19 +5,19 @@ import { Observable } from 'rxjs';
 import { CreateProject } from '../models/CreateProject';
 import { ApiService } from './api.service';
 
+const API_PATH = 'assets/';
 @Injectable()
-export class ProjectsService extends ApiService<Project> {
+export class ProjectsService extends ApiService {
   constructor(http: HttpClient) {
-    super(http)
+    super(http, API_PATH, ProjectsService.name)
   }
 
-  getProjects() {
-    // return super.readData<Project[]>('project');
-    return super.readData<Project[]>('assets/projects.json');
-  }
+  getProjects(): Observable<Project[]> {
+      return super.get<Project[]>('projects.json');
+       }
 
   //get create project modal data
   getCreateProjectData(): Observable<CreateProject> {
-    return this.readData<CreateProject>('assets/createProject.json');
+   return super.get<CreateProject>('createProject.json');
   }
 }
