@@ -8,7 +8,7 @@
     <div class="description">
       <p>
         Primary skills:
-        <span *ngFor="let item of card.PrimarySkills"> {{ item.Name }}</span>
+        <span *ngFor="let item of card.PrimarySkills"> {{ item.Name }},</span>
       </p>
       <p>Status: {{ card.IsActive ? "Active" : "Closed" }}</p>
       <p>Start: {{ card.StartDate }}</p>
@@ -30,7 +30,7 @@
   [nzVisible]="isVisible"
   nzPlacement="right"
   nzTitle="Project staff"
-  (nzOnClose)="closeStaff()"
+  (nzOnClose)="switchStaff()"
 >
   <ng-container *nzDrawerContent>
     <nz-collapse nzGhost >
@@ -54,7 +54,7 @@
 </nz-drawer>
 
 <ng-template #extraTemplate>
-  <button nz-button nzType="primary" (click)="openStaff()">View Staff</button>
+  <button nz-button nzType="primary" (click)="switchStaff()">View Staff</button>
 </ng-template>
 
 <ng-template #titleTemplate>

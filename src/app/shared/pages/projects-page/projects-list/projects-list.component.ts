@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/shared/models/Project';
-import { ProjectsPageFacade } from '../projects-page.facade';
+
 
 @Component({
   selector: 'app-projects-list',
@@ -11,6 +11,7 @@ export class ProjectsListComponent implements OnInit {
 
   @Input() projects: Project[] = []
   @Input() searchText!: string
+  isVisible: boolean = false
 
 
   constructor() { }

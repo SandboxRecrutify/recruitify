@@ -1,6 +1,8 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/Project';
 import { ProjectsPageFacade } from './projects-page.facade';
+
 
 @Component({
   selector: 'app-projects-page',
@@ -11,15 +13,24 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = ''
   isVisible = false;
   projects: Project[] = [];
+  projects$: Observable<Project[]>;
+
+  filter: boolean = false
+
+  switchFilter() {
+    this.filter = !this.filter
+  }
 
   handleToggle(isVisible: boolean): void {
     this.isVisible = isVisible;
   }
 
-  constructor(private projectsPageFacade: ProjectsPageFacade) {}
+  constructor(private projectsPageFacade: ProjectsPageFacade) {
+    this.projects$ = this.projectsPageFacade.getProjectsList$();
+  }
 
   ngOnInit(): void {
-    this.projectsPageFacade.projectsList$.subscribe(
+    this.projects$.subscribe(
       (response) => (this.projects = response)
     );
 

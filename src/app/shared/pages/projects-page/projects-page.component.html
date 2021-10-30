@@ -4,7 +4,7 @@
       Create Project
     </button>
     <div class="search">
-      <div class="filter">
+      <div class="filter" (click)="switchFilter()">
         <img src="assets/images/Vector.png" alt="filter" />
       </div>
       <nz-input-group [nzSuffix]="suffixIconSearch">
@@ -22,3 +22,16 @@
     [isVisible]="isVisible"
   ></app-create-project>
 </div>
+
+<nz-drawer
+nzWidth=100
+[nzClosable]="true"
+[nzVisible]="filter"
+nzPlacement="top"
+nzTitle="Projects filters"
+(nzOnClose)="switchFilter()"
+>
+<ng-container *nzDrawerContent nzWidth=100>
+  <p>Filters...</p>
+</ng-container>
+</nz-drawer>
