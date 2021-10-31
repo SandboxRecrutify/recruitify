@@ -1,6 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { PrimarySkill } from 'src/app/shared/models/Project';
 
 @Component({
@@ -8,7 +15,7 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
   templateUrl: './primary-skill-input.component.html',
   styleUrls: ['./primary-skill-input.component.scss'],
 })
-export class PrimarySkillInputComponent implements OnInit {
+export class PrimarySkillInputComponent implements OnInit, OnDestroy {
   @Input()
   primarySkill!: PrimarySkill;
   @Input()
@@ -19,6 +26,7 @@ export class PrimarySkillInputComponent implements OnInit {
   @Output()
   onRemovePrimarySkill = new EventEmitter<number>();
 
+  primarySkillsValiditySubscription!: Subscription;
   form!: FormGroup;
   isActive = true;
 
@@ -30,20 +38,25 @@ export class PrimarySkillInputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.primarySkillsValidity$.subscribe((validity) => {
-      if (!validity) {
-        for (const i in this.form.controls) {
-          if (this.form.controls.hasOwnProperty(i)) {
-            this.form.controls[i].markAsDirty();
-            this.form.controls[i].updateValueAndValidity();
+    this.primarySkillsValiditySubscription =
+      this.primarySkillsValidity$.subscribe((validity) => {
+        if (!validity) {
+          for (const i in this.form.controls) {
+            if (this.form.controls.hasOwnProperty(i)) {
+              this.form.controls[i].markAsDirty();
+              this.form.controls[i].updateValueAndValidity();
+            }
           }
         }
-      }
-    });
+      });
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       link: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.maxLength(100)]],
     });
+  }
+  ngOnDestroy(): void {
+    this.primarySkillsValiditySubscription.unsubscribe();
+    // this.primarySkillsValidity$.unsubscribe();
   }
 }
