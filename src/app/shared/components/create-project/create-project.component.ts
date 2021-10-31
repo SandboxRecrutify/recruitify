@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
+import { createProject } from '../../shared.config';
 
 @Component({
   selector: 'app-create-project',
@@ -71,15 +72,24 @@ export class CreateProjectComponent implements OnInit {
       .subscribe((data) => (this.data = data));
     // init form
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(128)]],
-      dates: [[new Date(), new Date()], [Validators.required]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(createProject.name.maxLength),
+        ],
+      ],
+      dates: [createProject.dates.defaultValue, [Validators.required]],
       plannedCandidatesCount: [null, [Validators.required]],
+      isActive: [createProject.isActive.defaultValue, []],
+      description: [
+        '',
+        [Validators.maxLength(createProject.description.maxLength)],
+      ],
       recruiters: [[], [Validators.required]],
       managers: [[], [Validators.required]],
       interviewers: [[], [Validators.required]],
       mentors: [[], [Validators.required]],
-      isActive: [false, []],
-      description: ['', [Validators.maxLength(500)]],
     });
   }
 }
