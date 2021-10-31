@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://recruitifyexadel.herokuapp.com/api/'
+  // apiUrl: 'https://recruitifyexadel.herokuapp.com/api/'
+  apiUrl: 'http://localhost:4200/'
 };
 
 /*
