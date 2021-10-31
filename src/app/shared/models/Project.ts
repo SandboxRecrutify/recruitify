@@ -13,8 +13,10 @@ export interface Staff {
   userName: string;
 }
 export interface PrimarySkill {
-  id: string;
+  id?: string;
   name: string;
+  description: string;
+  link: string;
 }
 
 export enum ProjectUserRole {
@@ -24,4 +26,4 @@ export enum ProjectUserRole {
   managers = 'Managers',
 }
 
-type StaffRole = { [key in keyof typeof ProjectUserRole]: Staff[] };
+export type StaffRole = { [key in keyof typeof ProjectUserRole]: Staff[] };

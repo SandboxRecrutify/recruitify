@@ -1,9 +1,5 @@
-import { PrimarySkill, Staff } from './Project';
+import { PrimarySkill, StaffRole } from './Project';
 
-export interface CreateProject {
-  staff: {
-    managers: Staff[];
-    recruiters: Staff[];
-  };
+export interface CreateProject extends StaffRole {
   primarySkills: PrimarySkill[];
 }

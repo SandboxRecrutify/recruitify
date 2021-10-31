@@ -1,3 +1,4 @@
+@use "./globals/" as *;
 /* You can add global styles to this file, and also import other style files */
 body {
   box-sizing: border-box;
@@ -11,4 +12,8 @@ body {
 .page_container {
   max-width: 1200px;
   margin: 60px auto;
+}
+// for red error texts
+.errorText {
+  color: $dangerColor;
 }
