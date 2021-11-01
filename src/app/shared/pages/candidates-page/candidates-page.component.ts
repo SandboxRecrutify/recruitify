@@ -1,8 +1,8 @@
-import { paths } from './../../../app-routing.constants';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Candidate } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-page',
@@ -11,17 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidatesPageComponent implements OnInit {
   searchValue = '';
-  visible = false;
   checked = false;
   indeterminate = false;
+  drawerVisible = false;
   setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
-  // filteredCandidateList: Candidate[] = this.candidatesList;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private router: Router
   ) {}
+
+  openDrawer(): void {
+    this.drawerVisible = !this.drawerVisible;
+  }
 
   sortAlphabetically = (a: Candidate, b: Candidate) =>
     a.firstname.localeCompare(b.lastname);

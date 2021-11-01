@@ -9,7 +9,7 @@
         [(ngModel)]="searchValue"
         (input)="searchName()"
       />
-      <div class="candidates_filter-btn"></div>
+      <div class="candidates_filter-btn" (click)="openDrawer()"></div>
     </div>
   </div>
 
@@ -80,5 +80,5 @@
     </tbody>
   </nz-table>
 
-  <!-- <app-filter-modal></app-filter-modal> -->
+  <app-filter-drawer [drawerVisible]="drawerVisible"></app-filter-drawer>
 </div>
