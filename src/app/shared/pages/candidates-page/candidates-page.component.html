@@ -22,8 +22,18 @@
           [nzIndeterminate]="indeterminate"
           (nzCheckedChange)="onAllChecked($event)"
         ></th>
-        <th nzCustomFilter nzSortOrder="null">Name</th>
-        <th nzSortOrder="null">Location</th>
+        <th
+          [nzSortFn]="sortAlphabetically"
+          [nzSortDirections]="['ascend', 'descend', null]"
+        >
+          Name
+        </th>
+        <th
+          [nzSortFn]="sortAlphabetically"
+          [nzSortDirections]="['ascend', 'descend', null]"
+        >
+          Location
+        </th>
         <th nzSortOrder="null">Primary skill</th>
         <th nzSortOrder="null">Status</th>
         <th nzSortOrder="null">Recruter's feedback</th>

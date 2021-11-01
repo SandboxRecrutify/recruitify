@@ -23,6 +23,11 @@ export class CandidatesPageComponent implements OnInit {
     private router: Router
   ) {}
 
+  sortAlphabetically = (a: Candidate, b: Candidate) =>
+    a.firstname.localeCompare(b.lastname);
+
+  // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
+
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);
