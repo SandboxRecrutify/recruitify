@@ -51,6 +51,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
     CandidatesPageComponent,
     FilterModalComponent,
     FilterPipe,
+    PrimarySkillInputComponent,
   ],
   imports: [
     CommonModule,
@@ -92,7 +95,8 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
     NzDrawerModule,
     NzCollapseModule,
     NzTabsModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzSpaceModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
