@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Candidate } from './../../models/Candidate';
+import { Candidate, CandidatesLocation } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
 
 @Component({
@@ -27,7 +27,7 @@ export class CandidatesPageComponent implements OnInit {
   }
 
   sortAlphabetically = (a: Candidate, b: Candidate) =>
-    a.firstname.localeCompare(b.lastname);
+    a.name.localeCompare(b.name);
 
   // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
 
@@ -63,8 +63,8 @@ export class CandidatesPageComponent implements OnInit {
   searchName() {
     this.candidatesList = this.candidatesList.filter(
       (candidate: Candidate) =>
-        candidate.firstname.indexOf(this.searchValue) !== -1 ||
-        candidate.lastname.indexOf(this.searchValue) !== -1
+        candidate.name.indexOf(this.searchValue) !== -1 ||
+        candidate.surname.indexOf(this.searchValue) !== -1
     );
   }
 
