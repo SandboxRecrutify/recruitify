@@ -1,39 +1,62 @@
 {
-  "staff": {
-    "managers": [
-      { "id": 1, "group": "manager", "name": "John Smith" },
-      { "id": 2, "group": "recruiter", "name": "John Smith" },
-      { "id": 3, "group": "interviewer", "name": "Joe white" },
-      { "id": 4, "group": "mentor", "name": "smith Smith" },
-      { "id": 5, "group": "manager", "name": "joanna" },
-      { "id": 6, "group": "recruiter", "name": "Alina" },
-      { "id": 7, "group": "interviewer", "name": "Liza" },
-      { "id": 8, "group": "mentor", "name": "Alex" },
-      { "id": 9, "group": "manager", "name": "Sergei" },
-      { "id": 10, "group": "recruiter", "name": "Vladislav" },
-      { "id": 11, "group": "interviewer", "name": "Sonya" },
-      { "id": 12, "group": "mentor", "name": "Alice" },
-      { "id": 13, "group": "manager", "name": "Shaha" }
-    ],
-    "recruiters": [
-      { "id": 1, "group": "manager", "name": "John Smith" },
-      { "id": 2, "group": "recruiter", "name": "John Smith" },
-      { "id": 3, "group": "interviewer", "name": "Joe white" },
-      { "id": 4, "group": "mentor", "name": "smith Smith" },
-      { "id": 5, "group": "manager", "name": "joanna" },
-      { "id": 6, "group": "recruiter", "name": "Alina" },
-      { "id": 7, "group": "interviewer", "name": "Liza" },
-      { "id": 8, "group": "mentor", "name": "Alex" },
-      { "id": 9, "group": "manager", "name": "Sergei" },
-      { "id": 10, "group": "recruiter", "name": "Vladislav" },
-      { "id": 11, "group": "interviewer", "name": "Sonya" },
-      { "id": 12, "group": "mentor", "name": "Alice" },
-      { "id": 13, "group": "manager", "name": "Shaha" }
-    ]
-  },
-  "primarySkills": [
-    { "label": ".Net", "value": ".net" },
-    { "label": "JS", "value": "js" },
-    { "label": "BA", "value": "ba" }
+  "managers": [
+    { "userId": 1, "userName": "John Smith" },
+    { "userId": 2, "userName": "John Smith" },
+    { "userId": 3, "userName": "Joe white" },
+    { "userId": 4, "userName": "smith Smith" },
+    { "userId": 5, "userName": "joanna" },
+    { "userId": 6, "userName": "Alina" },
+    { "userId": 7, "userName": "Liza" },
+    { "userId": 8, "userName": "Alex" },
+    { "userId": 9, "userName": "Sergei" },
+    { "userId": 10, "userName": "Vladislav" },
+    { "userId": 11, "userName": "Sonya" },
+    { "userId": 12, "userName": "Alice" },
+    { "userId": 13, "userName": "Shaha" }
+  ],
+  "recruiters": [
+    { "userId": 1, "userName": "John Smith" },
+    { "userId": 2, "userName": "John Smith" },
+    { "userId": 3, "userName": "Joe white" },
+    { "userId": 4, "userName": "smith Smith" },
+    { "userId": 5, "userName": "joanna" },
+    { "userId": 6, "userName": "Alina" },
+    { "userId": 7, "userName": "Liza" },
+    { "userId": 8, "userName": "Alex" },
+    { "userId": 9, "userName": "Sergei" },
+    { "userId": 10, "userName": "Vladislav" },
+    { "userId": 11, "userName": "Sonya" },
+    { "userId": 12, "userName": "Alice" },
+    { "userId": 13, "userName": "Shaha" }
+  ],
+  "mentors": [
+    { "userId": 1, "userName": "John Smith" },
+    { "userId": 2, "userName": "John Smith" },
+    { "userId": 3, "userName": "Joe white" },
+    { "userId": 4, "userName": "smith Smith" },
+    { "userId": 5, "userName": "joanna" },
+    { "userId": 6, "userName": "Alina" },
+    { "userId": 7, "userName": "Liza" },
+    { "userId": 8, "userName": "Alex" },
+    { "userId": 9, "userName": "Sergei" },
+    { "userId": 10, "userName": "Vladislav" },
+    { "userId": 11, "userName": "Sonya" },
+    { "userId": 12, "userName": "Alice" },
+    { "userId": 13, "userName": "Shaha" }
+  ],
+  "interviewers": [
+    { "userId": 1, "userName": "John Smith" },
+    { "userId": 2, "userName": "John Smith" },
+    { "userId": 3, "userName": "Joe white" },
+    { "userId": 4, "userName": "smith Smith" },
+    { "userId": 5, "userName": "joanna" },
+    { "userId": 6, "userName": "Alina" },
+    { "userId": 7, "userName": "Liza" },
+    { "userId": 8, "userName": "Alex" },
+    { "userId": 9, "userName": "Sergei" },
+    { "userId": 10, "userName": "Vladislav" },
+    { "userId": 11, "userName": "Sonya" },
+    { "userId": 12, "userName": "Alice" },
+    { "userId": 13, "userName": "Shaha" }
   ]
 }

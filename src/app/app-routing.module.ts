@@ -35,19 +35,23 @@ const mainRouter: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: paths.index,
-    redirectTo: paths.projects,
-    pathMatch: 'full',
+    path: paths.calendar,
+    component: CalendarPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: paths.fof,
     component: FourOFourComponent,
   },
   {
+    path: paths.index,
+    redirectTo: paths.projects,
+    pathMatch: 'full',
+  },
+  {
     path: paths.rest,
     redirectTo: paths.fof,
   },
-  { path: paths.calendar, component: CalendarPageComponent },
 ];
 
 const routes: Routes = [

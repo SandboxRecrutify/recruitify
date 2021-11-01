@@ -1,18 +1,5 @@
-export interface CreateProject {
-  staff: {
-    managers: Staff[]
-    recruiters: Staff[]
-  }
-  primarySkills: PrimarySkill[]
-}
+import { PrimarySkill, StaffRole } from './Project';
 
-type PrimarySkill = {
-  label: string
-  value: string
-}
-
-type Staff = {
-  id: string,
-  group: string,
-  name: string
+export interface CreateProject extends StaffRole {
+  primarySkills: PrimarySkill[];
 }
