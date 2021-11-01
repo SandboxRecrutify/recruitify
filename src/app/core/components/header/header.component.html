@@ -2,18 +2,55 @@
   <div class="header">
     <div class="header-container">
       <div class="logo">
-        <a routerLink="/"><img src="/assets/images/RecruitifyLogo.png" alt="logo" /></a>
-
+        <a routerLink="/"
+          ><img src="/assets/images/RecruitifyLogo.png" alt="logo"
+        /></a>
       </div>
       <div class="menu">
-        <div class="menu_user-info">
-          <p class="menu_user-name">Igor Nikolaev</p>
-          <p class="menu_user-role">mentor</p>
-        </div>
         <div class="menu_nav">
-          <div class="menu_icon menu_icon--projects" [routerLink]="['/', 'projects']" routerLinkActive="active"></div>
-          <div class="menu_icon menu_icon--candidates" [routerLink]="['/', 'candidates']" routerLinkActive="active"></div>
-          <div class="menu_icon menu_icon--calendar" [routerLink]="['/', 'calendar']" routerLinkActive="active"></div>
+          <a
+            class="menu_link"
+            [routerLink]="['/', 'projects']"
+            routerLinkActive="active"
+          >
+            <svg class="menu_icon">
+              <use
+                xlink:href="/assets/images/nav-icons/navSprite.svg#projects"
+              ></use>
+            </svg>
+          </a>
+          <a
+            class="menu_link"
+            [routerLink]="['/', 'candidates']"
+            routerLinkActive="active"
+          >
+            <svg class="menu_icon">
+              <use
+                xlink:href="/assets/images/nav-icons/navSprite.svg#candidates"
+              ></use>
+            </svg>
+          </a>
+          <a
+            class="menu_link"
+            [routerLink]="['/', 'calendar']"
+            routerLinkActive="active"
+          >
+            <svg class="menu_icon">
+              <use
+                xlink:href="/assets/images/nav-icons/navSprite.svg#calendar"
+              ></use>
+            </svg>
+          </a>
+        </div>
+        <div class="menu_user">
+          <p class="menu_user-name">Igor Nikolaev</p>
+          <a class="menu_link" (click)="onLogoutBtnClick()">
+            <svg class="logout_icon">
+              <use
+                xlink:href="/assets/images/nav-icons/navSprite.svg#logout"
+              ></use>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
