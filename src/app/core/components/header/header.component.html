@@ -2,7 +2,8 @@
   <div class="header">
     <div class="header-container">
       <div class="logo">
-        <img src="/assets/images/RecruitifyLogo.png" alt="logo" />
+        <a routerLink="/"><img src="/assets/images/RecruitifyLogo.png" alt="logo" /></a>
+
       </div>
       <div class="menu">
         <div class="menu_user-info">
@@ -10,9 +11,9 @@
           <p class="menu_user-role">mentor</p>
         </div>
         <div class="menu_nav">
-          <div class="menu_icon menu_icon--projects"></div>
-          <div class="menu_icon menu_icon--candidates"></div>
-          <div class="menu_icon menu_icon--calendar"></div>
+          <div class="menu_icon menu_icon--projects" [routerLink]="['/', 'projects']" routerLinkActive="active"></div>
+          <div class="menu_icon menu_icon--candidates" [routerLink]="['/', 'candidates']" routerLinkActive="active"></div>
+          <div class="menu_icon menu_icon--calendar" [routerLink]="['/', 'calendar']" routerLinkActive="active"></div>
         </div>
       </div>
     </div>

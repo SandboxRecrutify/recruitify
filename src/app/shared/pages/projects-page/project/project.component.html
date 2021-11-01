@@ -7,12 +7,12 @@
   <div class="project-info">
     <div class="description">
       <p>
-        Technologies:
+        Primary skills:
         <span *ngFor="let item of card.primarySkills"> {{ item.name }}</span>
       </p>
       <p>Status: {{ card.isActive ? "Active" : "Closed" }}</p>
-      <p>Start: {{ card.startDate }}</p>
-      <p>Finish: {{ card.endDate }}</p>
+      <p>Start: {{ card.startDate | date }}</p>
+      <p>Finish: {{ card.endDate | date }}</p>
     </div>
     <div class="project-buttons">
       <app-participants
@@ -34,19 +34,19 @@
 >
   <ng-container *nzDrawerContent>
     <nz-collapse nzGhost>
-      <nz-collapse-panel [nzHeader]="'Managers'">
+      <nz-collapse-panel [nzHeader]="'Managers'" nzActive="isVisible">
         <p *ngFor="let panel of card.managers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Interviewers'">
+      <nz-collapse-panel [nzHeader]="'Interviewers'"nzActive="isVisible">
         <p *ngFor="let panel of card.interviewers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Recruiters'">
+      <nz-collapse-panel [nzHeader]="'Recruiters'" nzActive="isVisible">
         <p *ngFor="let panel of card.recruiters">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Mentors'">
+      <nz-collapse-panel [nzHeader]="'Mentors'" nzActive="isVisible">
         <p *ngFor="let panel of card.mentors">{{ panel.userName }}</p>
       </nz-collapse-panel>
     </nz-collapse>

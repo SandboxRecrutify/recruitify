@@ -23,38 +23,38 @@
     ],
     "managers": [
       {
-        "UserId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
-        "UserName": "Alex Anderson"
+        "userId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
+        "userName": "Alex Anderson"
       }
     ],
     "interviewers": [
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       },
       {
-        "UserId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
-        "UserName": "David Lewis"
+        "userId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
+        "userName": "David Lewis"
       }
     ],
     "recruiters": [
       {
-        "UserId": "6f885f2c-b60d-4743-b381-4e841d48a956",
-        "UserName": "Brandon Harris"
+        "userId": "6f885f2c-b60d-4743-b381-4e841d48a956",
+        "userName": "Brandon Harris"
       },
       {
-        "UserId": "03699464-c0a6-412f-8c83-eca85b359e91",
-        "UserName": "Kevin Wils"
+        "userId": "03699464-c0a6-412f-8c83-eca85b359e91",
+        "userName": "Kevin Wils"
       }
     ],
     "mentors": [
       {
-        "UserId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
-        "UserName": "David Lewis"
+        "userId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
+        "userName": "David Lewis"
       },
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       }
     ],
     "isActive": true
@@ -75,30 +75,30 @@
     ],
     "managers": [
       {
-        "UserId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
-        "UserName": "Anthony Clark"
+        "userId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
+        "userName": "Anthony Clark"
       }
     ],
     "interviewers": [
       {
-        "UserId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
-        "UserName": "Fred Taylor"
+        "userId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
+        "userName": "Fred Taylor"
       },
       {
-        "UserId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
-        "UserName": "Justin Walker"
+        "userId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
+        "userName": "Justin Walker"
       }
     ],
     "recruiters": [
       {
-        "UserId": "6f885f2c-b60d-4743-b381-4e841d48a956",
-        "UserName": "Brandon Harris"
+        "userId": "6f885f2c-b60d-4743-b381-4e841d48a956",
+        "userName": "Brandon Harris"
       }
     ],
     "mentors": [
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       }
     ],
     "isActive": true
@@ -119,34 +119,34 @@
     ],
     "managers": [
       {
-        "UserId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
-        "UserName": "Alex Anderson"
+        "userId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
+        "userName": "Alex Anderson"
       }
     ],
     "interviewers": [
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       },
       {
-        "UserId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
-        "UserName": "Justin Walker"
+        "userId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
+        "userName": "Justin Walker"
       }
     ],
     "recruiters": [
       {
-        "UserId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
-        "UserName": "Anthony Clark"
+        "userId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
+        "userName": "Anthony Clark"
       },
       {
-        "UserId": "03699464-c0a6-412f-8c83-eca85b359e91",
-        "UserName": "Kevin Wils"
+        "userId": "03699464-c0a6-412f-8c83-eca85b359e91",
+        "userName": "Kevin Wils"
       }
     ],
     "mentors": [
       {
-        "UserId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
-        "UserName": "David Lewis"
+        "userId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
+        "userName": "David Lewis"
       }
     ],
     "isActive": false
@@ -175,34 +175,34 @@
     ],
     "managers": [
       {
-        "UserId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
-        "UserName": "Anthony Clark"
+        "userId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
+        "userName": "Anthony Clark"
       }
     ],
     "interviewers": [
       {
-        "UserId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
-        "UserName": "Fred Taylor"
+        "userId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
+        "userName": "Fred Taylor"
       },
       {
-        "UserId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
-        "UserName": "Justin Walker"
+        "userId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
+        "userName": "Justin Walker"
       }
     ],
     "recruiters": [
       {
-        "UserId": "6f885f2c-b60d-4743-b381-4e841d48a956",
-        "UserName": "Brandon Harris"
+        "userId": "6f885f2c-b60d-4743-b381-4e841d48a956",
+        "userName": "Brandon Harris"
       },
       {
-        "UserId": "03699464-c0a6-412f-8c83-eca85b359e91",
-        "UserName": "Kevin Wils"
+        "userId": "03699464-c0a6-412f-8c83-eca85b359e91",
+        "userName": "Kevin Wils"
       }
     ],
     "mentors": [
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       }
     ],
     "isActive": true
@@ -235,38 +235,38 @@
     ],
     "managers": [
       {
-        "UserId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
-        "UserName": "Alex Anderson"
+        "userId": "ce33e6c4-30ac-11ec-8d3d-0242ac130003",
+        "userName": "Alex Anderson"
       }
     ],
     "interviewers": [
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       },
       {
-        "UserId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
-        "UserName": "Fred Taylor"
+        "userId": "cb40d31e-7447-4ec0-bc53-ab566f3a7b2e",
+        "userName": "Fred Taylor"
       }
     ],
     "recruiters": [
       {
-        "UserId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
-        "UserName": "Anthony Clark"
+        "userId": "73e05563-6c9e-4727-9ebb-b08f16cc1001",
+        "userName": "Anthony Clark"
       },
       {
-        "UserId": "6f885f2c-b60d-4743-b381-4e841d48a956",
-        "UserName": "Brandon Harris"
+        "userId": "6f885f2c-b60d-4743-b381-4e841d48a956",
+        "userName": "Brandon Harris"
       }
     ],
     "mentors": [
       {
-        "UserId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
-        "UserName": "David Lewis"
+        "userId": "4f04e857-50ec-42d7-8fe4-0e3d3d8d34b3",
+        "userName": "David Lewis"
       },
       {
-        "UserId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
-        "UserName": "Christopher Johnson"
+        "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+        "userName": "Christopher Johnson"
       }
     ],
     "isActive": false
