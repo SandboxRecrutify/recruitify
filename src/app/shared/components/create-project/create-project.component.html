@@ -50,7 +50,8 @@
           *ngFor="let primarySkill of primarySkills; index as index"
           [primarySkill]="primarySkill"
           [index]="index"
-          (onRemovePrimarySkill)="onPrimarySkillRemove(index)"
+          (onPrimarySkillRemove)="onPrimarySkillRemove(index)"
+          (onPrimarySkillChange)="onPrimarySkillChange($event, index)"
           [primarySkillsValidity$]="primarySkillsValidity$"
         ></app-primary-skill-input>
         <div

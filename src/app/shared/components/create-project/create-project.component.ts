@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { __values } from 'tslib';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
@@ -31,9 +32,22 @@ export class CreateProjectComponent implements OnInit {
     private message: NzMessageService
   ) {}
 
+  private checkPrimarySkillsValidity(): boolean {
+    if (this.primarySkills.length === 0) {
+      return false;
+    }
+    return this.primarySkills.every((skill) => {
+      return skill.name && skill.description && skill.link;
+    });
+  }
+
   onPrimarySkillAdd() {
     this.isPrimarySkillsTouched = true;
     this.primarySkills.push({ name: '', description: '', link: '' });
+  }
+
+  onPrimarySkillChange(values: PrimarySkill, index: number) {
+    Object.assign(this.primarySkills[index], values);
   }
 
   handleOk(): void {
@@ -47,6 +61,11 @@ export class CreateProjectComponent implements OnInit {
   }
 
   submitForm() {
+    // check if any of the primary skills is invalid
+    this.isPrimarySkillsValid = this.checkPrimarySkillsValidity();
+    console.log('is primary skills valid', this.isPrimarySkillsValid);
+    this.primarySkillsValidity$.next(this.isPrimarySkillsValid);
+
     this.isPrimarySkillsTouched = true;
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
@@ -54,7 +73,6 @@ export class CreateProjectComponent implements OnInit {
         this.form.controls[i].updateValueAndValidity();
       }
     }
-    this.primarySkillsValidity$.next(this.isPrimarySkillsValid);
     if (
       this.form.valid &&
       this.isPrimarySkillsValid &&
@@ -62,7 +80,7 @@ export class CreateProjectComponent implements OnInit {
     ) {
       this.message.success('Project created successfully');
     }
-    console.log(this.form.value);
+    // console.log(this.form.value);
   }
 
   ngOnInit(): void {

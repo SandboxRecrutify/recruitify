@@ -24,20 +24,28 @@ export class PrimarySkillInputComponent implements OnInit, OnDestroy {
   primarySkillsValidity$!: Subject<boolean>;
 
   @Output()
-  onRemovePrimarySkill = new EventEmitter<number>();
+  onPrimarySkillRemove = new EventEmitter<number>();
 
-  primarySkillsValiditySubscription!: Subscription;
+  @Output()
+  onPrimarySkillChange = new EventEmitter<PrimarySkill>();
+
+  isAllDirty = false;
   form!: FormGroup;
   isActive = true;
+
+  private primarySkillsValiditySubscription!: Subscription;
+  private formChangesSubscription!: Subscription;
 
   constructor(private fb: FormBuilder) {}
 
   remove($event: MouseEvent) {
     $event.stopPropagation();
-    this.onRemovePrimarySkill.emit();
+    this.onPrimarySkillRemove.emit();
   }
 
   ngOnInit(): void {
+    // subscribe to Project create button click
+    // and check validity of all primary skills
     this.primarySkillsValiditySubscription =
       this.primarySkillsValidity$.subscribe((validity) => {
         if (!validity) {
@@ -49,14 +57,43 @@ export class PrimarySkillInputComponent implements OnInit, OnDestroy {
           }
         }
       });
+    //init form
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      link: ['', [Validators.required, Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.maxLength(100)]],
+      name: [
+        this.primarySkill.name,
+        [Validators.required, Validators.maxLength(100)],
+      ],
+      link: [
+        this.primarySkill.link,
+        [Validators.required, Validators.maxLength(100)],
+      ],
+      description: [
+        this.primarySkill.description,
+        [Validators.required, Validators.maxLength(100)],
+      ],
     });
+
+    this.formChangesSubscription = this.form.valueChanges.subscribe(
+      (values: PrimarySkill) => {
+        //pass data to parent component
+        this.onPrimarySkillChange.emit(values);
+        // check if all fields are dirty
+        let dirtyControlCount = 0;
+        for (const i in this.form.controls) {
+          if (
+            this.form.controls.hasOwnProperty(i) &&
+            this.form.controls[i].dirty
+          ) {
+            dirtyControlCount++;
+          }
+        }
+        this.isAllDirty = dirtyControlCount === 3 ? true : false;
+      }
+    );
   }
+
   ngOnDestroy(): void {
     this.primarySkillsValiditySubscription.unsubscribe();
-    // this.primarySkillsValidity$.unsubscribe();
+    this.formChangesSubscription.unsubscribe();
   }
 }
