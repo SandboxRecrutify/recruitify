@@ -61,5 +61,9 @@
         background-size: contain;
       }
     }
+    &_icon.active {
+      filter: brightness(150%);
+
+    }
   }
 }

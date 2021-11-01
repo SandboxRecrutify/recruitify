@@ -54,6 +54,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 
+
 @NgModule({
   declarations: [
     SharedComponent,

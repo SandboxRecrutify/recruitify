@@ -17,6 +17,9 @@ export class ProjectsPageComponent implements OnInit {
 
   filter: boolean = false
 
+  listOfOption: string[] = [".Net", "QA", "JavaScript", "AutomationQA", "DevOps", "Java", "PHP", "ProjectManager", "BusinessAnalyst"];
+  listOfSelectedValue = [];
+
   switchFilter() {
     this.filter = !this.filter
   }
