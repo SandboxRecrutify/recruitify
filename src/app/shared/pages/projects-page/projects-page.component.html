@@ -8,7 +8,12 @@
         <img src="assets/images/Vector.png" alt="filter" />
       </div>
       <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="Search project" [(ngModel)]="searchText"/>
+        <input
+          type="text"
+          nz-input
+          placeholder="Search project"
+          [(ngModel)]="searchText"
+        />
       </nz-input-group>
       <ng-template #suffixIconSearch>
         <i nz-icon nzType="search"></i>
@@ -16,7 +21,10 @@
     </div>
   </div>
 
-  <app-projects-list [projects]="projects" [searchText]="searchText"></app-projects-list>
+  <app-projects-list
+    [projects]="projects"
+    [searchText]="searchText"
+  ></app-projects-list>
   <app-create-project
     (onToggle)="handleToggle($event)"
     [isVisible]="isVisible"
@@ -24,14 +32,56 @@
 </div>
 
 <nz-drawer
-nzWidth=100
-[nzClosable]="true"
-[nzVisible]="filter"
-nzPlacement="top"
-nzTitle="Projects filters"
-(nzOnClose)="switchFilter()"
+[nzHeight]=150
+  [nzClosable]="true"
+  [nzVisible]="filter"
+  nzPlacement="top"
+  nzTitle="Projects filters"
+  (nzOnClose)="switchFilter()"
 >
-<ng-container *nzDrawerContent nzWidth=100>
-  <p>Filters...</p>
-</ng-container>
+  <ng-container *nzDrawerContent nzWidth="100">
+    <div class="filters">
+      <div class="status">
+        <label for="status">Status</label>
+        <nz-select
+          ngModel="lucy"
+          nzAllowClear
+          nzPlaceHolder="Choose Status"
+          id="status"
+        >
+          <nz-option nzValue="active" nzLabel="Active"></nz-option>
+          <nz-option nzValue="closed" nzLabel="Closed"></nz-option>
+        </nz-select>
+      </div>
+      <div class="date">
+        <label for="date">Date</label>
+        <nz-select ngModel="lucy" nzAllowClear nzPlaceHolder="Choose date " id="date">
+          <nz-option nzValue="new" nzLabel="New"></nz-option>
+          <nz-option nzValue="old" nzLabel="Old"></nz-option>
+        </nz-select>
+      </div>
+
+      <div class="skills">
+        <label for="skills">Skills</label>
+        <nz-select
+          class="skills"
+          id="skills"
+          [nzMaxTagCount]="3"
+          [nzMaxTagPlaceholder]="tagPlaceHolder"
+          nzMode="multiple"
+          nzPlaceHolder="Please select skills"
+          [(ngModel)]="listOfSelectedValue"
+        >
+          <nz-option
+            *ngFor="let item of listOfOption"
+            [nzLabel]="item"
+            [nzValue]="item"
+          ></nz-option>
+        </nz-select>
+        <ng-template #tagPlaceHolder let-selectedList
+          >and {{ selectedList.length }} more selected</ng-template
+        >
+      </div>
+    </div>
+  </ng-container>
 </nz-drawer>
