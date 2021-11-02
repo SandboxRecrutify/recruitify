@@ -52,6 +52,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 
@@ -100,6 +101,7 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     NzTabsModule,
     NzPopoverModule,
     NzSpaceModule,
+    NzEmptyModule
   ],
   exports: [RatingStarsComponent],
   providers: [
