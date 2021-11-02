@@ -18,6 +18,9 @@ export class CandidatesPageComponent implements OnInit {
   setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
 
+  candidateStatuses = this.candidatesPageFacade.statuses;
+  candidateEnglishLvls = this.candidatesPageFacade.englishLvls;
+
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private router: Router

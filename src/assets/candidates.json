@@ -193,5 +193,66 @@
     "currentJob": "LLC Acronis",
     "certificates": "CompTIA",
     "additionalInfo": "Ready to start now"
+  },
+  {
+    "id": "1e6a306e-30ec-11ec-a7bb-37cfa4f75a73",
+    "name": "Brian",
+    "surname": "Gaines",
+    "englishLevel": 2,
+    "phoneNumber": "+375255486325",
+    "email": "gainesss@gmail.com",
+    "location": {
+      "city": "Kiev",
+      "country": "Ukraine"
+    },
+    "primarySkills": [
+      {
+        "primarySkillId": "b7d88aa4-3775-11ec-93ad-f7d63f513914",
+        "primarySkillName": "Java"
+      },
+      {
+        "primarySkillId": "c3307088-3775-11ec-8e04-b7d29fa6ce1f",
+        "primarySkillName": "ProjectManager"
+      }
+    ],
+    "registrationDate": "2021-03-01T00:00:00.000Z",
+    "bestTimeToConnect": [14, 15, 16, 17, 18],
+    "goingToExadel": true,
+    "projectResults": [
+      {
+        "projectId": "bdbc3af0-f882-4f4f-bbb8-3e87ba16b768",
+        "feedbacks": [
+          {
+            "userId": "71da4db7-36ec-4a6b-bfb3-38d2462bdf2d",
+            "type": 2,
+            "rating": 3,
+            "textFeedback": "Has basic skills and knowledge",
+            "isRecommended": true,
+            "createdOn": "2021-03-14T10:11:14.000Z"
+          },
+          {
+            "type": 0,
+            "rating": 2,
+            "isRecommended": false,
+            "createdOn": "2021-04-07T12:09:53.000Z"
+          },
+          {
+            "userId": "d1b13d9f-3799-456b-87e2-1bef7db71cb1",
+            "type": 3,
+            "rating": 4,
+            "textFeedback": "Fully suitable for independent work",
+            "isRecommended": true,
+            "createdOn": "2021-04-29T11:43:50.000Z"
+          }
+        ],
+        "status": 5
+      },
+      {
+        "projectId": "2beed73a-30b5-11ec-808a-fb45776a1ed3",
+        "status": 0
+      }
+    ],
+    "currentJob": "LLC Pilot",
+    "additionalInfo": "I have experience in programming in js"
   }
 ]
