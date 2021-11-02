@@ -3,12 +3,17 @@
   <div class="profile_info">
     <div class="main-info">
       <div class="main-info_heading">
-        <p class="name">{{ candidate.firstname }} {{ candidate.lastname }}</p>
-        <p class="stack">{{ candidate.skill }}</p>
+        <p class="name">{{ candidate.name }} {{ candidate.surname }}</p>
+        <p class="stack" *ngFor="let skill of candidate.primarySkills">
+          {{ skill.primarySkillName }}
+        </p>
       </div>
-      <p class="location">{{ candidate.city }}, {{ candidate.country }}</p>
+      <p class="location">
+        {{ candidate.location.city }}, {{ candidate.location.country }}
+      </p>
       <p>
         <span>Skype:</span>
+        <!-- будет в contacts обязательным + остальные соц сети отрисвать -->
         <a href="skype:{{ candidate.skype }}?chat"> {{ candidate.skype }}</a>
       </p>
       <p>
@@ -17,12 +22,18 @@
       </p>
       <p>
         <span>Phone number:</span>
-        <a href="tel:+{{ candidate.phone }}"> {{ candidate.phone }}</a>
+        <a href="tel:+{{ candidate.phoneNumber }}">
+          {{ candidate.phoneNumber }}</a
+        >
       </p>
-      <p><span>English level:</span> {{ candidate.englishLvl }}</p>
+      <p><span>English level:</span> {{ candidate.englishLevel }}</p>
+      <!-- откуда брать язык стажировки, который выбрал кандидат -->
       <p><span>Language:</span> {{ candidate.language }}</p>
       <p><span>Test result:</span> {{ candidate.testResult }}</p>
-      <p><span>Status:</span> {{ candidate.status }}</p>
+      <p>
+        <span>Status:</span>
+        {{ candidate.projectResults[0].status }}
+      </p>
       <div>
         <span>Previous projects:</span>
         <p>{{ candidate.projects ? candidate.projects : "none" }}</p>

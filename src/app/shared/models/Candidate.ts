@@ -15,7 +15,7 @@ export interface Candidate {
   certificates: string;
   additionalQuestions: string;
   additionalInfo: string;
-  id: number; // почему не работает string, id же в виде строки??????????????
+  id: number;
 }
 
 export interface PrimarySkills {
