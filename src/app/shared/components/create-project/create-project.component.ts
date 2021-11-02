@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { __values } from 'tslib';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
@@ -33,9 +32,6 @@ export class CreateProjectComponent implements OnInit {
   ) {}
 
   private checkPrimarySkillsValidity(): boolean {
-    if (this.primarySkills.length === 0) {
-      return false;
-    }
     return this.primarySkills.every((skill) => {
       return skill.name && skill.description && skill.link;
     });
@@ -62,7 +58,9 @@ export class CreateProjectComponent implements OnInit {
 
   submitForm() {
     // check if any of the primary skills is invalid
-    this.isPrimarySkillsValid = this.checkPrimarySkillsValidity();
+    if (this.primarySkills.length !== 0) {
+      this.isPrimarySkillsValid = this.checkPrimarySkillsValidity();
+    }
     console.log('is primary skills valid', this.isPrimarySkillsValid);
     this.primarySkillsValidity$.next(this.isPrimarySkillsValid);
 
