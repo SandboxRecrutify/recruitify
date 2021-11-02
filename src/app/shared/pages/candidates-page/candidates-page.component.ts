@@ -1,8 +1,8 @@
-import { paths } from './../../../app-routing.constants';
-import { Router } from '@angular/router';
-import { Candidate } from './../../models/Candidate';
-import { CandidatesPageFacade } from './candidates-page.facade';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Candidate, CandidatesLocation } from './../../models/Candidate';
+import { CandidatesPageFacade } from './candidates-page.facade';
 
 @Component({
   selector: 'app-candidates-page',
@@ -11,17 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidatesPageComponent implements OnInit {
   searchValue = '';
-  visible = false;
   checked = false;
   indeterminate = false;
+  drawerVisible = false;
   setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
-  // filteredCandidateList: Candidate[] = this.candidatesList;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private router: Router
   ) {}
+
+  openDrawer(): void {
+    this.drawerVisible = !this.drawerVisible;
+  }
+
+  sortAlphabetically = (a: Candidate, b: Candidate) =>
+    a.name.localeCompare(b.name);
+
+  // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
 
   updateCheckedSet(id: number, checked: boolean): void {
     if (checked) {
@@ -55,8 +63,8 @@ export class CandidatesPageComponent implements OnInit {
   searchName() {
     this.candidatesList = this.candidatesList.filter(
       (candidate: Candidate) =>
-        candidate.firstname.indexOf(this.searchValue) !== -1 ||
-        candidate.lastname.indexOf(this.searchValue) !== -1
+        candidate.name.indexOf(this.searchValue) !== -1 ||
+        candidate.surname.indexOf(this.searchValue) !== -1
     );
   }
 

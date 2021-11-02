@@ -1,25 +1,49 @@
 export interface Candidate {
-  id: number;
-  firstname: string;
-  lastname: string;
-  skill: string;
-  country: string;
-  city: string;
-  skype: string;
+  name: string;
+  surname: string;
+  englishLevel: number;
+  phoneNumber: string;
   email: string;
-  phone: string;
-  englishLvl: string;
-  language: string;
-  testResult: string;
-  status: string;
-  projects: string;
-  feedback1: number;
-  feedback2: number;
-  applicationDate: string;
-  timeToContacts: string;
-  comments: string;
-  questions: string;
-  job: string;
+  contacts: CandidateContacts;
+  location: CandidatesLocation;
+  primarySkills: PrimarySkills[];
+  registrationDate: Date | string;
+  bestTimeToConnect: number[];
+  goingToExadel: boolean;
+  projectResults: CandidatesProjectResults[];
+  currentJob: string;
   certificates: string;
-  join: string;
+  additionalQuestions: string;
+  additionalInfo: string;
+  id: number;
+}
+
+export interface PrimarySkills {
+  primarySkillId: string;
+  primarySkillName: string;
+}
+
+export interface CandidateContacts {
+  type: string;
+  value: string;
+}
+
+export interface CandidatesLocation {
+  city: string;
+  country: string;
+}
+
+export interface CandidatesProjectResults {
+  feedbacks: CandidatesFeedback[];
+  projectId: string;
+  status: number;
+}
+
+export interface CandidatesFeedback {
+  textFeedback: string;
+  rating: number;
+  userId: string;
+  type: number;
+  isRecommended: boolean;
+  createdOn: Date | string;
 }

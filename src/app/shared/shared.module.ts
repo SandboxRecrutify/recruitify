@@ -27,7 +27,6 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
-import { FilterModalComponent } from './pages/candidates-page/filter-modal/filter-modal.component';
 
 //pipes
 import { FilterPipe } from './pipes/filter.pipe';
@@ -53,6 +52,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
+import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 
 
 @NgModule({
@@ -68,9 +68,9 @@ import { PrimarySkillInputComponent } from './components/create-project/primary-
     FourOFourComponent,
     CalendarPageComponent,
     CandidatesPageComponent,
-    FilterModalComponent,
     FilterPipe,
     PrimarySkillInputComponent,
+    FilterDrawerComponent,
   ],
   imports: [
     CommonModule,
