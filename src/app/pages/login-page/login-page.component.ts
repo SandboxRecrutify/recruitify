@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppFacade } from 'src/app/app.facade';
 
 @Component({
   templateUrl: './login-page.component.html',
@@ -7,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   validateForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private appFacade: AppFacade) {}
 
   submitForm() {
     for (const i in this.validateForm.controls) {
@@ -17,13 +18,20 @@ export class LoginPageComponent implements OnInit {
       }
     }
     if (this.validateForm.valid) {
-      console.log(this.validateForm.value);
+      this.appFacade.login(this.validateForm.value);
     }
   }
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(16),
+        ],
+      ],
     });
   }
 }

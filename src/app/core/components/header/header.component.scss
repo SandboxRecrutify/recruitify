@@ -1,13 +1,63 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
   background: #ffffff;
-  .logo {
-    margin-left: 30px;
+  color: #0082ca;
+
+  p {
+    padding: 0;
+    margin: 0;
   }
-  .search {
-    margin-right: 50px;
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    &_nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    &_link {
+      display: flex;
+      align-items: center;
+    }
+
+    &_icon {
+      width: 30px;
+      height: 30px;
+      stroke: #0082ca;
+      transition: 0.3s;
+    }
+
+    &_icon:hover,
+    .active svg {
+      stroke: #00c3ff;
+    }
+
+    &_user {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    &_user-name {
+      color: #949494;
+      font-weight: 600;
+    }
+
+    .logout_icon {
+      width: 20px;
+      height: 20px;
+      stroke: #949494;
+    }
   }
 }

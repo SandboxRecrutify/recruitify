@@ -2,9 +2,33 @@
   &_head {
     margin-bottom: 1rem;
     display: flex;
+    justify-content: space-between;
 
-    .statusFilter {
-      margin-left: 20px;
+    .search {
+      display: flex;
+    }
+
+    .filter {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
     }
   }
+
+}
+.filters {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+ nz-select.skills {
+    min-width: 200px;
+
+  }
+
+label {
+  margin-right: 10px;
 }

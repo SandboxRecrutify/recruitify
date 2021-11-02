@@ -1,63 +1,79 @@
 @use "../../../../globals" as *;
 
-.search-box {
-  padding: 8px;
+.candidates_container {
+  margin: 0 auto;
 }
 
-.search-box input {
-  width: 188px;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.search-box button {
-  width: 90px;
-}
-
-.search-button {
-  margin-right: 8px;
-}
-
-.header {
-  position: relative;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.candidates_heading {
+  width: 100%;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   color: $primaryColor;
 
-  .candidatesCount {
-    position: absolute;
-    top: 10px;
-    left: 0;
+  .candidates_count {
     height: 25px;
-    padding-left: 25px;
+    padding-left: 20px;
+    align-self: center;
     display: flex;
     align-items: center;
     font-size: 18px;
-    font-weight: 500;
-    background: url(../../../../assets/images/Group.png) no-repeat center left;
+    font-weight: 600;
+    background: url(/assets/images/person.svg) no-repeat center left;
     background-size: contain;
   }
 
-  h3 {
+  .candidates_title {
     margin: 0;
+    justify-self: center;
+    align-self: center;
     font-size: 18px;
-    color: $primaryColor;
     font-weight: 600;
+    color: $primaryColor;
+  }
+
+  .candidates_filter-wrap {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .candidates_filter-btn {
+      width: 22px;
+      height: 22px;
+      background: url(/assets/images/filter.svg) no-repeat center center;
+      background-size: contain;
+      cursor: pointer;
+    }
   }
 }
 
 th {
   position: relative;
-  font-size: 16px;
   font-weight: 600;
   border-top: 1px solid $primaryColor;
   border-bottom: 1px solid $primaryColor !important;
 }
 
 td {
-  font-size: 15px;
   color: $primaryColor;
   font-weight: 400;
+}
+
+.drawer-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-flow: column;
+  column-gap: 15px;
+
+  // nz-form-item {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
+
+  // nz-select {
+  //   width: 200px;
+  // }
 }

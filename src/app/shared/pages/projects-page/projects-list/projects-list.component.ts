@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/shared/models/Project';
-import { ProjectsPageFacade } from '../projects-page.facade';
+
 
 @Component({
   selector: 'app-projects-list',
@@ -9,7 +9,10 @@ import { ProjectsPageFacade } from '../projects-page.facade';
 })
 export class ProjectsListComponent implements OnInit {
 
-  @Input() cards: Project[] = []
+  @Input() projects: Project[] = []
+  @Input() searchText!: string
+  @Input() status!: string
+  isVisible: boolean = false
 
 
   constructor() { }

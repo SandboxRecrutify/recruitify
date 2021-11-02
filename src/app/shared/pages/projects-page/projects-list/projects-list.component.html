@@ -1,6 +1,6 @@
 <div class="projects-list">
   <app-project
-    *ngFor="let iterCard of cards"
+    *ngFor="let iterCard of projects | search: searchText | filter: status"
     [card]="iterCard"
   ></app-project>
 </div>

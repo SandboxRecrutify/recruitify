@@ -3,17 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateProject } from '../models/CreateProject';
+import { ApiService } from './api.service';
 
+const API_PATH = 'assets/';
 @Injectable()
-export class ProjectsService {
-  constructor(private http: HttpClient) {}
+export class ProjectsService extends ApiService {
+  constructor(http: HttpClient) {
+    super(http, API_PATH, ProjectsService.name)
+  }
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>('assets/projects.json');
-  }
+      return super.get<Project[]>('projects.json');
+       }
 
   //get create project modal data
   getCreateProjectData(): Observable<CreateProject> {
-    return this.http.get<CreateProject>('assets/createProject.json');
+   return super.get<CreateProject>('createProject.json');
   }
 }

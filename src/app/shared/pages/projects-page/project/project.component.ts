@@ -9,9 +9,10 @@ import { Project } from 'src/app/shared/models/Project';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  cardIndex = 0;
-
+  
   @Input() card!: Project;
+
+  isVisible = false
 
   constructor(private router: Router) {}
 
@@ -20,4 +21,8 @@ export class ProjectComponent implements OnInit {
   showCandidates() {
     this.router.navigate([paths.candidates]);
   }
+  switchStaff() {
+    this.isVisible = !this.isVisible
+  }
+
 }

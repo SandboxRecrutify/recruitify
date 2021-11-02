@@ -34,8 +34,6 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzRadioModule,
 
   ],
-  providers: [
-    MainLayoutFacade,
-  ],
+  providers: [MainLayoutFacade],
 })
 export class CoreModule {}

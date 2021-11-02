@@ -1,47 +1,63 @@
-import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
-import { CandidatesService } from './services/candidates.service';
-import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { SharedComponent } from './shared.component';
-import { RatingStarsComponent } from './components/rating-stars/rating-stars.component';
 
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzRateModule } from 'ng-zorro-antd/rate';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
+//facades
+import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
+import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
+import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
+import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 
+//services
+import { CandidatesService } from './services/candidates.service';
+import { ProjectsService } from './services/projects.service';
+
+//components
+import { SharedComponent } from './shared.component';
+import { RatingStarsComponent } from './components/rating-stars/rating-stars.component';
+import { CandidatesPageComponent } from './pages/candidates-page/candidates-page.component';
 import { ProjectsPageComponent } from './pages/projects-page/projects-page.component';
 import { ProjectsListComponent } from './pages/projects-page/projects-list/projects-list.component';
 import { ProjectComponent } from './pages/projects-page/project/project.component';
+import { ParticipantsComponent } from './pages/projects-page/participants/participants.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
+//pipes
+import { SearchPipe } from './pipes/search.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+
+//nz-modules
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { ParticipantsComponent } from './pages/projects-page/participants/participants.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { ProjectsService } from './services/projects.service';
-import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio-button/radio-button.components';
-
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
+import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 
 
 @NgModule({
@@ -54,9 +70,15 @@ import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio
     ParticipantsComponent,
     CreateProjectComponent,
     ProfilePageComponent,
+    FourOFourComponent,
     CalendarPageComponent,
     FillFormComponent,
     AppRadioButtonComponent,
+    CandidatesPageComponent,
+    SearchPipe,
+    FilterPipe,
+    PrimarySkillInputComponent,
+    FilterDrawerComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +89,6 @@ import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio
     NzButtonModule,
     NzCardModule,
     ReactiveFormsModule,
-    NzTabsModule,
     NzTableModule,
     NzGridModule,
     NzInputModule,
@@ -78,8 +99,14 @@ import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio
     NzSwitchModule,
     BrowserAnimationsModule,
     NzDropDownModule,
+    NzResultModule,
     BrowserAnimationsModule,
     NzRadioModule,
+    NzDrawerModule,
+    NzCollapseModule,
+    NzTabsModule,
+    NzPopoverModule,
+    NzSpaceModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
