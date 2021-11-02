@@ -35,22 +35,23 @@
       </div>
       <!-- technologies or primary skills -->
       <div nz-col [nzSpan]="24" style="margin-bottom: 1.5rem">
-        <nz-space nzAlign="center" style="margin-bottom: 0.5rem">
-          <span *nzSpaceItem>Primary Skills</span>
-          <button
-            (click)="onPrimarySkillAdd()"
-            *nzSpaceItem
-            nz-button
-            nzType="primary"
-          >
-            Add
+        <div
+          nz-row
+          nzAlign="middle"
+          nzJustify="space-between"
+          style="margin-bottom: 0.5rem"
+        >
+          <span>Primary Skills</span>
+          <button (click)="onPrimarySkillAdd()" nz-button>
+            <i nz-icon nzType="plus" nzTheme="outline"></i>
           </button>
-        </nz-space>
+        </div>
         <app-primary-skill-input
           *ngFor="let primarySkill of primarySkills; index as index"
           [primarySkill]="primarySkill"
           [index]="index"
-          (onRemovePrimarySkill)="onPrimarySkillRemove(index)"
+          (onPrimarySkillRemove)="onPrimarySkillRemove(index)"
+          (onPrimarySkillChange)="onPrimarySkillChange($event, index)"
           [primarySkillsValidity$]="primarySkillsValidity$"
         ></app-primary-skill-input>
         <div

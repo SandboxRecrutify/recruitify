@@ -5,11 +5,10 @@
     [nzExtra]="extra"
   >
     <ng-template #header>
-      <!-- TODO: have to find better solition for showing this error -->
-      <span [ngClass]="{ errorText: !form.valid && !form.pristine }">
+      <span [ngClass]="{ errorText: !form.valid && isAllDirty }">
         {{ index + 1 + ". " }}
         {{ primarySkill.name + " " }}
-        {{ !form.valid && !form.pristine ? "(invalid)" : "" }}
+        {{ !form.valid && isAllDirty ? "(invalid)" : "" }}
       </span>
     </ng-template>
     <ng-template #extra>
@@ -24,12 +23,7 @@
             >Primary skill name</nz-form-label
           >
           <nz-form-control nzErrorTip="Please enter primary skills's name">
-            <input
-              nz-input
-              [(ngModel)]="primarySkill.name"
-              formControlName="name"
-              id="name"
-            />
+            <input nz-input formControlName="name" id="name" />
           </nz-form-control>
         </nz-form-item>
       </div>
