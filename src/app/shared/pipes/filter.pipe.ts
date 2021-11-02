@@ -4,16 +4,18 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string  = '', field: string = 'name'): any[] {
+  transform(items: any[], filter: string = ''): any[] {
     if (!items) {
       return [];
     }
-    if (!searchText) {
+    if (!filter) {
       return items;
     }
-
-    return items.filter((item) => {
-      return item[field].toLowerCase().includes(searchText.toLowerCase());
-    });
+    if (filter === 'active') {
+      return items.filter((item) => item.isActive === true);
+    } else if (filter === 'closed') {
+      return items.filter((item) =>  item.isActive === false);
+    }
+    return items
   }
 }

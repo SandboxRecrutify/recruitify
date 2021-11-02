@@ -11,6 +11,7 @@ export class ProjectsListComponent implements OnInit {
 
   @Input() projects: Project[] = []
   @Input() searchText!: string
+  @Input() status!: string
   isVisible: boolean = false
 
 
