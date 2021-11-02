@@ -7,6 +7,9 @@ import { CandidatesPageComponent } from './shared/pages/candidates-page/candidat
 import { MainLayoutComponent } from './core/main-layout/main-layout.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
+import { FillFormComponent } from './shared/pages/fill-form-page/fill-form.component';
+
+
 // consts
 import { paths } from './app-routing.constants';
 
@@ -17,6 +20,7 @@ const mainRouter: Routes = [
   { path: paths.profile, component: ProfilePageComponent },
   { path: 'profile/:id', component: ProfilePageComponent },
   { path: paths.calendar, component: CalendarPageComponent },
+  { path: 'fill-form', component: FillFormComponent}
 ];
 
 const routes: Routes = [

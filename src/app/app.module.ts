@@ -14,6 +14,10 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -41,6 +45,10 @@ import { HttpClientModule } from '@angular/common/http';
     NzIconModule,
     NzButtonModule,
     NzInputModule,
+    NzSelectModule,
+    NzRadioModule,
+    NzModalModule,
+ 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

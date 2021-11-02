@@ -1,0 +1,185 @@
+<div class="fill_form">
+  <div class="fill_form_container">
+    <h2>Hi! Please, fill out the form</h2>
+      <form nz-form >
+
+        <nz-form-item>
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="fname">First Name</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="fname" type="text" id="fname">
+              </nz-form-control>
+            </div>
+                
+            <div class="inner-item-box pad-left">
+              <nz-form-label nzRequired nzNoColon nzFor="lname">Last Name</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="lname" type="text" id="lname">
+              </nz-form-control>
+            </div>
+          </div>  
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="skype">Skype</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="skype" type="text" id="skype">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="email">Email</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="email" type="text" id="email">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="phone">Phone</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="phone" type="text" id="phone">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <div class="item-box">
+          <div class="inner-item-box">
+            <nz-form-label nzRequired nzNoColon nzFor="location">Location (City, Country)</nz-form-label>
+            <nz-form-control >
+              <input nz-input name="location" type="text" id="location">
+            </nz-form-control>
+          </div>
+              
+          <div class="inner-item-box pad-left">
+            <nz-form-control >
+              <input nz-input name="location" type="text" id="location">
+            </nz-form-control> 
+          </div>
+        </div>
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box pad-top">
+              <nz-form-label nzNoColon nzRequired>English level</nz-form-label>
+              <nz-select nzAllowClear nzPlaceHolder="Choose your English level">
+                <nz-option nzLabel="Beginner" nzValue="Beginner"></nz-option>
+                <nz-option nzLabel="Pre-Intermrdiate" nzValue="Pre-Intermrdiate"></nz-option>
+                <nz-option nzLabel="Intermediate" nzValue="Intermediate"></nz-option>
+                <nz-option nzLabel="Advanced" nzValue="Advanced"></nz-option>
+                <nz-option nzLabel="Native" nzValue="Native"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <app-radio-button title="Choose the language of Internship" [options]="['English', 'Russian']"></app-radio-button>
+        </nz-form-item>
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
+              <nz-select  nzRequired  nzAllowClear nzPlaceHolder="Primary skill" required>
+                <nz-option nzLabel="Beginner" nzValue=".NET"></nz-option>
+                <nz-option nzLabel="Pre-Intermrdiate" nzValue="QA"></nz-option>
+                <nz-option nzLabel="Intermediate" nzValue="JavaScript"></nz-option>
+                <nz-option nzLabel="Advanced" nzValue="AutomationQA"></nz-option>
+                <nz-option nzLabel="Native" nzValue="BusinessAnalyst"></nz-option>
+                <nz-option nzLabel="Native" nzValue="DevOps"></nz-option>
+                <nz-option nzLabel="Native" nzValue="Java"></nz-option>
+                <nz-option nzLabel="Native" nzValue="PHP"></nz-option>
+                <nz-option nzLabel="Native" nzValue="ProjectMAnager"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <app-radio-button title="Are you planning to join Exadel after the Training?" [options]="['Yes', 'No']"></app-radio-button>
+        </nz-form-item>
+
+        
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzFor="comments">Comments</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="comments" type="text" id="comments">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon>Do you have any questions?</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="questions" type="text" id="questions">
+            </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzFor="cjob">Current job</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="cjob" type="text" id="cjob">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon>Professional certificates</nz-form-label>
+              <nz-form-control>
+                  <input nz-input name="certificates" type="text" id="certificates">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item class="btn">
+          <button nz-button><span>Submit</span></button>
+        <!-- <nz-modal nzTitle="The first Modal" >
+          <ng-container *nzModalContent>
+          </ng-container>
+        </nz-modal>
+                   -->
+        </nz-form-item>
+
+      <!-- <modal-button></modal-button> -->
+            
+      </form>
+   
+  </div>
+</div>

@@ -12,7 +12,9 @@ import { RatingStarsComponent } from './components/rating-stars/rating-stars.com
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRateModule } from 'ng-zorro-antd/rate';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+
+import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 
 import { ProjectsPageComponent } from './pages/projects-page/projects-page.component';
 import { ProjectsListComponent } from './pages/projects-page/projects-list/projects-list.component';
@@ -26,6 +28,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ParticipantsComponent } from './pages/projects-page/participants/participants.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
@@ -37,6 +40,9 @@ import { ProjectsService } from './services/projects.service';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
+import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio-button/radio-button.components';
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +55,8 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     CreateProjectComponent,
     ProfilePageComponent,
     CalendarPageComponent,
+    FillFormComponent,
+    AppRadioButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +79,7 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
     BrowserAnimationsModule,
     NzDropDownModule,
     BrowserAnimationsModule,
+    NzRadioModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
