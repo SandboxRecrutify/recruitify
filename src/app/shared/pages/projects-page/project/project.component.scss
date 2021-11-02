@@ -1,7 +1,7 @@
 .project-card {
   min-width: 590px;
   color: #0082CA;
-  font-weight: 600;
+  font-weight: 400;
   // box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
   // transition: all 0.2s ease-in-out;
   // &:hover {
@@ -13,9 +13,6 @@
     display: flex;
     justify-content: space-between;
   }
-  // .description {
-  //   color: #0082ca;
-  // }
 
   app-participants {
     margin-bottom: 50%;
@@ -23,6 +20,7 @@
     align-self: center;
     &:hover {
       transform: scale(1.1);
+      filter: brightness(150%)
   }
   }
   .project-buttons {
@@ -44,6 +42,3 @@
   margin: 0;
 }
 
-.staff {
-  color: red;
-}
