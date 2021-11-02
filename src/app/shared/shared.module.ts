@@ -29,6 +29,7 @@ import { FourOFourComponent } from './pages/four-o-four/four-o-four.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
 //pipes
+import { SearchPipe } from './pipes/search.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
 //nz-modules
@@ -68,6 +69,7 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     FourOFourComponent,
     CalendarPageComponent,
     CandidatesPageComponent,
+    SearchPipe,
     FilterPipe,
     PrimarySkillInputComponent,
     FilterDrawerComponent,
