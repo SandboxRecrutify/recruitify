@@ -13,6 +13,8 @@
     </div>
   </div>
 
+  <app-dropdown-menu *ngIf="menuVisible"></app-dropdown-menu>
+
   <nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
     <thead>
       <tr>

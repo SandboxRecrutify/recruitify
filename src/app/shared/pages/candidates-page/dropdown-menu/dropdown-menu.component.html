@@ -1,0 +1,37 @@
+<div class="menu">
+  <div class="menu_email">
+    <button nz-button nzType="primary">Send E-mail</button>
+    <button nz-button nzType="primary">Send test task</button>
+  </div>
+
+  <div class="menu_test">
+    <button nz-button nzType="primary">Set test result</button>
+    <input nz-input class="menu_test-input" />
+  </div>
+
+  <div class="menu_status">
+    <nz-select
+      class="menu_status-select"
+      id="status"
+      formControlName="status"
+      nzPlaceHolder="Set status"
+    >
+      <nz-option nzValue="Accept" nzLabel="Accept"></nz-option>
+      <nz-option nzValue="Decline" nzLabel="Decline"></nz-option>
+    </nz-select>
+
+    <nz-select
+      class="menu_status-select"
+      id="status"
+      formControlName="status"
+      nzPlaceHolder="Set status"
+    >
+      <nz-option nzValue="Some" nzLabel="Some"></nz-option>
+      <nz-option nzValue="Reasons" nzLabel="Reasons"></nz-option>
+    </nz-select>
+
+    <button nz-button class="menu_status-btn" nzType="primary">
+      Submit status
+    </button>
+  </div>
+</div>

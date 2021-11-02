@@ -54,7 +54,7 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
-
+import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     FilterPipe,
     PrimarySkillInputComponent,
     FilterDrawerComponent,
+    DropdownMenuComponent,
   ],
   imports: [
     CommonModule,
