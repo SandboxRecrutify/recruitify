@@ -1,0 +1,48 @@
+.start {
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.55)
+    ),
+    url(/assets/images/landing/background.jpg) no-repeat center center;
+  background-size: cover;
+
+  .container {
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_info {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 150px);
+
+    &-img1 {
+      background: url(/assets/images/landing/img1.png) no-repeat center center;
+    }
+
+    &-img2 {
+      background: url(/assets/images/landing/img2.png) no-repeat center center;
+    }
+    &-img3 {
+      background: url(/assets/images/landing/img3.png) no-repeat center center;
+    }
+    &-img4 {
+      background: url(/assets/images/landing/img4.png) no-repeat center center;
+    }
+    &-img5 {
+      background: url(/assets/images/landing/img5.png) no-repeat center center;
+    }
+
+    &-text {
+      text-align: center;
+      align-self: center;
+    }
+  }
+}
