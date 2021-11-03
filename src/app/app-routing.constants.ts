@@ -1,4 +1,5 @@
 export const paths = {
+  start: 'start',
   login: 'login',
   projects: 'projects',
   candidates: 'candidates',
