@@ -1,5 +1,6 @@
 import { LocalStorageService } from './../../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
+import { AppFacade } from 'src/app/app.facade';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private lsService: LocalStorageService) {}
+  constructor(private appFacade: AppFacade) {}
 
   onLogoutBtnClick() {
-    this.lsService.clear();
-    window.location.reload();
+    this.appFacade.logout();
   }
 
   ngOnInit(): void {}
