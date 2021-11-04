@@ -44,13 +44,22 @@
         </div>
         <div class="menu_user">
           <p class="menu_user-name">Igor Nikolaev</p>
-          <a class="menu_link" (click)="onLogoutBtnClick()">
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure to logout?"
+            nzPopconfirmPlacement="bottomRight"
+            nz-button
+            class="menu_link"
+            (nzOnConfirm)="onLogoutBtnClick()"
+            nzType="link"
+            nzOkText="Log out"
+          >
             <svg class="logout_icon">
               <use
                 xlink:href="/assets/images/nav-icons/navSprite.svg#logout"
               ></use>
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
