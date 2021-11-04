@@ -1,3 +1,5 @@
+import { paths } from 'src/app/app-routing.constants';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./start-page.component.scss'],
 })
 export class StartPageComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  goToInternships() {
+    this.router.navigate([paths.internships]);
+  }
 }

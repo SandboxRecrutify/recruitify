@@ -56,6 +56,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
+import { InternshipsComponent } from './pages/internships/internships.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dro
     PrimarySkillInputComponent,
     FilterDrawerComponent,
     DropdownMenuComponent,
+    InternshipsComponent,
   ],
   imports: [
     CommonModule,
