@@ -1,4 +1,6 @@
 export const paths = {
+  start: 'start',
+  internships: 'internships',
   login: 'login',
   projects: 'projects',
   candidates: 'candidates',
@@ -9,4 +11,5 @@ export const paths = {
   rest: '**',
   slash: '/',
   calendar: 'calendar',
+  fillForm: 'fill-form',
 };

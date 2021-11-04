@@ -54,9 +54,12 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
-
+import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
+import { InternshipsComponent } from './pages/internships/internships.component';
+import { EnumToArrayPipe } from './pipes/enumToArray.pipes';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,9 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     FilterPipe,
     PrimarySkillInputComponent,
     FilterDrawerComponent,
+    DropdownMenuComponent,
+    InternshipsComponent,
+    EnumToArrayPipe,
   ],
   imports: [
     CommonModule,
@@ -103,8 +109,9 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     NzTabsModule,
     NzPopoverModule,
     NzSpaceModule,
+    NzEmptyModule
   ],
-  exports: [RatingStarsComponent],
+  exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
     CandidatesService,
     ProfilePageComponent,

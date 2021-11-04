@@ -11,4 +11,7 @@ export class AuthService {
   login(user: UserData): Observable<User> {
     return of({ email: user.email, id: 'some_id', token: 'some_token' });
   }
+  logout(): Observable<{}> {
+    return of({});
+  }
 }

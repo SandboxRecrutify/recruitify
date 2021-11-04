@@ -73,17 +73,17 @@
           </div>
         </div>
 
-
+        {{ englishLevel$ | async}}
         <nz-form-item >
           <div class="item-box">
             <div class="inner-item-box pad-top">
               <nz-form-label nzNoColon nzRequired>English level</nz-form-label>
               <nz-select nzAllowClear nzPlaceHolder="Choose your English level">
-                <nz-option nzLabel="Beginner" nzValue="Beginner"></nz-option>
-                <nz-option nzLabel="Pre-Intermrdiate" nzValue="Pre-Intermrdiate"></nz-option>
-                <nz-option nzLabel="Intermediate" nzValue="Intermediate"></nz-option>
-                <nz-option nzLabel="Advanced" nzValue="Advanced"></nz-option>
-                <nz-option nzLabel="Native" nzValue="Native"></nz-option>
+                <nz-option
+                *ngFor="let englishLevel of englishLevel$ | async | enumToArray"
+                [nzValue]="englishLevel[0]"
+                [nzLabel]="englishLevel[1]"
+              ></nz-option>
               </nz-select>
             </div>
           </div>

@@ -11,10 +11,11 @@ import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainLayoutFacade } from './main-layout/main-layout.facade';
+
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select'
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @NgModule({
   declarations: [MainLayoutComponent, LoginPageComponent, HeaderComponent],
@@ -32,6 +33,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzSelectModule,
     NzRadioModule,
 
+    NzPopconfirmModule,
   ],
   providers: [MainLayoutFacade],
 })

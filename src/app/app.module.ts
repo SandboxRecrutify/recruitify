@@ -27,11 +27,15 @@ registerLocaleData(en);
 /** config ng-zorro-antd i18n **/
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { HttpClientModule } from '@angular/common/http';
+import { StartPageComponent } from './pages/start-page/start-page.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { FillFormServices } from './services/fill-form.service';
+import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
 
 /** set the default i18n config **/
 
 @NgModule({
-  declarations: [AppComponent, FillFormComponent],
+  declarations: [AppComponent, StartPageComponent, FillFormComponent, AppRadioButtonComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -49,10 +53,10 @@ import { HttpClientModule } from '@angular/common/http';
     NzSelectModule,
     NzRadioModule,
     NzModalModule,
- 
+    NzFormModule,
     NzMessageModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, FillFormServices],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

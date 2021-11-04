@@ -13,6 +13,8 @@
     </div>
   </div>
 
+  <app-dropdown-menu *ngIf="menuVisible"></app-dropdown-menu>
+
   <nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
     <thead>
       <tr>
@@ -32,14 +34,15 @@
           [nzSortFn]="sortAlphabetically"
           [nzSortDirections]="['ascend', 'descend', null]"
         >
-          Location
+          Primary skill
         </th>
-        <th nzSortOrder="null">Primary skill</th>
         <th nzSortOrder="null">Status</th>
-        <th nzSortOrder="null">Recruter's feedback</th>
-        <th nzSortOrder="null">Interviewer's feedback</th>
-        <th nzWidth="100px" nzSortOrder="null">Test result</th>
-        <th nzWidth="120px"></th>
+        <th nzWidth="90px" nzSortOrder="null">Test</th>
+        <th nzSortOrder="null">Recruter</th>
+        <th nzSortOrder="null">Interview 1</th>
+        <th nzSortOrder="null">Mentor</th>
+        <th nzSortOrder="null">Interview 2</th>
+        <th nzWidth="60px"></th>
       </tr>
     </thead>
     <tbody>
@@ -49,18 +52,42 @@
           (nzCheckedChange)="onItemChecked(candidate.id, $event)"
         ></td>
         <td>{{ candidate.name }} {{ candidate.surname }}</td>
-        <td>{{ candidate.location.city }}, {{ candidate.location.country }}</td>
-        <td>{{ candidate.primarySkills[0].primarySkillName }}</td>
-        <td>New</td>
         <td>
-          <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+          <p *ngFor="let skill of candidate.primarySkills">
+            {{ skill.primarySkillName }}
+          </p>
         </td>
         <td>
-          <app-rating-stars [rate]="0" [isDisabled]="true"></app-rating-stars>
+          {{ candidateStatuses[candidate.projectResults[0].status] }}
         </td>
         <td>10</td>
         <td>
-          <button
+          <app-rating-stars
+            [rate]="candidate.projectResults[0].feedbacks[0].rating"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
+        <td>
+          <app-rating-stars
+            [rate]="candidate.projectResults[0].feedbacks[0].rating"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
+        <td>
+          <app-rating-stars
+            [rate]="candidate.projectResults[0].feedbacks[0].rating"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
+        <td>
+          <app-rating-stars
+            [rate]="candidate.projectResults[0].feedbacks[0].rating"
+            [isDisabled]="true"
+          ></app-rating-stars>
+        </td>
+
+        <td>
+          <!-- <button
             nz-button
             nzSize="small"
             nzType="primary"
@@ -68,7 +95,11 @@
             [routerLink]="['/profile', candidate.id]"
           >
             view profile
-          </button>
+          </button> -->
+          <button
+            class="profile-btn"
+            [routerLink]="['/profile', candidate.id]"
+          ></button>
         </td>
       </tr>
     </tbody>

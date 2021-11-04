@@ -13,6 +13,8 @@ export class AppFacade {
   public readonly INITIAL_PATH = paths.projects;
   public readonly USER_KEY = 'user';
 
+  private User: User | undefined;
+
   constructor(
     private lsService: LocalStorageService,
     private router: Router,
@@ -21,14 +23,16 @@ export class AppFacade {
   ) {}
   isAuthenticated$(): Observable<boolean> {
     return this.getUser$().pipe(
-      map((user) => {
-        return !!user;
-      }),
+      map((user) => !!user),
       catchError(() => of(false))
     );
   }
 
   getUser$(): Observable<User | null> {
+    console.log('getUser');
+    if (this.User) {
+      return of(this.User);
+    }
     const user = this.lsService.getItem<User>(this.USER_KEY);
     return of(user);
   }
@@ -43,9 +47,16 @@ export class AppFacade {
         this.message.success('Login successful');
       },
       (error) => {
-        // TODO error toast here later
+        this.message.success('Something went wrong!');
         console.log(error);
       }
     );
+  }
+
+  logout() {
+    this.auth.logout().subscribe(() => {
+      this.lsService.removeItem(this.USER_KEY);
+      this.router.navigate([paths.login]);
+    });
   }
 }

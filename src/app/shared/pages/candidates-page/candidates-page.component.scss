@@ -67,13 +67,23 @@ td {
   grid-template-rows: repeat(3, 1fr);
   grid-auto-flow: column;
   column-gap: 15px;
+}
 
-  // nz-form-item {
-  //   display: flex;
-  //   justify-content: space-between;
-  // }
+nz-table p {
+  margin: 0;
+  padding: 0;
+}
 
-  // nz-select {
-  //   width: 200px;
-  // }
+.profile-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: url(/assets/images/view-profile-btn.svg) no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile-btn:hover {
+  filter: brightness(130%);
 }

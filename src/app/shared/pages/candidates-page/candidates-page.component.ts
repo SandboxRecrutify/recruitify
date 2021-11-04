@@ -14,8 +14,12 @@ export class CandidatesPageComponent implements OnInit {
   checked = false;
   indeterminate = false;
   drawerVisible = false;
+  menuVisible = true;
   setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
+
+  candidateStatuses = this.candidatesPageFacade.statuses;
+  candidateEnglishLvls = this.candidatesPageFacade.englishLvls;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,

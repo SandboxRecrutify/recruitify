@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Observable } from 'rxjs';
+import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipes';
+import { FillFormFacade } from './fill-form.facade';
 
 
 @Component({
-  // selector: 'app-fill-form',
+  selector: 'app-fill-form',
   templateUrl: './fill-form.component.html',
   styleUrls: ['./fill-form.component.scss'],
+  providers: [FillFormFacade, EnumToArrayPipe]
 })
 
 
 export class FillFormComponent implements OnInit {
   validateForm!: FormGroup;
-  constructor(private fb: FormBuilder) {
+  englishLevel$: Observable<any>
+  constructor(private fb: FormBuilder, private fillFormFacade: FillFormFacade) {
+    this.englishLevel$ = fillFormFacade.englishLevel$
+    fillFormFacade.englishLevel$.subscribe((next) => {
+      console.log(next);
+    })
   }
 
   submitForm() {

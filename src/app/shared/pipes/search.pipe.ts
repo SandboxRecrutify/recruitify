@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
   transform(items: any[], searchText: string  = '', field: string = 'name'): any[] {
     if (!items) {
-      return [];
+      return [undefined];
     }
     if (!searchText) {
       return items;

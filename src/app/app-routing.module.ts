@@ -1,3 +1,5 @@
+import { InternshipsComponent } from './shared/pages/internships/internships.component';
+import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // components
@@ -9,7 +11,7 @@ import { CandidatesPageComponent } from './shared/pages/candidates-page/candidat
 import { FourOFourComponent } from './shared/pages/four-o-four/four-o-four.component';
 import { ProfilePageComponent } from './shared/pages/profile-page/profile-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
-import { FillFormComponent } from './shared/pages/fill-form-page/fill-form.component';
+import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 
 
 // consts
@@ -22,7 +24,9 @@ const mainRouter: Routes = [
   { path: paths.profile, component: ProfilePageComponent },
   { path: 'profile/:id', component: ProfilePageComponent },
   { path: paths.calendar, component: CalendarPageComponent },
-  { path: 'fill-form', component: FillFormComponent},
+  { path: paths.fillForm, component: FillFormComponent},
+  { path: paths.start, component: StartPageComponent },
+  { path: paths.internships, component: InternshipsComponent },
   {
     path: paths.projects,
     component: ProjectsPageComponent,
