@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import {FillFormComponent} from './pages/fill-form-page/fill-form.component'
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -30,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 /** set the default i18n config **/
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FillFormComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

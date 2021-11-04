@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedRoutingModule } from './shared-routing.module';
 
 
-import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 //facades
 import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
@@ -49,7 +48,6 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { AppRadioButtonComponent } from './pages/fill-form-page/Components/radio-button/radio-button.components';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
@@ -72,8 +70,6 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
     ProfilePageComponent,
     FourOFourComponent,
     CalendarPageComponent,
-    FillFormComponent,
-    AppRadioButtonComponent,
     CandidatesPageComponent,
     SearchPipe,
     FilterPipe,
