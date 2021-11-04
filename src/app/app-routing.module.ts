@@ -1,3 +1,5 @@
+import { InternshipsComponent } from './shared/pages/internships/internships.component';
+import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // components
@@ -14,6 +16,8 @@ import { paths } from './app-routing.constants';
 
 const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
+  { path: paths.start, component: StartPageComponent },
+  { path: paths.internships, component: InternshipsComponent },
   {
     path: paths.projects,
     component: ProjectsPageComponent,

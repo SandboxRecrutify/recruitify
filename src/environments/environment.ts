@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://recruitifyexadel.herokuapp.com/api/'
-  apiUrl: 'http://localhost:4200/'
+  apiUrl: 'http://localhost:4200/',
 };
 
 /*
