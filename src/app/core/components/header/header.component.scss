@@ -1,6 +1,7 @@
+@use "../../../../globals/" as *;
 .header {
   background: #ffffff;
-  color: #0082ca;
+  color: $primaryColor;
 
   p {
     padding: 0;
@@ -59,5 +60,11 @@
       height: 20px;
       stroke: #949494;
     }
+  }
+}
+
+button.menu_link:hover {
+  svg.logout_icon {
+    stroke: #0082ca !important;
   }
 }
