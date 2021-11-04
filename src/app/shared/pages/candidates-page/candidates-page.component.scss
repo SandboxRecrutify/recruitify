@@ -73,3 +73,17 @@ nz-table p {
   margin: 0;
   padding: 0;
 }
+
+.profile-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: url(/assets/images/view-profile-btn.svg) no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile-btn:hover {
+  filter: brightness(130%);
+}
