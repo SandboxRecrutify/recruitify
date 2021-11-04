@@ -12,7 +12,9 @@ export class MainLayoutFacade {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.isHeaderVisible =
-          event.url !== `/${paths.login}` && event.url !== `/${paths.start}`;
+          event.url !== `/${paths.login}` &&
+          event.url !== `/${paths.start}` &&
+          event.url !== `/${paths.internships}`;
       });
   }
 }

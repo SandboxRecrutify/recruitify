@@ -1,5 +1,6 @@
 export const paths = {
   start: 'start',
+  internships: 'internships',
   login: 'login',
   projects: 'projects',
   candidates: 'candidates',

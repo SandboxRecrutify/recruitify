@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { paths } from 'src/app/app-routing.constants';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
 
 @Component({
@@ -9,10 +9,9 @@ import { Project } from 'src/app/shared/models/Project';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  
   @Input() card!: Project;
 
-  isVisible = false
+  isVisible = false;
 
   constructor(private router: Router) {}
 
@@ -22,7 +21,6 @@ export class ProjectComponent implements OnInit {
     this.router.navigate([paths.candidates]);
   }
   switchStaff() {
-    this.isVisible = !this.isVisible
+    this.isVisible = !this.isVisible;
   }
-
 }
