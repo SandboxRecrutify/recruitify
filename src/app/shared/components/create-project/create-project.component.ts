@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { environment } from 'src/environments/environment';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { createProject } from '../../shared.config';
 
 @Component({
   selector: 'app-create-project',
@@ -98,15 +98,19 @@ export class CreateProjectComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.maxLength(createProject.name.maxLength),
+          Validators.maxLength(environment.CREATE_PROJECT_NAME_LENGTH),
         ],
       ],
-      dates: [createProject.dates.defaultValue, [Validators.required]],
+      dates: [, [Validators.required]],
       plannedCandidatesCount: [null, [Validators.required]],
       isActive: [true, []],
       description: [
         '',
-        [Validators.maxLength(createProject.description.maxLength)],
+        [
+          Validators.maxLength(
+            environment.CREATE_PROJECT_NAME_DESCRIPTION_LENGTH
+          ),
+        ],
       ],
       recruiters: [[], [Validators.required]],
       managers: [[], [Validators.required]],
