@@ -26,14 +26,11 @@
     [searchText]="searchText"
     [status]="status"
   ></app-projects-list>
-  <app-create-project
-    (onToggle)="handleToggle($event)"
-    [isVisible]="isVisible"
-  ></app-create-project>
+  <app-create-project></app-create-project>
 </div>
 
 <nz-drawer
-[nzHeight]=150
+  [nzHeight]="150"
   [nzClosable]="true"
   [nzVisible]="filter"
   nzPlacement="top"
@@ -56,7 +53,12 @@
       </div>
       <div class="date">
         <label for="date">Date</label>
-        <nz-select ngModel="lucy" nzAllowClear nzPlaceHolder="Choose date " id="date">
+        <nz-select
+          ngModel="lucy"
+          nzAllowClear
+          nzPlaceHolder="Choose date "
+          id="date"
+        >
           <nz-option nzValue="new" nzLabel="New"></nz-option>
           <nz-option nzValue="old" nzLabel="Old"></nz-option>
         </nz-select>

@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from 'src/environments/environment';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
+import { ProjectsPageFacade } from '../../pages/projects-page/projects-page.facade';
 import { ProjectsService } from '../../services/projects.service';
 
 @Component({
@@ -12,9 +13,7 @@ import { ProjectsService } from '../../services/projects.service';
   styleUrls: ['./create-project.component.scss'],
 })
 export class CreateProjectComponent implements OnInit {
-  @Input() isVisible!: boolean;
-  @Output() onToggle = new EventEmitter<boolean>();
-
+  isVisible: boolean = false;
   primarySkills: Map<string, FormGroup> = new Map();
   isPrimarySkillsTouched: boolean = false;
   data: CreateProject | undefined;
@@ -23,6 +22,7 @@ export class CreateProjectComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectsService: ProjectsService,
+    private projectsFacade: ProjectsPageFacade,
     private message: NzMessageService
   ) {}
 
@@ -60,7 +60,7 @@ export class CreateProjectComponent implements OnInit {
     this.form.reset();
     this.primarySkills.clear();
     this.isPrimarySkillsTouched = false;
-    this.onToggle.emit(false);
+    this.projectsFacade.toggleCreateProjectDrawer$.next(false);
   }
 
   submitForm() {
@@ -83,6 +83,11 @@ export class CreateProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //subscribe to projects service toggle this component
+    this.projectsFacade.toggleCreateProjectDrawer$.subscribe((visible) => {
+      this.isVisible = visible;
+    });
+
     // subscribe to primary skills
     this.projectsService.getCreateProjectData().subscribe((data) => {
       data.primarySkills = data.primarySkills.map((skill) => ({
