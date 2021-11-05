@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { paths } from 'src/app/app-routing.constants';
-import { Router } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
+import { ProjectsPageFacade } from '../projects-page.facade';
 
 @Component({
   selector: 'app-project',
@@ -13,7 +14,11 @@ export class ProjectComponent implements OnInit {
 
   isVisible = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private projectsFacade: ProjectsPageFacade
+  ) {}
 
   ngOnInit(): void {}
 
@@ -22,5 +27,16 @@ export class ProjectComponent implements OnInit {
   }
   switchStaff() {
     this.isVisible = !this.isVisible;
+  }
+  onEdit() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        editingId: this.card.id,
+      },
+      queryParamsHandling: 'merge',
+    });
+    this.projectsFacade.toggleCreateProjectDrawer$.next(true);
+    this.projectsFacade.projectDetails$.next(this.card);
   }
 }

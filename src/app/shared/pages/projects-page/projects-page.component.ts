@@ -10,7 +10,7 @@ import { ProjectsPageFacade } from './projects-page.facade';
 })
 export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
-  isVisible = false;
+
   projects: Project[] = [];
   projects$: Observable<Project[]>;
 
@@ -43,7 +43,6 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   handleToggle(isVisible: boolean): void {
-    this.isVisible = isVisible;
+    this.projectsPageFacade.toggleCreateProjectDrawer$.next(isVisible);
   }
-
 }
