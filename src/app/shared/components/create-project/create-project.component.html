@@ -199,7 +199,7 @@
       <!-- candidates' max count -->
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="plannedCandidatesCount"
+          <nz-form-label nzRequired nzFor="plannedApplicationsCount"
             >Max. candidates count
           </nz-form-label>
           <nz-form-control
@@ -208,8 +208,8 @@
             <input
               type="number"
               nz-input
-              formControlName="plannedCandidatesCount"
-              id="plannedCandidatesCount"
+              formControlName="plannedApplicationsCount"
+              id="plannedApplicationsCount"
             />
           </nz-form-control>
         </nz-form-item>
@@ -238,7 +238,7 @@
         </nz-form-item>
       </div>
       <button nz-button nzType="primary" nzBlock (click)="submitForm()">
-        Create
+        {{ editingId ? "Save" : "Create" }}
       </button>
     </form>
   </ng-container>

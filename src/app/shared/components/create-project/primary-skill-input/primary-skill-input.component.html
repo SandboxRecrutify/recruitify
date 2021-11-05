@@ -1,5 +1,9 @@
 <nz-collapse style="margin-bottom: 0.5rem">
-  <nz-collapse-panel [nzHeader]="header" [nzActive]="true" [nzExtra]="extra">
+  <nz-collapse-panel
+    [nzHeader]="header"
+    [nzActive]="isInitiallyActive"
+    [nzExtra]="extra"
+  >
     <ng-template #header>
       <span [ngClass]="{ errorText: !form.valid }">
         {{ index + 1 + ". " }}

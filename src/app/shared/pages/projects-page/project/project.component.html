@@ -20,7 +20,9 @@
         [required]="card.plannedApplicationsCount"
         (click)="showCandidates()"
       ></app-participants>
-      <button nz-button nzType="primary" class="edit-btn">Edit project</button>
+      <button nz-button (click)="onEdit()" nzType="primary" class="edit-btn">
+        Edit project
+      </button>
     </div>
   </div>
 </nz-card>
@@ -38,7 +40,7 @@
         <p *ngFor="let panel of card.managers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Interviewers'"nzActive="isVisible">
+      <nz-collapse-panel [nzHeader]="'Interviewers'" nzActive="isVisible">
         <p *ngFor="let panel of card.interviewers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 

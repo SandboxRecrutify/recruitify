@@ -10,6 +10,6 @@ export class ProjectsPageFacade {
   getProjectsList$(): Observable<Project[]> {
     return this.projectsService.getProjects();
   }
-
+  projectDetails$ = new Subject<Project>();
   toggleCreateProjectDrawer$: Subject<boolean> = new Subject<boolean>();
 }
