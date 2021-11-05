@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { createProject } from '../../shared.config';
 
 @Component({
   selector: 'app-create-project',
@@ -17,13 +15,10 @@ export class CreateProjectComponent implements OnInit {
   @Input() isVisible!: boolean;
   @Output() onToggle = new EventEmitter<boolean>();
 
-  primarySkills: PrimarySkill[] = [];
-  isPrimarySkillsValid: boolean = false;
+  primarySkills: Map<string, FormGroup> = new Map();
   isPrimarySkillsTouched: boolean = false;
-  data!: CreateProject;
+  data: CreateProject | undefined;
   form!: FormGroup;
-
-  primarySkillsValidity$ = new Subject<boolean>();
 
   constructor(
     private fb: FormBuilder,
@@ -31,76 +26,91 @@ export class CreateProjectComponent implements OnInit {
     private message: NzMessageService
   ) {}
 
-  private checkPrimarySkillsValidity(): boolean {
-    return this.primarySkills.every((skill) => {
-      return skill.name && skill.description && skill.link;
-    });
-  }
-
-  onPrimarySkillAdd() {
+  onPrimarySkillToggle(value: boolean, primarySkill: PrimarySkill) {
     this.isPrimarySkillsTouched = true;
-    this.primarySkills.push({ name: '', description: '', link: '' });
+    if (value) {
+      this.primarySkills.set(
+        primarySkill.id!,
+        this.fb.group({
+          name: [primarySkill.name, [Validators.required]],
+          description: [primarySkill.description, [Validators.required]],
+          testLink: [primarySkill.testLink, [Validators.required]],
+        })
+      );
+    } else {
+      this.primarySkills.delete(primarySkill.id!);
+    }
   }
 
-  onPrimarySkillChange(values: PrimarySkill, index: number) {
-    Object.assign(this.primarySkills[index], values);
+  onPrimarySkillRemove(id: string) {
+    this.primarySkills.delete(id!);
+    this.data?.primarySkills.find((skill) => {
+      if (skill.id === id) {
+        skill.checked = false;
+        return true;
+      }
+      return false;
+    });
   }
 
   handleOk(): void {
     this.submitForm();
   }
-  onPrimarySkillRemove(index: number) {
-    this.primarySkills.splice(index, 1);
-  }
   handleCancel(): void {
+    this.form.reset();
+    this.primarySkills.clear();
+    this.isPrimarySkillsTouched = false;
     this.onToggle.emit(false);
   }
 
   submitForm() {
-    // check if any of the primary skills is invalid
-    if (this.primarySkills.length !== 0) {
-      this.isPrimarySkillsValid = this.checkPrimarySkillsValidity();
-    }
-    console.log('is primary skills valid', this.isPrimarySkillsValid);
-    this.primarySkillsValidity$.next(this.isPrimarySkillsValid);
-
     this.isPrimarySkillsTouched = true;
+    let isPrimarySkillsValid = false;
+    if (this.primarySkills.size > 0) {
+      isPrimarySkillsValid = Array.from(this.primarySkills.values()).every(
+        (skill) => skill.valid
+      );
+    }
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
         this.form.controls[i].markAsDirty();
         this.form.controls[i].updateValueAndValidity();
       }
     }
-    if (
-      this.form.valid &&
-      this.isPrimarySkillsValid &&
-      this.primarySkills.length > 0
-    ) {
+    if (this.form.valid && isPrimarySkillsValid) {
       this.message.success('Project created successfully');
     }
-    // console.log(this.form.value);
   }
 
   ngOnInit(): void {
-    this.projectsService
-      .getCreateProjectData()
-      .pipe(tap((data) => console.log(data)))
-      .subscribe((data) => (this.data = data));
+    // subscribe to primary skills
+    this.projectsService.getCreateProjectData().subscribe((data) => {
+      data.primarySkills = data.primarySkills.map((skill) => ({
+        ...skill,
+        checked: false,
+      }));
+      this.data = data;
+    });
+
     // init form
     this.form = this.fb.group({
       name: [
         '',
         [
           Validators.required,
-          Validators.maxLength(createProject.name.maxLength),
+          Validators.maxLength(environment.CREATE_PROJECT_NAME_LENGTH),
         ],
       ],
-      dates: [createProject.dates.defaultValue, [Validators.required]],
+      dates: [, [Validators.required]],
       plannedCandidatesCount: [null, [Validators.required]],
-      isActive: [createProject.isActive.defaultValue, []],
+      isActive: [true, []],
       description: [
         '',
-        [Validators.maxLength(createProject.description.maxLength)],
+        [
+          Validators.maxLength(
+            environment.CREATE_PROJECT_NAME_DESCRIPTION_LENGTH
+          ),
+        ],
       ],
       recruiters: [[], [Validators.required]],
       managers: [[], [Validators.required]],

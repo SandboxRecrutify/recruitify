@@ -14,9 +14,10 @@ export interface Staff {
 }
 export interface PrimarySkill {
   id?: string;
+  checked?: boolean;
   name: string;
   description: string;
-  link: string;
+  testLink: string;
 }
 
 export enum ProjectUserRole {

@@ -42,25 +42,40 @@
           style="margin-bottom: 0.5rem"
         >
           <span>Primary Skills</span>
-          <button (click)="onPrimarySkillAdd()" nz-button>
+          <button
+            nz-popover
+            nzPopoverTitle="Choose primary skill"
+            nzPopoverTrigger="click"
+            [nzPopoverContent]="contentTemplate"
+            nz-button
+          >
             <i nz-icon nzType="plus" nzTheme="outline"></i>
           </button>
+          <ng-template #contentTemplate>
+            <div *ngFor="let primarySkill of data?.primarySkills">
+              <label
+                [(ngModel)]="primarySkill.checked"
+                (ngModelChange)="onPrimarySkillToggle($event, primarySkill)"
+                [ngModelOptions]="{ standalone: true }"
+                nz-checkbox
+                [nzValue]="primarySkill.id"
+                >{{ primarySkill.name }}</label
+              >
+            </div>
+          </ng-template>
         </div>
         <app-primary-skill-input
-          *ngFor="let primarySkill of primarySkills; index as index"
-          [primarySkill]="primarySkill"
+          *ngFor="let item of primarySkills | keyvalue; index as index"
           [index]="index"
-          (onPrimarySkillRemove)="onPrimarySkillRemove(index)"
-          (onPrimarySkillChange)="onPrimarySkillChange($event, index)"
-          [primarySkillsValidity$]="primarySkillsValidity$"
+          [form]="item.value"
+          (onPrimarySkillRemove)="onPrimarySkillRemove(item.key)"
         ></app-primary-skill-input>
         <div
           class="errorText"
-          *ngIf="isPrimarySkillsTouched && primarySkills.length === 0"
+          *ngIf="isPrimarySkillsTouched && primarySkills.size === 0"
         >
           Please add at least one primary skill
         </div>
-        <!-- (onRemovePrimarySkill)="" -->
       </div>
 
       <!-- managers -->
