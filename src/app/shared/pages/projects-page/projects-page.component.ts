@@ -45,5 +45,4 @@ export class ProjectsPageComponent implements OnInit {
   handleToggle(isVisible: boolean): void {
     this.isVisible = isVisible;
   }
-
 }

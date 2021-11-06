@@ -9,15 +9,15 @@ const API_PATH = 'assets/';
 @Injectable()
 export class ProjectsService extends ApiService {
   constructor(http: HttpClient) {
-    super(http, API_PATH, ProjectsService.name)
+    super(http, API_PATH, ProjectsService.name);
   }
 
   getProjects(): Observable<Project[]> {
-      return super.get<Project[]>('projects.json');
-       }
+    return super.get<Project[]>('projects.json');
+  }
 
   //get create project modal data
   getCreateProjectData(): Observable<CreateProject> {
-   return super.get<CreateProject>('createProject.json');
+    return super.get<CreateProject>('createProject.json');
   }
 }

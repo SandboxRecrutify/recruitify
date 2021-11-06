@@ -1,5 +1,7 @@
+import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
+import { Project } from 'src/app/shared/models/Project';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Candidate, CandidatesLocation } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
@@ -15,53 +17,22 @@ export class CandidatesPageComponent implements OnInit {
   indeterminate = false;
   drawerVisible = false;
   menuVisible = true;
-  setOfCheckedId = new Set<number>();
+  setOfCheckedId = new Set<string>();
   candidatesList: Candidate[] = [];
 
-  candidateStatuses = this.candidatesPageFacade.statuses;
+  currentProjectId = this.candidatesPageFacade.setCurrentProjetId;
+  currentProject: any;
+
   candidateEnglishLvls = this.candidatesPageFacade.englishLvls;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
-    private router: Router
+    private projectsPageFacade: ProjectsPageFacade,
+    private router: ActivatedRoute
   ) {}
 
   openDrawer(): void {
     this.drawerVisible = !this.drawerVisible;
-  }
-
-  sortAlphabetically = (a: Candidate, b: Candidate) =>
-    a.name.localeCompare(b.name);
-
-  // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
-
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
-  }
-
-  onAllChecked(value: boolean): void {
-    this.candidatesList.forEach((item) =>
-      this.updateCheckedSet(item.id, value)
-    );
-    this.refreshCheckedStatus();
-  }
-
-  onItemChecked(id: number, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  refreshCheckedStatus(): void {
-    this.checked = this.candidatesList.every((item) =>
-      this.setOfCheckedId.has(item.id)
-    );
-    this.indeterminate =
-      this.candidatesList.some((item) => this.setOfCheckedId.has(item.id)) &&
-      !this.checked;
   }
 
   searchName() {
@@ -76,5 +47,21 @@ export class CandidatesPageComponent implements OnInit {
     this.candidatesPageFacade.candidateList$.subscribe((response) => {
       this.candidatesList = response;
     });
+    // let currentProjectId: string;
+    // this.router.params.subscribe((params) => (currentProjectId = params.id));
+    // this.projectsPageFacade.getProjectsList$().subscribe((response) => {
+    //   this.currentProject = response.find(
+    //     (project) => project.id === currentProjectId
+    //   );
+    // });
+    // this.candidatesPageFacade.candidateList$.subscribe((response) => {
+    //   this.candidatesList = response;
+    // .filter((candidate: Candidate) => {
+    //   let { projectResults } = candidate;
+    //   return projectResults.some(
+    //     (item) => item.projectId === currentProjectId
+    //   );
+    // });
+    // });
   }
 }

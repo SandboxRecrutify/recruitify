@@ -1,0 +1,82 @@
+<nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th
+        nzWidth="40px"
+        [(nzChecked)]="checked"
+        [nzIndeterminate]="indeterminate"
+        (nzCheckedChange)="onAllChecked($event)"
+      ></th>
+      <th
+        [nzSortFn]="sortAlphabetically"
+        [nzSortDirections]="['ascend', 'descend', null]"
+      >
+        Name
+      </th>
+      <th
+        [nzSortFn]="sortAlphabetically"
+        [nzSortDirections]="['ascend', 'descend', null]"
+      >
+        Primary skill
+      </th>
+      <th nzSortOrder="null">Status</th>
+      <th nzWidth="90px" nzSortOrder="null">Test</th>
+      <th nzSortOrder="null">Recruter</th>
+      <th nzSortOrder="null">Interview 1</th>
+      <th nzSortOrder="null">Mentor</th>
+      <th nzSortOrder="null">Interview 2</th>
+      <th nzWidth="60px"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let candidate of nzTable.data">
+      <td
+        [nzChecked]="setOfCheckedId.has(candidate.id)"
+        (nzCheckedChange)="onItemChecked(candidate.id, $event)"
+      ></td>
+      <td>{{ candidate.name }} {{ candidate.surname }}</td>
+      <td>
+        <p *ngFor="let skill of candidate.primarySkills">
+          {{ skill.primarySkillName }}
+        </p>
+      </td>
+      <td>
+        <!-- status -->
+        {{
+          candidate.projectResults[0]
+            ? candidate.projectResults[0].status
+            : "none"
+        }}
+      </td>
+      <td>15</td>
+      <td>
+        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+      </td>
+      <td>
+        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+      </td>
+      <td>
+        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+      </td>
+      <td>
+        <app-rating-stars [rate]="1"></app-rating-stars>
+      </td>
+
+      <td>
+        <!-- <button
+          nz-button
+          nzSize="small"
+          nzType="primary"
+          style="font-size: 12px"
+          [routerLink]="['/profile', candidate.id]"
+        >
+          view profile
+        </button> -->
+        <button
+          class="profile-btn"
+          [routerLink]="['/profile', candidate.id]"
+        ></button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

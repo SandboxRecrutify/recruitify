@@ -24,15 +24,20 @@ const mainRouter: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: paths.candidates,
+    path: `${paths.projects}/:id`,
     component: CandidatesPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: paths.profile,
-    component: ProfilePageComponent,
+    path: paths.candidates,
+    component: CandidatesPageComponent,
     canActivate: [AuthGuard],
   },
+  // {
+  //   path: paths.profile,
+  //   component: ProfilePageComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: `${paths.profile}/:id`,
     component: ProfilePageComponent,

@@ -1,6 +1,6 @@
 [
   {
-    "_id": "2beed73a-30b5-11ec-808a-fb45776a1ed3",
+    "id": "2beed73a-30b5-11ec-808a-fb45776a1ed3",
     "name": "Java Web Development",
     "startDate": "2022-01-10T00:00:00.000Z",
     "endDate": "2022-03-30T00:00:00.000Z",
@@ -60,7 +60,7 @@
     "isActive": true
   },
   {
-    "_id": "7d85284c-30b5-11ec-95cb-230b32afd221",
+    "id": "7d85284c-30b5-11ec-95cb-230b32afd221",
     "name": "Big Data",
     "startDate": "2022-02-13T00:00:00.000Z",
     "endDate": "2022-04-10T00:00:00.000Z",
@@ -104,7 +104,7 @@
     "isActive": true
   },
   {
-    "_id": "bdbc3af0-f882-4f4f-bbb8-3e87ba16b768",
+    "id": "bdbc3af0-f882-4f4f-bbb8-3e87ba16b768",
     "name": "Big Data",
     "startDate": "2021-03-10T00:00:00.000Z",
     "endDate": "2021-05-01T00:00:00.000Z",
@@ -152,7 +152,7 @@
     "isActive": false
   },
   {
-    "_id": "871b1e7a-30b5-11ec-9b40-437a6473123c",
+    "id": "871b1e7a-30b5-11ec-9b40-437a6473123c",
     "name": "BA, JS, .NET Development",
     "startDate": "2022-03-15T00:00:00.000Z",
     "endDate": "2022-05-30T00:00:00.000Z",
@@ -208,7 +208,7 @@
     "isActive": true
   },
   {
-    "_id": "dd49fe8f-d697-41a5-be23-7066563b85a6",
+    "id": "dd49fe8f-d697-41a5-be23-7066563b85a6",
     "name": "BA, JS, .NET Development",
     "startDate": "2021-08-12T00:00:00.000Z",
     "endDate": "2021-09-30T00:00:00.000Z",

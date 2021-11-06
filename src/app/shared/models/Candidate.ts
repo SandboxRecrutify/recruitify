@@ -15,7 +15,7 @@ export interface Candidate {
   certificates: string;
   additionalQuestions: string;
   additionalInfo: string;
-  id: number;
+  id: string;
 }
 
 export interface PrimarySkills {

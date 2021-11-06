@@ -1,11 +1,11 @@
+import { Project } from 'src/app/shared/models/Project';
+import { ActivatedRoute } from '@angular/router';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CandidatesPageFacade {
-  candidateList$ = this.candidatesService.getCandidates();
-
   englishLvls = [
     'Begginer',
     'Pre-Intermediate',
@@ -14,18 +14,18 @@ export class CandidatesPageFacade {
     'Native',
   ];
 
-  statuses = [
-    'New',
-    'Test',
-    'Interview',
-    'Tech Interview 1',
-    'Waiting List',
-    'Tech Interview 2',
-    'Accepted to Sandbox',
-    'Job Offer',
-    'Declined',
-    'Candidate rejected',
-  ];
+  candidateList$ = this.candidatesService.getCandidates();
+  currentProject!: Project[];
+  currentProjectId!: string;
 
-  constructor(private candidatesService: CandidatesService) {}
+  constructor(
+    private candidatesService: CandidatesService,
+    private router: ActivatedRoute
+  ) {}
+
+  setCurrentProjetId() {
+    this.router.params.subscribe(
+      (params) => (this.currentProjectId = params.id)
+    );
+  }
 }

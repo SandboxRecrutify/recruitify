@@ -57,6 +57,7 @@ import { PrimarySkillInputComponent } from './components/create-project/primary-
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
+import { CandidatesTableComponent } from './pages/candidates-page/candidates-table/candidates-table.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { InternshipsComponent } from './pages/internships/internships.component'
     FilterDrawerComponent,
     DropdownMenuComponent,
     InternshipsComponent,
+    CandidatesTableComponent,
   ],
   imports: [
     CommonModule,
@@ -104,7 +106,7 @@ import { InternshipsComponent } from './pages/internships/internships.component'
     NzTabsModule,
     NzPopoverModule,
     NzSpaceModule,
-    NzEmptyModule
+    NzEmptyModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
