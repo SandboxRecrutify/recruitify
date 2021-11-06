@@ -1,6 +1,4 @@
-import { Project } from 'src/app/shared/models/Project';
-import { ActivatedRoute } from '@angular/router';
-import { Candidate } from './../../models/Candidate';
+import { UserService } from './../../services/user.service';
 import { CandidatesService } from './../../services/candidates.service';
 import { Injectable } from '@angular/core';
 
@@ -14,18 +12,35 @@ export class CandidatesPageFacade {
     'Native',
   ];
 
-  candidateList$ = this.candidatesService.getCandidates();
-  currentProject!: Project[];
-  currentProjectId!: string;
+  declineReasons = [
+    'Bad feedback from the Recruiter',
+    'Bad feedback from the Interviewer',
+    'Bad feedback from the Mentor',
+    'Wrong location',
+    'Russian language knowledge',
+    'Bad test result',
+    'Candidate´s rejection',
+  ];
+
+  candidateStatuses = [
+    'New',
+    'Test',
+    'Interview',
+    'Tech Interview 1 ',
+    'Tech Interview 2',
+    'Accepted',
+    'Declined',
+    'Candidate rejected',
+  ];
+
+  candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
 
   constructor(
     private candidatesService: CandidatesService,
-    private router: ActivatedRoute
+    private userServise: UserService
   ) {}
 
-  setCurrentProjetId() {
-    this.router.params.subscribe(
-      (params) => (this.currentProjectId = params.id)
-    );
-  }
+  candidateList$ = this.candidatesService.getCandidates();
+  isRecruiter: boolean = this.userServise.isRecruiter();
+  isManager: boolean = this.userServise.isManager();
 }

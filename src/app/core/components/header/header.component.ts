@@ -1,3 +1,4 @@
+import { UserService } from './../../../shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AppFacade } from 'src/app/app.facade';
 
@@ -7,7 +8,9 @@ import { AppFacade } from 'src/app/app.facade';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private appFacade: AppFacade) {}
+  isAdmin: boolean = this.userService.isAdmin();
+
+  constructor(private appFacade: AppFacade, private userService: UserService) {}
 
   onLogoutBtnClick() {
     this.appFacade.logout();

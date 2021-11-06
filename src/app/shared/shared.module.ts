@@ -14,6 +14,7 @@ import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 //services
 import { CandidatesService } from './services/candidates.service';
 import { ProjectsService } from './services/projects.service';
+import { UserService } from './services/user.service';
 
 //components
 import { SharedComponent } from './shared.component';
@@ -117,6 +118,7 @@ import { CandidatesTableComponent } from './pages/candidates-page/candidates-tab
     ProfilePageFacade,
     ProjectsService,
     ProjectsPageFacade,
+    UserService,
   ],
 })
 export class SharedModule {}

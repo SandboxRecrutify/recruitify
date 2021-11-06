@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
-const CANDIDATE_API = 'odata/Candidates';
+// const CANDIDATE_API = 'odata/Candidates';
 @Injectable()
 // export class CandidatesService extends ApiService {
 //   constructor(private httpClient: HttpClient) {
