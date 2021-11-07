@@ -9,7 +9,12 @@ export class AuthService {
   constructor() {}
 
   login(user: UserData): Observable<User> {
-    return of({ email: user.email, id: 'some_id', token: 'some_token' });
+    return of({
+      email: user.email,
+      id: 'some_id',
+      token: 'some_token',
+      role: 'admin',
+    });
   }
   logout(): Observable<{}> {
     return of({});

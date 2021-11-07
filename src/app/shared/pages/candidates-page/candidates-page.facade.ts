@@ -1,11 +1,9 @@
-import { Candidate } from './../../models/Candidate';
+import { UserService } from './../../services/user.service';
 import { CandidatesService } from './../../services/candidates.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CandidatesPageFacade {
-  candidateList$ = this.candidatesService.getCandidates();
-
   englishLvls = [
     'Begginer',
     'Pre-Intermediate',
@@ -14,18 +12,35 @@ export class CandidatesPageFacade {
     'Native',
   ];
 
-  statuses = [
+  declineReasons = [
+    'Bad feedback from the Recruiter',
+    'Bad feedback from the Interviewer',
+    'Bad feedback from the Mentor',
+    'Wrong location',
+    'Russian language knowledge',
+    'Bad test result',
+    'Candidate´s rejection',
+  ];
+
+  candidateStatuses = [
     'New',
     'Test',
     'Interview',
-    'Tech Interview 1',
-    'Waiting List',
+    'Tech Interview 1 ',
     'Tech Interview 2',
-    'Accepted to Sandbox',
-    'Job Offer',
+    'Accepted',
     'Declined',
     'Candidate rejected',
   ];
 
-  constructor(private candidatesService: CandidatesService) {}
+  candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
+
+  constructor(
+    private candidatesService: CandidatesService,
+    private userServise: UserService
+  ) {}
+
+  candidateList$ = this.candidatesService.getCandidates();
+  isRecruiter: boolean = this.userServise.isRecruiter();
+  isManager: boolean = this.userServise.isManager();
 }

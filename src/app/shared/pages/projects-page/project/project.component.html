@@ -18,7 +18,7 @@
       <app-participants
         [registered]="card.currentApplicationsCount"
         [required]="card.plannedApplicationsCount"
-        (click)="showCandidates()"
+        [routerLink]="['/projects', card.id]"
       ></app-participants>
       <button nz-button (click)="onEdit()" nzType="primary" class="edit-btn">
         Edit project

@@ -1,5 +1,5 @@
 export interface Staff {
-  id: string
-  role: string
-  users: string[]
+  id: string;
+  role: string;
+  users: string[];
 }

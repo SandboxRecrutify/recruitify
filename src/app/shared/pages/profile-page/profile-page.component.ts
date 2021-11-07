@@ -38,9 +38,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profilePageFacade.candidatesList$.subscribe((responce) => {
+    this.profilePageFacade.candidatesList$.subscribe((response: any) => {
       this.router.params.subscribe((params) => {
-        this.candidate = responce.find((item) => item.id === params.id);
+        this.candidate = response.find((item: any) => item.id === params.id);
       });
     });
   }

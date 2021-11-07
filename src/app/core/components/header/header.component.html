@@ -24,7 +24,7 @@
             [routerLink]="['/', 'candidates']"
             routerLinkActive="active"
           >
-            <svg class="menu_icon">
+            <svg class="menu_icon" *ngIf="isAdmin">
               <use
                 xlink:href="/assets/images/nav-icons/navSprite.svg#candidates"
               ></use>
