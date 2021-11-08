@@ -33,11 +33,6 @@ const mainRouter: Routes = [
     component: CandidatesPageComponent,
     canActivate: [AuthGuard],
   },
-  // {
-  //   path: paths.profile,
-  //   component: ProfilePageComponent,
-  //   canActivate: [AuthGuard],
-  // },
   {
     path: `${paths.profile}/:id`,
     component: ProfilePageComponent,

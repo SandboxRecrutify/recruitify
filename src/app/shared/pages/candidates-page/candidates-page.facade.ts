@@ -1,3 +1,4 @@
+import { Candidate } from './../../models/Candidate';
 import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
@@ -41,7 +42,8 @@ export class CandidatesPageFacade {
   constructor(
     private candidatesService: CandidatesService,
     private userServise: UserService,
-    private projectsPageFacade: ProjectsPageFacade
+    private projectsPageFacade: ProjectsPageFacade,
+    private router: ActivatedRoute
   ) {}
 
   candidateList$ = this.candidatesService.getCandidates();
@@ -61,10 +63,4 @@ export class CandidatesPageFacade {
         response.find((project) => project.id === currentProjectId)
       );
   }
-
-  // this.projectsPageFacade.getProjectsList$().subscribe((response) => {
-  //   this.currentProject = response.find(
-  //     (project) => project.id === this.currentProjectId
-  //   );
-  // });
 }

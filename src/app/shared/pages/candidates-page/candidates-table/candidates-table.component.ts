@@ -40,13 +40,6 @@ export class CandidatesTableComponent implements OnInit {
     }
   }
 
-  lol(candidate: Candidate) {
-    let currentProject: any = candidate.projectResults.find(
-      (item) => item.projectId === this.currentProjectId
-    );
-    console.log(currentProject.feedbacks);
-  }
-
   updateCheckedSet(id: string, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);

@@ -3,18 +3,19 @@
   <div class="profile_info">
     <div class="main-info">
       <div class="main-info_heading">
-        <p class="name">{{ candidate.name }} {{ candidate.surname }}</p>
-        <p class="stack" *ngFor="let skill of candidate.primarySkills">
-          {{ skill.primarySkillName }}
+        <p class="name" (click)="log(candidate)">
+          {{ candidate.name }} {{ candidate.surname }}
+        </p>
+        <p class="stack">
+          {{ printCandidatePrimarySkills(candidate) }}
         </p>
       </div>
       <p class="location">
         {{ candidate.location.city }}, {{ candidate.location.country }}
       </p>
-      <p>
-        <span>Skype:</span>
-        <!-- будет в contacts обязательным + остальные соц сети отрисвать -->
-        <a href="skype:{{ candidate.skype }}?chat"> {{ candidate.skype }}</a>
+      <p *ngFor="let contact of candidate.contacts">
+        <span>{{ contact.type }}: </span>
+        <a href="#">{{ contact.value }}</a>
       </p>
       <p>
         <span>Email:</span>
@@ -27,7 +28,6 @@
         >
       </p>
       <p><span>English level:</span> {{ candidate.englishLevel }}</p>
-      <!-- откуда брать язык стажировки, который выбрал кандидат -->
       <p><span>Language:</span> {{ candidate.language }}</p>
       <p><span>Test result:</span> {{ candidate.testResult }}</p>
       <p>

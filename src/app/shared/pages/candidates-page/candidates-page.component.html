@@ -1,7 +1,9 @@
 <div class="page_container candidates_container">
   <div class="candidates_heading">
     <div class="candidates_count">{{ candidatesList.length }}</div>
-    <h3 class="candidates_title">{{ currentProject.name }}</h3>
+    <h3 class="candidates_title">
+      {{ currentProjectName || "" }}
+    </h3>
     <div class="candidates_filter-wrap">
       <input
         nz-input
