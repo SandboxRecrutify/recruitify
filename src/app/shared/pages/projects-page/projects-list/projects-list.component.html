@@ -2,11 +2,11 @@
   <nz-empty
     nzNotFoundImage="assets/images/no_data.svg"
     nzNotFoundContent="No matches"
-    *ngIf="(projects | search: searchText).length === 0"
+    *ngIf="projects.length === 0"
   ></nz-empty>
   <div nz-row [nzGutter]="[16, 16]">
     <div
-      *ngFor="let iterCard of projects | search: searchText | filter: status"
+      *ngFor="let iterCard of projects"
       nz-col
       nzSpan="12"
       nzMd="24"
