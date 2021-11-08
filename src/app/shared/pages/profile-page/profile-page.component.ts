@@ -1,3 +1,4 @@
+import { Candidate } from './../../models/Candidate';
 import { ProfilePageFacade } from './profile-page.facade';
 import { paths } from './../../../app-routing.constants';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -43,5 +44,14 @@ export class ProfilePageComponent implements OnInit {
         this.candidate = response.find((item: any) => item.id === params.id);
       });
     });
+  }
+  printCandidatePrimarySkills(candidate: Candidate) {
+    return candidate.primarySkills
+      .map((skill) => skill.primarySkillName)
+      .join(' | ');
+  }
+
+  log(candidate: Candidate) {
+    console.log(candidate);
   }
 }

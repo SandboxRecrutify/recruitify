@@ -2,7 +2,7 @@ export interface Feedback {
   textFeedback: string;
   rating: number;
   userId: string;
-  type: number;
+  type: string;
   isRecommended: boolean;
   createdOn: Date | string;
 }

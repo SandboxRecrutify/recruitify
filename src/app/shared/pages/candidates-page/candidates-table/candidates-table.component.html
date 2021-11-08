@@ -47,30 +47,34 @@
             : "none"
         }}
       </td>
-      <td>15</td>
       <td>
-        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+        {{ getFeedbackRate(candidate, "Test") }}
       </td>
       <td>
-        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+        <app-rating-stars
+          [rate]="getFeedbackRate(candidate, 'Mentor')"
+          [isDisabled]="true"
+        ></app-rating-stars>
       </td>
       <td>
-        <app-rating-stars [rate]="1" [isDisabled]="true"></app-rating-stars>
+        <app-rating-stars
+          [rate]="getFeedbackRate(candidate, 'TechInterviewOneStep')"
+          [isDisabled]="true"
+        ></app-rating-stars>
       </td>
       <td>
-        <app-rating-stars [rate]="1"></app-rating-stars>
+        <app-rating-stars
+          [rate]="getFeedbackRate(candidate, 'Recruiter')"
+          [isDisabled]="true"
+        ></app-rating-stars>
+      </td>
+      <td>
+        <app-rating-stars
+          [rate]="getFeedbackRate(candidate, 'TechInterviewSecondStep')"
+        ></app-rating-stars>
       </td>
 
       <td>
-        <!-- <button
-          nz-button
-          nzSize="small"
-          nzType="primary"
-          style="font-size: 12px"
-          [routerLink]="['/profile', candidate.id]"
-        >
-          view profile
-        </button> -->
         <button
           class="profile-btn"
           [routerLink]="['/profile', candidate.id]"

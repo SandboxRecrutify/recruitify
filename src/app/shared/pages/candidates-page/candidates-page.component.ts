@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CandidatesPageFacade } from './candidates-page.facade';
 import { UserService } from './../../services/user.service';
 import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
@@ -18,33 +18,36 @@ export class CandidatesPageComponent implements OnInit {
   drawerVisible = false;
   menuVisible = true;
   candidatesList: Candidate[] = [];
-  currentProjectId!: string;
-  currentProject: any;
+  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
+  currentProjectName: any;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private projectsPageFacade: ProjectsPageFacade,
-    private router: ActivatedRoute,
-    private userService: UserService
+    private router: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.router.params.subscribe(
-      (params) => (this.currentProjectId = params.id)
-    );
-
     this.projectsPageFacade.getProjectsList$().subscribe((response) => {
-      this.currentProject = response.find(
+      let currentProject = response.find(
         (project) => project.id === this.currentProjectId
       );
+      this.currentProjectName = currentProject?.name;
     });
 
     this.candidatesPageFacade.candidateList$.subscribe((response) => {
-      this.candidatesList = response.filter((candidate: Candidate) => {
-        let { projectResults } = candidate;
-        return projectResults.some(
-          (item) => item.projectId === this.currentProjectId
-        );
+      this.router.params.subscribe((params: Params) => {
+        if (params.id) {
+          this.candidatesList = response.filter((candidate: Candidate) => {
+            let { projectResults } = candidate;
+
+            return projectResults.some(
+              (item) => item.projectId === this.currentProjectId
+            );
+          });
+        } else {
+          this.candidatesList = response;
+        }
       });
     });
   }
