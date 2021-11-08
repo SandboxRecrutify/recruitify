@@ -60,7 +60,10 @@ import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/fil
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
 import { CandidatesTableComponent } from './pages/candidates-page/candidates-table/candidates-table.component';
-
+import { ProjectFiltersComponent } from './pages/projects-page/project-filters/project-filters.component';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 @NgModule({
   declarations: [
     SharedComponent,
@@ -81,6 +84,7 @@ import { CandidatesTableComponent } from './pages/candidates-page/candidates-tab
     DropdownMenuComponent,
     InternshipsComponent,
     CandidatesTableComponent,
+    ProjectFiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +114,9 @@ import { CandidatesTableComponent } from './pages/candidates-page/candidates-tab
     NzPopoverModule,
     NzSpaceModule,
     NzEmptyModule,
+    NzTypographyModule,
+    NzDividerModule,
+    NzRadioModule,
   ],
   exports: [RatingStarsComponent],
   providers: [
