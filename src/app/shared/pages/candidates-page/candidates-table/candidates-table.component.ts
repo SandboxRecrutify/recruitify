@@ -1,3 +1,7 @@
+import { Project } from 'src/app/shared/models/Project';
+import { CandidateProjectResults } from './../../../models/CandidateProjectResults';
+import { Feedback } from './../../../models/Feedback';
+import { ActivatedRoute } from '@angular/router';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { Candidate } from './../../../models/Candidate';
 import { Component, Input, OnInit } from '@angular/core';
@@ -13,10 +17,35 @@ export class CandidatesTableComponent implements OnInit {
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<string>();
+  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
 
-  constructor(private candidatesPageFacade: CandidatesPageFacade) {}
+  constructor(
+    private candidatesPageFacade: CandidatesPageFacade,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {}
+
+  getFeedbackRate(candidate: Candidate, feedbackType: string) {
+    try {
+      let currentProject: any = candidate.projectResults.find(
+        (item) => item.projectId === this.currentProjectId
+      );
+      let testFeedback = currentProject.feedbacks.find(
+        (item: any) => item.type === feedbackType
+      );
+      return testFeedback.rating;
+    } catch (error) {
+      return '-';
+    }
+  }
+
+  lol(candidate: Candidate) {
+    let currentProject: any = candidate.projectResults.find(
+      (item) => item.projectId === this.currentProjectId
+    );
+    console.log(currentProject.feedbacks);
+  }
 
   updateCheckedSet(id: string, checked: boolean): void {
     if (checked) {

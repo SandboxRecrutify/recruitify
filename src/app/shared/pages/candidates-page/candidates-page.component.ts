@@ -18,7 +18,7 @@ export class CandidatesPageComponent implements OnInit {
   drawerVisible = false;
   menuVisible = true;
   candidatesList: Candidate[] = [];
-  currentProjectId!: string;
+  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
   currentProject: any;
 
   constructor(
@@ -29,10 +29,6 @@ export class CandidatesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.router.params.subscribe(
-      (params) => (this.currentProjectId = params.id)
-    );
-
     this.projectsPageFacade.getProjectsList$().subscribe((response) => {
       this.currentProject = response.find(
         (project) => project.id === this.currentProjectId
