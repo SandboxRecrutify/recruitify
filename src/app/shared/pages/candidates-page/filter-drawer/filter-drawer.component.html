@@ -1,126 +1,196 @@
 <nz-drawer
   [nzClosable]="true"
   [nzVisible]="drawerVisible"
-  [nzHeight]="250"
+  [nzHeight]="205"
   nzPlacement="top"
   nzTitle="Candidates filter"
   (nzOnClose)="closeDrawer()"
 >
   <ng-container *nzDrawerContent>
     <div class="drawer-container">
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Skill</nz-form-label>
-        <nz-form-control>
-          <nz-select id="primarySkill">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option nzValue="skills" nzLabel="skills"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Status</nz-form-label>
-        <nz-form-control>
-          <nz-select id="status">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option nzValue="status" nzLabel="status"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Location</nz-form-label>
-        <nz-form-control>
-          <nz-select id="location">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option nzValue="locations" nzLabel="locations"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Test</nz-form-label>
-        <nz-form-control>
-          <nz-select id="testResult">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option nzValue="testResult" nzLabel="testResult"></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Recruiter</nz-form-label>
-        <nz-form-control>
-          <nz-select id="recrFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="recrFeedback"
-              nzLabel="recrFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Interview 1</nz-form-label>
-        <nz-form-control>
-          <nz-select id="intervFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="intervFeedback"
-              nzLabel="intervFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Mentor</nz-form-label>
-        <nz-form-control>
-          <nz-select id="intervFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="intervFeedback"
-              nzLabel="intervFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Interview 2</nz-form-label>
-        <nz-form-control>
-          <nz-select id="intervFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="intervFeedback"
-              nzLabel="intervFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">English level</nz-form-label>
-        <nz-form-control>
-          <nz-select id="intervFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="intervFeedback"
-              nzLabel="intervFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="drawer-item">
-        <nz-form-label nzFor="">Date</nz-form-label>
-        <nz-form-control>
-          <nz-select id="intervFeedback">
-            <nz-option nzValue="some" nzLabel="some"></nz-option>
-            <nz-option
-              nzValue="intervFeedback"
-              nzLabel="intervFeedback"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div class="drawer-btns">
-      <button nz-button nzType="default">Create a report</button>
-      <button nz-button nzType="primary">Show results</button>
-      <button nz-button nzType="primary">Clear filters</button>
+      <div class="drawer-inputs">
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <!-- [(ngModel)]="tagValue" -->
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Location"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Date"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="English level"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Skill"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Status"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Test"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Recruiter"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Interview 1"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Mentor"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="drawer-item">
+          <nz-form-control>
+            <nz-select
+              nzSize="small"
+              nzMode="tags"
+              [nzMaxTagCount]="2"
+              [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+              nzPlaceHolder="Interview 2"
+            >
+              <nz-option
+                *ngFor="let option of listOfOption"
+                [nzLabel]="option.label"
+                [nzValue]="option.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="drawer-btns">
+        <button nz-button nzType="primary" nzSize="small" *ngIf="isAdmin">
+          Create a report
+        </button>
+        <button nz-button nzType="default" nzSize="small">Show results</button>
+        <button nz-button nzType="default" nzSize="small">Clear filters</button>
+      </div>
     </div>
   </ng-container>
+  <ng-template #nzMaxTagPlaceholder let-selectedList
+    >+{{ selectedList.length }}
+  </ng-template>
 </nz-drawer>
