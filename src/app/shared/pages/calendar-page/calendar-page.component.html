@@ -1,48 +1,5 @@
-<div class="page_container calendar-wrapp">
-  <div class="calendar_week-btns">
-    <a href="#"><< Previous week</a>
-    <a href="#">Next week >></a>
-  </div>
-
-  <div class="time-line">
-    <p class="time-line_item" *ngFor="let t of time">{{ t }}</p>
-  </div>
-  <div class="calendar_table">
-    <div class="calendar_interviewers">Aleksey Yanul</div>
-    <div class="calendar_weekdays">
-      <p class="calendar_weekday" *ngFor="let day of days">{{ day }}</p>
-    </div>
-    <div class="calendar_time-grid">
-      <div
-        class="time-grid_item time-grid_item--free"
-        *ngFor="let t of time"
-        (click)="setItemBusy($event)"
-        (contextmenu)="setItemFree($event)"
-      ></div>
-      <div
-        class="time-grid_item time-grid_item--free"
-        *ngFor="let t of time"
-        (click)="setItemBusy($event)"
-        (contextmenu)="setItemFree($event)"
-      ></div>
-      <div
-        class="time-grid_item time-grid_item--free"
-        *ngFor="let t of time"
-        (click)="setItemBusy($event)"
-        (contextmenu)="setItemFree($event)"
-      ></div>
-      <div
-        class="time-grid_item time-grid_item--free"
-        *ngFor="let t of time"
-        (click)="setItemBusy($event)"
-        (contextmenu)="setItemFree($event)"
-      ></div>
-      <div
-        class="time-grid_item time-grid_item--free"
-        *ngFor="let t of time"
-        (click)="setItemBusy($event)"
-        (contextmenu)="setItemFree($event)"
-      ></div>
-    </div>
-  </div>
+<div class="page_container calendar-wrapp" style="height: 82vh">
+  <app-time-line></app-time-line>
+  <!-- <app-table-for-interviewers></app-table-for-interviewers> -->
+  <app-table-for-staff></app-table-for-staff>
 </div>
