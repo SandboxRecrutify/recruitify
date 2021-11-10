@@ -11,11 +11,14 @@ import { CandidatesPageComponent } from './shared/pages/candidates-page/candidat
 import { FourOFourComponent } from './shared/pages/four-o-four/four-o-four.component';
 import { ProfilePageComponent } from './shared/pages/profile-page/profile-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
+import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
+
 // consts
 import { paths } from './app-routing.constants';
 
 const mainRouter: Routes = [
   { path: paths.login, component: LoginPageComponent },
+  { path: paths.fillForm, component: FillFormComponent },
   { path: paths.start, component: StartPageComponent },
   { path: paths.internships, component: InternshipsComponent },
   {

@@ -1,97 +1,58 @@
-.calendar-wrapp p {
-  margin: 0;
-  padding: 0;
+.note {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &_text {
+    font-size: 12px;
+    color: #949494;
+  }
+}
+
+.note_text-item {
+  width: 215px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mouse {
+  width: 30px;
+  height: 30px;
+  background: url(/assets/images/calendar/mouse.svg) no-repeat left center;
+  background-size: cover;
+}
+
+.text_color--free {
+  width: 15px;
+  height: 15px;
+  background-color: #66ff00;
+}
+
+.text_color--busy {
+  width: 15px;
+  height: 15px;
+  background-color: #ff0000;
+}
+
+.page_container {
+  margin-top: 20px;
 }
 
 .calendar-wrapp {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
   padding: 20px;
   background: #fff;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
 }
 
-.calendar_week-btns {
-  width: 80%;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-.time-line {
-  width: 81%;
-  display: grid;
-  grid-template-columns: repeat(25, 1fr);
-  font-size: 10px;
-  color: #949494;
-}
-
-.time-line_item {
-  justify-self: center;
-}
-
-.calendar_table {
+app-time-line {
   width: 100%;
   display: flex;
-  color: #0082ca;
-  border: 1px solid #949494;
-  border-bottom: none;
+  justify-content: flex-end;
 }
-
-.calendar_interviewers {
-  padding: 3px 10px;
-  width: 15%;
-  font-weight: 600;
-  border-bottom: 1px solid #949494;
-}
-
-.calendar_weekdays {
-  width: 4%;
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  font-weight: 500;
-  border-left: 1px solid #949494;
-  border-bottom: 1px solid #949494;
-}
-
-.calendar_weekday {
-  align-self: center;
-  justify-self: center;
-}
-
-.calendar_time-grid {
-  width: 81%;
-  display: grid;
-  grid-template-columns: repeat(25, 1fr);
-}
-
-.time-grid_item {
-  padding: 5px;
-  height: 30px;
-  border-left: 1px solid #949494;
-  border-bottom: 1px solid #949494;
-  transition: 0.3s;
-}
-
-.time-grid_item--free {
-  background: url(/assets/images/calendar/calendar-can.svg) no-repeat center
-    center;
-  background-size: 80%;
-}
-
-.time-grid_item--busy {
-  background: url(/assets/images/calendar/calendar-not.svg) no-repeat center
-    center;
-  background-size: 80%;
-}
-
-.time-grid_item--assigned {
-  background: url(/assets/images/calendar/calendar-assign.svg) no-repeat center
-    center;
-  background-size: 80%;
-}
-
-// free: '#DCE9D5',
-// busy: '#999999',
-// assigned: '#76CC48',

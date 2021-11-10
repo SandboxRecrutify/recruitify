@@ -59,11 +59,23 @@ import { PrimarySkillInputComponent } from './components/create-project/primary-
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
+import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
 import { CandidatesTableComponent } from './pages/candidates-page/candidates-table/candidates-table.component';
 import { ProjectFiltersComponent } from './pages/projects-page/project-filters/project-filters.component';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { TableForInterviewersComponent } from './pages/calendar-page/table-for-interviewers/table-for-interviewers.component';
+import { TimeLineComponent } from './pages/calendar-page/time-line/time-line.component';
+import { CalendarItemDirective } from './directives/calendar-item.directive';
+import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time-grid-item.component';
+import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
+import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
+import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
+import { CalendarWeekdayDirective } from './directives/calendar-weekday.directive';
+import { CandidateService } from './services/candidate.service';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
 @NgModule({
   declarations: [
     SharedComponent,
@@ -83,10 +95,20 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     FilterDrawerComponent,
     DropdownMenuComponent,
     InternshipsComponent,
+    EnumToArrayPipe,
     CandidatesTableComponent,
     ProjectFiltersComponent,
+    TableForInterviewersComponent,
+    TimeLineComponent,
+    CalendarItemDirective,
+    TimeGridItemComponent,
+    TableForStaffComponent,
+    TimeGridRowComponent,
+    CandidatesGridComponent,
+    CalendarWeekdayDirective,
   ],
   imports: [
+    NzBreadCrumbModule,
     CommonModule,
     SharedRoutingModule,
     FormsModule,
@@ -108,6 +130,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzDropDownModule,
     NzResultModule,
     BrowserAnimationsModule,
+    NzRadioModule,
     NzDrawerModule,
     NzCollapseModule,
     NzTabsModule,
@@ -118,7 +141,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzDividerModule,
     NzRadioModule,
   ],
-  exports: [RatingStarsComponent],
+  exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
     CandidatesService,
     ProfilePageComponent,
@@ -128,6 +151,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     ProjectsService,
     ProjectsPageFacade,
     UserService,
+    CandidateService,
   ],
 })
 export class SharedModule {}

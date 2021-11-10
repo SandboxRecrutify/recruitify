@@ -19,7 +19,12 @@
       >
         Primary skill
       </th>
-      <th nzSortOrder="null">Status</th>
+      <th
+        [nzSortFn]="sortAlphabetically"
+        [nzSortDirections]="['ascend', 'descend', null]"
+      >
+        Status
+      </th>
       <th nzWidth="90px" nzSortOrder="null">Test</th>
       <th nzSortOrder="null">Recruter</th>
       <th nzSortOrder="null">Interview 1</th>

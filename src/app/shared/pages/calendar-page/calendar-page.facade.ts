@@ -1,11 +1,9 @@
+import { UserService } from './../../services/user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CalendarPageFacade {
   itemStatuses = ['free', 'busy', 'assigned'];
-
-  days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-
   time = [
     '09:00',
     '09:30',
@@ -27,12 +25,32 @@ export class CalendarPageFacade {
     '17:30',
     '18:00',
     '18:30',
-    '19:00',
-    '19:30',
-    '20:00',
-    '20:30',
-    '21:00',
+  ];
+  today = new Date();
+
+  candidatesContactTime = [
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
   ];
 
   constructor() {}
+
+  getWeekDays() {
+    let datesArr = [this.today];
+    for (let i = 1; i <= 6; i++) {
+      let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
+      datesArr.push(nextDay);
+    }
+    return datesArr;
+  }
 }

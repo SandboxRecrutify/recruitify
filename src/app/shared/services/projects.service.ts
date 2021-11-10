@@ -8,11 +8,13 @@ import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 
 const API_PATH = '/Projects';
+import { flatMap } from 'rxjs/internal/operators';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectsService extends ApiService {
   constructor(http: HttpClient) {
-    super(http, API_PATH, ProjectsService.name);
+    super(http, API_PATH, ProjectsService.name, true);
   }
 
   getProjects(): Observable<Project[]> {
@@ -23,10 +25,7 @@ export class ProjectsService extends ApiService {
   // } }).pipe(map((d: any) => d.value));
   }
 
-  getProjectById(projectId: string): Observable<Project> {
-    return super.get({ id: '' });
-  }
-  //get create project modal data
+    //get create project modal data
   getCreateProjectData(): Observable<CreateProject> {
     return super.get<CreateProject>({ mock: '/createProject.json' });
   }
@@ -34,4 +33,11 @@ export class ProjectsService extends ApiService {
   getPrimarySkills(): Observable<PrimarySkill[]> {
     return super.get<PrimarySkill[]>({ endpoint: '/primary_skills' });
   }
+
+  getProjectById(projectId:string): Observable<Project> {
+    return super.get<Project[]>({mock: '/projects.json'})
+    .pipe(flatMap(projects => projects),
+    filter(project=>project.id===projectId))
+  }
+
 }

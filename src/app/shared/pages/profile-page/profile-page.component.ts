@@ -1,9 +1,9 @@
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { paths } from './../../../app-routing.constants';
 import { Candidate } from './../../models/Candidate';
 import { ProfilePageFacade } from './profile-page.facade';
-import { paths } from './../../../app-routing.constants';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,35 +23,36 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ],
 })
 export class ProfilePageComponent implements OnInit {
-  candidate: any = {};
+  candidate: Candidate | undefined = undefined;
+  tabs = ['Recruiters', 'Mentors', 'Interviewers'];
 
   constructor(
     private profilePageFacade: ProfilePageFacade,
-    private toCandidatesPage: Router,
-    private router: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  tabNames = ['Recruiters', 'Mentors', 'Interviewers'];
-  tabs = [1, 2, 3];
-
   goToCandidatesList() {
-    this.toCandidatesPage.navigate([paths.candidates]);
+    this.router.navigate([paths.candidates]);
   }
 
   ngOnInit(): void {
-    this.profilePageFacade.candidatesList$.subscribe((response: any) => {
-      this.router.params.subscribe((params) => {
-        this.candidate = response.find((item: any) => item.id === params.id);
-      });
+    this.route.params.subscribe((params) => {
+      this.profilePageFacade
+        .getCandiateById$(params.id)
+        .subscribe((candidate) => {
+          this.candidate = candidate;
+        });
     });
   }
-  printCandidatePrimarySkills(candidate: Candidate) {
-    return candidate.primarySkills
+
+  printCandidatePrimarySkills(candidate?: Candidate) {
+    return candidate?.primarySkills
       .map((skill) => skill.primarySkillName)
       .join(' | ');
   }
 
-  log(candidate: Candidate) {
+  log(candidate?: Candidate) {
     console.log(candidate);
   }
 }

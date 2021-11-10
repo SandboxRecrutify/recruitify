@@ -1,0 +1,6 @@
+<div class="candidates_grid">
+  <div class="candidates_item" *ngFor="let candidate of candidates">
+    {{ candidate.name }} {{ candidate.surname }} |
+    {{ candidate.time.join(", ") }}
+  </div>
+</div>

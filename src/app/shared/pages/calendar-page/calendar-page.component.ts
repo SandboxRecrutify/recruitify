@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { CalendarPageFacade } from './calendar-page.facade';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
@@ -7,24 +8,11 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
   styleUrls: ['./calendar-page.component.scss'],
 })
 export class CalendarPageComponent implements OnInit {
-  itemStatuses = this.calendarPageFacade.itemStatuses;
-  days = this.calendarPageFacade.days;
-  time = this.calendarPageFacade.time;
+  constructor(private userService: UserService) {}
 
-  constructor(
-    private el: ElementRef,
-    private render: Renderer2,
-    private calendarPageFacade: CalendarPageFacade
-  ) {}
-
-  setItemBusy(event: any) {
-    this.render.addClass(event.target, 'time-grid_item--busy');
-  }
-
-  setItemFree(event: any) {
-    event.preventDefault();
-    this.render.removeClass(event.target, 'time-grid_item--busy');
-  }
+  isInterviewer = this.userService.isInterviewer();
+  isManagerOrRecruiter =
+    this.userService.isRecruiter() || this.userService.isManager();
 
   ngOnInit(): void {}
 }

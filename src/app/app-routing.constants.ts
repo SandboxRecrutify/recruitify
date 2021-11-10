@@ -11,4 +11,5 @@ export const paths = {
   rest: '**',
   slash: '/',
   calendar: 'calendar',
+  fillForm: 'fill-form',
 };
