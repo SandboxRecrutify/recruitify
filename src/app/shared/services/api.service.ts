@@ -47,15 +47,12 @@ interface Filter {
 export abstract class ApiService {
   private readonly serviceName: string;
   private readonly apiPath: string;
-  private readonly isMock: boolean = false;
 
   protected constructor(
     private http: HttpClient,
     apiPath: string,
     serviceName: string = ApiService.name,
-    isMock: boolean = false
   ) {
-    this.isMock = isMock;
     this.apiPath = apiPath;
     this.serviceName = serviceName;
   }

@@ -1,20 +1,19 @@
-import { PrimarySkill } from './../models/Project';
-import { Project } from '../models/Project';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { flatMap } from 'rxjs/internal/operators';
+import { filter, map } from 'rxjs/operators';
 import { CreateProject } from '../models/CreateProject';
+import { Project } from '../models/Project';
+import { PrimarySkill } from './../models/Project';
 import { ApiService } from './api.service';
-import { map } from 'rxjs/operators';
 
 const API_PATH = '/Projects';
-import { flatMap } from 'rxjs/internal/operators';
-import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectsService extends ApiService {
   constructor(http: HttpClient) {
-    super(http, API_PATH, ProjectsService.name, true);
+    super(http, API_PATH, ProjectsService.name);
   }
 
   getProjects(): Observable<Project[]> {
