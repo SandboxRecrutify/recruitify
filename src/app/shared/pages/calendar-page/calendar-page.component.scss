@@ -1,3 +1,42 @@
+.note {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &_text {
+    font-size: 12px;
+    color: #949494;
+  }
+}
+
+.note_text-item {
+  width: 215px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mouse {
+  width: 30px;
+  height: 30px;
+  background: url(/assets/images/calendar/mouse.svg) no-repeat left center;
+  background-size: cover;
+}
+
+.text_color--free {
+  width: 15px;
+  height: 15px;
+  background-color: #66ff00;
+}
+
+.text_color--busy {
+  width: 15px;
+  height: 15px;
+  background-color: #ff0000;
+}
+
 .page_container {
   margin-top: 20px;
 }
