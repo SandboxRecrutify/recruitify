@@ -72,6 +72,9 @@ import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/ta
 import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 import { CalendarWeekdayDirective } from './directives/calendar-weekday.directive';
+import { CandidateService } from './services/candidate.service';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
 @NgModule({
   declarations: [
     SharedComponent,
@@ -103,6 +106,7 @@ import { CalendarWeekdayDirective } from './directives/calendar-weekday.directiv
     CalendarWeekdayDirective,
   ],
   imports: [
+    NzBreadCrumbModule,
     CommonModule,
     SharedRoutingModule,
     FormsModule,
@@ -144,6 +148,7 @@ import { CalendarWeekdayDirective } from './directives/calendar-weekday.directiv
     ProjectsService,
     ProjectsPageFacade,
     UserService,
+    CandidateService,
   ],
 })
 export class SharedModule {}

@@ -1,13 +1,17 @@
+@use "../../../../globals/" as *;
 .profile {
   position: relative;
-  padding: 60px 50px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 30px;
   background: #ffffff;
-  color: #0082ca;
-
+  color: $primaryColor;
+  &_wrapper {
+    max-width: 1200px;
+    margin: 1rem auto;
+  }
   p {
     margin: 0;
   }
@@ -16,18 +20,8 @@
     font-weight: 500;
   }
 
-  .goback-btn {
-    position: absolute;
-    top: 20px;
-    left: 50px;
-    width: 30px;
-    height: 20px;
-    background: url(/assets/images/goBackArrow.svg) no-repeat center center;
-    background-size: cover;
-    cursor: pointer;
-  }
-
   &_info {
+    margin-top: 11px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -60,7 +54,7 @@
       width: 50%;
       position: relative;
       padding: 10px;
-      border: 1px solid #0082ca;
+      border: 1px solid $primaryColor;
 
       &_title {
         position: absolute;
@@ -97,4 +91,12 @@
       }
     }
   }
+}
+
+.goback-btn {
+  width: 24px;
+  height: 1rem;
+  background: url(/assets/images/goBackArrow.svg) no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
 }
