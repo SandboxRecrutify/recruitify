@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Candidate, CandidatesLocation } from './../../models/Candidate';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CandidatesPageFacade } from './candidates-page.facade';
+import { UserService } from './../../services/user.service';
+import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
+import { Candidate } from './../../models/Candidate';
 
 @Component({
   selector: 'app-candidates-page',
@@ -13,55 +14,46 @@ export class CandidatesPageComponent implements OnInit {
   searchValue = '';
   checked = false;
   indeterminate = false;
+  setOfCheckedId = new Set<string>();
   drawerVisible = false;
   menuVisible = true;
-  setOfCheckedId = new Set<number>();
   candidatesList: Candidate[] = [];
-
-  candidateStatuses = this.candidatesPageFacade.statuses;
-  candidateEnglishLvls = this.candidatesPageFacade.englishLvls;
+  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
+  currentProjectName: any;
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
-    private router: Router
+    private projectsPageFacade: ProjectsPageFacade,
+    private router: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.projectsPageFacade.getProjectsList$().subscribe((response) => {
+      let currentProject = response.find(
+        (project) => project.id === this.currentProjectId
+      );
+      this.currentProjectName = currentProject?.name;
+    });
+
+    this.candidatesPageFacade.candidateList$.subscribe((response) => {
+      this.router.params.subscribe((params: Params) => {
+        if (params.id) {
+          this.candidatesList = response.filter((candidate: Candidate) => {
+            let { projectResults } = candidate;
+
+            return projectResults.some(
+              (item) => item.projectId === this.currentProjectId
+            );
+          });
+        } else {
+          this.candidatesList = response;
+        }
+      });
+    });
+  }
 
   openDrawer(): void {
     this.drawerVisible = !this.drawerVisible;
-  }
-
-  sortAlphabetically = (a: Candidate, b: Candidate) =>
-    a.name.localeCompare(b.name);
-
-  // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
-
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
-  }
-
-  onAllChecked(value: boolean): void {
-    this.candidatesList.forEach((item) =>
-      this.updateCheckedSet(item.id, value)
-    );
-    this.refreshCheckedStatus();
-  }
-
-  onItemChecked(id: number, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  refreshCheckedStatus(): void {
-    this.checked = this.candidatesList.every((item) =>
-      this.setOfCheckedId.has(item.id)
-    );
-    this.indeterminate =
-      this.candidatesList.some((item) => this.setOfCheckedId.has(item.id)) &&
-      !this.checked;
   }
 
   searchName() {
@@ -70,11 +62,5 @@ export class CandidatesPageComponent implements OnInit {
         candidate.name.indexOf(this.searchValue) !== -1 ||
         candidate.surname.indexOf(this.searchValue) !== -1
     );
-  }
-
-  ngOnInit(): void {
-    this.candidatesPageFacade.candidateList$.subscribe((response) => {
-      this.candidatesList = response;
-    });
   }
 }

@@ -1,4 +1,5 @@
 export interface Project extends StaffRole {
+  id: string;
   name: string;
   startDate: Date | string;
   endDate: Date | string;
@@ -15,9 +16,10 @@ export interface Staff {
 }
 export interface PrimarySkill {
   id?: string;
+  checked?: boolean;
   name: string;
   description: string;
-  link: string;
+  testLink: string;
 }
 
 export enum ProjectUserRole {

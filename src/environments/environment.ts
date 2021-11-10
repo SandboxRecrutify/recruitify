@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://recruitifyexadel.herokuapp.com/api/'
-  apiUrl: 'http://localhost:4200/',
+  apiUrl: 'https://recruitifyexadel.herokuapp.com',
+  mockApiUrl: 'http://localhost:4200/',
+  CREATE_PROJECT_NAME_LENGTH: 128,
+  CREATE_PROJECT_NAME_DESCRIPTION_LENGTH: 500,
 };
 
 /*

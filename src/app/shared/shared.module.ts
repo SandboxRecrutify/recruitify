@@ -15,6 +15,7 @@ import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
 //services
 import { CandidatesService } from './services/candidates.service';
 import { ProjectsService } from './services/projects.service';
+import { UserService } from './services/user.service';
 
 //components
 import { SharedComponent } from './shared.component';
@@ -54,12 +55,27 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { PrimarySkillInputComponent } from './components/create-project/primary-skill-input/primary-skill-input.component';
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
 import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
+import { CandidatesTableComponent } from './pages/candidates-page/candidates-table/candidates-table.component';
+import { ProjectFiltersComponent } from './pages/projects-page/project-filters/project-filters.component';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { TableForInterviewersComponent } from './pages/calendar-page/table-for-interviewers/table-for-interviewers.component';
+import { TimeLineComponent } from './pages/calendar-page/time-line/time-line.component';
+import { CalendarItemDirective } from './directives/calendar-item.directive';
+import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time-grid-item.component';
+import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
+import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
+import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
+import { CandidateService } from './services/candidate.service';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -81,8 +97,18 @@ import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
     DropdownMenuComponent,
     InternshipsComponent,
     EnumToArrayPipe,
+    CandidatesTableComponent,
+    ProjectFiltersComponent,
+    TableForInterviewersComponent,
+    TimeLineComponent,
+    CalendarItemDirective,
+    TimeGridItemComponent,
+    TableForStaffComponent,
+    TimeGridRowComponent,
+    CandidatesGridComponent,
   ],
   imports: [
+    NzBreadCrumbModule,
     CommonModule,
     SharedRoutingModule,
     FormsModule,
@@ -94,6 +120,7 @@ import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
     NzTableModule,
     NzGridModule,
     NzInputModule,
+    NzCheckboxModule,
     NzModalModule,
     NzFormModule,
     NzSelectModule,
@@ -109,7 +136,10 @@ import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
     NzTabsModule,
     NzPopoverModule,
     NzSpaceModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NzTypographyModule,
+    NzDividerModule,
+    NzRadioModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
@@ -120,6 +150,8 @@ import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
     ProfilePageFacade,
     ProjectsService,
     ProjectsPageFacade,
+    UserService,
+    CandidateService,
   ],
 })
 export class SharedModule {}

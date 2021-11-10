@@ -1,11 +1,20 @@
-<div class="projects-list">
+<div>
   <nz-empty
     nzNotFoundImage="assets/images/no_data.svg"
     nzNotFoundContent="No matches"
-    *ngIf="(projects | search: searchText).length === 0"
+    *ngIf="projects.length === 0"
   ></nz-empty>
-  <app-project
-    *ngFor="let iterCard of projects | search: searchText | filter: status"
-    [card]="iterCard"
-  ></app-project>
+  <div nz-row [nzGutter]="[16, 16]">
+    <div
+      *ngFor="let iterCard of projects"
+      nz-col
+      nzSpan="12"
+      nzMd="24"
+      nzSm="24"
+      nzXs="24"
+      nzLg="12"
+    >
+      <app-project [card]="iterCard"></app-project>
+    </div>
+  </div>
 </div>

@@ -27,11 +27,21 @@ export class CalendarPageFacade {
     '17:30',
     '18:00',
     '18:30',
-    '19:00',
-    '19:30',
-    '20:00',
-    '20:30',
-    '21:00',
+  ];
+
+  candidatesContactTime = [
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
+    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
   ];
 
   constructor() {}

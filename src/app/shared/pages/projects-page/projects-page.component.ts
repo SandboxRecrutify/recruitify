@@ -9,26 +9,11 @@ import { ProjectsPageFacade } from './projects-page.facade';
   styleUrls: ['./projects-page.component.scss'],
 })
 export class ProjectsPageComponent implements OnInit {
+  isFiltersVisible: boolean = false;
   searchText: string = '';
-  isVisible = false;
+
   projects: Project[] = [];
   projects$: Observable<Project[]>;
-
-  filter: boolean = false;
-  status: string = '';
-
-  listOfOption: string[] = [
-    '.Net',
-    'QA',
-    'JavaScript',
-    'AutomationQA',
-    'DevOps',
-    'Java',
-    'PHP',
-    'ProjectManager',
-    'BusinessAnalyst',
-  ];
-  listOfSelectedValue = [];
 
   constructor(private projectsPageFacade: ProjectsPageFacade) {
     this.projects$ = this.projectsPageFacade.getProjectsList$();
@@ -38,12 +23,11 @@ export class ProjectsPageComponent implements OnInit {
     this.projects$.subscribe((response) => (this.projects = response));
   }
 
-  switchFilter() {
-    this.filter = !this.filter;
+  toggleFiltersVisible(isVisible: boolean) {
+    this.isFiltersVisible = isVisible;
   }
 
   handleToggle(isVisible: boolean): void {
-    this.isVisible = isVisible;
+    this.projectsPageFacade.toggleCreateProjectDrawer$.next(isVisible);
   }
-
 }

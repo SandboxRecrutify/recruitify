@@ -1,14 +1,14 @@
 <nz-collapse style="margin-bottom: 0.5rem">
   <nz-collapse-panel
     [nzHeader]="header"
-    [nzActive]="isActive"
+    [nzActive]="isInitiallyActive"
     [nzExtra]="extra"
   >
     <ng-template #header>
-      <span [ngClass]="{ errorText: !form.valid && isAllDirty }">
+      <span [ngClass]="{ errorText: !form.valid }">
         {{ index + 1 + ". " }}
-        {{ primarySkill.name + " " }}
-        {{ !form.valid && isAllDirty ? "(invalid)" : "" }}
+        {{ form.value.name + " " }}
+        {{ form.invalid ? "(invalid)" : "" }}
       </span>
     </ng-template>
     <ng-template #extra>
@@ -17,23 +17,13 @@
       </button>
     </ng-template>
     <form [formGroup]="form" nz-form nzLayout="vertical" nz-row [nzGutter]="16">
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzSpan]="24">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="name"
-            >Primary skill name</nz-form-label
-          >
-          <nz-form-control nzErrorTip="Please enter primary skills's name">
-            <input nz-input formControlName="name" id="name" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label nzRequired nzFor="link"
+          <nz-form-label nzRequired nzFor="testLink"
             >Link to test task</nz-form-label
           >
           <nz-form-control nzErrorTip="Please enter link to the test task">
-            <input nz-input formControlName="link" id="link" />
+            <input nz-input formControlName="testLink" id="testLink" />
           </nz-form-control>
         </nz-form-item>
       </div>

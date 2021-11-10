@@ -1,10 +1,9 @@
-<div class="menu">
-  <div class="menu_email">
-    <button nz-button nzType="primary">Send E-mail</button>
+<div class="menu" *ngIf="isRecruiter || isManager">
+  <div class="menu_email" *ngIf="isRecruiter">
     <button nz-button nzType="primary">Send test task</button>
   </div>
 
-  <div class="menu_test">
+  <div class="menu_test" *ngIf="isRecruiter">
     <button nz-button nzType="primary">Set test result</button>
     <input nz-input class="menu_test-input" />
   </div>
@@ -14,21 +13,51 @@
       class="menu_status-select"
       id="status"
       nzPlaceHolder="Set status"
+      *ngIf="isRecruiter; else selectForManager"
     >
-      <nz-option nzValue="Accept" nzLabel="Accept"></nz-option>
-      <nz-option nzValue="Decline" nzLabel="Decline"></nz-option>
+      <nz-option
+        *ngFor="let status of candidateStatuses"
+        nzValue="{{ status }}"
+        nzLabel="{{ status }}"
+      ></nz-option>
     </nz-select>
 
-    <nz-select
-      class="menu_status-select"
-      id="reason"
-      nzPlaceHolder="Set reason"
-    >
-      <nz-option nzValue="Some" nzLabel="Some"></nz-option>
-      <nz-option nzValue="Reasons" nzLabel="Reasons"></nz-option>
-    </nz-select>
+    <ng-template #selectForManager>
+      <nz-select
+        class="menu_status-select"
+        id="status"
+        nzPlaceHolder="Set status"
+        *ngIf="isManager"
+        [(ngModel)]="selectedStatus"
+        (ngModelChange)="setReasonSelectVisibility($event)"
+      >
+        <nz-option
+          *ngFor="let status of candidateStatusesForManager"
+          nzValue="{{ status }}"
+          nzLabel="{{ status }}"
+        ></nz-option>
+      </nz-select>
+      <nz-select
+        class="menu_status-select"
+        id="reason"
+        nzPlaceHolder="Set reason"
+        *ngIf="isManager && isReasonSelectVisible"
+        [(ngModel)]="selectedReason"
+      >
+        <nz-option
+          *ngFor="let reason of declineReasons"
+          nzValue="{{ reason }}"
+          nzLabel="{{ reason }}"
+        ></nz-option>
+      </nz-select>
+    </ng-template>
 
-    <button nz-button class="menu_status-btn" nzType="primary">
+    <button
+      nz-button
+      class="menu_status-btn"
+      nzType="primary"
+      (click)="submitStatus()"
+    >
       Submit status
     </button>
   </div>

@@ -1,3 +1,5 @@
+import { UserService } from './../../../services/user.service';
+import { Candidate } from './../../../models/Candidate';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,16 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FilterDrawerComponent implements OnInit {
   @Input() drawerVisible: any;
+  @Input() candidatesList!: Candidate[];
 
-  constructor() {}
+  isAdmin = this.userService.isAdmin();
 
-  // openDrawer(): void {
-  //   this.drawerVisible = !this.drawerVisible;
-  // }
+  listOfOption = [
+    { label: '123', value: '123' },
+    { label: '123', value: '123' },
+  ];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {}
 
   closeDrawer(): void {
     this.drawerVisible = !this.drawerVisible;
   }
-
-  ngOnInit(): void {}
 }

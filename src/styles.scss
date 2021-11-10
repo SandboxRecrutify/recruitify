@@ -12,9 +12,9 @@ body {
 .page_container {
   max-width: 1200px;
   margin: 60px auto;
+  padding: 0 1rem;
 }
 // for red error texts
 .errorText {
   color: $dangerColor;
 }
-

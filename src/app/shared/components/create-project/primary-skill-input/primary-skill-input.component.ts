@@ -6,9 +6,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { PrimarySkill } from 'src/app/shared/models/Project';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-primary-skill-input',
@@ -17,26 +17,16 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
 })
 export class PrimarySkillInputComponent implements OnInit, OnDestroy {
   @Input()
-  primarySkill!: PrimarySkill;
+  form!: FormGroup;
   @Input()
   index!: number;
-  @Input()
-  primarySkillsValidity$!: Subject<boolean>;
 
   @Output()
   onPrimarySkillRemove = new EventEmitter<number>();
 
-  @Output()
-  onPrimarySkillChange = new EventEmitter<PrimarySkill>();
-
-  isAllDirty = false;
-  form!: FormGroup;
-  isActive = true;
-
-  private primarySkillsValiditySubscription!: Subscription;
-  private formChangesSubscription!: Subscription;
-
-  constructor(private fb: FormBuilder) {}
+  isInitiallyActive: boolean = true;
+  private subscriptions: Subscription[] = [];
+  constructor(private route: ActivatedRoute) {}
 
   remove($event: MouseEvent) {
     $event.stopPropagation();
@@ -44,56 +34,13 @@ export class PrimarySkillInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // subscribe to Project create button click
-    // and check validity of all primary skills
-    this.primarySkillsValiditySubscription =
-      this.primarySkillsValidity$.subscribe((validity) => {
-        if (!validity) {
-          for (const i in this.form.controls) {
-            if (this.form.controls.hasOwnProperty(i)) {
-              this.form.controls[i].markAsDirty();
-              this.form.controls[i].updateValueAndValidity();
-            }
-          }
-        }
-      });
-    //init form
-    this.form = this.fb.group({
-      name: [
-        this.primarySkill.name,
-        [Validators.required, Validators.maxLength(100)],
-      ],
-      link: [
-        this.primarySkill.link,
-        [Validators.required, Validators.maxLength(100)],
-      ],
-      description: [
-        this.primarySkill.description,
-        [Validators.required, Validators.maxLength(100)],
-      ],
-    });
-
-    this.formChangesSubscription = this.form.valueChanges.subscribe(
-      (values: PrimarySkill) => {
-        //pass data to parent component
-        this.onPrimarySkillChange.emit(values);
-        // check if all fields are dirty
-        let dirtyControlCount = 0;
-        for (const i in this.form.controls) {
-          if (
-            this.form.controls.hasOwnProperty(i) &&
-            this.form.controls[i].dirty
-          ) {
-            dirtyControlCount++;
-          }
-        }
-        this.isAllDirty = dirtyControlCount === 3 ? true : false;
-      }
+    this.subscriptions.push(
+      this.route.queryParams.subscribe((params) => {
+        this.isInitiallyActive = !params.editingId;
+      })
     );
   }
-
   ngOnDestroy(): void {
-    this.primarySkillsValiditySubscription.unsubscribe();
-    this.formChangesSubscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

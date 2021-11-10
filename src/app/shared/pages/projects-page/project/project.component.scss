@@ -1,6 +1,6 @@
 .project-card {
-  min-width: 590px;
-  color: #0082CA;
+  min-width: 400px;
+  color: #0082ca;
   font-weight: 400;
   // box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
   // transition: all 0.2s ease-in-out;
@@ -18,10 +18,11 @@
     margin-bottom: 50%;
     display: flex;
     align-self: center;
+    transition: 0.3s;
     &:hover {
       transform: scale(1.1);
-      filter: brightness(150%)
-  }
+      filter: brightness(150%);
+    }
   }
   .project-buttons {
     display: flex;
@@ -36,9 +37,8 @@
 }
 
 .card-title {
-  color: #0082CA;
+  color: #0082ca;
   font-weight: 700;
   font-size: 1.2rem;
   margin: 0;
 }
-

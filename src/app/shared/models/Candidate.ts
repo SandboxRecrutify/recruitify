@@ -1,49 +1,26 @@
+import { CandidateProjectResults } from './CandidateProjectResults';
+import { CandidateLocation } from './CandidateLocation';
+import { CandidateContact } from './CandidateContact';
+import { PrimarySkill } from './PrimarySkill';
+
 export interface Candidate {
+  id: string;
   name: string;
   surname: string;
-  englishLevel: number;
+  englishLevel: string;
   phoneNumber: string;
   email: string;
-  contacts: CandidateContacts;
-  location: CandidatesLocation;
-  primarySkills: PrimarySkills[];
-  registrationDate: Date | string;
   bestTimeToConnect: number[];
-  goingToExadel: boolean;
-  projectResults: CandidatesProjectResults[];
   currentJob: string;
-  certificates: string;
-  additionalQuestions: string;
-  additionalInfo: string;
-  id: number;
-}
-
-export interface PrimarySkills {
-  primarySkillId: string;
-  primarySkillName: string;
-}
-
-export interface CandidateContacts {
-  type: string;
-  value: string;
-}
-
-export interface CandidatesLocation {
-  city: string;
-  country: string;
-}
-
-export interface CandidatesProjectResults {
-  feedbacks: CandidatesFeedback[];
-  projectId: string;
-  status: number;
-}
-
-export interface CandidatesFeedback {
-  textFeedback: string;
-  rating: number;
-  userId: string;
-  type: number;
-  isRecommended: boolean;
-  createdOn: Date | string;
+  goingToExadel: boolean;
+  contacts: CandidateContact[];
+  location: CandidateLocation;
+  primarySkills: PrimarySkill[];
+  registrationDate: Date | string;
+  projectResults: CandidateProjectResults[];
+  certificates?: string;
+  additionalQuestions?: string;
+  additionalInfo?: string;
+  testResult?: string;
+  language?: string;
 }

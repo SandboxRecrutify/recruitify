@@ -1,13 +1,12 @@
-import { map } from 'rxjs/operators';
-import { CandidatesService } from './../../services/candidates.service';
-import { Injectable, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Candidate } from '../../models/Candidate';
+import { CandidateService } from '../../services/candidate.service';
 
 @Injectable()
-
 export class ProfilePageFacade {
-
-  candidatesList$ = this.candidatesService.getCandidates()
-
-  constructor(private candidatesService: CandidatesService, private router: ActivatedRoute) {}
+  constructor(private candidateService: CandidateService) {}
+  getCandiateById$(id: string): Observable<Candidate> {
+    return this.candidateService.getCandiateById(id);
+  }
 }

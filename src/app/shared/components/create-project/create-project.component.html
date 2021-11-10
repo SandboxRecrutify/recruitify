@@ -42,25 +42,40 @@
           style="margin-bottom: 0.5rem"
         >
           <span>Primary Skills</span>
-          <button (click)="onPrimarySkillAdd()" nz-button>
+          <button
+            nz-popover
+            nzPopoverTitle="Choose primary skill"
+            nzPopoverTrigger="click"
+            [nzPopoverContent]="contentTemplate"
+            nz-button
+          >
             <i nz-icon nzType="plus" nzTheme="outline"></i>
           </button>
+          <ng-template #contentTemplate>
+            <div *ngFor="let primarySkill of data?.primarySkills">
+              <label
+                [(ngModel)]="primarySkill.checked"
+                (ngModelChange)="onPrimarySkillToggle($event, primarySkill)"
+                [ngModelOptions]="{ standalone: true }"
+                nz-checkbox
+                [nzValue]="primarySkill.id"
+                >{{ primarySkill.name }}</label
+              >
+            </div>
+          </ng-template>
         </div>
         <app-primary-skill-input
-          *ngFor="let primarySkill of primarySkills; index as index"
-          [primarySkill]="primarySkill"
+          *ngFor="let item of primarySkills | keyvalue; index as index"
           [index]="index"
-          (onPrimarySkillRemove)="onPrimarySkillRemove(index)"
-          (onPrimarySkillChange)="onPrimarySkillChange($event, index)"
-          [primarySkillsValidity$]="primarySkillsValidity$"
+          [form]="item.value"
+          (onPrimarySkillRemove)="onPrimarySkillRemove(item.key)"
         ></app-primary-skill-input>
         <div
           class="errorText"
-          *ngIf="isPrimarySkillsTouched && primarySkills.length === 0"
+          *ngIf="isPrimarySkillsTouched && primarySkills.size === 0"
         >
           Please add at least one primary skill
         </div>
-        <!-- (onRemovePrimarySkill)="" -->
       </div>
 
       <!-- managers -->
@@ -184,7 +199,7 @@
       <!-- candidates' max count -->
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="plannedCandidatesCount"
+          <nz-form-label nzRequired nzFor="plannedApplicationsCount"
             >Max. candidates count
           </nz-form-label>
           <nz-form-control
@@ -193,8 +208,8 @@
             <input
               type="number"
               nz-input
-              formControlName="plannedCandidatesCount"
-              id="plannedCandidatesCount"
+              formControlName="plannedApplicationsCount"
+              id="plannedApplicationsCount"
             />
           </nz-form-control>
         </nz-form-item>
@@ -223,7 +238,7 @@
         </nz-form-item>
       </div>
       <button nz-button nzType="primary" nzBlock (click)="submitForm()">
-        Create
+        {{ editingId ? "Save" : "Create" }}
       </button>
     </form>
   </ng-container>
