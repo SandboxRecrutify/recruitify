@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedRoutingModule } from './shared-routing.module';
 
+
 //facades
 import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
@@ -41,6 +42,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -59,6 +61,7 @@ import { PrimarySkillInputComponent } from './components/create-project/primary-
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
+import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
 import { CandidatesTableComponent } from './pages/candidates-page/candidates-table/candidates-table.component';
 import { ProjectFiltersComponent } from './pages/projects-page/project-filters/project-filters.component';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -73,6 +76,7 @@ import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-g
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
 @NgModule({
   declarations: [
     SharedComponent,
@@ -92,6 +96,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     FilterDrawerComponent,
     DropdownMenuComponent,
     InternshipsComponent,
+    EnumToArrayPipe,
     CandidatesTableComponent,
     ProjectFiltersComponent,
     TableForInterviewersComponent,
@@ -125,6 +130,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzDropDownModule,
     NzResultModule,
     BrowserAnimationsModule,
+    NzRadioModule,
     NzDrawerModule,
     NzCollapseModule,
     NzTabsModule,
@@ -135,7 +141,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzDividerModule,
     NzRadioModule,
   ],
-  exports: [RatingStarsComponent],
+  exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
     CandidatesService,
     ProfilePageComponent,
