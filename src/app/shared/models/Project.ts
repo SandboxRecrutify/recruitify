@@ -1,5 +1,4 @@
 export interface Project extends StaffRole {
-  id: string;
   name: string;
   startDate: Date | string;
   endDate: Date | string;
