@@ -64,6 +64,13 @@ import { ProjectFiltersComponent } from './pages/projects-page/project-filters/p
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { TableForInterviewersComponent } from './pages/calendar-page/table-for-interviewers/table-for-interviewers.component';
+import { TimeLineComponent } from './pages/calendar-page/time-line/time-line.component';
+import { CalendarItemDirective } from './directives/calendar-item.directive';
+import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time-grid-item.component';
+import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
+import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
+import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 @NgModule({
   declarations: [
     SharedComponent,
@@ -85,6 +92,13 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     InternshipsComponent,
     CandidatesTableComponent,
     ProjectFiltersComponent,
+    TableForInterviewersComponent,
+    TimeLineComponent,
+    CalendarItemDirective,
+    TimeGridItemComponent,
+    TableForStaffComponent,
+    TimeGridRowComponent,
+    CandidatesGridComponent,
   ],
   imports: [
     CommonModule,

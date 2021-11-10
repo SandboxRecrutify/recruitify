@@ -30,6 +30,21 @@
     background: rgba(133, 136, 136, 0.75);
     color: #ffffff;
 
+    &_info--reg {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        text-align: right;
+      }
+    }
+
+    &_heading {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
     &_title {
       font-size: 18px;
       font-weight: 600;

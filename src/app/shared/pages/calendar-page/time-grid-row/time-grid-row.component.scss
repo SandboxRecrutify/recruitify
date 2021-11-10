@@ -1,0 +1,7 @@
+.calendar_time-grid-line {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-gap: 1px;
+}

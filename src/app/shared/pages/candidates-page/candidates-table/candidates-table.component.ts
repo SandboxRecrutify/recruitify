@@ -72,5 +72,7 @@ export class CandidatesTableComponent implements OnInit {
 
   sortAlphabetically = (a: Candidate, b: Candidate) =>
     a.name.localeCompare(b.name);
-  // sortNumber = (arr: any) => arr.sort((a, b) => (a.age > b.age ? 1 : -1));
+
+  // sortNumber = (arr: any) =>
+  //   arr.sort((a, b) => (a.testResult > b.testResult ? 1 : -1));
 }

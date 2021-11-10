@@ -1,0 +1,11 @@
+<div class="calendar_table">
+  <div class="calendar_interviewers">Aleksey Yanul</div>
+  <div class="calendar_weekdays">
+    <div class="calendar_weekday" *ngFor="let day of days">{{ day }}</div>
+  </div>
+  <div class="calendar_time-grid" appCalendarItem>
+    <app-time-grid-row *ngFor="let day of days"></app-time-grid-row>
+  </div>
+</div>
+
+<!-- <div>{{ date | date: "cc" }}</div> -->
