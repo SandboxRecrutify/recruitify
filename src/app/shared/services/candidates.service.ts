@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
-const CANDIDATE_API = '/odata/Candidates';
+const CANDIDATE_API = '/Candidates';
 @Injectable()
 export class CandidatesService extends ApiService {
   constructor(private httpClient: HttpClient) {
-    super(httpClient, CANDIDATE_API, CandidatesService.name, false);
+    super(httpClient, CANDIDATE_API, CandidatesService.name);
   }
 
   getCandidates(): Observable<Candidate[]> {
-    return super.get().pipe(map((d: any) => d.value));
+    return super.get({odata: {}}).pipe(map((d: any) => d.value));
   }
 }
