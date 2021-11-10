@@ -71,6 +71,8 @@ import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time
 import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
 import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
+import { CandidateService } from './services/candidate.service';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 @NgModule({
   declarations: [
     SharedComponent,
@@ -101,6 +103,7 @@ import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/c
     CandidatesGridComponent,
   ],
   imports: [
+    NzBreadCrumbModule,
     CommonModule,
     SharedRoutingModule,
     FormsModule,
@@ -142,6 +145,7 @@ import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/c
     ProjectsService,
     ProjectsPageFacade,
     UserService,
+    CandidateService,
   ],
 })
 export class SharedModule {}
