@@ -1,5 +1,23 @@
 <div class="page_container calendar-wrapp" style="height: 82vh">
+  <div class="note">
+    <div class="mouse"></div>
+    <div class="note_text">
+      <div class="note_text-item">
+        LMB - if you are free at this time
+        <div class="text_color--free"></div>
+      </div>
+      <div class="note_text-item">
+        RMB - switch back to busy
+        <div class="text_color--busy"></div>
+      </div>
+    </div>
+  </div>
+
   <app-time-line></app-time-line>
-  <!-- <app-table-for-interviewers></app-table-for-interviewers> -->
-  <app-table-for-staff></app-table-for-staff>
+  <app-table-for-interviewers></app-table-for-interviewers>
+
+  <!--
+  <app-table-for-interviewers *ngIf="isInterviewer"></app-table-for-interviewers>
+  <app-table-for-staff *ngIf="isManagerOrRecruiter"></app-table-for-staff>
+  -->
 </div>

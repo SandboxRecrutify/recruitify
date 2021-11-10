@@ -1,5 +1,5 @@
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table-for-interviewers',
@@ -7,14 +7,10 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
   styleUrls: ['./table-for-interviewers.component.scss'],
 })
 export class TableForInterviewersComponent implements OnInit {
-  days = this.calendarPageFacade.days;
   time = this.calendarPageFacade.time;
+  weekDays = this.calendarPageFacade.getWeekDays();
 
-  constructor(
-    private el: ElementRef,
-    private render: Renderer2,
-    private calendarPageFacade: CalendarPageFacade
-  ) {}
+  constructor(private calendarPageFacade: CalendarPageFacade) {}
 
   ngOnInit(): void {}
 }
