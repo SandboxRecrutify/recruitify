@@ -14,7 +14,8 @@ export class MainLayoutFacade {
         this.isHeaderVisible =
           event.url !== `/${paths.login}` &&
           event.url !== `/${paths.start}` &&
-          event.url !== `/${paths.internships}`;
+          event.url !== `/${paths.internships}` &&
+          event.url !== `/${paths.fillForm}`;
       });
   }
 }

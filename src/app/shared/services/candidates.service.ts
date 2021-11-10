@@ -9,7 +9,7 @@ const CANDIDATE_API = '/odata/Candidates';
 @Injectable()
 export class CandidatesService extends ApiService {
   constructor(private httpClient: HttpClient) {
-    super(httpClient, CANDIDATE_API, CandidatesService.name, true);
+    super(httpClient, CANDIDATE_API, CandidatesService.name, false);
   }
 
   getCandidates(): Observable<Candidate[]> {
