@@ -21,12 +21,12 @@ interface queryParams {
   mock?: string;
 }
 
-interface OData {
+export interface OData {
   top?: number;
   skip?: number;
   count?: boolean;
   orderby?: any; // || OrderBy
-  filter?: Filter[] | Rule[];
+  filter?: any //Filter[] | Rule[];
 }
 interface OrderBy {
   names: string[];
@@ -109,10 +109,18 @@ export abstract class ApiService {
       url += params.mock;
     } else if (params.odata) {
       url = '?$count=true';
-      // url += this.buildOData('top', params.odata.top)
-      // url += this.buildOData('skip', params.odata.skip);
-      url += this.buildOData('orderby', params.odata.orderby); //+ params.odata.orderby.names.join(',') + ' ' + params.odata.orderby.order
-      // url += this.buildOData('filter', params.odata.filter);
+      if(params.odata.top) {
+         url += this.buildOData('top', params.odata.top)
+      }
+      if(params.odata.skip) {
+          url += this.buildOData('skip', params.odata.skip);
+      }
+      if (params.odata.orderby) {
+        url += this.buildOData('orderby', params.odata.orderby); //+ params.odata.orderby.names.join(',') + ' ' + params.odata.orderby.order
+      }
+      if (params.odata.filter) {
+        url += this.buildOData('filter', params.odata.filter);
+      }
     } else {
       url += params.id || params.endpoint
     }
