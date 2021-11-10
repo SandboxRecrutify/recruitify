@@ -59,7 +59,7 @@ import { PrimarySkillInputComponent } from './components/create-project/primary-
 import { FilterDrawerComponent } from './pages/candidates-page/filter-drawer/filter-drawer.component';
 import { DropdownMenuComponent } from './pages/candidates-page/dropdown-menu/dropdown-menu.component';
 import { InternshipsComponent } from './pages/internships/internships.component';
-import { EnumToArrayPipe } from './pipes/enumToArray.pipes';
+import { EnumToArrayPipe } from './pipes/enumToArray.pipe';
 
 @NgModule({
   declarations: [

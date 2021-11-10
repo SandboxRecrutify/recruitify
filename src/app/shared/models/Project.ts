@@ -7,6 +7,7 @@ export interface Project extends StaffRole {
   description: string;
   primarySkills: PrimarySkill[];
   isActive: boolean;
+  id: string;
 }
 export interface Staff {
   userId: string;

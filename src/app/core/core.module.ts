@@ -32,7 +32,6 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzDropDownModule,
     NzSelectModule,
     NzRadioModule,
-
     NzPopconfirmModule,
   ],
   providers: [MainLayoutFacade],

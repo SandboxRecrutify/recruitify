@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipes';
+import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
 import { FillFormFacade } from './fill-form.facade';
 
 
@@ -16,11 +16,14 @@ import { FillFormFacade } from './fill-form.facade';
 export class FillFormComponent implements OnInit {
   validateForm!: FormGroup;
   englishLevel$: Observable<any>
+  primarySkills$: Observable<any>
   constructor(private fb: FormBuilder, private fillFormFacade: FillFormFacade) {
     this.englishLevel$ = fillFormFacade.englishLevel$
     fillFormFacade.englishLevel$.subscribe((next) => {
       console.log(next);
     })
+
+    this.primarySkills$ = fillFormFacade.primarySkills$
   }
 
   submitForm() {

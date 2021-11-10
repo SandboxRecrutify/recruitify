@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import {FillFormComponent} from './pages/fill-form-page/fill-form.component'
+import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -30,7 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FillFormServices } from './services/fill-form.service';
-import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
 
 /** set the default i18n config **/
 

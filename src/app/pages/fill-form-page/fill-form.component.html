@@ -8,14 +8,14 @@
             <div class="inner-item-box">
               <nz-form-label nzRequired nzNoColon nzFor="fname">First Name</nz-form-label>
               <nz-form-control>
-                <input nz-input name="fname" type="text" id="fname">
+                <input nz-input name="fname" type="text" id="fname" placeholder="Enter your First name">
               </nz-form-control>
             </div>
                 
             <div class="inner-item-box pad-left">
               <nz-form-label nzRequired nzNoColon nzFor="lname">Last Name</nz-form-label>
               <nz-form-control >
-                <input nz-input name="lname" type="text" id="lname">
+                <input nz-input name="lname" type="text" id="lname" placeholder="Enter your Last name">
               </nz-form-control>
             </div>
           </div>  
@@ -27,7 +27,7 @@
             <div class="inner-item-box">
               <nz-form-label nzRequired nzNoColon nzFor="skype">Skype</nz-form-label>
               <nz-form-control >
-                <input nz-input name="skype" type="text" id="skype">
+                <input nz-input name="skype" type="text" id="skype" placeholder="Enter your Skype Login">
               </nz-form-control>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <div class="inner-item-box">
               <nz-form-label nzRequired nzNoColon nzFor="email">Email</nz-form-label>
               <nz-form-control >
-                <input nz-input name="email" type="text" id="email">
+                <input nz-input name="email" type="text" id="email" placeholder="Enter your Email">
               </nz-form-control>
             </div>
           </div>
@@ -51,7 +51,7 @@
             <div class="inner-item-box">
               <nz-form-label nzRequired nzNoColon nzFor="phone">Phone</nz-form-label>
               <nz-form-control >
-                <input nz-input name="phone" type="text" id="phone">
+                <input nz-input name="phone" type="text" id="phone" placeholder="Enter your Phone number">
               </nz-form-control>
             </div>
           </div>
@@ -62,18 +62,17 @@
           <div class="inner-item-box">
             <nz-form-label nzRequired nzNoColon nzFor="location">Location (City, Country)</nz-form-label>
             <nz-form-control >
-              <input nz-input name="location" type="text" id="location">
+              <input nz-input name="location" type="text" id="location" placeholder="Enter your Country">
             </nz-form-control>
           </div>
               
           <div class="inner-item-box pad-left">
             <nz-form-control >
-              <input nz-input name="location" type="text" id="location">
+              <input nz-input name="location" type="text" id="location" placeholder="Enter your City">
             </nz-form-control> 
           </div>
         </div>
 
-        {{ englishLevel$ | async}}
         <nz-form-item >
           <div class="item-box">
             <div class="inner-item-box pad-top">
@@ -100,15 +99,11 @@
             <div class="inner-item-box">
               <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
               <nz-select  nzRequired  nzAllowClear nzPlaceHolder="Primary skill" required>
-                <nz-option nzLabel="Beginner" nzValue=".NET"></nz-option>
-                <nz-option nzLabel="Pre-Intermrdiate" nzValue="QA"></nz-option>
-                <nz-option nzLabel="Intermediate" nzValue="JavaScript"></nz-option>
-                <nz-option nzLabel="Advanced" nzValue="AutomationQA"></nz-option>
-                <nz-option nzLabel="Native" nzValue="BusinessAnalyst"></nz-option>
-                <nz-option nzLabel="Native" nzValue="DevOps"></nz-option>
-                <nz-option nzLabel="Native" nzValue="Java"></nz-option>
-                <nz-option nzLabel="Native" nzValue="PHP"></nz-option>
-                <nz-option nzLabel="Native" nzValue="ProjectMAnager"></nz-option>
+                <nz-option
+                *ngFor="let primarySkills of primarySkills$ | async "
+                [nzValue]="primarySkills.id"
+                [nzLabel]="primarySkills.name"
+              ></nz-option>
               </nz-select>
             </div>
           </div>
@@ -125,7 +120,7 @@
             <div class="inner-item-box">
               <nz-form-label nzNoColon nzFor="comments">Comments</nz-form-label>
               <nz-form-control>
-                <input nz-input name="comments" type="text" id="comments">
+                <input nz-input name="comments" type="text" id="comments" placeholder="Enter your comments">
               </nz-form-control>
             </div>
           </div>
@@ -137,7 +132,7 @@
             <div class="inner-item-box">
               <nz-form-label nzNoColon>Do you have any questions?</nz-form-label>
               <nz-form-control>
-                <input nz-input name="questions" type="text" id="questions">
+                <input nz-input name="questions" type="text" id="questions" placeholder="Enter your questions">
             </nz-form-control>
             </div>
           </div>
@@ -149,7 +144,7 @@
             <div class="inner-item-box">
               <nz-form-label nzNoColon nzFor="cjob">Current job</nz-form-label>
               <nz-form-control>
-                <input nz-input name="cjob" type="text" id="cjob">
+                <input nz-input name="cjob" type="text" id="cjob" placeholder="Enter your Current job">
               </nz-form-control>
             </div>
           </div>
@@ -161,7 +156,7 @@
             <div class="inner-item-box">
               <nz-form-label nzNoColon>Professional certificates</nz-form-label>
               <nz-form-control>
-                  <input nz-input name="certificates" type="text" id="certificates">
+                  <input nz-input name="certificates" type="text" id="certificates" placeholder="What professional certificates do you have?">
               </nz-form-control>
             </div>
           </div>
