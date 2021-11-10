@@ -9,7 +9,7 @@ const API_PATH = 'assets/';
 @Injectable()
 export class ProjectsService extends ApiService {
   constructor(http: HttpClient) {
-    super(http, API_PATH, ProjectsService.name);
+    super(http, API_PATH, ProjectsService.name, true);
   }
 
   getProjects(): Observable<Project[]> {

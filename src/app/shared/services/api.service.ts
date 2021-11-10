@@ -12,12 +12,15 @@ export const UPDATE = 'Update';
 export abstract class ApiService {
   private readonly serviceName: string;
   private readonly apiPath: string;
+  private readonly isMock: boolean = false;
 
   protected constructor(
     private http: HttpClient,
     apiPath: string,
-    serviceName: string = ApiService.name
+    serviceName: string = ApiService.name,
+    isMock: boolean = false
   ) {
+    this.isMock = isMock;
     this.apiPath = apiPath;
     this.serviceName = serviceName;
   }
@@ -48,7 +51,9 @@ export abstract class ApiService {
   }
 
   protected getApiUrl(): string {
-    return environment.apiUrl + this.apiPath;
+    return (
+      (this.isMock ? environment.mockApiUrl : environment.apiUrl) + this.apiPath
+    );
   }
 
   private wrapRequest<T>(

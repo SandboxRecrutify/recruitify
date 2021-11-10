@@ -4,21 +4,23 @@ import { CandidateContact } from './CandidateContact';
 import { PrimarySkill } from './PrimarySkill';
 
 export interface Candidate {
+  id: string;
   name: string;
   surname: string;
-  englishLevel: number;
+  englishLevel: string;
   phoneNumber: string;
   email: string;
+  bestTimeToConnect: number[];
+  currentJob: string;
+  goingToExadel: boolean;
   contacts: CandidateContact[];
   location: CandidateLocation;
   primarySkills: PrimarySkill[];
   registrationDate: Date | string;
-  bestTimeToConnect: number[];
-  goingToExadel: boolean;
   projectResults: CandidateProjectResults[];
-  currentJob: string;
-  certificates: string;
-  additionalQuestions: string;
-  additionalInfo: string;
-  id: string;
+  certificates?: string;
+  additionalQuestions?: string;
+  additionalInfo?: string;
+  testResult?: string;
+  language?: string;
 }
