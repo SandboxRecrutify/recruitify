@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import {FillFormComponent} from './pages/fill-form-page/fill-form.component'
+import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -27,15 +27,28 @@ registerLocaleData(en);
 
 /** config ng-zorro-antd i18n **/
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FillFormServices } from './services/fill-form.service';
+import { AuthInterceptor } from './services/http.auth.interceptor';
 
 /** set the default i18n config **/
 
+//
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptor,
+  multi: true,
+};
+
 @NgModule({
-  declarations: [AppComponent, StartPageComponent, FillFormComponent, AppRadioButtonComponent],
+  declarations: [
+    AppComponent,
+    StartPageComponent,
+    FillFormComponent,
+    AppRadioButtonComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -56,7 +69,11 @@ import { FillFormServices } from './services/fill-form.service';
     NzFormModule,
     NzMessageModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, FillFormServices],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    FillFormServices,
+    INTERCEPTOR_PROVIDER,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
