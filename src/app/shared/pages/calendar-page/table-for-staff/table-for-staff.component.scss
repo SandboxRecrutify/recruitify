@@ -1,13 +1,14 @@
 .calendar_table-wrapp {
   height: 47%;
+  // padding-left: 40px;
   overflow-y: auto;
 }
 
 .calendar_table {
   width: 100%;
-  border: 1px solid #949494;
+  // border: 1px solid #949494;
   display: grid;
-  grid-gap: 1px;
+  // grid-gap: 1px;
 }
 
 .calendar_raw {
@@ -15,4 +16,17 @@
   height: 40px;
   display: grid;
   grid-template-columns: 19% 81%;
+  border: 1px solid #949494;
+}
+
+.calendar_staff {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+app-time-line {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
