@@ -11,7 +11,7 @@ export class CandidateService extends ApiService {
     super(httpClient, CANDIDATE_API, CandidateService.name);
   }
 
-  getCandiateById(id: string): Observable<Candidate> {
-    return super.get({id: '/' + id});
+  getCandidateById(id: string): Observable<Candidate> {
+    return super.get({path: '/' + id});
   }
 }
