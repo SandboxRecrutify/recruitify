@@ -6,7 +6,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 3px;
   align-content: start;
-  border: 2px solid #0082ca;
+  border: 1px solid #0082ca;
   overflow-y: auto;
 }
 
@@ -17,4 +17,6 @@
   align-items: center;
   background-color: #0082ca;
   color: white;
+  font-size: 12px;
+  font-weight: 400;
 }
