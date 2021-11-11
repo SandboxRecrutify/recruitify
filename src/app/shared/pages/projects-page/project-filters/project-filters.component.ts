@@ -1,3 +1,4 @@
+import { PrimarySkill } from './../../../models/Project';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateProject } from 'src/app/shared/models/CreateProject';
@@ -15,7 +16,7 @@ export class ProjectFiltersComponent implements OnInit {
   @Output()
   onToggleIsVisible = new EventEmitter<boolean>();
 
-  data: CreateProject | undefined;
+  data: PrimarySkill[] | undefined;
   statuses = [
     {
       name: 'Active',
@@ -47,8 +48,8 @@ export class ProjectFiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectsService.getCreateProjectData().subscribe((data) => {
-      this.primarySkillsInput = data.primarySkills.map((skill) => skill.id!);
+    this.projectsService.getPrimarySkills().subscribe((data) => {
+      this.primarySkillsInput = data.map((skill) => skill.id!);
       this.data = data;
     });
   }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Candidate } from '../models/Candidate';
 import { ApiService } from './api.service';
 
-const CANDIDATE_API = '/api/candidates';
+const CANDIDATE_API = '/candidates';
 @Injectable()
 export class CandidateService extends ApiService {
   constructor(private httpClient: HttpClient) {
@@ -12,6 +12,6 @@ export class CandidateService extends ApiService {
   }
 
   getCandiateById(id: string): Observable<Candidate> {
-    return super.get('/' + id);
+    return super.get({id: '/' + id});
   }
 }

@@ -43,7 +43,7 @@
               >
                 <div nz-row>
                   <div
-                    *ngFor="let item of data?.primarySkills"
+                    *ngFor="let item of data"
                     nz-col
                     nzSpan="8"
                   >
@@ -81,7 +81,7 @@
       </div>
       <div nz-row nzJustify="end">
         <button nz-button (click)="onSubmit()" nzType="primary" type="submit">
-          confirm
+          Confirm
         </button>
       </div>
     </form>

@@ -19,7 +19,7 @@ export class FillFormServices extends ApiService{
     }
 
     primarySkills(): Observable<PrimarySkill[]> {
-      super.get<any>()
+      // super.get<any>()
         return of([
             {
               "id": "aeb0e468-3774-11ec-83d4-97dbf3c3f8eb",
