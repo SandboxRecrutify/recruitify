@@ -4,6 +4,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateProject } from 'src/app/shared/models/CreateProject';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 
+export interface ProjectsOrderBy {
+  property: string;
+  orderBy: 'asc' | 'desc';
+}
+export interface ProjectsFilters {
+  status: string;
+  primary: string[];
+  orderBy: ProjectsOrderBy
+}
 @Component({
   selector: 'app-project-filters',
   templateUrl: './project-filters.component.html',
@@ -12,6 +21,9 @@ import { ProjectsService } from 'src/app/shared/services/projects.service';
 export class ProjectFiltersComponent implements OnInit {
   @Input()
   isVisible: boolean = false;
+
+  @Output() onFilters: EventEmitter<ProjectsFilters> =
+    new EventEmitter<ProjectsFilters>();
 
   @Output()
   onToggleIsVisible = new EventEmitter<boolean>();
@@ -33,7 +45,7 @@ export class ProjectFiltersComponent implements OnInit {
   ];
   statusInput: string = 'all';
   primarySkillsInput: string[] = [];
-  dateSortInput: string = 'newest';
+  dateSortInput: ProjectsOrderBy = {property: 'startDate', orderBy: 'asc'}
 
   constructor(private projectsService: ProjectsService) {}
   primarySkillsChange(values: string[]) {
@@ -44,7 +56,15 @@ export class ProjectFiltersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.statusInput, this.primarySkillsInput, this.dateSortInput);
+    // console.log(this.statusInput, this.primarySkillsInput, this.dateSortInput);
+
+    const ProjectsFilters: ProjectsFilters = {
+      status: this.statusInput,
+      primary: this.primarySkillsInput,
+      orderBy: this.dateSortInput,
+    };
+    this.onFilters.emit(ProjectsFilters);
+    // console.log(ProjectsFilters);
   }
 
   ngOnInit(): void {

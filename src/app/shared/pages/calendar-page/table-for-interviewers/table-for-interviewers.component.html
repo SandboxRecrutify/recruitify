@@ -1,3 +1,17 @@
+<div class="prompt">
+  <div class="prompt_img"></div>
+  <div class="prompt_text">
+    <div class="prompt_text-item">
+      LMB - if you are free at this time
+      <div class="text_color--free"></div>
+    </div>
+    <div class="prompt_text-item">
+      RMB - switch back to busy
+      <div class="text_color--busy"></div>
+    </div>
+  </div>
+</div>
+<app-time-line></app-time-line>
 <div class="calendar_table">
   <div class="calendar_interviewers">Aleksey Yanul</div>
   <div class="calendar_weekdays">
@@ -8,6 +22,7 @@
       [day]="day.getDay()"
     >
       {{ day | date: "MMM, d" }}
+      {{ day | date: "ccc" }}
     </div>
   </div>
   <div class="calendar_time-grid" appCalendarItem>
