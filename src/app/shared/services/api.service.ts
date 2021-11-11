@@ -13,9 +13,8 @@ export const ODATA = '/odata';
 export const API = '/api';
 export const MOCK = '/assets';
 
-interface queryParams {
-  endpoint?: string
-  id?: string;
+interface QueryParams {
+  path?: string
   odata?: OData;
   body?: any;
   mock?: string;
@@ -57,14 +56,14 @@ export abstract class ApiService {
     this.serviceName = serviceName;
   }
 
-  get<T>(params: queryParams): Observable<T> {
+  get<T>(params: QueryParams): Observable<T> {
     return this.wrapRequest<T>(
       this.http.get<T>(this.getApiUrl(params) + this.getQueryOptions(params)),
       GET
     );
   }
 
-  createData<T, B>(params: queryParams, body: B): Observable<T> {
+  createData<T, B>(params: QueryParams, body: B): Observable<T> {
     return this.wrapRequest<T>(
       this.http.post<T>(
         this.getApiUrl(params) + this.getQueryOptions(params),
@@ -74,7 +73,7 @@ export abstract class ApiService {
     );
   }
 
-  updateData<T, B>(params: queryParams, body: B): Observable<T> {
+  updateData<T, B>(params: QueryParams, body: B): Observable<T> {
     return this.wrapRequest<T>(
       this.http.put<T>(
         this.getApiUrl(params) + this.getQueryOptions(params),
@@ -84,7 +83,7 @@ export abstract class ApiService {
     );
   }
 
-  deleteData<T>(params: queryParams): Observable<T> {
+  deleteData<T>(params: QueryParams): Observable<T> {
     return this.wrapRequest<T>(
       this.http.delete<T>(
         this.getApiUrl(params) + this.getQueryOptions(params)
@@ -93,7 +92,7 @@ export abstract class ApiService {
     );
   }
 
-  protected getApiUrl(params: queryParams): string {
+  protected getApiUrl(params: QueryParams): string {
     if (params.mock) {
       return environment.mockApiUrl + MOCK;
     } else if (params.odata) {
@@ -103,7 +102,7 @@ export abstract class ApiService {
     }
   }
 
-  private getQueryOptions(params: queryParams): string {
+  private getQueryOptions(params: QueryParams): string {
     let url = '';
     if (params.mock) {
       url += params.mock;
@@ -122,7 +121,7 @@ export abstract class ApiService {
         url += this.buildOData('filter', params.odata.filter);
       }
     } else {
-      url += params.id || params.endpoint
+      url += params.path
     }
     return url;
   }
