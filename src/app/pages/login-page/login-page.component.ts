@@ -24,14 +24,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(16),
-        ],
-      ],
+      password: ['', [Validators.required]],
     });
   }
 }

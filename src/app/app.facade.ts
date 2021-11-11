@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { paths } from './app-routing.constants';
 import { LocalStorageService } from './services/local-storage.service';
-import { User, UserData } from './shared/models/User';
+import { User, UserData, UserResponse } from './shared/models/User';
 import { AuthService } from './shared/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +13,7 @@ export class AppFacade {
   public readonly INITIAL_PATH = paths.projects;
   public readonly USER_KEY = 'user';
 
-  private User: User | undefined;
+  private user: User | undefined;
 
   constructor(
     private lsService: LocalStorageService,
@@ -29,9 +29,9 @@ export class AppFacade {
   }
 
   getUser$(): Observable<User | null> {
-    console.log('getUser');
-    if (this.User) {
-      return of(this.User);
+    // console.log('getUser');
+    if (this.user) {
+      return of(this.user);
     }
     const user = this.lsService.getItem<User>(this.USER_KEY);
     return of(user);
@@ -41,13 +41,20 @@ export class AppFacade {
 
   login(user: UserData) {
     this.auth.login(user).subscribe(
-      (user: User) => {
-        this.lsService.setItem(this.USER_KEY, user);
+      (response: UserResponse) => {
+        this.lsService.setItem(this.USER_KEY, {
+          email: user.email,
+          token: response.access_token,
+        });
+        this.user = {
+          email: user.email,
+          token: response.access_token,
+        };
         this.router.navigate([this.INITIAL_PATH]);
         this.message.success('Login successful');
       },
       (error) => {
-        this.message.success('Something went wrong!');
+        this.message.error('Something went wrong!');
         console.log(error);
       }
     );
