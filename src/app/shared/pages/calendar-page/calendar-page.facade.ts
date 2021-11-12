@@ -35,59 +35,35 @@ export class CalendarPageFacade {
     { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
     { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
     { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
   ];
 
   constructor() {}
 
   getWeekDays() {
-    let datesArr = [this.today];
+    let daysArr = [this.today];
     for (let i = 1; i <= 6; i++) {
       let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
-      datesArr.push(nextDay);
+      daysArr.push(nextDay);
     }
-    return datesArr;
+    return daysArr;
+  }
+
+  getNextWeekDays() {
+    let daysArr = [];
+    for (let i = 7; i <= 13; i++) {
+      let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
+      daysArr.push(nextDay);
+    }
+    console.log(daysArr);
+  }
+
+  getPreviousWeekDays() {
+    let daysArr = [];
+    for (let i = 1; i <= 7; i++) {
+      let previousDay = new Date(
+        new Date().getTime() - 24 * i * 60 * 60 * 1000
+      );
+      console.log(previousDay);
+    }
   }
 }
