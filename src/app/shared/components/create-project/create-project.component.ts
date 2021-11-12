@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsPageFacade } from '../../pages/projects-page/projects-page.facade';
-import { ProjectsService } from '../../services/projects.service';
 
 @Component({
   selector: 'app-create-project',
@@ -26,7 +25,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   constructor(
     private fb: FormBuilder,
-    private projectsService: ProjectsService,
     private projectsFacade: ProjectsPageFacade,
     private message: NzMessageService,
     private route: ActivatedRoute,
@@ -65,6 +63,7 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   }
   handleCancel(): void {
     this.form.reset();
+    this.form.patchValue({ isActive: true });
     this.primarySkills.clear();
     this.isPrimarySkillsTouched = false;
     this.projectsFacade.toggleCreateProjectDrawer$.next(false);
@@ -105,9 +104,9 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       })
     );
 
-    // subscribe to primary skills
+    // subscribe to primary skills and staff
     this.subscriptions.push(
-      this.projectsService.getCreateProjectData().subscribe((data) => {
+      this.projectsFacade.getCreateProjectData$().subscribe((data) => {
         data.primarySkills = data.primarySkills.map((skill) => ({
           ...skill,
           checked: false,
@@ -125,7 +124,8 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           Validators.maxLength(environment.CREATE_PROJECT_NAME_LENGTH),
         ],
       ],
-      dates: [, [Validators.required]],
+      dates: [[], [Validators.required]],
+      registrationDates: [[], [Validators.required]],
       plannedApplicationsCount: [null, [Validators.required]],
       isActive: [true, []],
       description: [

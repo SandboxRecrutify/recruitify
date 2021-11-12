@@ -11,12 +11,14 @@ export const UPDATE = 'Update';
 
 export const ODATA = '/odata';
 export const API = '/api';
+export const TOKEN = '/connect/token';
 export const MOCK = '/assets';
 
 interface QueryParams {
   path?: string;
   odata?: OData;
   body?: any;
+  login?: boolean;
   mock?: string;
 }
 
@@ -97,8 +99,10 @@ export abstract class ApiService {
       return environment.mockApiUrl + MOCK;
     } else if (params.odata) {
       return environment.apiUrl + ODATA + this.apiPath;
+    } else if (params.login) {
+      return environment.apiUrl + TOKEN + this.apiPath.toLowerCase();
     } else {
-      return environment.apiUrl + this.apiPath.toLowerCase();
+      return environment.apiUrl + API + this.apiPath.toLowerCase();
     }
   }
 
@@ -120,6 +124,7 @@ export abstract class ApiService {
       if (params.odata.filter) {
         url += this.buildOData('filter', params.odata.filter);
       }
+    } else if (params.login) {
     } else {
       url += params.path;
     }
