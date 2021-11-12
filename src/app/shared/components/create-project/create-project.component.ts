@@ -92,32 +92,11 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     }
 
     if (this.form.valid && isPrimarySkillsValid) {
-      const { dates, registrationDates, ...restForm } = this.form.value;
-      const toSend = {
-        ...restForm,
-        startDate: dates[0],
-        endDate: dates[1],
-        registrationStartDate: registrationDates[0],
-        registrationEndDate: registrationDates[1],
-        managers: this.data?.staffGroup.managers.filter((manager) =>
-          this.form.value.managers.includes(manager.userId)
-        ),
-        recruiters: this.data?.staffGroup.recruiters.filter((recruiter) =>
-          this.form.value.recruiters.includes(recruiter.userId)
-        ),
-        interviewers: this.data?.staffGroup.interviewers.filter((interviewer) =>
-          this.form.value.interviewers.includes(interviewer.userId)
-        ),
-        mentors: this.data?.staffGroup.mentors.filter((mentor) =>
-          this.form.value.mentors.includes(mentor.userId)
-        ),
-        primarySkills: Array.from(this.primarySkills.entries()).map((el) => ({
-          id: el[0],
-          ...el[1].value,
-        })),
-      };
-
-      console.log('restForm', toSend);
+      const toSend = this.projectsFacade.prepareProjectForCreation(
+        this.form.value,
+        this.data?.staffGroup!,
+        this.primarySkills
+      );
       if (this.editingId) {
         toSend.id = this.editingId;
         this.projectsFacade.editProject(toSend);
