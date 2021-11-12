@@ -39,7 +39,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.profilePageFacade
-        .getCandiateById$(params.id)
+        .getCandidateById$(params.id)
         .subscribe((candidate) => {
           this.candidate = candidate;
         });

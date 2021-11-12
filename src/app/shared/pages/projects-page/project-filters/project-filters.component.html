@@ -67,13 +67,13 @@
             </nz-form-label>
             <nz-form-control>
               <nz-radio-group
-                [(ngModel)]="dateSortInput"
+                [(ngModel)]="dateSortInput.orderBy"
                 [ngModelOptions]="{ standalone: true }"
               >
-                <label style="display: flex" nz-radio nzValue="newest"
+                <label style="display: flex" nz-radio nzValue="asc"
                   >Newest</label
                 >
-                <label nz-radio nzValue="oldest">Oldest</label>
+                <label nz-radio nzValue="desc">Oldest</label>
               </nz-radio-group>
             </nz-form-control>
           </nz-form-item>
@@ -81,7 +81,7 @@
       </div>
       <div nz-row nzJustify="end">
         <button nz-button (click)="onSubmit()" nzType="primary" type="submit">
-          Confirm
+          Apply
         </button>
       </div>
     </form>

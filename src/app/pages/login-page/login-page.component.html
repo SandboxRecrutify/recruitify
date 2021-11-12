@@ -39,14 +39,8 @@
             />
           </nz-input-group>
           <ng-template #passwordError let-control>
-            <ng-container *ngIf="control.hasError('maxlength')">
-              Max. length: 16 characters
-            </ng-container>
             <ng-container *ngIf="control.hasError('required')">
               Please enter your password
-            </ng-container>
-            <ng-container *ngIf="control.hasError('minlength')">
-              Min. length: 6 characters
             </ng-container>
           </ng-template>
         </nz-form-control>

@@ -30,7 +30,7 @@ export class ProjectsService extends ApiService {
   }
 
   getPrimarySkills(): Observable<PrimarySkill[]> {
-    return super.get<PrimarySkill[]>({ endpoint: '/primary_skills' });
+    return super.get<PrimarySkill[]>({ path: '/primary_skills' });
   }
 
   getProjectById(projectId:string): Observable<Project> {
