@@ -1,3 +1,32 @@
+<div class="week-btns">
+  <a nz-button nzType="link" (click)="onPreviousButtonClick()"
+    ><<< Previous week</a
+  >
+  <a nz-button nzType="link" (click)="onNextButtonClick()">Nest week >>></a>
+</div>
+
+<app-time-line></app-time-line>
+<div class="calendar_table">
+  <div class="calendar_interviewers">Aleksey Yanul</div>
+  <div class="calendar_weekdays">
+    <div
+      class="calendar_weekday"
+      *ngFor="let day of displayedWeekDays"
+      appCalendarWeekday
+      [day]="day.getDay()"
+    >
+      {{ day | date: "MMM, d" }}
+      {{ day | date: "ccc" }}
+    </div>
+  </div>
+  <div class="calendar_time-grid" appCalendarItem>
+    <app-time-grid-row
+      *ngFor="let day of displayedWeekDays"
+      appCalendarWeekday
+      [day]="day.getDay()"
+    ></app-time-grid-row>
+  </div>
+</div>
 <div class="prompt">
   <div class="prompt_img"></div>
   <div class="prompt_text">
@@ -9,27 +38,5 @@
       RMB - switch back to busy
       <div class="text_color--busy"></div>
     </div>
-  </div>
-</div>
-<app-time-line></app-time-line>
-<div class="calendar_table">
-  <div class="calendar_interviewers">Aleksey Yanul</div>
-  <div class="calendar_weekdays">
-    <div
-      class="calendar_weekday"
-      *ngFor="let day of weekDays"
-      appCalendarWeekday
-      [day]="day.getDay()"
-    >
-      {{ day | date: "MMM, d" }}
-      {{ day | date: "ccc" }}
-    </div>
-  </div>
-  <div class="calendar_time-grid" appCalendarItem>
-    <app-time-grid-row
-      *ngFor="let day of weekDays"
-      appCalendarWeekday
-      [day]="day.getDay()"
-    ></app-time-grid-row>
   </div>
 </div>
