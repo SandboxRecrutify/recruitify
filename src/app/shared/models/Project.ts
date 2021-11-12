@@ -2,9 +2,11 @@ export interface Project extends StaffRole {
   name: string;
   startDate: Date | string;
   endDate: Date | string;
-  currentApplicationsCount: number;
+  startRegistrationDate: Date | string;
+  endRegistrationDate: Date | string;
+  currentApplicationsCount?: number;
   plannedApplicationsCount: number;
-  description: string;
+  description?: string;
   primarySkills: PrimarySkill[];
   isActive: boolean;
   id: string;

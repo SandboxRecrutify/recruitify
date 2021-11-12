@@ -52,6 +52,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
@@ -140,6 +141,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzTypographyModule,
     NzDividerModule,
     NzRadioModule,
+    NzPopconfirmModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [

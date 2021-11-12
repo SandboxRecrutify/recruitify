@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { paths } from 'src/app/app-routing.constants';
 import { environment } from 'src/environments/environment';
@@ -21,12 +20,13 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   data: CreateProject | undefined;
   form!: FormGroup;
   editingId: string | undefined;
+  isLoading = false;
+  isDeleting = false;
 
   private subscriptions: Subscription[] = [];
   constructor(
     private fb: FormBuilder,
     private projectsFacade: ProjectsPageFacade,
-    private message: NzMessageService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -90,10 +90,47 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         this.form.controls[i].updateValueAndValidity();
       }
     }
-    console.log(this.form.value);
+
     if (this.form.valid && isPrimarySkillsValid) {
-      this.message.success('Project created successfully');
+      const { dates, registrationDates, ...restForm } = this.form.value;
+      const toSend = {
+        ...restForm,
+        startDate: dates[0],
+        endDate: dates[1],
+        registrationStartDate: registrationDates[0],
+        registrationEndDate: registrationDates[1],
+        managers: this.data?.staffGroup.managers.filter((manager) =>
+          this.form.value.managers.includes(manager.userId)
+        ),
+        recruiters: this.data?.staffGroup.recruiters.filter((recruiter) =>
+          this.form.value.recruiters.includes(recruiter.userId)
+        ),
+        interviewers: this.data?.staffGroup.interviewers.filter((interviewer) =>
+          this.form.value.interviewers.includes(interviewer.userId)
+        ),
+        mentors: this.data?.staffGroup.mentors.filter((mentor) =>
+          this.form.value.mentors.includes(mentor.userId)
+        ),
+        primarySkills: Array.from(this.primarySkills.entries()).map((el) => ({
+          id: el[0],
+          ...el[1].value,
+        })),
+      };
+
+      console.log('restForm', toSend);
+      if (this.editingId) {
+        toSend.id = this.editingId;
+        this.projectsFacade.editProject(toSend);
+      } else {
+        this.projectsFacade.createProject(toSend);
+      }
     }
+  }
+  /// delete project
+  deleteProject() {
+    console.log('deleted');
+    // this.projectsFacade.deleteProject(this.editingId!);
+    // this.handleCancel();
   }
 
   ngOnInit(): void {
@@ -156,6 +193,10 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           this.form.patchValue({
             ...project,
             dates: [new Date(project.startDate), new Date(project.endDate)],
+            registrationDates: [
+              new Date(project.startRegistrationDate),
+              new Date(project.endRegistrationDate),
+            ],
             managers: project.managers.map((manager) => manager.userId),
             interviewers: project.interviewers.map(
               (interviewer) => interviewer.userId
@@ -184,6 +225,17 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
             });
           }
         }
+      })
+    );
+    // subscribe to loadings
+    this.subscriptions.push(
+      this.projectsFacade.createProjectLoading$.subscribe((loading) => {
+        this.isLoading = loading;
+      })
+    );
+    this.subscriptions.push(
+      this.projectsFacade.deleteProjectLoading$.subscribe((deleting) => {
+        this.isDeleting = deleting;
       })
     );
   }

@@ -253,9 +253,32 @@
           </nz-form-control>
         </nz-form-item>
       </div>
-      <button nz-button nzType="primary" nzBlock (click)="submitForm()">
+      <button
+        [disabled]="isDeleting"
+        nz-button
+        nzType="primary"
+        nzBlock
+        [nzLoading]="isLoading"
+        (click)="submitForm()"
+      >
         {{ editingId ? "Save" : "Create" }}
       </button>
+      <ng-container *ngIf="editingId">
+        <div nz-row nzJustify="end" style="margin-top: 1rem; width: 100%">
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this project?"
+            (nzOnConfirm)="deleteProject()"
+            nzPopconfirmPlacement="leftBottom"
+            nz-button
+            nzType="link"
+            nzDanger
+            [nzLoading]="isDeleting"
+          >
+            Delete
+          </button>
+        </div>
+      </ng-container>
     </form>
   </ng-container>
 </nz-drawer>
