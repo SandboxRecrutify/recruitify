@@ -25,6 +25,9 @@
             <ng-container *ngIf="control.hasError('required')">
               Please enter your email address
             </ng-container>
+            <ng-container *ngIf="control.hasError('wrong')">
+              Please check your email address
+            </ng-container>
           </ng-template>
         </nz-form-control>
       </nz-form-item>
@@ -42,11 +45,20 @@
             <ng-container *ngIf="control.hasError('required')">
               Please enter your password
             </ng-container>
+            <ng-container *ngIf="control.hasError('wrong')">
+              Please check your password
+            </ng-container>
           </ng-template>
         </nz-form-control>
       </nz-form-item>
 
-      <button class="loginPage_btn" type="submit" nz-button nzType="primary">
+      <button
+        [nzLoading]="isLoading"
+        class="loginPage_btn"
+        type="submit"
+        nz-button
+        nzType="primary"
+      >
         Log in
       </button>
     </form>
