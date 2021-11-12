@@ -54,16 +54,15 @@ export class CalendarPageFacade {
       let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
       daysArr.push(nextDay);
     }
-    console.log(daysArr);
+    return daysArr;
   }
 
   getPreviousWeekDays() {
     let daysArr = [];
     for (let i = 1; i <= 7; i++) {
-      let previousDay = new Date(
-        new Date().getTime() - 24 * i * 60 * 60 * 1000
-      );
-      console.log(previousDay);
+      let nextDay = new Date(new Date().getTime() - 24 * i * 60 * 60 * 1000);
+      daysArr.unshift(nextDay);
     }
+    return daysArr;
   }
 }

@@ -76,8 +76,6 @@ import { CalendarWeekdayDirective } from './directives/calendar-weekday.directiv
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
-
 @NgModule({
   declarations: [
     SharedComponent,
@@ -142,7 +140,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NzTypographyModule,
     NzDividerModule,
     NzRadioModule,
-    DragDropModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [

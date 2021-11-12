@@ -1,24 +1,13 @@
-<!-- <div class="candidates_grid">
+<div class="candidates_grid">
   <div class="candidates_item" *ngFor="let candidate of candidates">
-    {{ candidate.name }} {{ candidate.surname }} |
-    {{ candidate.time.join(", ") }}
-  </div>
-</div> -->
-
-<div class="candidates_grid" cdkDropList cdkDropListSortingDisabled>
-  <div cdkDrag class="candidates_item" *ngFor="let candidate of candidates">
     {{ candidate.name }} {{ candidate.surname }} |
     {{ candidate.time.join(", ") }}
   </div>
 </div>
 
-<!-- entered(event: CdkDragEnter) {
-  moveItemInArray(this.items, event.item.data, event.container.data);
-}
-<div style="display:flex;flex-wrap:wrap" cdkDropListGroup>
-  <div cdkDropList [cdkDropListData]="i" *ngFor="let item of items; let i = index;"  [style.width]="item.width || '100%'">
-    <div cdkDrag [cdkDragData]="i" (cdkDragEntered)="entered($event)">
-      {{item}}
-    </div>
+<!-- <div class="candidates_grid" cdkDropList cdkDropListSortingDisabled>
+  <div cdkDrag class="candidates_item" *ngFor="let candidate of candidates">
+    {{ candidate.name }} {{ candidate.surname }} |
+    {{ candidate.time.join(", ") }}
   </div>
 </div> -->
