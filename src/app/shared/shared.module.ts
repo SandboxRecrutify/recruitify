@@ -72,7 +72,6 @@ import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time
 import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
 import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
-import { CalendarWeekdayDirective } from './directives/calendar-weekday.directive';
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
@@ -105,7 +104,6 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     TableForStaffComponent,
     TimeGridRowComponent,
     CandidatesGridComponent,
-    CalendarWeekdayDirective,
   ],
   imports: [
     NzBreadCrumbModule,

@@ -1,4 +1,3 @@
-import { UserService } from './../../services/user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -48,21 +47,15 @@ export class CalendarPageFacade {
     return daysArr;
   }
 
-  getNextWeekDays() {
-    let daysArr = [];
-    for (let i = 7; i <= 13; i++) {
-      let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
-      daysArr.push(nextDay);
-    }
-    return daysArr;
+  getNextWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() + 24 * 7 * 60 * 60 * 1000)
+    );
   }
 
-  getPreviousWeekDays() {
-    let daysArr = [];
-    for (let i = 1; i <= 7; i++) {
-      let nextDay = new Date(new Date().getTime() - 24 * i * 60 * 60 * 1000);
-      daysArr.unshift(nextDay);
-    }
-    return daysArr;
+  getPreviousWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() - 24 * 7 * 60 * 60 * 1000)
+    );
   }
 }

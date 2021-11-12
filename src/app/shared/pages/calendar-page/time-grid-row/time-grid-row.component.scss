@@ -4,5 +4,10 @@
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-gap: 1px;
-  background-color: #949494;
+}
+
+.weekend {
+  width: 100%;
+  height: 100%;
+  background-color: #faecc0;
 }
