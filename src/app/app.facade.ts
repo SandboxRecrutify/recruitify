@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { paths } from './app-routing.constants';
 import { LocalStorageService } from './services/local-storage.service';
@@ -21,6 +21,9 @@ export class AppFacade {
     private auth: AuthService,
     private message: NzMessageService
   ) {}
+  isUserLoading$ = new BehaviorSubject<boolean>(false);
+  userAuthError$ = new BehaviorSubject<boolean>(false);
+
   isAuthenticated$(): Observable<boolean> {
     return this.getUser$().pipe(
       map((user) => !!user),
@@ -40,6 +43,7 @@ export class AppFacade {
   initUserFromStorage() {}
 
   login(user: UserData) {
+    this.isUserLoading$.next(true);
     this.auth.login(user).subscribe(
       (response: UserResponse) => {
         this.lsService.setItem(this.USER_KEY, {
@@ -52,10 +56,13 @@ export class AppFacade {
         };
         this.router.navigate([this.INITIAL_PATH]);
         this.message.success('Login successful');
+        this.isUserLoading$.next(false);
       },
       (error) => {
-        this.message.error('Something went wrong!');
+        this.message.error('Wrong email or password!');
         console.log(error);
+        this.isUserLoading$.next(false);
+        this.userAuthError$.next(true);
       }
     );
   }
