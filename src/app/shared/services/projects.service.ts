@@ -39,7 +39,13 @@ export class ProjectsService extends ApiService {
     );
   }
 
-  createProject(project: Project): Observable<Project> {
+  createProject$(project: Project): Observable<Project> {
     return super.post<any, Project>({ path: '' }, project);
+  }
+  editProject$(project: Project): Observable<Project> {
+    return super.put<any, Project>({ path: '' }, project);
+  }
+  deleteProject$(id: string): Observable<Project> {
+    return super.delete<any>({ path: '/' + id });
   }
 }
