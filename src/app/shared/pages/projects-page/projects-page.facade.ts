@@ -3,9 +3,12 @@ import { FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
+import { Project } from '../../models/Project';
+import { QueryParams } from '../../services/api.service';
 import { PrimarySkill } from '../../models/PrimarySkill';
 import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
+import { ProjectsFilters } from './project-filters/project-filters.component';
 
 @Injectable()
 export class ProjectsPageFacade {
@@ -21,8 +24,29 @@ export class ProjectsPageFacade {
     private message: NzMessageService
   ) {}
 
-  getProjectsList$(): Observable<Project[]> {
-    return this.projectsService.getProjects();
+  getProjectsList$(filters?: ProjectsFilters): Observable<Project[]> {
+    const skills = filters?.primary.map((p) => {
+      return {
+        property: 'primarySkills',
+        value: `/any(p: p/name eq '${p}')`,
+        operator: '',
+      }
+    });
+    // console.log(skills)
+    const queryParams = filters
+      ? <QueryParams>{
+          odata: {
+            orderby: {
+              names: [filters.orderBy.property],
+              order: filters.orderBy.order,
+            },
+            filter: skills
+              // { property: filters.status, operator: '', value: '' },
+          },
+        }
+      : { odata: {} };
+
+    return this.projectsService.getProjects(queryParams);
   }
 
   getCreateProjectData$(): Observable<CreateProject> {
@@ -107,3 +131,10 @@ export class ProjectsPageFacade {
     };
   }
 }
+
+//primarySkills/any(p: p/name eq 'Java')
+// startDate asc  | desc
+// isActive | not isActive
+
+//for search
+//contains(name, 'searchText')

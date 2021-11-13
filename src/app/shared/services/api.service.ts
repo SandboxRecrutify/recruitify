@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 
 export const GET = 'Get';
 export const POST = 'Post';
@@ -14,7 +14,7 @@ export const API = '/api';
 export const TOKEN = '/connect/token';
 export const MOCK = '/assets';
 
-interface QueryParams {
+export interface QueryParams {
   path?: string;
   odata?: OData;
   body?: any;
@@ -26,23 +26,18 @@ export interface OData {
   top?: number;
   skip?: number;
   count?: boolean;
-  orderby?: any; // || OrderBy
-  filter?: any; //Filter[] | Rule[];
+  orderby?: OrderBy;
+  filter?: Filter[]
 }
 interface OrderBy {
   names: string[];
   order?: 'asc' | 'desc' | '';
 }
 
-interface Rule {
-  operator: string;
-  filter: Filter[] | Rule[];
-}
-
 interface Filter {
   property: string;
-  operator: string;
-  value: string;
+  value?: string;
+  operator?: string;
 }
 
 export abstract class ApiService {
@@ -119,10 +114,17 @@ export abstract class ApiService {
         url += this.buildOData('skip', params.odata.skip);
       }
       if (params.odata.orderby) {
-        url += this.buildOData('orderby', params.odata.orderby); //+ params.odata.orderby.names.join(',') + ' ' + params.odata.orderby.order
+        const orderBy = params.odata.orderby;
+        url += this.buildOData(
+          'orderby',
+          orderBy.names.join(',') + ' ' + orderBy.order);
       }
       if (params.odata.filter) {
-        url += this.buildOData('filter', params.odata.filter);
+        const filter = params.odata.filter;
+        const filterParams = filter
+            .map((f) => `${f.property}${f.value}`).join(' or ')
+        url += this.buildOData('filter', filterParams);
+        console.log(url)
       }
     } else if (params.login) {
     } else {
@@ -130,6 +132,12 @@ export abstract class ApiService {
     }
     return url;
   }
+
+  private buildFilter() {}
+
+  // private isRuleInterface(obj: Rule | Filter): obj is Rule {
+  //   return (<Rule>obj).filter !== undefined;
+  // }
 
   private buildOData(query: string, value: any) {
     return (query && `&$${query}=${value}`) || '';

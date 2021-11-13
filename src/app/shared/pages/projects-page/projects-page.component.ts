@@ -15,14 +15,16 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
 
   projects: Project[] = [];
-  projects$: Observable<Project[]>;
+  // projects$: Observable<Project[]>;
 
   constructor(private projectsPageFacade: ProjectsPageFacade) {
-    this.projects$ = this.projectsPageFacade.getProjectsList$();
+
   }
 
   ngOnInit(): void {
-    this.projects$.subscribe((response) => (this.projects = response));
+    this.projectsPageFacade.getProjectsList$().subscribe((projects) => {
+      this.projects = projects
+    })
   }
 
   toggleFiltersVisible(isVisible: boolean) {
@@ -34,6 +36,10 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   applyProjectsFilters($event: ProjectsFilters) {
-  //   this.projectsPageFacade.getProjectsList$($event)
+    // console.log($event)
+    this.projectsPageFacade.getProjectsList$($event).subscribe((projects) => {
+      // console.log(projects)
+      this.projects = projects
+    })
   }
 }
