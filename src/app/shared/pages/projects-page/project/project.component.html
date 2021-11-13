@@ -16,7 +16,7 @@
     </div>
     <div class="project-buttons">
       <app-participants
-        [registered]="card.currentApplicationsCount"
+        [registered]="card?.currentApplicationsCount!"
         [required]="card.plannedApplicationsCount"
         [routerLink]="['/projects', card.id]"
       ></app-participants>
