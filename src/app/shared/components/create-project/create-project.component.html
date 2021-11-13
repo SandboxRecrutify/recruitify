@@ -273,6 +273,7 @@
             nz-button
             nzType="link"
             nzDanger
+            [disabled]="isLoading"
             [nzLoading]="isDeleting"
           >
             Delete

@@ -30,6 +30,7 @@ export class ProjectsPageFacade {
   }
 
   createProject(project: Project): void {
+    // TODO move it to componenet
     this.createProjectLoading$.next(true);
     this.projectsService.createProject$(project).subscribe(
       (value) => {
@@ -44,6 +45,7 @@ export class ProjectsPageFacade {
     );
   }
   editProject(project: Project): void {
+    // TODO move it to componenet
     this.createProjectLoading$.next(true);
     this.projectsService.editProject$(project).subscribe(
       (value) => {
@@ -58,6 +60,7 @@ export class ProjectsPageFacade {
     );
   }
   deleteProject(id: string) {
+    // TODO move it to componenet
     this.deleteProjectLoading$.next(true);
     this.projectsService.deleteProject$(id).subscribe(
       (value) => {

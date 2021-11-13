@@ -58,9 +58,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleOk(): void {
-    this.submitForm();
-  }
   handleCancel(): void {
     this.form.reset();
     this.form.patchValue({ isActive: true });
