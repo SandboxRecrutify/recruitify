@@ -1,32 +1,53 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Directive({
   selector: '[appCalendarItem]',
 })
-export class CalendarItemDirective {
+export class CalendarItemDirective implements OnInit {
+  @Input('day') day!: number;
   isMouseDown = false;
 
   constructor(private el: ElementRef, private render: Renderer2) {}
 
-  @HostListener('mousedown', ['$event']) onMouseDown(event: MouseEvent) {
-    if (event.which === 1) {
-      this.render.setStyle(event.target, 'background', '#66FF00');
+  @HostListener('mousedown', ['$event']) onMouseDown(event: Event | any) {
+    let isNotChecked = !event.target.style.background;
+    let isItem = event.target.classList.contains('time-grid_item');
+    if (event.which === 1 && isNotChecked && isItem) {
+      this.render.setStyle(event.target, 'background', '#CADDC0');
       this.isMouseDown = true;
     }
   }
 
-  @HostListener('mouseup') onMouseUp(event: Event) {
+  @HostListener('mouseup') onMouseUp() {
     this.isMouseDown = false;
   }
 
-  @HostListener('mouseover', ['$event.target']) onMouseEnter(event: Event) {
-    this.isMouseDown
-      ? this.render.setStyle(event, 'background', '#66FF00')
-      : null;
+  @HostListener('mouseover', ['$event.target']) onMouseEnter(
+    event: HTMLElement
+  ) {
+    let isItem = event.classList.contains('time-grid_item');
+    if (isItem) {
+      this.isMouseDown
+        ? this.render.setStyle(event, 'background', '#CADDC0')
+        : null;
+    }
   }
 
   @HostListener('contextmenu', ['$event']) onRightClick(event: Event) {
     event.preventDefault();
-    this.render.setStyle(event.target, 'background', '#ff0000');
+    this.render.setStyle(event.target, 'background', '');
+  }
+
+  ngOnInit(): void {
+    if (this.day === 0 || this.day === 6) {
+      this.render.setStyle(this.el.nativeElement, 'background', '#faecc0');
+    }
   }
 }
