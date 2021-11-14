@@ -28,12 +28,12 @@ export class CalendarPageFacade {
   today = new Date();
 
   candidatesContactTime = [
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
+    { name: 'Vasya', surname: 'S', time: ['10', '11', , '16'] },
+    { name: 'Petya', surname: 'M', time: ['Any time'] },
+    { name: 'Igar', surname: 'V', time: ['12', '16'] },
+    { name: 'Nasta', surname: 'P', time: ['Any time'] },
+    { name: 'Lola', surname: 'J', time: ['10', '11', '12', '16'] },
+    { name: 'Koka', surname: 'A', time: ['Any time'] },
   ];
 
   constructor() {}
