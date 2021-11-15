@@ -23,7 +23,8 @@ const mainRouter: Routes = [
     component: LoginPageComponent,
     canActivate: [AuthGuard],
   },
-  { path: paths.fillForm, component: FillFormComponent },
+  // { path: paths.fillForm, component: FillFormComponent },
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
   { path: paths.start, component: StartPageComponent },
   { path: paths.internships, component: InternshipsComponent },
   {

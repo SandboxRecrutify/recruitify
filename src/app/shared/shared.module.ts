@@ -10,6 +10,7 @@ import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
+import { InternshipsFacade } from './pages/internships/internships.facade';
 
 //services
 import { CandidatesService } from './services/candidates.service';
@@ -152,6 +153,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     ProjectsPageFacade,
     UserService,
     CandidateService,
+    InternshipsFacade,
   ],
 })
 export class SharedModule {}
