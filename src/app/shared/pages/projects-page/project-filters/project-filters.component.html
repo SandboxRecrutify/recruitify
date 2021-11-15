@@ -42,16 +42,12 @@
                 style="width: 100%"
               >
                 <div nz-row>
-                  <div
-                    *ngFor="let item of data"
-                    nz-col
-                    nzSpan="8"
-                  >
+                  <div *ngFor="let item of data" nz-col nzSpan="8">
                     <label
                       [ngModelOptions]="{ standalone: true }"
-                      [ngModel]="primarySkillsInput.includes(item.id!)"
+                      [ngModel]="primarySkillsInput.includes(item.name!)"
                       nz-checkbox
-                      [nzValue]="item.id"
+                      [nzValue]="item.name"
                       >{{ item.name }}</label
                     >
                   </div>
