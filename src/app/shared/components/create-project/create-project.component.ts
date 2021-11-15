@@ -1,14 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 import { paths } from 'src/app/app-routing.constants';
 import { environment } from 'src/environments/environment';
 import { CreateProject } from '../../models/CreateProject';
 import { PrimarySkill } from '../../models/Project';
 import { ProjectsPageFacade } from '../../pages/projects-page/projects-page.facade';
-import { ProjectsService } from '../../services/projects.service';
 
 @Component({
   selector: 'app-create-project',
@@ -22,16 +21,21 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   data: CreateProject | undefined;
   form!: FormGroup;
   editingId: string | undefined;
+  isLoading = false;
+  isDeleting = false;
 
   private subscriptions: Subscription[] = [];
   constructor(
     private fb: FormBuilder,
-    private projectsService: ProjectsService,
     private projectsFacade: ProjectsPageFacade,
-    private message: NzMessageService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  //disable dates before today
+  disabledDate = (current: Date): boolean => {
+    return current && dayjs().add(-1, 'day').isAfter(dayjs(current));
+  };
 
   onPrimarySkillToggle(value: boolean, primarySkill: PrimarySkill) {
     this.isPrimarySkillsTouched = true;
@@ -60,11 +64,9 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleOk(): void {
-    this.submitForm();
-  }
   handleCancel(): void {
     this.form.reset();
+    this.form.patchValue({ isActive: true });
     this.primarySkills.clear();
     this.isPrimarySkillsTouched = false;
     this.projectsFacade.toggleCreateProjectDrawer$.next(false);
@@ -91,10 +93,26 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         this.form.controls[i].updateValueAndValidity();
       }
     }
-    console.log(this.form.value);
+
     if (this.form.valid && isPrimarySkillsValid) {
-      this.message.success('Project created successfully');
+      const toSend = this.projectsFacade.prepareProjectForCreation(
+        this.form.value,
+        this.data?.staffGroup!,
+        this.primarySkills
+      );
+      if (this.editingId) {
+        toSend.id = this.editingId;
+        this.projectsFacade.editProject(toSend);
+      } else {
+        this.projectsFacade.createProject(toSend);
+      }
     }
+  }
+  /// delete project
+  deleteProject() {
+    console.log('deleted');
+    // this.projectsFacade.deleteProject(this.editingId!);
+    // this.handleCancel();
   }
 
   ngOnInit(): void {
@@ -105,9 +123,9 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       })
     );
 
-    // subscribe to primary skills
+    // subscribe to primary skills and staff
     this.subscriptions.push(
-      this.projectsService.getCreateProjectData().subscribe((data) => {
+      this.projectsFacade.getCreateProjectData$().subscribe((data) => {
         data.primarySkills = data.primarySkills.map((skill) => ({
           ...skill,
           checked: false,
@@ -125,7 +143,8 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           Validators.maxLength(environment.CREATE_PROJECT_NAME_LENGTH),
         ],
       ],
-      dates: [, [Validators.required]],
+      dates: [[], [Validators.required]],
+      registrationDates: [[], [Validators.required]],
       plannedApplicationsCount: [null, [Validators.required]],
       isActive: [true, []],
       description: [
@@ -156,6 +175,10 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           this.form.patchValue({
             ...project,
             dates: [new Date(project.startDate), new Date(project.endDate)],
+            registrationDates: [
+              new Date(project.startRegistrationDate),
+              new Date(project.endRegistrationDate),
+            ],
             managers: project.managers.map((manager) => manager.userId),
             interviewers: project.interviewers.map(
               (interviewer) => interviewer.userId
@@ -184,6 +207,17 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
             });
           }
         }
+      })
+    );
+    // subscribe to loadings
+    this.subscriptions.push(
+      this.projectsFacade.createProjectLoading$.subscribe((loading) => {
+        this.isLoading = loading;
+      })
+    );
+    this.subscriptions.push(
+      this.projectsFacade.deleteProjectLoading$.subscribe((deleting) => {
+        this.isDeleting = deleting;
       })
     );
   }

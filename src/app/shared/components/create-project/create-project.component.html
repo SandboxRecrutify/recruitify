@@ -94,7 +94,7 @@
               id="managers"
             >
               <nz-option
-                *ngFor="let manager of data?.managers"
+                *ngFor="let manager of data?.staffGroup?.managers"
                 [nzValue]="manager.userId"
                 [nzLabel]="manager.userName"
               >
@@ -121,7 +121,7 @@
               id="recruiters"
             >
               <nz-option
-                *ngFor="let recruiter of data?.recruiters"
+                *ngFor="let recruiter of data?.staffGroup?.recruiters"
                 [nzValue]="recruiter.userId"
                 [nzLabel]="recruiter.userName"
               >
@@ -148,7 +148,7 @@
               id="interviewers"
             >
               <nz-option
-                *ngFor="let interviewer of data?.interviewers"
+                *ngFor="let interviewer of data?.staffGroup?.interviewers"
                 [nzValue]="interviewer.userId"
                 [nzLabel]="interviewer.userName"
               >
@@ -173,7 +173,7 @@
               id="mentors"
             >
               <nz-option
-                *ngFor="let mentor of data?.mentors"
+                *ngFor="let mentor of data?.staffGroup?.mentors"
                 [nzValue]="mentor.userId"
                 [nzLabel]="mentor.userName"
               >
@@ -190,6 +190,8 @@
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter dates">
             <nz-range-picker
+              [nzDisabledDate]="disabledDate"
+              class="datePicker"
               formControlName="dates"
               id="dates"
             ></nz-range-picker>
@@ -211,6 +213,22 @@
               formControlName="plannedApplicationsCount"
               id="plannedApplicationsCount"
             />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <!-- dates -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="registrationDates"
+            >Choose start and end dates of registration
+          </nz-form-label>
+          <nz-form-control nzErrorTip="Please enter dates of registration">
+            <nz-range-picker
+              [nzDisabledDate]="disabledDate"
+              class="datePicker"
+              formControlName="registrationDates"
+              id="registrationDates"
+            ></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -237,9 +255,33 @@
           </nz-form-control>
         </nz-form-item>
       </div>
-      <button nz-button nzType="primary" nzBlock (click)="submitForm()">
+      <button
+        [disabled]="isDeleting"
+        nz-button
+        nzType="primary"
+        nzBlock
+        [nzLoading]="isLoading"
+        (click)="submitForm()"
+      >
         {{ editingId ? "Save" : "Create" }}
       </button>
+      <ng-container *ngIf="editingId">
+        <div nz-row nzJustify="end" style="margin-top: 1rem; width: 100%">
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this project?"
+            (nzOnConfirm)="deleteProject()"
+            nzPopconfirmPlacement="leftBottom"
+            nz-button
+            nzType="link"
+            nzDanger
+            [disabled]="isLoading"
+            [nzLoading]="isDeleting"
+          >
+            Delete
+          </button>
+        </div>
+      </ng-container>
     </form>
   </ng-container>
 </nz-drawer>

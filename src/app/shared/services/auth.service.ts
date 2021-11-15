@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { User, UserData, UserResponse } from '../models/User';
+import { UserData, UserResponse } from '../models/User';
 import { ApiService } from './api.service';
 
-const API_URL = '/connect';
+const API_URL = '';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class AuthService extends ApiService {
       .set('username', user.email)
       .set('password', user.password)
       .set('grant_type', 'password');
-    return super.post<UserResponse, any>({ path: '/token' }, body.toString());
+    return super.post<UserResponse, any>({ login: true }, body.toString());
   }
   logout(): Observable<{}> {
     return of({});

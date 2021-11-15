@@ -15,36 +15,42 @@ import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 
 // consts
 import { paths } from './app-routing.constants';
+import { AppGuard } from './app-guard';
 
 const mainRouter: Routes = [
-  { path: paths.login, component: LoginPageComponent },
-  { path: paths.fillForm, component: FillFormComponent },
+  {
+    path: paths.login,
+    component: LoginPageComponent,
+    canActivate: [AuthGuard],
+  },
+  // { path: paths.fillForm, component: FillFormComponent },
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
   { path: paths.start, component: StartPageComponent },
   { path: paths.internships, component: InternshipsComponent },
   {
     path: paths.projects,
     component: ProjectsPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AppGuard],
   },
   {
     path: `${paths.projects}/:id`,
     component: CandidatesPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AppGuard],
   },
   {
     path: paths.candidates,
     component: CandidatesPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AppGuard],
   },
   {
     path: `${paths.profile}/:id/:projectId`,
     component: ProfilePageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AppGuard],
   },
   {
     path: paths.calendar,
     component: CalendarPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AppGuard],
   },
   {
     path: paths.fof,
@@ -77,6 +83,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
+  providers: [AppGuard, AuthGuard],
 })
 export class AppRoutingModule {}

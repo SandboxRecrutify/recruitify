@@ -1,24 +1,16 @@
-<div class="prompt">
-  <div class="prompt_img"></div>
-  <div class="prompt_text">
-    <div class="prompt_text-item">
-      LMB - if you are free at this time
-      <div class="text_color--free"></div>
-    </div>
-    <div class="prompt_text-item">
-      RMB - switch back to busy
-      <div class="text_color--busy"></div>
-    </div>
-  </div>
+<div class="week-btns">
+  <a nz-button nzType="link" (click)="onPreviousBtn()"><<< Previous week</a>
+  <a nz-button nzType="link" (click)="onNextBtnClick()">Nest week >>></a>
 </div>
+
 <app-time-line></app-time-line>
 <div class="calendar_table">
   <div class="calendar_interviewers">Aleksey Yanul</div>
   <div class="calendar_weekdays">
     <div
       class="calendar_weekday"
-      *ngFor="let day of weekDays"
-      appCalendarWeekday
+      *ngFor="let day of displayedWeekDays"
+      appCalendarItem
       [day]="day.getDay()"
     >
       {{ day | date: "MMM, d" }}
@@ -27,9 +19,17 @@
   </div>
   <div class="calendar_time-grid" appCalendarItem>
     <app-time-grid-row
-      *ngFor="let day of weekDays"
-      appCalendarWeekday
+      *ngFor="let day of displayedWeekDays"
       [day]="day.getDay()"
     ></app-time-grid-row>
+  </div>
+</div>
+<div class="prompt">
+  <div class="prompt_img"></div>
+  <div class="prompt_text">
+    <div class="prompt_text-item">
+      LMB - if you can interview a candidate at this time
+    </div>
+    <div class="prompt_text-item">RMB - cancel your choise</div>
   </div>
 </div>

@@ -1,4 +1,3 @@
-import { UserService } from './../../services/user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -29,28 +28,34 @@ export class CalendarPageFacade {
   today = new Date();
 
   candidatesContactTime = [
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['10', '11', '12', '16'] },
-    { name: 'Vasya', surname: 'Vasiliev', time: ['Any time'] },
+    { name: 'Vasya', surname: 'S', time: ['10', '11', , '16'] },
+    { name: 'Petya', surname: 'M', time: ['Any time'] },
+    { name: 'Igar', surname: 'V', time: ['12', '16'] },
+    { name: 'Nasta', surname: 'P', time: ['Any time'] },
+    { name: 'Lola', surname: 'J', time: ['10', '11', '12', '16'] },
+    { name: 'Koka', surname: 'A', time: ['Any time'] },
   ];
 
   constructor() {}
 
   getWeekDays() {
-    let datesArr = [this.today];
+    let daysArr = [this.today];
     for (let i = 1; i <= 6; i++) {
       let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
-      datesArr.push(nextDay);
+      daysArr.push(nextDay);
     }
-    return datesArr;
+    return daysArr;
+  }
+
+  getNextWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() + 24 * 7 * 60 * 60 * 1000)
+    );
+  }
+
+  getPreviousWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() - 24 * 7 * 60 * 60 * 1000)
+    );
   }
 }

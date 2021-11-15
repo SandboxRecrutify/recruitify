@@ -10,6 +10,7 @@ import { CalendarPageFacade } from './pages/calendar-page/calendar-page.facade';
 import { ProfilePageFacade } from './pages/profile-page/profile-page.facade';
 import { CandidatesPageFacade } from './pages/candidates-page/candidates-page.facade';
 import { ProjectsPageFacade } from './pages/projects-page/projects-page.facade';
+import { InternshipsFacade } from './pages/internships/internships.facade';
 
 //services
 import { CandidatesService } from './services/candidates.service';
@@ -52,6 +53,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
@@ -72,7 +74,6 @@ import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time
 import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
 import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
-import { CalendarWeekdayDirective } from './directives/calendar-weekday.directive';
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
@@ -105,7 +106,6 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     TableForStaffComponent,
     TimeGridRowComponent,
     CandidatesGridComponent,
-    CalendarWeekdayDirective,
   ],
   imports: [
     NzBreadCrumbModule,
@@ -140,6 +140,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzTypographyModule,
     NzDividerModule,
     NzRadioModule,
+    NzPopconfirmModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
@@ -152,6 +153,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     ProjectsPageFacade,
     UserService,
     CandidateService,
+    InternshipsFacade,
   ],
 })
 export class SharedModule {}

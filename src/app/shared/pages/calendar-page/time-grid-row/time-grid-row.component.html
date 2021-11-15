@@ -1,3 +1,7 @@
-<div class="calendar_time-grid-line">
+<div class="calendar_time-grid-line" *ngIf="setIsWeekDay(); else weekendRow">
   <app-time-grid-item *ngFor="let t of time"></app-time-grid-item>
 </div>
+
+<ng-template #weekendRow>
+  <div class="weekend"></div>
+</ng-template>

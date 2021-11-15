@@ -1,3 +1,15 @@
+.heading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    padding: 0;
+    font-size: 12px;
+  }
+}
+
 .calendar_table-wrapp {
   height: 47%;
   // padding-left: 40px;
@@ -20,9 +32,11 @@
 }
 
 .calendar_staff {
+  padding-left: 10px;
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  font-weight: 500;
+  border-right: 1px solid #949494;
 }
 
 app-time-line {

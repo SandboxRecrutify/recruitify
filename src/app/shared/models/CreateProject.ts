@@ -1,5 +1,6 @@
 import { PrimarySkill, StaffRole } from './Project';
 
-export interface CreateProject extends StaffRole {
+export interface CreateProject {
   primarySkills: PrimarySkill[];
+  staffGroup: StaffRole;
 }

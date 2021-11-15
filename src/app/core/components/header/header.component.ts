@@ -1,6 +1,7 @@
 import { UserService } from './../../../shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AppFacade } from 'src/app/app.facade';
+import { User } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,18 @@ import { AppFacade } from 'src/app/app.facade';
 })
 export class HeaderComponent implements OnInit {
   isAdmin: boolean = this.userService.isAdmin();
-
+  user: User | undefined;
   constructor(private appFacade: AppFacade, private userService: UserService) {}
 
   onLogoutBtnClick() {
     this.appFacade.logout();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.appFacade.getUser$().subscribe((user) => {
+      if (user) {
+        this.user = user;
+      }
+    });
+  }
 }

@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { paths } from '../app-routing.constants';
 import { AppFacade } from '../app.facade';
 
 @Injectable()
@@ -35,14 +36,14 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('[Interceptor Error]: ', error);
-        // if (error.status === 401) {
-        //   this.auth.logout();
-        //   this.router.navigate(['/admin', 'login'], {
-        //     queryParams: {
-        //       authFailed: true,
-        //     },
-        //   });
-        // }
+        if (error.status === 401 && this.router.url !== '/' + paths.login) {
+          this.appFacade.logout();
+          this.router.navigate([paths.login], {
+            queryParams: {
+              authFailed: true,
+            },
+          });
+        }
         return throwError(error);
       })
     );
