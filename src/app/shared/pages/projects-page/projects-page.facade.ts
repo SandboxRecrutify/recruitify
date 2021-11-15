@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
-import { Project } from '../../models/Project';
 import { QueryParams } from '../../services/api.service';
 import { PrimarySkill } from '../../models/PrimarySkill';
 import { Project, StaffRole } from '../../models/Project';
@@ -30,7 +29,7 @@ export class ProjectsPageFacade {
         property: 'primarySkills',
         value: `/any(p: p/name eq '${p}')`,
         operator: '',
-      }
+      };
     });
     // console.log(skills)
     const queryParams = filters
@@ -40,8 +39,8 @@ export class ProjectsPageFacade {
               names: [filters.orderBy.property],
               order: filters.orderBy.order,
             },
-            filter: skills
-              // { property: filters.status, operator: '', value: '' },
+            filter: skills,
+            // { property: filters.status, operator: '', value: '' },
           },
         }
       : { odata: {} };
