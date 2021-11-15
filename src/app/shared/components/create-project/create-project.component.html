@@ -190,6 +190,7 @@
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter dates">
             <nz-range-picker
+              [nzDisabledDate]="disabledDate"
               class="datePicker"
               formControlName="dates"
               id="dates"
@@ -223,6 +224,7 @@
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter dates of registration">
             <nz-range-picker
+              [nzDisabledDate]="disabledDate"
               class="datePicker"
               formControlName="registrationDates"
               id="registrationDates"

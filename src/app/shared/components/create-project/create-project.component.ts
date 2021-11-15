@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 import { paths } from 'src/app/app-routing.constants';
 import { environment } from 'src/environments/environment';
@@ -30,6 +31,11 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  //disable dates before today
+  disabledDate = (current: Date): boolean => {
+    return current && dayjs().add(-1, 'day').isAfter(dayjs(current));
+  };
 
   onPrimarySkillToggle(value: boolean, primarySkill: PrimarySkill) {
     this.isPrimarySkillsTouched = true;
