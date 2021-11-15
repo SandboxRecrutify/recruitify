@@ -6,7 +6,7 @@ import { ProjectsService } from 'src/app/shared/services/projects.service';
 
 export interface ProjectsOrderBy {
   property: string;
-  orderBy: 'asc' | 'desc';
+  order: 'asc' | 'desc';
 }
 export interface ProjectsFilters {
   status: string;
@@ -32,20 +32,20 @@ export class ProjectFiltersComponent implements OnInit {
   statuses = [
     {
       name: 'Active',
-      value: 'active',
+      value: 'isActive',
     },
     {
       name: 'Closed',
-      value: 'closed',
+      value: 'not isActive',
     },
     {
       name: 'All',
-      value: 'all',
+      value: '',
     },
   ];
-  statusInput: string = 'all';
+  statusInput: string = '';
   primarySkillsInput: string[] = [];
-  dateSortInput: ProjectsOrderBy = {property: 'startDate', orderBy: 'asc'}
+  dateSortInput: ProjectsOrderBy = {property: 'startDate', order: 'asc'}
 
   constructor(private projectsService: ProjectsService) {}
   primarySkillsChange(values: string[]) {
@@ -65,11 +65,12 @@ export class ProjectFiltersComponent implements OnInit {
     };
     this.onFilters.emit(ProjectsFilters);
     // console.log(ProjectsFilters);
+    this.onClose()
   }
 
   ngOnInit(): void {
     this.projectsService.getPrimarySkills().subscribe((data) => {
-      this.primarySkillsInput = data.map((skill) => skill.id!);
+      // this.primarySkillsInput = data.map((skill) => skill.id!);
       this.data = data;
     });
   }

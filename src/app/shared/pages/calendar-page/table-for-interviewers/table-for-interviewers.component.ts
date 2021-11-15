@@ -9,28 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class TableForInterviewersComponent implements OnInit {
   time = this.calendarPageFacade.time;
   currentWeekDays = this.calendarPageFacade.getWeekDays();
-  previousWeekDays = this.calendarPageFacade.getPreviousWeekDays();
-  nextWeekDays = this.calendarPageFacade.getNextWeekDays();
   displayedWeekDays: Date[] = this.currentWeekDays;
 
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 
   ngOnInit(): void {}
 
-  onNextButtonClick() {
-    if (this.displayedWeekDays === this.currentWeekDays) {
-      this.displayedWeekDays = this.nextWeekDays;
-    } else if (this.displayedWeekDays === this.previousWeekDays) {
-      this.displayedWeekDays = this.currentWeekDays;
-    }
-    console.log(this.previousWeekDays);
+  onNextBtnClick() {
+    this.displayedWeekDays = this.calendarPageFacade.getNextWeekDays(
+      this.displayedWeekDays
+    );
   }
 
-  onPreviousButtonClick() {
-    if (this.displayedWeekDays === this.currentWeekDays) {
-      this.displayedWeekDays = this.previousWeekDays;
-    } else if (this.displayedWeekDays === this.nextWeekDays) {
-      this.displayedWeekDays = this.currentWeekDays;
-    }
+  onPreviousBtn() {
+    this.displayedWeekDays = this.calendarPageFacade.getPreviousWeekDays(
+      this.displayedWeekDays
+    );
   }
 }
