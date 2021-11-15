@@ -1,5 +1,4 @@
 <div class="internships">
-  <!-- <div *ngFor="let project of activeProjects">{{ project.name }}</div> -->
   <div class="container">
     <div class="card" *ngFor="let project of activeProjects">
       <div class="card_heading">
@@ -12,11 +11,10 @@
           </p>
         </div>
       </div>
-
       <p class="card_info">👥 How to enter: pass the interview</p>
       <p class="card_info">
-        ⏰ Duration: 2 months
-        {{ getProjectDuration(project.startDate, project.endDate) }}
+        ⏰ Duration:
+        {{ getProjectDuration(project.startDate, project.endDate) }} weeks
       </p>
       <p class="card_info">
         📆 Start: {{ project.startDate | date: "MM.dd.yyyy" }}
@@ -31,7 +29,7 @@
       <nz-collapse nzGhost>
         <nz-collapse-panel
           *ngFor="let skill of project.primarySkills"
-          [nzHeader]="skill.name"
+          [nzHeader]="getNzCollapseTitle(skill.name)"
         >
           <div style="color: #ffffff">
             {{ skill.description }}
@@ -39,7 +37,12 @@
         </nz-collapse-panel>
       </nz-collapse>
 
-      <button class="card_btn" nz-button nzType="primary">
+      <button
+        class="card_btn"
+        nz-button
+        nzType="primary"
+        [routerLink]="['/fill-form', project.id]"
+      >
         Send a request
       </button>
     </div>
