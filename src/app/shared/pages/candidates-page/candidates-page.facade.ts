@@ -32,7 +32,7 @@ export class CandidatesPageFacade {
     'New',
     'Test',
     'Interview',
-    'Tech Interview 1 ',
+    'Tech Interview 1',
     'Tech Interview 2',
     'Accepted',
     'Declined',

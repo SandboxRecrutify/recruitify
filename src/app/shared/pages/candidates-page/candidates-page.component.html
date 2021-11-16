@@ -16,6 +16,7 @@
   </div>
   <app-dropdown-menu *ngIf="menuVisible"></app-dropdown-menu>
   <app-candidates-table
+    [isLoading]="isLoading"
     [currentProjectId]="currentProjectId"
     [candidatesList]="candidatesList"
   ></app-candidates-table>

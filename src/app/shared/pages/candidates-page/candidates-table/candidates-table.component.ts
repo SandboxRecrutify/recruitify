@@ -12,17 +12,17 @@ import { CandidatesPageFacade } from './../candidates-page.facade';
 export class CandidatesTableComponent implements OnInit {
   @Input() candidatesList!: Candidate[];
   @Input() currentProjectId!: string;
+  @Input() isLoading: boolean = false;
 
   paths = paths;
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<string>();
   candidateStatuses: string[] = [];
-  constructor(
-    private candidatesPageFacade: CandidatesPageFacade,
-    private router: ActivatedRoute
-  ) {
-    this.candidateStatuses = candidatesPageFacade.candidateStatuses;
+  feedbackTypes: string[] = [];
+  constructor(private candidatesPageFacade: CandidatesPageFacade) {
+    this.candidateStatuses = this.candidatesPageFacade.candidateStatuses;
+    this.feedbackTypes = this.candidatesPageFacade.feedbackTypes;
   }
 
   ngOnInit(): void {}
@@ -30,13 +30,10 @@ export class CandidatesTableComponent implements OnInit {
   // TODO chande feedback model.
   getFeedbackRate(candidate: Candidate, feedbackType: string) {
     try {
-      let currentProject: any = candidate.projectResults.find(
-        (item) => item.projectId === this.currentProjectId
-      );
-      let testFeedback = currentProject.feedbacks.find(
-        (item: any) => item.type === feedbackType
-      );
-      return testFeedback.rating;
+      const feedback = candidate.projectResults[0].feedbacks.find((item) => {
+        return item.type === this.feedbackTypes.indexOf(feedbackType);
+      });
+      return feedback?.rating || '-';
     } catch (error) {
       return '-';
     }

@@ -17,6 +17,7 @@ export class CandidatesPageComponent implements OnInit {
   setOfCheckedId = new Set<string>();
   drawerVisible = false;
   menuVisible = true;
+  isLoading = false;
 
   candidatesList: Candidate[] = [];
   currentProjectId = '';
@@ -33,11 +34,16 @@ export class CandidatesPageComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.currentProjectId = params.id;
       if (params.id) {
-        this.candidatesPageFacade
-          .getProjectCandidates$(params.id)
-          .subscribe((candidates) => {
+        this.isLoading = true;
+        this.candidatesPageFacade.getProjectCandidates$(params.id).subscribe(
+          (candidates) => {
             this.candidatesList = candidates;
-          });
+            this.isLoading = false;
+          },
+          () => {
+            this.isLoading = false;
+          }
+        );
 
         this.candidatesPageFacade
           .getProjectData$(params.id)
