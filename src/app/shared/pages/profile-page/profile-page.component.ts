@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { paths } from './../../../app-routing.constants';
+import { CandidatesPageFacade } from '../candidates-page/candidates-page.facade';
 import { Candidate } from './../../models/Candidate';
 import { ProfilePageFacade } from './profile-page.facade';
 
@@ -25,34 +25,55 @@ import { ProfilePageFacade } from './profile-page.facade';
 export class ProfilePageComponent implements OnInit {
   candidate: Candidate | undefined = undefined;
   tabs = ['Recruiters', 'Mentors', 'Interviewers'];
+  projectLanguages: string[] = [];
+  englishLvls: string[] = [];
+  candidateStatuses: string[] = [];
+  currentProjectId: string = '';
+  prevProjects: any[] = [];
+  isLoading = false;
 
   constructor(
     private profilePageFacade: ProfilePageFacade,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
-
-  goToCandidatesList() {
-    this.router.navigate([paths.candidates]);
+    private route: ActivatedRoute,
+    private candidatesFacade: CandidatesPageFacade
+  ) {
+    this.candidateStatuses = this.candidatesFacade.candidateStatuses;
+    this.projectLanguages = this.candidatesFacade.projectLanguages;
+    this.englishLvls = this.candidatesFacade.englishLvls;
   }
-
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
+      this.currentProjectId = params.projectId;
+      this.isLoading = true;
       this.profilePageFacade
-        .getCandidateById$(params.id)
-        .subscribe((candidate) => {
-          this.candidate = candidate;
+        .getCandidateById$(params.id, params.projectId)
+        .subscribe(
+          (candidate) => {
+            this.isLoading = false;
+            this.candidate = candidate;
+          },
+          () => {
+            this.isLoading = false;
+          }
+        );
+      this.profilePageFacade
+        .getPrevProjects$(params.id)
+        .subscribe((prevProjects) => {
+          this.prevProjects = prevProjects;
         });
     });
   }
 
   printCandidatePrimarySkills(candidate?: Candidate) {
-    return candidate?.primarySkills
-      .map((skill) => skill.primarySkillName)
-      .join(' | ');
+    return candidate?.primarySkills.map((skill) => skill.name).join(' | ');
   }
-
-  log(candidate?: Candidate) {
-    console.log(candidate);
+  getTestResult() {
+    return (
+      this.candidate?.projectResults[0].feedbacks.find((feedback) => {
+        //feedback type 0 is test result
+        return feedback.type === 0;
+      })?.rating || 'none'
+    );
   }
 }

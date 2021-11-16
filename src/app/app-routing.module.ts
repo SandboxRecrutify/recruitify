@@ -43,7 +43,7 @@ const mainRouter: Routes = [
     canActivate: [AppGuard],
   },
   {
-    path: `${paths.profile}/:id`,
+    path: `${paths.profile}/:id/:projectId`,
     component: ProfilePageComponent,
     canActivate: [AppGuard],
   },

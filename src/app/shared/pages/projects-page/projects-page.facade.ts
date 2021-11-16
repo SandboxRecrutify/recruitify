@@ -4,7 +4,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
 import { QueryParams } from '../../services/api.service';
-import { PrimarySkill } from '../../models/PrimarySkill';
 import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectsFilters } from './project-filters/project-filters.component';

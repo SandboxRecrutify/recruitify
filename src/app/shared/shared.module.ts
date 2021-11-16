@@ -76,6 +76,7 @@ import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-g
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   declarations: [
@@ -141,6 +142,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzDividerModule,
     NzRadioModule,
     NzPopconfirmModule,
+    NzSpinModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
