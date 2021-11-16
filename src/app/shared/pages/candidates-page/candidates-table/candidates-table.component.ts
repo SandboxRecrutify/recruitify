@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { paths } from 'src/app/app-routing.constants';
 import { Candidate } from './../../../models/Candidate';
 import { CandidatesPageFacade } from './../candidates-page.facade';
@@ -33,7 +32,7 @@ export class CandidatesTableComponent implements OnInit {
       const feedback = candidate.projectResults[0].feedbacks.find((item) => {
         return item.type === this.feedbackTypes.indexOf(feedbackType);
       });
-      return feedback?.rating || '-';
+      return typeof feedback?.rating === 'number' ? feedback.rating : '-';
     } catch (error) {
       return '-';
     }
