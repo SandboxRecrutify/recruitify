@@ -34,10 +34,7 @@ export class ProjectsService extends ApiService {
   }
 
   getProjectById(projectId: string): Observable<Project> {
-    return super.get<Project[]>({ mock: '/projects.json' }).pipe(
-      flatMap((projects) => projects),
-      filter((project) => project.id === projectId)
-    );
+    return super.get<Project>({ path: '/' + projectId });
   }
 
   createProject$(project: Project): Observable<Project> {

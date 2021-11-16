@@ -42,13 +42,13 @@
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
       <td>
         <p *ngFor="let skill of candidate.primarySkills">
-          {{ skill.primarySkillName }}
+          {{ skill.name }}
         </p>
       </td>
       <td>
         {{
           candidate.projectResults[0]
-            ? candidate.projectResults[0].status
+            ? candidateStatuses[candidate.projectResults[0].status]
             : "none"
         }}
       </td>
@@ -83,7 +83,7 @@
       <td>
         <button
           class="profile-btn"
-          [routerLink]="['/profile', candidate.id]"
+          [routerLink]="['/' + paths.profile, candidate.id, currentProjectId]"
         ></button>
       </td>
     </tr>

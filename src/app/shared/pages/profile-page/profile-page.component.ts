@@ -47,9 +47,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   printCandidatePrimarySkills(candidate?: Candidate) {
-    return candidate?.primarySkills
-      .map((skill) => skill.primarySkillName)
-      .join(' | ');
+    return candidate?.primarySkills.map((skill) => skill.name).join(' | ');
   }
 
   log(candidate?: Candidate) {

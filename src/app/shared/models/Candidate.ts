@@ -1,7 +1,7 @@
 import { CandidateProjectResults } from './CandidateProjectResults';
 import { CandidateLocation } from './CandidateLocation';
 import { CandidateContact } from './CandidateContact';
-import { PrimarySkill } from './PrimarySkill';
+import { PrimarySkill } from './Project';
 
 export interface Candidate {
   id: string;

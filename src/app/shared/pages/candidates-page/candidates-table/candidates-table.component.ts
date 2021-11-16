@@ -1,10 +1,8 @@
-import { Project } from 'src/app/shared/models/Project';
-import { CandidateProjectResults } from './../../../models/CandidateProjectResults';
-import { Feedback } from './../../../models/Feedback';
-import { ActivatedRoute } from '@angular/router';
-import { CandidatesPageFacade } from './../candidates-page.facade';
-import { Candidate } from './../../../models/Candidate';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { paths } from 'src/app/app-routing.constants';
+import { Candidate } from './../../../models/Candidate';
+import { CandidatesPageFacade } from './../candidates-page.facade';
 
 @Component({
   selector: 'app-candidates-table',
@@ -13,19 +11,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CandidatesTableComponent implements OnInit {
   @Input() candidatesList!: Candidate[];
+  @Input() currentProjectId!: string;
 
+  paths = paths;
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<string>();
-  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
-
+  candidateStatuses: string[] = [];
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private router: ActivatedRoute
-  ) {}
+  ) {
+    this.candidateStatuses = candidatesPageFacade.candidateStatuses;
+  }
 
   ngOnInit(): void {}
 
+  // TODO chande feedback model.
   getFeedbackRate(candidate: Candidate, feedbackType: string) {
     try {
       let currentProject: any = candidate.projectResults.find(
@@ -72,7 +74,4 @@ export class CandidatesTableComponent implements OnInit {
 
   sortAlphabetically = (a: Candidate, b: Candidate) =>
     a.name.localeCompare(b.name);
-
-  // sortNumber = (arr: any) =>
-  //   arr.sort((a, b) => (a.testResult > b.testResult ? 1 : -1));
 }
