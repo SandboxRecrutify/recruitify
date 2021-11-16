@@ -30,6 +30,7 @@ export class ProfilePageComponent implements OnInit {
   candidateStatuses: string[] = [];
   currentProjectId: string = '';
   prevProjects: any[] = [];
+  isLoading = false;
 
   constructor(
     private profilePageFacade: ProfilePageFacade,
@@ -44,11 +45,18 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.currentProjectId = params.projectId;
+      this.isLoading = true;
       this.profilePageFacade
         .getCandidateById$(params.id, params.projectId)
-        .subscribe((candidate) => {
-          this.candidate = candidate;
-        });
+        .subscribe(
+          (candidate) => {
+            this.isLoading = false;
+            this.candidate = candidate;
+          },
+          () => {
+            this.isLoading = false;
+          }
+        );
       this.profilePageFacade
         .getPrevProjects$(params.id)
         .subscribe((prevProjects) => {
