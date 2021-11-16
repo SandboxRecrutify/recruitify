@@ -8,6 +8,8 @@ import { UserService } from './../../services/user.service';
 
 @Injectable()
 export class CandidatesPageFacade {
+  projectLanguages = ['English', 'Russian'];
+
   englishLvls = [
     'Begginer',
     'Pre-Intermediate',
@@ -36,7 +38,13 @@ export class CandidatesPageFacade {
     'Declined',
     'Candidate rejected',
   ];
-
+  feedbackTypes = [
+    'Test',
+    'Interview',
+    'TechInterviewOneStep',
+    'TechInterviewSecondStep',
+    'Mentor',
+  ];
   candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
 
   constructor(

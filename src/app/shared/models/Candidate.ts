@@ -7,7 +7,7 @@ export interface Candidate {
   id: string;
   name: string;
   surname: string;
-  englishLevel: string;
+  englishLevel: number;
   phoneNumber: string;
   email: string;
   bestTimeToConnect: number[];
@@ -22,5 +22,5 @@ export interface Candidate {
   additionalQuestions?: string;
   additionalInfo?: string;
   testResult?: string;
-  language?: string;
+  projectLanguage: number;
 }
