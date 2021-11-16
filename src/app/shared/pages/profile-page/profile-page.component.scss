@@ -1,5 +1,6 @@
 @use "../../../../globals/" as *;
 .profile {
+  font-size: 1rem !important;
   position: relative;
   padding: 2rem;
   display: flex;
@@ -11,6 +12,7 @@
   &_wrapper {
     max-width: 1200px;
     margin: 1rem auto;
+    padding: 0 1rem;
   }
   p {
     margin: 0;

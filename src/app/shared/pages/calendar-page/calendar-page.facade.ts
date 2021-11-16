@@ -1,4 +1,3 @@
-import { UserService } from './../../services/user.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -29,12 +28,12 @@ export class CalendarPageFacade {
   today = new Date();
 
   candidatesContactTime = [
-    { name: 'Vasya', surname: 'kalu', time: ['10', '11', , '16'] },
-    { name: 'Petya', surname: 'olos', time: ['Any time'] },
-    { name: 'Igar', surname: 'mjgh', time: ['12', '16'] },
-    { name: 'Nasta', surname: 'lopo', time: ['Any time'] },
-    { name: 'Pisa', surname: 'gtyu', time: ['10', '11', '12', '16'] },
-    { name: 'Koka', surname: 'muny', time: ['Any time'] },
+    { name: 'Vasya', surname: 'S', time: ['10', '11', , '16'] },
+    { name: 'Petya', surname: 'M', time: ['Any time'] },
+    { name: 'Igar', surname: 'V', time: ['12', '16'] },
+    { name: 'Nasta', surname: 'P', time: ['Any time'] },
+    { name: 'Lola', surname: 'J', time: ['10', '11', '12', '16'] },
+    { name: 'Koka', surname: 'A', time: ['Any time'] },
   ];
 
   constructor() {}
@@ -48,21 +47,15 @@ export class CalendarPageFacade {
     return daysArr;
   }
 
-  getNextWeekDays() {
-    let daysArr = [];
-    for (let i = 7; i <= 13; i++) {
-      let nextDay = new Date(new Date().getTime() + 24 * i * 60 * 60 * 1000);
-      daysArr.push(nextDay);
-    }
-    return daysArr;
+  getNextWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() + 24 * 7 * 60 * 60 * 1000)
+    );
   }
 
-  getPreviousWeekDays() {
-    let daysArr = [];
-    for (let i = 1; i <= 7; i++) {
-      let nextDay = new Date(new Date().getTime() - 24 * i * 60 * 60 * 1000);
-      daysArr.unshift(nextDay);
-    }
-    return daysArr;
+  getPreviousWeekDays(weekdaysArr: Date[]) {
+    return weekdaysArr.map(
+      (item) => new Date(item.getTime() - 24 * 7 * 60 * 60 * 1000)
+    );
   }
 }

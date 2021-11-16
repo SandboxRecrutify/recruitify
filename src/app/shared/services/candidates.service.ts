@@ -13,6 +13,9 @@ export class CandidatesService extends ApiService {
   }
 
   getCandidates(): Observable<Candidate[]> {
-    return super.get({odata: {}}).pipe(map((d: any) => d.value));
+    return super.get({ odata: {} }).pipe(map((d: any) => d.value));
+  }
+  getCandidatesByProjectId(projectId: string): Observable<Candidate[]> {
+    return super.get({ path: '/all/' + projectId });
   }
 }

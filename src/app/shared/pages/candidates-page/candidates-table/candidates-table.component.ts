@@ -1,10 +1,7 @@
-import { Project } from 'src/app/shared/models/Project';
-import { CandidateProjectResults } from './../../../models/CandidateProjectResults';
-import { Feedback } from './../../../models/Feedback';
-import { ActivatedRoute } from '@angular/router';
-import { CandidatesPageFacade } from './../candidates-page.facade';
-import { Candidate } from './../../../models/Candidate';
 import { Component, Input, OnInit } from '@angular/core';
+import { paths } from 'src/app/app-routing.constants';
+import { Candidate } from './../../../models/Candidate';
+import { CandidatesPageFacade } from './../candidates-page.facade';
 
 @Component({
   selector: 'app-candidates-table',
@@ -13,28 +10,29 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CandidatesTableComponent implements OnInit {
   @Input() candidatesList!: Candidate[];
+  @Input() currentProjectId!: string;
+  @Input() isLoading: boolean = false;
 
+  paths = paths;
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<string>();
-  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
-
-  constructor(
-    private candidatesPageFacade: CandidatesPageFacade,
-    private router: ActivatedRoute
-  ) {}
+  candidateStatuses: string[] = [];
+  feedbackTypes: string[] = [];
+  constructor(private candidatesPageFacade: CandidatesPageFacade) {
+    this.candidateStatuses = this.candidatesPageFacade.candidateStatuses;
+    this.feedbackTypes = this.candidatesPageFacade.feedbackTypes;
+  }
 
   ngOnInit(): void {}
 
+  // TODO chande feedback model.
   getFeedbackRate(candidate: Candidate, feedbackType: string) {
     try {
-      let currentProject: any = candidate.projectResults.find(
-        (item) => item.projectId === this.currentProjectId
-      );
-      let testFeedback = currentProject.feedbacks.find(
-        (item: any) => item.type === feedbackType
-      );
-      return testFeedback.rating;
+      const feedback = candidate.projectResults[0].feedbacks.find((item) => {
+        return item.type === this.feedbackTypes.indexOf(feedbackType);
+      });
+      return typeof feedback?.rating === 'number' ? feedback.rating : '-';
     } catch (error) {
       return '-';
     }
@@ -72,7 +70,4 @@ export class CandidatesTableComponent implements OnInit {
 
   sortAlphabetically = (a: Candidate, b: Candidate) =>
     a.name.localeCompare(b.name);
-
-  // sortNumber = (arr: any) =>
-  //   arr.sort((a, b) => (a.testResult > b.testResult ? 1 : -1));
 }
