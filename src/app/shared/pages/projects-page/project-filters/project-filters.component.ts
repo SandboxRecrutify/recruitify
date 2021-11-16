@@ -45,7 +45,7 @@ export class ProjectFiltersComponent implements OnInit {
   ];
   statusInput: string = '';
   primarySkillsInput: string[] = [];
-  dateSortInput: ProjectsOrderBy = {property: 'startDate', order: 'asc'}
+  dateSortInput: ProjectsOrderBy = {property: 'startDate', order: 'desc'}
 
   constructor(private projectsService: ProjectsService) {}
   primarySkillsChange(values: string[]) {

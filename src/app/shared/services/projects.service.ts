@@ -19,9 +19,6 @@ export class ProjectsService extends ApiService {
     // console.log(filters)
     return super.get(filters).pipe(map((d: any) => d.value));
     // return super.get({mock: '/projects.json'})
-    //   return super.get({ odata: {'filter': "isActive",
-    //   'orderby': 'name', 'skip': 1
-    // } }).pipe(map((d: any) => d.value));
   }
 
   //get create project modal data

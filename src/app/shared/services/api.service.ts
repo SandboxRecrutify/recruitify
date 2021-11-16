@@ -35,7 +35,7 @@ interface OrderBy {
 }
 
 interface Filter {
-  property: string;
+  property?: string;
   value?: string;
   operator?: string;
 }
