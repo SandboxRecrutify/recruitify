@@ -1,4 +1,3 @@
-
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/Project';
@@ -17,14 +16,12 @@ export class ProjectsPageComponent implements OnInit {
   projects: Project[] = [];
   // projects$: Observable<Project[]>;
 
-  constructor(private projectsPageFacade: ProjectsPageFacade) {
-
-  }
+  constructor(private projectsPageFacade: ProjectsPageFacade) {}
 
   ngOnInit(): void {
     this.projectsPageFacade.getProjectsList$().subscribe((projects) => {
-      this.projects = projects
-    })
+      this.projects = projects;
+    });
   }
 
   toggleFiltersVisible(isVisible: boolean) {
@@ -39,7 +36,11 @@ export class ProjectsPageComponent implements OnInit {
     // console.log($event)
     this.projectsPageFacade.getProjectsList$($event).subscribe((projects) => {
       // console.log(projects)
-      this.projects = projects
-    })
+      this.projects = projects;
+    });
+  }
+
+  onSearchChange($event: string) {
+    console.log($event)
   }
 }
