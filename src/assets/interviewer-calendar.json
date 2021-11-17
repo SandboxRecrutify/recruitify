@@ -1,0 +1,64 @@
+[
+  {
+    "name": "Michael Ivanov",
+    "skill": "JS",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          { "time": "9:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "9:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "10:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "10:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "11:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "11:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "12:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "12:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "13:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "13:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "14:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "14:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "15:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "15:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "16:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "16:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "17:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "17:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "18:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "18:30", "isAvaliable": false, "isAsigned": false }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Elizveta Kiseleva",
+    "skill": ".NET",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          { "time": "9:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "9:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "10:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "10:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "11:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "11:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "12:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "12:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "13:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "13:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "14:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "14:30", "isAvaliable": true, "isAsigned": false },
+          { "time": "15:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "15:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "16:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "16:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "17:00", "isAvaliable": false, "isAsigned": false },
+          { "time": "17:30", "isAvaliable": false, "isAsigned": false },
+          { "time": "18:00", "isAvaliable": true, "isAsigned": false },
+          { "time": "18:30", "isAvaliable": true, "isAsigned": false }
+        ]
+      }
+    ]
+  }
+]

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DragulaModule } from 'ng2-dragula';
+
 import { SharedRoutingModule } from './shared-routing.module';
 
 //facades
@@ -140,7 +142,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzDividerModule,
     NzRadioModule,
     NzPopconfirmModule,
+    DragulaModule.forRoot(),
     NzSpinModule,
+
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [

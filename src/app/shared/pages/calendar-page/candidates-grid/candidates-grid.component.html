@@ -1,13 +1,12 @@
-<div class="candidates_grid">
-  <div class="candidates_item" *ngFor="let candidate of candidates">
-    {{ candidate.name }} {{ candidate.surname }} |
-    {{ candidate.time.join(", ") }}
+<div class="candidates_grid" dragula="calendar">
+  <div
+    class="candidates_item"
+    *ngFor="let candidate of candidatesWithTimeToContact"
+  >
+    <div class="skill">{{ candidate.skill }}</div>
+    <p>{{ candidate.name }} {{ candidate.surname }}</p>
+    <p>
+      {{ candidate.bestTimeToConnect.join(", ") }}
+    </p>
   </div>
 </div>
-
-<!-- <div class="candidates_grid" cdkDropList cdkDropListSortingDisabled>
-  <div cdkDrag class="candidates_item" *ngFor="let candidate of candidates">
-    {{ candidate.name }} {{ candidate.surname }} |
-    {{ candidate.time.join(", ") }}
-  </div>
-</div> -->

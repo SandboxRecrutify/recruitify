@@ -1,8 +1,8 @@
+import { CandidatesService } from './../../services/candidates.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CalendarPageFacade {
-  itemStatuses = ['free', 'busy', 'assigned'];
   time = [
     '09:00',
     '09:30',
@@ -26,9 +26,8 @@ export class CalendarPageFacade {
     '18:30',
   ];
   today = new Date();
-
   candidatesContactTime = [
-    { name: 'Vasya', surname: 'S', time: ['10', '11', , '16'] },
+    { name: 'Vasya', surname: 'S', time: ['10', '11', '16'] },
     { name: 'Petya', surname: 'M', time: ['Any time'] },
     { name: 'Igar', surname: 'V', time: ['12', '16'] },
     { name: 'Nasta', surname: 'P', time: ['Any time'] },
@@ -36,7 +35,7 @@ export class CalendarPageFacade {
     { name: 'Koka', surname: 'A', time: ['Any time'] },
   ];
 
-  constructor() {}
+  constructor(private candidatesService: CandidatesService) {}
 
   getWeekDays() {
     let daysArr = [this.today];
