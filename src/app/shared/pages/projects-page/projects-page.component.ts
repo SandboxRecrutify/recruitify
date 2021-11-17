@@ -14,7 +14,6 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
 
   projects: Project[] = [];
-  // projects$: Observable<Project[]>;
 
   constructor(private projectsPageFacade: ProjectsPageFacade) {}
 
@@ -33,14 +32,12 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   applyProjectsFilters($event: ProjectsFilters) {
-    // console.log($event)
     this.projectsPageFacade.getProjectsList$($event).subscribe((projects) => {
-      // console.log(projects)
       this.projects = projects;
     });
   }
 
   onSearchChange($event: string) {
-    console.log($event)
+    console.log($event);
   }
 }

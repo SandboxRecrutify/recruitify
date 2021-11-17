@@ -122,11 +122,19 @@ export abstract class ApiService {
       }
       if (params.odata.filter) {
         const filter = params.odata.filter;
-        const filterParams = filter
-          .map((f) => `${f.property}${f.value}`)
-          .join(' or ');
-        url += this.buildOData('filter', filterParams);
-        console.log(url);
+        const filterParams = filter.map((el) => {
+          if (Array.isArray(el) && el) {
+            return el.map((f) => `${f.property}${f.operator}`).join(' or ');
+          } else {
+            return el.property && `${el.property}`;
+          }
+        });
+
+        if (filterParams.includes('')) {
+          return (url += this.buildOData('filter', filterParams.join('')));
+        } else {
+          return (url += this.buildOData('filter', filterParams.join(' and ')));
+        }
       }
     } else if (params.login) {
     } else {
@@ -135,14 +143,8 @@ export abstract class ApiService {
     return url;
   }
 
-  private buildFilter() {}
-
-  // private isRuleInterface(obj: Rule | Filter): obj is Rule {
-  //   return (<Rule>obj).filter !== undefined;
-  // }
-
   private buildOData(query: string, value: any) {
-    return (query && `&$${query}=${value}`) || '';
+    return (query && value && `&$${query}=${value}`) || '';
   }
 
   private wrapRequest<T>(

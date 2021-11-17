@@ -34,7 +34,6 @@ import { CalendarPageComponent } from './pages/calendar-page/calendar-page.compo
 
 //pipes
 import { SearchPipe } from './pipes/search.pipe';
-import { FilterPipe } from './pipes/filter.pipe';
 
 //nz-modules
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -94,7 +93,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     CalendarPageComponent,
     CandidatesPageComponent,
     SearchPipe,
-    FilterPipe,
     PrimarySkillInputComponent,
     FilterDrawerComponent,
     DropdownMenuComponent,
