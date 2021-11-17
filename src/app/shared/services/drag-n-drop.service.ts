@@ -1,6 +1,6 @@
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,9 @@ export class DragNDropService {
       })
     );
     this.subs.add(
-      dragulaService.over('calendar').subscribe(({ container }) => {
+      dragulaService.over('calendar').subscribe(({ el, container, source }) => {
+        console.log(container);
+
         container.classList.add('over');
       })
     );
@@ -32,10 +34,6 @@ export class DragNDropService {
         if (target.classList.contains('avaliable')) {
           el.innerHTML = '';
           el.className = 'd-none';
-          // console.log('drop', el);
-          // console.log('drop', target);
-          // console.log('drop', sibling);
-          // target.className = 'assigned';
           target.classList.add('assigned');
         }
       })

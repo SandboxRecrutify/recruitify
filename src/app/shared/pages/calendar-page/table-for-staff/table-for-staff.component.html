@@ -10,18 +10,18 @@
 <app-time-line></app-time-line>
 
 <div class="calendar_table-wrapp">
-  <div class="calendar_raw" *ngFor="let interviewer of interviewersTimeTable">
+  <div class="calendar_row" *ngFor="let interviewer of interviewersTimeTable">
     <div class="calendar_staff">
       {{ interviewer.name }}, {{ interviewer.skill }}
     </div>
-    <div class="row">
+    <div class="time-grid">
       <div
         class="time-grid_item"
         *ngFor="let time of interviewer.calendar[0].timetable"
       >
         <div
           *ngIf="time.isAvaliable"
-          class="time-grid_item avaliable"
+          class="avaliable"
           dragula="calendar"
         ></div>
       </div>

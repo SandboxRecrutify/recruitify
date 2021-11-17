@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { CandidatesService } from './../../../services/candidates.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -19,17 +19,6 @@ export class CandidatesGridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.candidatesService.getCandidates().subscribe((responce) => {
-    //   responce.map((candidate) => {
-    //     let { name, surname, bestTimeToConnect } = candidate;
-    //     this.candidatesTimeToContact.push({
-    //       name: name,
-    //       surname: surname,
-    //       bestTimeToConnect: bestTimeToConnect,
-    //     });
-    //   });
-    // });
-
     this.http
       .get('/assets/candidates-contact-time.json')
       .subscribe((response) => {
