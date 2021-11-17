@@ -1,4 +1,9 @@
-<nz-table #nzTable [nzData]="candidatesList" nzTableLayout="fixed">
+<nz-table
+  [nzLoading]="isLoading"
+  #nzTable
+  [nzData]="candidatesList"
+  nzTableLayout="fixed"
+>
   <thead>
     <tr>
       <th
@@ -42,13 +47,13 @@
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
       <td>
         <p *ngFor="let skill of candidate.primarySkills">
-          {{ skill.primarySkillName }}
+          {{ skill.name }}
         </p>
       </td>
       <td>
         {{
           candidate.projectResults[0]
-            ? candidate.projectResults[0].status
+            ? candidateStatuses[candidate.projectResults[0].status]
             : "none"
         }}
       </td>
@@ -57,7 +62,7 @@
       </td>
       <td>
         <app-rating-stars
-          [rate]="getFeedbackRate(candidate, 'Mentor')"
+          [rate]="getFeedbackRate(candidate, 'Interview')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
@@ -69,7 +74,7 @@
       </td>
       <td>
         <app-rating-stars
-          [rate]="getFeedbackRate(candidate, 'Recruiter')"
+          [rate]="getFeedbackRate(candidate, 'Mentor')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
@@ -83,7 +88,7 @@
       <td>
         <button
           class="profile-btn"
-          [routerLink]="['/profile', candidate.id]"
+          [routerLink]="['/' + paths.profile, candidate.id, currentProjectId]"
         ></button>
       </td>
     </tr>

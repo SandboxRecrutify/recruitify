@@ -13,6 +13,7 @@
           nz-input
           placeholder="Search project"
           [(ngModel)]="searchText"
+          (ngModelChange)="onSearchChange($event)"
         />
       </nz-input-group>
       <ng-template #suffixIconSearch>

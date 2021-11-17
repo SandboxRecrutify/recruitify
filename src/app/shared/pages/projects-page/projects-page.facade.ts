@@ -4,7 +4,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
 import { QueryParams } from '../../services/api.service';
-import { PrimarySkill } from '../../models/PrimarySkill';
 import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectsFilters } from './project-filters/project-filters.component';
@@ -24,14 +23,14 @@ export class ProjectsPageFacade {
   ) {}
 
   getProjectsList$(filters?: ProjectsFilters): Observable<Project[]> {
-    const skills = filters?.primary.map((p) => {
+    const skills = filters?.primary.length ? filters?.primary.map((p) => {
       return {
         property: 'primarySkills',
         value: `/any(p: p/name eq '${p}')`,
         operator: '',
       };
-    });
-    // console.log(skills)
+    }) : null
+    console.log(skills)
     const queryParams = filters
       ? <QueryParams>{
           odata: {
@@ -39,8 +38,8 @@ export class ProjectsPageFacade {
               names: [filters.orderBy.property],
               order: filters.orderBy.order,
             },
-            filter: skills,
-            // { property: filters.status, operator: '', value: '' },
+            filter: skills
+            // { property: filters.status, operator: ' and ', value: '' },
           },
         }
       : { odata: {} };

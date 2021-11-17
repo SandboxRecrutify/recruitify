@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { CandidatesPageFacade } from './candidates-page.facade';
-import { UserService } from './../../services/user.service';
-import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { paths } from 'src/app/app-routing.constants';
 import { Candidate } from './../../models/Candidate';
+import { CandidatesPageFacade } from './candidates-page.facade';
 
 @Component({
   selector: 'app-candidates-page',
@@ -17,38 +17,43 @@ export class CandidatesPageComponent implements OnInit {
   setOfCheckedId = new Set<string>();
   drawerVisible = false;
   menuVisible = true;
+  isLoading = false;
+
   candidatesList: Candidate[] = [];
-  currentProjectId = this.candidatesPageFacade.getCurrentProjectId(this.router);
-  currentProjectName: any;
+  currentProjectId = '';
+  currentProjectName: string = '';
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
-    private projectsPageFacade: ProjectsPageFacade,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
-    this.projectsPageFacade.getProjectsList$().subscribe((response) => {
-      let currentProject = response.find(
-        (project) => project.id === this.currentProjectId
-      );
-      this.currentProjectName = currentProject?.name;
-    });
+    this.route.params.subscribe((params: Params) => {
+      this.currentProjectId = params.id;
+      if (params.id) {
+        this.isLoading = true;
+        this.candidatesPageFacade.getProjectCandidates$(params.id).subscribe(
+          (candidates) => {
+            this.candidatesList = candidates;
+            this.isLoading = false;
+          },
+          () => {
+            this.isLoading = false;
+          }
+        );
 
-    this.candidatesPageFacade.candidateList$.subscribe((response) => {
-      this.router.params.subscribe((params: Params) => {
-        if (params.id) {
-          this.candidatesList = response.filter((candidate: Candidate) => {
-            let { projectResults } = candidate;
-
-            return projectResults.some(
-              (item) => item.projectId === this.currentProjectId
-            );
+        this.candidatesPageFacade
+          .getProjectData$(params.id)
+          .subscribe((project) => {
+            this.currentProjectName = project.name;
           });
-        } else {
-          this.candidatesList = response;
-        }
-      });
+      } else {
+        this.router.navigate([paths.fof]);
+        this.message.error('Project not found!');
+      }
     });
   }
 

@@ -19,9 +19,6 @@ export class ProjectsService extends ApiService {
     // console.log(filters)
     return super.get(filters).pipe(map((d: any) => d.value));
     // return super.get({mock: '/projects.json'})
-    //   return super.get({ odata: {'filter': "isActive",
-    //   'orderby': 'name', 'skip': 1
-    // } }).pipe(map((d: any) => d.value));
   }
 
   //get create project modal data
@@ -34,10 +31,7 @@ export class ProjectsService extends ApiService {
   }
 
   getProjectById(projectId: string): Observable<Project> {
-    return super.get<Project[]>({ mock: '/projects.json' }).pipe(
-      flatMap((projects) => projects),
-      filter((project) => project.id === projectId)
-    );
+    return super.get<Project>({ path: '/' + projectId });
   }
 
   createProject$(project: Project): Observable<Project> {
