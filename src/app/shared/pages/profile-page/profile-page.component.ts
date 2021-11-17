@@ -24,7 +24,6 @@ import { ProfilePageFacade } from './profile-page.facade';
 })
 export class ProfilePageComponent implements OnInit {
   candidate: Candidate | undefined = undefined;
-  tabs = ['Recruiters', 'Mentors', 'Interviewers'];
   projectLanguages: string[] = [];
   englishLvls: string[] = [];
   candidateStatuses: string[] = [];

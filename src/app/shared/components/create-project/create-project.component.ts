@@ -111,8 +111,8 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   /// delete project
   deleteProject() {
     console.log('deleted');
-    // this.projectsFacade.deleteProject(this.editingId!);
-    // this.handleCancel();
+    this.projectsFacade.deleteProject(this.editingId!);
+    this.handleCancel();
   }
 
   ngOnInit(): void {
