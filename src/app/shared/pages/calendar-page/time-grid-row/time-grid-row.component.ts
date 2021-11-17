@@ -11,15 +11,11 @@ export class TimeGridRowComponent implements OnInit {
 
   time = this.calendarPageFacade.time;
 
-  setIsWeekDay() {
-    return this.day !== 0 && this.day !== 6;
-  }
-
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 
-  ngOnInit(): void {
-    // console.log(this.day === 0 || this.day === 6);
-    // console.log(this.day === 0 || this.day === 6);
-    // console.log(this.setIsWeekEnd());
+  ngOnInit(): void {}
+
+  setIsWeekDay() {
+    return this.day !== 0 && this.day !== 6;
   }
 }

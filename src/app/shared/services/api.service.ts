@@ -27,7 +27,7 @@ export interface OData {
   skip?: number;
   count?: boolean;
   orderby?: OrderBy;
-  filter?: Filter[]
+  filter?: Filter[];
 }
 interface OrderBy {
   names: string[];
@@ -117,14 +117,16 @@ export abstract class ApiService {
         const orderBy = params.odata.orderby;
         url += this.buildOData(
           'orderby',
-          orderBy.names.join(',') + ' ' + orderBy.order);
+          orderBy.names.join(',') + ' ' + orderBy.order
+        );
       }
       if (params.odata.filter) {
         const filter = params.odata.filter;
         const filterParams = filter
-            .map((f) => `${f.property}${f.value}`).join(' or ')
+          .map((f) => `${f.property}${f.value}`)
+          .join(' or ');
         url += this.buildOData('filter', filterParams);
-        console.log(url)
+        console.log(url);
       }
     } else if (params.login) {
     } else {

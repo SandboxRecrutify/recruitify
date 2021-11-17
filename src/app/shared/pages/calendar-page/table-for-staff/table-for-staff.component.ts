@@ -1,3 +1,7 @@
+import { DragNDropService } from './../../../services/drag-n-drop.service';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { DragulaService } from 'ng2-dragula';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-for-staff.component.scss'],
 })
 export class TableForStaffComponent implements OnInit {
+  interviewersTimeTable: any = [];
   today = new Date().toLocaleDateString();
-  today1 = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
+  subs = new Subscription();
 
-  constructor() {}
+  constructor(
+    private dragulaService: DragulaService,
+    private http: HttpClient,
+    private dragNDropService: DragNDropService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.http
+      .get('/assets/interviewer-calendar.json')
+      .subscribe((response) => (this.interviewersTimeTable = response));
+  }
 }
