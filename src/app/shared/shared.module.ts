@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DragulaModule } from 'ng2-dragula';
+
 import { SharedRoutingModule } from './shared-routing.module';
 
 //facades
@@ -76,7 +78,6 @@ import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-g
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [

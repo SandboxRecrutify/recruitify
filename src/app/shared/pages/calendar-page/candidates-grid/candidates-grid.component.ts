@@ -1,10 +1,7 @@
+import { HttpClient } from '@angular/common/http';
+import { CandidatesService } from './../../../services/candidates.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  CdkDragEnter,
-} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -12,17 +9,31 @@ import {
   styleUrls: ['./candidates-grid.component.scss'],
 })
 export class CandidatesGridComponent implements OnInit {
-  constructor(private calendarPageFacade: CalendarPageFacade) {}
-
   candidates = this.calendarPageFacade.candidatesContactTime;
+  candidatesWithTimeToContact: any = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private calendarPageFacade: CalendarPageFacade,
+    private candidatesService: CandidatesService,
+    private http: HttpClient
+  ) {}
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.candidates, event.previousIndex, event.currentIndex);
-  }
+  ngOnInit(): void {
+    // this.candidatesService.getCandidates().subscribe((responce) => {
+    //   responce.map((candidate) => {
+    //     let { name, surname, bestTimeToConnect } = candidate;
+    //     this.candidatesTimeToContact.push({
+    //       name: name,
+    //       surname: surname,
+    //       bestTimeToConnect: bestTimeToConnect,
+    //     });
+    //   });
+    // });
 
-  entered(event: CdkDragEnter) {
-    moveItemInArray(this.candidates, event.item.data, event.container.data);
+    this.http
+      .get('/assets/candidates-contact-time.json')
+      .subscribe((response) => {
+        this.candidatesWithTimeToContact = response;
+      });
   }
 }

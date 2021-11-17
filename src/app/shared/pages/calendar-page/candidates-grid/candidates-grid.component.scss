@@ -1,3 +1,7 @@
+p {
+  margin: 0;
+}
+
 .candidates_grid {
   height: 47%;
   width: 100%;
@@ -11,8 +15,11 @@
 }
 
 .candidates_item {
-  height: 25px;
+  position: relative;
+  padding: 3px 0;
+  // height: 25px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #0082ca;
@@ -21,4 +28,10 @@
   font-weight: 400;
   box-sizing: border-box;
   cursor: move;
+}
+
+.skill {
+  position: absolute;
+  top: 0px;
+  left: 2px;
 }

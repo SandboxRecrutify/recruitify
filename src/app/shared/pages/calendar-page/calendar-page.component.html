@@ -1,24 +1,7 @@
 <div class="page_container calendar-wrapp">
+  <!-- *ngIf="isInterviewer" -->
   <!-- <app-table-for-interviewers></app-table-for-interviewers> -->
+
+  <!-- *ngIf="isManagerOrRecruiter" -->
   <app-table-for-staff></app-table-for-staff>
-
-  <div>
-    <div class="wrapper" style="display: flex; gap: 10px">
-      <div class="container" dragula="DRAGULA_FACTS">
-        <div>111</div>
-        <div>222</div>
-        <div>333</div>
-      </div>
-      <div class="container" dragula="DRAGULA_FACTS">
-        <div>444</div>
-        <div>555</div>
-        <div>666</div>
-      </div>
-    </div>
-  </div>
-
-  <!--
-  <app-table-for-interviewers *ngIf="isInterviewer"></app-table-for-interviewers>
-  <app-table-for-staff *ngIf="isManagerOrRecruiter"></app-table-for-staff>
-  -->
 </div>

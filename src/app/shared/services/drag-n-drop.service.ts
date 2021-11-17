@@ -1,22 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
 import { DragulaService } from 'ng2-dragula';
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-table-for-staff',
-  templateUrl: './table-for-staff.component.html',
-  styleUrls: ['./table-for-staff.component.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class TableForStaffComponent implements OnInit {
-  interviewersTimeTable: any = [];
-  today = new Date().toLocaleDateString();
+export class DragNDropService {
   subs = new Subscription();
 
-  constructor(
-    private dragulaService: DragulaService,
-    private http: HttpClient
-  ) {
+  constructor(private dragulaService: DragulaService) {
     dragulaService.createGroup('calendar', {
       revertOnSpill: true,
     });
@@ -48,11 +40,5 @@ export class TableForStaffComponent implements OnInit {
         }
       })
     );
-  }
-
-  ngOnInit(): void {
-    this.http
-      .get('/assets/interviewer-calendar.json')
-      .subscribe((response) => (this.interviewersTimeTable = response));
   }
 }
