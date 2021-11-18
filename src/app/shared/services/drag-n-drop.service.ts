@@ -14,13 +14,11 @@ export class DragNDropService {
     });
     this.subs.add(
       dragulaService.drag('calendar').subscribe(({ el }) => {
-        console.log(el);
+        // console.log(el);
       })
     );
     this.subs.add(
       dragulaService.over('calendar').subscribe(({ el, container, source }) => {
-        console.log(container);
-
         container.classList.add('over');
       })
     );

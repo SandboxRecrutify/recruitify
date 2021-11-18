@@ -11,7 +11,12 @@
 
 <div class="calendar_table-wrapp">
   <div class="calendar_row" *ngFor="let interviewer of interviewersTimeTable">
-    <div class="calendar_staff">
+    <div
+      class="calendar_staff"
+      [ngClass]="{
+        avaliableInterviewer: interviewer.skill === dragedCandidateSkill
+      }"
+    >
       {{ interviewer.name }}, {{ interviewer.skill }}
     </div>
     <div class="time-grid">
@@ -21,12 +26,39 @@
       >
         <div
           *ngIf="time.isAvaliable"
-          class="avaliable"
-          dragula="calendar"
+          [ngClass]="{
+            markedByInterviewer: time.isAvaliable,
+            avaliableToDrop:
+              interviewer.skill === dragedCandidateSkill &&
+              dragedCandidateTime.includes(time.time) &&
+              !time.isAsigned
+          }"
+          [dragula]="
+            checkIsAvaliableToDrop(
+              interviewer.skill,
+              dragedCandidateSkill,
+              time.time,
+              dragedCandidateTime
+            )
+          "
         ></div>
       </div>
     </div>
   </div>
 </div>
 
-<app-candidates-grid></app-candidates-grid>
+<!-- <app-candidates-grid></app-candidates-grid> -->
+
+<div class="candidates_grid" dragula="calendar">
+  <div
+    class="candidates_item"
+    *ngFor="let candidate of candidatesWithTimeToContact"
+    id="{{ candidate.id }}"
+  >
+    <div class="skill">{{ candidate.skill }}</div>
+    <p>{{ candidate.name }} {{ candidate.surname }}</p>
+    <p>
+      {{ candidate.bestTimeToConnect.join(", ") }}
+    </p>
+  </div>
+</div>

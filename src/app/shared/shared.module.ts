@@ -146,7 +146,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzPopconfirmModule,
     DragulaModule.forRoot(),
     NzSpinModule,
-
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [

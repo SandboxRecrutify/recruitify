@@ -37,6 +37,7 @@
   align-items: center;
   font-weight: 500;
   border-right: 1px solid #949494;
+  transition: 0.3s;
 }
 
 app-time-line {
@@ -63,17 +64,17 @@ app-time-line {
   overflow: hidden;
 }
 
-.avaliable {
+.markedByInterviewer {
   height: 100%;
   width: 100%;
-  transition: 0.3s;
   background-color: #caddc0;
+  transition: 0.3s;
 }
 
 .over {
   width: 100%;
-  background-color: rgb(245, 244, 220);
-  box-shadow: 0px 0px 3px 1px rgba(15, 15, 17, 0.2) inset;
+  background-color: rgb(239, 237, 193);
+  box-shadow: 0px 0px 7px 5px rgba(15, 15, 17, 0.2) inset;
 }
 
 .d-none {
@@ -82,4 +83,52 @@ app-time-line {
 
 .assigned {
   background-color: #76cc48;
+}
+
+// candidates - grid
+
+p {
+  margin: 0;
+}
+
+.candidates_grid {
+  height: 47%;
+  width: 100%;
+  padding: 3px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 3px;
+  align-content: start;
+  border: 1px solid #0082ca;
+  overflow-y: auto;
+}
+
+.candidates_item {
+  position: relative;
+  padding: 3px 0;
+  // height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0082ca;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  box-sizing: border-box;
+  cursor: move;
+}
+
+.skill {
+  position: absolute;
+  top: 0px;
+  left: 2px;
+}
+
+.avaliableInterviewer {
+  background-color: #f0f4ed;
+}
+
+.avaliableToDrop {
+  background-color: #caee8d;
 }
