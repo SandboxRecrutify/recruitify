@@ -23,14 +23,11 @@ export class ProjectsPageFacade {
   ) {}
 
   getProjectsList$(filters?: ProjectsFilters): Observable<Project[]> {
-    const skills = filters?.primary.length ? filters?.primary.map((p) => {
-      return {
-        property: 'primarySkills',
-        value: `/any(p: p/name eq '${p}')`,
-        operator: '',
-      };
-    }) : null
-    console.log(skills)
+    const skills = filters?.primary.map((p) => ({
+      property: 'primarySkills',
+      operator: `/any(p: p/name eq '${p}')`,
+    }));
+    const status = { property: filters?.status, operator: ' and ' };
     const queryParams = filters
       ? <QueryParams>{
           odata: {
@@ -38,12 +35,10 @@ export class ProjectsPageFacade {
               names: [filters.orderBy.property],
               order: filters.orderBy.order,
             },
-            filter: skills
-            // { property: filters.status, operator: ' and ', value: '' },
+            filter: [skills, status],
           },
         }
       : { odata: {} };
-
     return this.projectsService.getProjects(queryParams);
   }
 
@@ -130,9 +125,6 @@ export class ProjectsPageFacade {
   }
 }
 
-//primarySkills/any(p: p/name eq 'Java')
-// startDate asc  | desc
-// isActive | not isActive
 
 //for search
 //contains(name, 'searchText')

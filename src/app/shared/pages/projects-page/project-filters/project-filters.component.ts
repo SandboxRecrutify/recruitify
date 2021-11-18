@@ -11,7 +11,7 @@ export interface ProjectsOrderBy {
 export interface ProjectsFilters {
   status: string;
   primary: string[];
-  orderBy: ProjectsOrderBy
+  orderBy: ProjectsOrderBy;
 }
 @Component({
   selector: 'app-project-filters',
@@ -45,7 +45,7 @@ export class ProjectFiltersComponent implements OnInit {
   ];
   statusInput: string = '';
   primarySkillsInput: string[] = [];
-  dateSortInput: ProjectsOrderBy = {property: 'startDate', order: 'desc'}
+  dateSortInput: ProjectsOrderBy = { property: 'startDate', order: 'desc' };
 
   constructor(private projectsService: ProjectsService) {}
   primarySkillsChange(values: string[]) {
@@ -56,21 +56,22 @@ export class ProjectFiltersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // console.log(this.statusInput, this.primarySkillsInput, this.dateSortInput);
-
     const ProjectsFilters: ProjectsFilters = {
       status: this.statusInput,
       primary: this.primarySkillsInput,
       orderBy: this.dateSortInput,
     };
     this.onFilters.emit(ProjectsFilters);
-    // console.log(ProjectsFilters);
-    this.onClose()
+    this.onClose();
   }
 
+  clearFilters() {
+    this.statusInput = '';
+    this.primarySkillsInput = [];
+    this.dateSortInput = { property: 'startDate', order: 'desc' };
+  }
   ngOnInit(): void {
     this.projectsService.getPrimarySkills().subscribe((data) => {
-      // this.primarySkillsInput = data.map((skill) => skill.id!);
       this.data = data;
     });
   }
