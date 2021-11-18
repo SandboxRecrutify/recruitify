@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./time-line.component.scss'],
 })
 export class TimeLineComponent implements OnInit {
-  time = this.calendarPageFacade.time;
+  time = this.calendarPageFacade.timeLine;
 
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 

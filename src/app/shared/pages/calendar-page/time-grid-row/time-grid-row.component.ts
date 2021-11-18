@@ -7,15 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./time-grid-row.component.scss'],
 })
 export class TimeGridRowComponent implements OnInit {
-  @Input('day') day!: number;
-
-  time = this.calendarPageFacade.time;
+  time = this.calendarPageFacade.timeLine;
 
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 
   ngOnInit(): void {}
-
-  setIsWeekDay() {
-    return this.day !== 0 && this.day !== 6;
-  }
 }
