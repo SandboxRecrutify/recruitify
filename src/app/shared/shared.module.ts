@@ -68,11 +68,11 @@ import { ProjectFiltersComponent } from './pages/projects-page/project-filters/p
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { TableForInterviewersComponent } from './pages/calendar-page/table-for-interviewers/table-for-interviewers.component';
+import { CalendarForInterviewersComponent } from './pages/calendar-page/calendar-for-interviewers/calendar-for-interviewers.component';
 import { TimeLineComponent } from './pages/calendar-page/time-line/time-line.component';
 import { CalendarItemDirective } from './directives/calendar-item.directive';
 import { TimeGridItemComponent } from './pages/calendar-page/time-grid-item/time-grid-item.component';
-import { TableForStaffComponent } from './pages/calendar-page/table-for-staff/table-for-staff.component';
+import { CalendarForRecruitersComponent } from './pages/calendar-page/calendar-for-recruiters/calendar-for-recruiters.component';
 import { TimeGridRowComponent } from './pages/calendar-page/time-grid-row/time-grid-row.component';
 import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/candidates-grid.component';
 import { CandidateService } from './services/candidate.service';
@@ -100,11 +100,11 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     EnumToArrayPipe,
     CandidatesTableComponent,
     ProjectFiltersComponent,
-    TableForInterviewersComponent,
+    CalendarForInterviewersComponent,
     TimeLineComponent,
     CalendarItemDirective,
     TimeGridItemComponent,
-    TableForStaffComponent,
+    CalendarForRecruitersComponent,
     TimeGridRowComponent,
     CandidatesGridComponent,
   ],

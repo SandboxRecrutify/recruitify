@@ -12,15 +12,12 @@
 
 .calendar_table-wrapp {
   height: 47%;
-  // padding-left: 40px;
   overflow-y: auto;
 }
 
 .calendar_table {
   width: 100%;
-  // border: 1px solid #949494;
   display: grid;
-  // grid-gap: 1px;
 }
 
 .calendar_row {
@@ -106,7 +103,6 @@ p {
 .candidates_item {
   position: relative;
   padding: 3px 0;
-  // height: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;

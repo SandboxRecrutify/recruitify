@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./candidates-grid.component.scss'],
 })
 export class CandidatesGridComponent implements OnInit {
-  candidates = this.calendarPageFacade.candidatesContactTime;
+  // candidates = this.calendarPageFacade.candidatesContactTime;
   candidatesWithTimeToContact: any = [];
 
   constructor(

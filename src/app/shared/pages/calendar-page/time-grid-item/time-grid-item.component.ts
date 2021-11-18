@@ -9,9 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./time-grid-item.component.scss'],
 })
 export class TimeGridItemComponent implements OnInit {
-  @Input() time: any;
-
   constructor() {}
 
   ngOnInit(): void {}
+
+  onItemMarked() {}
 }
