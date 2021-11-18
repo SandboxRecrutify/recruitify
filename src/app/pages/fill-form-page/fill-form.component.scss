@@ -8,6 +8,8 @@
         width: 500px;
         margin: 0 auto;
         padding: 40px;
+        font-weight: 500;
+        color: $primaryColor;
     } 
 
     form{
@@ -37,10 +39,6 @@
         margin: 0;
     }
 
-    .ant-form-item-label{
-        color: $primaryColor;
-    }
-
     .pad-left{
         padding-left: 10px;
         width: 100%;
@@ -58,12 +56,49 @@
         width: 100%;
     }
 
+    .color{
+        color: $primaryColor;
+    }
+    
     nz-select{
         padding: 10px 0;
     }
 
+    .checkbox{
+        display: flex;
+        flex-direction: row;
+        width: 200px;
+        justify-content: space-around;
+
+        // .timeInput{
+        //     border: 10px solid black;
+        // }
+        
+    }
+
+    #selectbox{
+        border: 10px solid black;
+    }
+
+    .time-select, .add-link{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+
     .color{
         color: $primaryColor;
+    }
+
+    .add-btn{
+        margin-left: 8px;
+        background-color: $bgColor;
+        border: none;
+
+        i{
+            color: $primaryColor;
+        }
     }
 
     .btn{
@@ -72,8 +107,9 @@
     }
 
     button{
-        background: $primaryColor;
-        color: white;
+        background-color: $primaryColor;
+        color: $bgColor;
+        border-radius: 8px;
     }
 
 }

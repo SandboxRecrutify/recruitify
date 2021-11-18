@@ -1,254 +1,236 @@
 <div class="fill_form">
   <div class="fill_form_container">
     <h2>Hi! Please, fill out the form</h2>
-    <form nz-form>
-      <nz-form-item>
+      <form nz-form (ngSubmit)="submitForm()">
+
+        <nz-form-item>
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="fname">First Name</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="fname" type="text" id="fname" placeholder="Enter your First name">
+              </nz-form-control>
+            </div>
+                
+            <div class="inner-item-box pad-left">
+              <nz-form-label nzRequired nzNoColon nzFor="lname">Last Name</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="lname" type="text" id="lname" placeholder="Enter your Last name">
+              </nz-form-control>
+            </div>
+          </div>  
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="skype">Skype</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="skype" type="text" id="skype" placeholder="Enter your Skype Login">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="email">Email</nz-form-label>
+              <nz-form-control >
+                <input class="input-link-one" nz-input name="email" type="text" id="email" placeholder="Enter your Email">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="phone">Phone</nz-form-label>
+              <nz-form-control >
+                <input nz-input name="phone" type="text" id="phone" placeholder="Enter your Phone number">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item>
+          <div class="item-box">
+            <div class="inner-item-box">
+
+              <nz-form-label nzNoColon nzFor="link">Add links to your social networks 
+                <button class="add-btn" nz-button nzType="default" nzShape="circle">
+                  <i nz-icon nzType="plus"></i>
+                </button>
+              </nz-form-label>
+              
+              <!-- <div class="add-link">
+                <div nz-col nzSpan="8" class="social-network">
+                  <nz-form-control>
+                    <input class="input-link-one" nz-input name="link" type="text" placeholder="Social network" *ngIf="showInputField" #snetwork />
+                  </nz-form-control>
+                </div>
+              
+                <div nz-col nzSpan="15" class="social-link">
+                  <nz-form-control>
+                    <input class="input-link-two" nz-input name="link" type="text" placeholder="Link" *ngIf="showInputField" #slink />
+                  </nz-form-control>
+                </div>
+              </div> -->
+
+            </div>
+          </div>
+        </nz-form-item>
+
+
+
         <div class="item-box">
           <div class="inner-item-box">
-            <nz-form-label nzRequired nzNoColon nzFor="fname"
-              >First Name</nz-form-label
-            >
-            <nz-form-control>
-              <input
-                nz-input
-                name="fname"
-                type="text"
-                id="fname"
-                placeholder="Enter your First name"
-              />
+            <nz-form-label nzRequired nzNoColon nzFor="location">Location (City, Country)</nz-form-label>
+            <nz-form-control >
+              <input nz-input name="location" type="text" id="location" placeholder="Enter your Country">
             </nz-form-control>
           </div>
-
+              
           <div class="inner-item-box pad-left">
-            <nz-form-label nzRequired nzNoColon nzFor="lname"
-              >Last Name</nz-form-label
-            >
-            <nz-form-control>
-              <input
-                nz-input
-                name="lname"
-                type="text"
-                id="lname"
-                placeholder="Enter your Last name"
-              />
-            </nz-form-control>
+            <nz-form-control >
+              <input nz-input name="location" type="text" id="location" placeholder="Enter your City">
+            </nz-form-control> 
           </div>
         </div>
-      </nz-form-item>
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzRequired nzNoColon nzFor="skype"
-              >Skype</nz-form-label
-            >
-            <nz-form-control>
-              <input
-                nz-input
-                name="skype"
-                type="text"
-                id="skype"
-                placeholder="Enter your Skype Login"
-              />
-            </nz-form-control>
-          </div>
-        </div>
-      </nz-form-item>
-
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzRequired nzNoColon nzFor="email"
-              >Email</nz-form-label
-            >
-            <nz-form-control>
-              <input
-                nz-input
-                name="email"
-                type="text"
-                id="email"
-                placeholder="Enter your Email"
-              />
-            </nz-form-control>
-          </div>
-        </div>
-      </nz-form-item>
-
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzRequired nzNoColon nzFor="phone"
-              >Phone</nz-form-label
-            >
-            <nz-form-control>
-              <input
-                nz-input
-                name="phone"
-                type="text"
-                id="phone"
-                placeholder="Enter your Phone number"
-              />
-            </nz-form-control>
-          </div>
-        </div>
-      </nz-form-item>
-
-      <div class="item-box">
-        <div class="inner-item-box">
-          <nz-form-label nzRequired nzNoColon nzFor="location"
-            >Location (City, Country)</nz-form-label
-          >
-          <nz-form-control>
-            <input
-              nz-input
-              name="location"
-              type="text"
-              id="location"
-              placeholder="Enter your Country"
-            />
-          </nz-form-control>
-        </div>
-
-        <div class="inner-item-box pad-left">
-          <nz-form-control>
-            <input
-              nz-input
-              name="location"
-              type="text"
-              id="location"
-              placeholder="Enter your City"
-            />
-          </nz-form-control>
-        </div>
-      </div>
-
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box pad-top">
-            <nz-form-label nzNoColon nzRequired>English level</nz-form-label>
-            <nz-select nzAllowClear nzPlaceHolder="Choose your English level">
-              <nz-option
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box pad-top">
+              <nz-form-label nzNoColon nzRequired>English level</nz-form-label>
+              <nz-select nzAllowClear nzPlaceHolder="Choose your English level">
+                <nz-option
                 *ngFor="let englishLevel of englishLevel$ | async | enumToArray"
                 [nzValue]="englishLevel[0]"
                 [nzLabel]="englishLevel[1]"
               ></nz-option>
-            </nz-select>
+              </nz-select>
+            </div>
           </div>
-        </div>
-      </nz-form-item>
+        </nz-form-item >
 
-      <nz-form-item>
-        <app-radio-button
-          title="Choose the language of Internship"
-          [options]="['English', 'Russian']"
-        ></app-radio-button>
-      </nz-form-item>
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
-            <nz-select
-              nzRequired
-              nzAllowClear
-              nzPlaceHolder="Primary skill"
-              required
-            >
-              <nz-option
-                *ngFor="let primarySkill of currentProjectSkills"
-                [nzValue]="primarySkill.id"
-                [nzLabel]="primarySkill.name"
+        <nz-form-item >
+          <app-radio-button title="Choose the language of Internship" [options]="['English', 'Russian']"></app-radio-button>
+        </nz-form-item>
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
+              <nz-select  nzRequired  nzAllowClear nzPlaceHolder="Primary skill" required>
+                <nz-option
+                *ngFor="let primarySkills of primarySkills$ | async "
+                [nzValue]="primarySkills.id"
+                [nzLabel]="primarySkills.name"
               ></nz-option>
-            </nz-select>
+              </nz-select>
+            </div>
           </div>
-        </div>
-      </nz-form-item>
+        </nz-form-item >
 
-      <nz-form-item>
-        <app-radio-button
-          title="Are you planning to join Exadel after the Training?"
-          [options]="['Yes', 'No']"
-        ></app-radio-button>
-      </nz-form-item>
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzNoColon nzFor="comments">Comments</nz-form-label>
-            <nz-form-control>
-              <input
-                nz-input
-                name="comments"
-                type="text"
-                id="comments"
-                placeholder="Enter your comments"
-              />
+        <nz-form-item>
+          <div class="item-box">
+            <div class="inner-item-box">
+
+              <nz-form-label nzNoColon nzRequired nzFor="time">The best time for you to contact you (Minsk time zone)</nz-form-label>
+
+              <div class="checkbox pad-top">
+
+                <div *ngFor="let data of selectedTimes">
+                  {{data.value}}
+                  <nz-form-control>
+                    <input class="timeInput" name="time" type="checkbox" 
+                    [(selectbox)]="data.isSelected" #selectbox="selectboxAs" 
+                    nz-checkbox [checked]="data.isSelected" 
+                    (change)="selectedTimeChange($event, data)">
+                  </nz-form-control>
+                </div>
+
+              </div>
+              
+
+            </div>
+          </div>
+        </nz-form-item>
+  
+
+        <nz-form-item >
+          <app-radio-button title="Are you planning to join Exadel after the Training?" [options]="['Yes', 'No']"></app-radio-button>
+        </nz-form-item>
+
+        
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzFor="comments">Comments</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="comments" type="text" id="comments" placeholder="Enter your comments">
+              </nz-form-control>
+            </div>
+          </div>
+        </nz-form-item >
+
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon>Do you have any questions?</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="questions" type="text" id="questions" placeholder="Enter your questions">
             </nz-form-control>
+            </div>
           </div>
-        </div>
-      </nz-form-item>
+        </nz-form-item >
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzNoColon>Do you have any questions?</nz-form-label>
-            <nz-form-control>
-              <input
-                nz-input
-                name="questions"
-                type="text"
-                id="questions"
-                placeholder="Enter your questions"
-              />
-            </nz-form-control>
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon nzFor="cjob">Current job</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="cjob" type="text" id="cjob" placeholder="Enter your Current job">
+              </nz-form-control>
+            </div>
           </div>
-        </div>
-      </nz-form-item>
+        </nz-form-item >
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzNoColon nzFor="cjob">Current job</nz-form-label>
-            <nz-form-control>
-              <input
-                nz-input
-                name="cjob"
-                type="text"
-                id="cjob"
-                placeholder="Enter your Current job"
-              />
-            </nz-form-control>
+
+        <nz-form-item >
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzNoColon>Professional certificates</nz-form-label>
+              <nz-form-control>
+                  <input nz-input name="certificates" type="text" id="certificates" placeholder="What professional certificates do you have?">
+              </nz-form-control>
+            </div>
           </div>
-        </div>
-      </nz-form-item>
+        </nz-form-item >
 
-      <nz-form-item>
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzNoColon>Professional certificates</nz-form-label>
-            <nz-form-control>
-              <input
-                nz-input
-                name="certificates"
-                type="text"
-                id="certificates"
-                placeholder="What professional certificates do you have?"
-              />
-            </nz-form-control>
-          </div>
-        </div>
-      </nz-form-item>
 
-      <nz-form-item class="btn">
-        <button nz-button><span>Submit</span></button>
+        <nz-form-item class="btn">
+          <button nz-button><span>Submit</span></button>
         <!-- <nz-modal nzTitle="The first Modal" >
           <ng-container *nzModalContent>
           </ng-container>
         </nz-modal>
                    -->
-      </nz-form-item>
+        </nz-form-item>
 
-      <!-- <modal-button></modal-button> -->
-    </form>
+        <!-- <modal-button></modal-button> -->
+            
+      </form>
+   
   </div>
 </div>

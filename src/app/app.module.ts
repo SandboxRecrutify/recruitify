@@ -32,6 +32,7 @@ import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FillFormServices } from './services/fill-form.service';
 import { AuthInterceptor } from './services/http.auth.interceptor';
+import { Selectbox } from './pages/fill-form-page/checkbox/selectbox.directive';
 
 /** set the default i18n config **/
 
@@ -48,6 +49,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     StartPageComponent,
     FillFormComponent,
     AppRadioButtonComponent,
+    Selectbox,
   ],
   imports: [
     BrowserModule,
