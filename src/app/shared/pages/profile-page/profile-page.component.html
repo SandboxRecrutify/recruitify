@@ -101,23 +101,9 @@
           </p>
         </div>
       </div>
-
-      <div class="feedbacks">
-        <!-- <div class="feedbacks_form">
-        <div class="form-heading">
-          <p>Enter your feedback:</p>
-          <app-rating-stars [isDisabled]="false"></app-rating-stars>
-        </div>
-        <textarea nz-input></textarea>
-        <button nz-button nzSize="default" nzType="primary">Save</button>
-      </div> -->
-
-        <nz-tabset nzSize="small">
-          <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
-            {{ tab }}'s Feedbacks here
-          </nz-tab>
-        </nz-tabset>
-      </div>
+      <app-profile-feedbacks
+        [feedbacks]="candidate?.projectResults?.[0]?.feedbacks || []"
+      ></app-profile-feedbacks>
     </div>
   </nz-spin>
 </div>
