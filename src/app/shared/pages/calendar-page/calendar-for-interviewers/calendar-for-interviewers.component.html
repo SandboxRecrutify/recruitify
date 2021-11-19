@@ -1,10 +1,14 @@
-<div class="week-btns">
-  <a nz-button nzType="link" (click)="onPreviousBtn()"><<< Previous week</a>
-  <a nz-button nzType="link" (click)="onNextBtnClick()">Nest week >>></a>
+<div class="heading">
+  <button nz-button nzSize="small" nzType="primary">Save</button>
+  <div class="week-btns">
+    <a nz-button nzType="link" (click)="onPreviousBtn()"><<< Previous week</a>
+    <a nz-button nzType="link" (click)="onNextBtnClick()">Nest week >>></a>
+  </div>
 </div>
 
 <app-time-line></app-time-line>
-<div class="calendar_table">
+
+<div class="calendar">
   <div class="calendar_interviewers">Aleksey Yanul</div>
   <div class="calendar_weekdays">
     <div
@@ -20,10 +24,10 @@
   <div class="calendar_time-grid" appCalendarItem>
     <app-time-grid-row
       *ngFor="let day of displayedWeekDays"
-      [day]="day.getDay()"
     ></app-time-grid-row>
   </div>
 </div>
+
 <div class="prompt">
   <div class="prompt_img"></div>
   <div class="prompt_text">

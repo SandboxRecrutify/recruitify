@@ -22,10 +22,12 @@
   }
 
   .card {
+    min-height: 440px;
     align-self: start;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
     padding: 20px;
     background: rgba(133, 136, 136, 0.75);
     color: #ffffff;
@@ -37,6 +39,10 @@
       p {
         text-align: right;
       }
+    }
+
+    .description {
+      margin: 10px 0;
     }
 
     &_heading {

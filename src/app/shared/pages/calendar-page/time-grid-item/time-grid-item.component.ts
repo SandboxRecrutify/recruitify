@@ -1,3 +1,5 @@
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -10,4 +12,6 @@ export class TimeGridItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onItemMarked() {}
 }

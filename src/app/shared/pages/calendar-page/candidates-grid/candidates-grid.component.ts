@@ -1,10 +1,7 @@
+import { HttpClient } from '@angular/common/http';
+import { CandidatesService } from './../../../services/candidates.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, OnInit } from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  CdkDragEnter,
-} from '@angular/cdk/drag-drop';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -12,17 +9,20 @@ import {
   styleUrls: ['./candidates-grid.component.scss'],
 })
 export class CandidatesGridComponent implements OnInit {
-  constructor(private calendarPageFacade: CalendarPageFacade) {}
+  // candidates = this.calendarPageFacade.candidatesContactTime;
+  candidatesWithTimeToContact: any = [];
 
-  candidates = this.calendarPageFacade.candidatesContactTime;
+  constructor(
+    private calendarPageFacade: CalendarPageFacade,
+    private candidatesService: CandidatesService,
+    private http: HttpClient
+  ) {}
 
-  ngOnInit(): void {}
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.candidates, event.previousIndex, event.currentIndex);
-  }
-
-  entered(event: CdkDragEnter) {
-    moveItemInArray(this.candidates, event.item.data, event.container.data);
+  ngOnInit(): void {
+    this.http
+      .get('/assets/candidates-contact-time.json')
+      .subscribe((response) => {
+        this.candidatesWithTimeToContact = response;
+      });
   }
 }

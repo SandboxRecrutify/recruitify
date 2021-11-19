@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Michael Ivanov",
+    "skill": "JS",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          { "time": 9, "isAvaliable": true, "isAsigned": false },
+          { "time": 9, "isAvaliable": true, "isAsigned": false },
+          { "time": 10, "isAvaliable": true, "isAsigned": false },
+          { "time": 10, "isAvaliable": true, "isAsigned": false },
+          { "time": 11, "isAvaliable": false, "isAsigned": false },
+          { "time": 11, "isAvaliable": false, "isAsigned": false },
+          { "time": 12, "isAvaliable": false, "isAsigned": false },
+          { "time": 12, "isAvaliable": false, "isAsigned": false },
+          { "time": 13, "isAvaliable": false, "isAsigned": false },
+          { "time": 13, "isAvaliable": true, "isAsigned": false },
+          { "time": 14, "isAvaliable": true, "isAsigned": false },
+          { "time": 14, "isAvaliable": true, "isAsigned": false },
+          { "time": 15, "isAvaliable": false, "isAsigned": false },
+          { "time": 15, "isAvaliable": false, "isAsigned": false },
+          { "time": 16, "isAvaliable": false, "isAsigned": false },
+          { "time": 16, "isAvaliable": false, "isAsigned": false },
+          { "time": 17, "isAvaliable": true, "isAsigned": false },
+          { "time": 17, "isAvaliable": true, "isAsigned": false },
+          { "time": 18, "isAvaliable": false, "isAsigned": false },
+          { "time": 18, "isAvaliable": false, "isAsigned": false }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Elizveta Kiseleva",
+    "skill": ".NET",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          { "time": 9, "isAvaliable": false, "isAsigned": false },
+          { "time": 9, "isAvaliable": false, "isAsigned": false },
+          { "time": 10, "isAvaliable": false, "isAsigned": false },
+          { "time": 10, "isAvaliable": true, "isAsigned": false },
+          { "time": 11, "isAvaliable": true, "isAsigned": false },
+          { "time": 11, "isAvaliable": true, "isAsigned": false },
+          { "time": 12, "isAvaliable": false, "isAsigned": false },
+          { "time": 12, "isAvaliable": false, "isAsigned": false },
+          { "time": 13, "isAvaliable": true, "isAsigned": false },
+          { "time": 13, "isAvaliable": false, "isAsigned": false },
+          { "time": 14, "isAvaliable": false, "isAsigned": false },
+          { "time": 14, "isAvaliable": true, "isAsigned": false },
+          { "time": 15, "isAvaliable": false, "isAsigned": false },
+          { "time": 15, "isAvaliable": false, "isAsigned": false },
+          { "time": 16, "isAvaliable": true, "isAsigned": false },
+          { "time": 16, "isAvaliable": false, "isAsigned": false },
+          { "time": 17, "isAvaliable": false, "isAsigned": false },
+          { "time": 17, "isAvaliable": false, "isAsigned": false },
+          { "time": 18, "isAvaliable": true, "isAsigned": false },
+          { "time": 18, "isAvaliable": true, "isAsigned": false }
+        ]
+      }
+    ]
+  }
+]

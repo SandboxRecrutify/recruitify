@@ -5,6 +5,9 @@ import {
   Renderer2,
   Input,
   OnInit,
+  OnChanges,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 @Directive({
@@ -13,6 +16,7 @@ import {
 export class CalendarItemDirective implements OnInit {
   @Input('day') day!: number;
   isMouseDown = false;
+  today = new Date().getDay();
 
   constructor(private el: ElementRef, private render: Renderer2) {}
 
@@ -46,8 +50,8 @@ export class CalendarItemDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.day === 0 || this.day === 6) {
-      this.render.setStyle(this.el.nativeElement, 'background', '#faecc0');
-    }
+    this.today === this.day
+      ? this.render.setStyle(this.el.nativeElement, 'background', '#faecc0')
+      : null;
   }
 }
