@@ -78,6 +78,8 @@ import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/c
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { InterviewersDropTableComponent } from './pages/calendar-page/interviewers-drop-table/interviewers-drop-table.component';
+import { SkillsTabsetComponent } from './pages/calendar-page/skills-tabset/skills-tabset.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     CalendarForRecruitersComponent,
     TimeGridRowComponent,
     CandidatesGridComponent,
+    InterviewersDropTableComponent,
+    SkillsTabsetComponent,
   ],
   imports: [
     NzBreadCrumbModule,
