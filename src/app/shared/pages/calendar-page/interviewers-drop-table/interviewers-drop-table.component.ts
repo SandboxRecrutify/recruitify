@@ -10,13 +10,11 @@ import { Component, DoCheck, Input, OnInit } from '@angular/core';
 export class InterviewersDropTableComponent implements OnInit, DoCheck {
   @Input() displayedInterviewers: any;
 
-  log() {
-    console.log(this.displayedInterviewers);
-  }
-
   dragedCandidateSkill: any = '';
   dragedCandidateTime: any = [];
   interviewersTimeTable: any;
+
+  isWeekDay!: boolean;
 
   constructor(
     private calendarService: CalendarService,
@@ -27,9 +25,12 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
     this.dragNDropService.skill.subscribe((response) => {
       this.dragedCandidateSkill = response;
     });
+
     this.dragNDropService.time.subscribe((response) => {
       this.dragedCandidateTime = response;
     });
+
+    this.isWeekDay = !this.calendarService.checkDayIsWeekend();
   }
 
   ngOnInit(): void {

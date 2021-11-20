@@ -1,17 +1,11 @@
 <div class="heading">
-  <button
-    nz-button
-    nzType="primary"
-    nzSize="small"
-    (click)="onPreviousDayButtonClick()"
-  >
-    Save
-  </button>
+  <button nz-button nzType="primary" nzSize="small">Save</button>
   <a nz-button nzType="link" (click)="onPreviousDayButtonClick()"><<<</a>
   <nz-date-picker
     nzSize="small"
     nzFormat="dd.MM.yyyy"
     [(ngModel)]="datepickerValue"
+    (ngModelChange)="onCalendarDateChange($event)"
   ></nz-date-picker>
   <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
 </div>
