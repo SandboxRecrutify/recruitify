@@ -1,0 +1,40 @@
+<div class="timetable">
+  <div class="calendar_row" *ngFor="let interviewer of displayedInterviewers">
+    <div
+      (click)="log()"
+      class="calendar_staff"
+      [ngClass]="{
+        avaliableInterviewer: interviewer.skill === dragedCandidateSkill
+      }"
+    >
+      {{ interviewer.name }}, {{ interviewer.skill }}
+    </div>
+    <div class="time-grid">
+      <div
+        class="time-grid_item"
+        *ngFor="let time of interviewer.calendar[0].timetable"
+      >
+        <div
+          [ngClass]="{
+            markedByInterviewer: time.isAvaliable,
+            avaliableToDrop:
+              checkIsAvaliableToDrop(
+                interviewer.skill,
+                dragedCandidateSkill,
+                time.time,
+                dragedCandidateTime
+              ) && !time.isAsigned
+          }"
+          [dragula]="
+            setDragulaValue(
+              interviewer.skill,
+              dragedCandidateSkill,
+              time.time,
+              dragedCandidateTime
+            )
+          "
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

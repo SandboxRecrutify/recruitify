@@ -1,9 +1,10 @@
-<div class="candidates_grid" dragula="calendar">
+<div class="candidates" dragula="calendar">
   <div
-    class="candidates_item"
-    *ngFor="let candidate of candidatesWithTimeToContact"
+    class="candidate"
+    *ngFor="let candidate of displayedCandidates"
+    id="{{ candidate.id }}"
   >
-    <div class="skill">{{ candidate.skill }}</div>
+    <div class="candidate_skill">{{ candidate.skill }}</div>
     <p>{{ candidate.name }} {{ candidate.surname }}</p>
     <p>
       {{ candidate.bestTimeToConnect.join(", ") }}

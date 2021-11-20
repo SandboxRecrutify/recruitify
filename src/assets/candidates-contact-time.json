@@ -50,6 +50,27 @@
   },
   {
     "id": 8,
+    "name": "Igar",
+    "surname": "Lentman",
+    "skill": "JS",
+    "bestTimeToConnect": [9, 15, 18]
+  },
+  {
+    "id": 9,
+    "name": "Katerina",
+    "surname": "Monich",
+    "skill": ".NET",
+    "bestTimeToConnect": [10, 12, 13, 18]
+  },
+  {
+    "id": 10,
+    "name": "Anastasiya",
+    "surname": "Zeba",
+    "skill": "JS",
+    "bestTimeToConnect": [9, 10, 12, 13, 15, 17]
+  },
+  {
+    "id": 11,
     "name": "Dmitro",
     "surname": "Gordon",
     "skill": "JS",

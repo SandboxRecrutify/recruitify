@@ -1,66 +1,18 @@
 <div class="heading">
+  <button
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    (click)="onPreviousDayButtonClick()"
+  >
+    Save
+  </button>
+  <a nz-button nzType="link" (click)="onPreviousDayButtonClick()"><<<</a>
   <nz-date-picker
     nzSize="small"
     nzFormat="dd.MM.yyyy"
-    [nzPlaceHolder]="today"
+    [(ngModel)]="datepickerValue"
   ></nz-date-picker>
-  <a nz-button nzType="link">Next day >>></a>
+  <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
 </div>
-
-<app-time-line></app-time-line>
-
-<div class="calendar_table-wrapp">
-  <div class="calendar_row" *ngFor="let interviewer of interviewersTimeTable">
-    <div
-      class="calendar_staff"
-      [ngClass]="{
-        avaliableInterviewer: interviewer.skill === dragedCandidateSkill
-      }"
-    >
-      {{ interviewer.name }}, {{ interviewer.skill }}
-    </div>
-    <div class="time-grid">
-      <div
-        class="time-grid_item"
-        *ngFor="let time of interviewer.calendar[0].timetable"
-      >
-        <div
-          [ngClass]="{
-            markedByInterviewer: time.isAvaliable,
-            avaliableToDrop:
-              checkIsAvaliableToDrop(
-                interviewer.skill,
-                dragedCandidateSkill,
-                time.time,
-                dragedCandidateTime
-              ) && !time.isAsigned
-          }"
-          [dragula]="
-            setDragulaValue(
-              interviewer.skill,
-              dragedCandidateSkill,
-              time.time,
-              dragedCandidateTime
-            )
-          "
-        ></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="candidates_grid" dragula="calendar">
-  <div
-    class="candidates_item"
-    *ngFor="let candidate of candidatesTimeTable"
-    id="{{ candidate.id }}"
-  >
-    <div class="skill">{{ candidate.skill }}</div>
-    <p>{{ candidate.name }} {{ candidate.surname }}</p>
-    <p>
-      {{ candidate.bestTimeToConnect.join(", ") }}
-    </p>
-  </div>
-</div>
-
-<!-- <app-candidates-grid></app-candidates-grid> -->
+<app-skills-tabset></app-skills-tabset>

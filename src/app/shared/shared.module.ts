@@ -78,6 +78,8 @@ import { CandidatesGridComponent } from './pages/calendar-page/candidates-grid/c
 import { CandidateService } from './services/candidate.service';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { InterviewersDropTableComponent } from './pages/calendar-page/interviewers-drop-table/interviewers-drop-table.component';
+import { SkillsTabsetComponent } from './pages/calendar-page/skills-tabset/skills-tabset.component';
 import { ProfileFeedbacksComponent } from './pages/profile-page/profile-feedbacks/profile-feedbacks.component';
 import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-modal/add-feedback-modal.component';
 
@@ -109,6 +111,8 @@ import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-mod
     CalendarForRecruitersComponent,
     TimeGridRowComponent,
     CandidatesGridComponent,
+    InterviewersDropTableComponent,
+    SkillsTabsetComponent,
     ProfileFeedbacksComponent,
     AddFeedbackModalComponent,
   ],
