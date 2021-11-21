@@ -17,6 +17,10 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
 
   isWeekDay!: boolean;
 
+  isVisible: boolean = false;
+
+  clickedCandidate: any;
+
   constructor(
     private calendarService: CalendarService,
     private dragNDropService: DragNDropService
@@ -32,10 +36,6 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
     });
 
     this.isWeekDay = !this.calendarService.checkDayIsWeekend();
-  }
-
-  log(interv: any) {
-    console.log(interv);
   }
 
   ngOnInit(): void {
@@ -72,5 +72,13 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
       interviewerSkill === dragedCandidateSkill ||
       interviewerSkill === 'Recruiter';
     return isTimeIncludes && isEqualSkill;
+  }
+
+  onItemClick(candidate: any) {
+    if (candidate) {
+      this.clickedCandidate = candidate;
+      this.isVisible = true;
+    }
+    console.log(candidate);
   }
 }

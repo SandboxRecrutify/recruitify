@@ -9,7 +9,7 @@
         *ngFor="let time of interviewer.calendar[0].timetable"
       >
         <div
-          (click)="log(time.candidate.length > 0)"
+          (click)="onItemClick(time.candidate[0])"
           [ngClass]="{
             markedByInterviewer: time.isAvaliable,
             avaliableToDrop: checkIsAvaliableToDrop(
@@ -36,14 +36,10 @@
 </div>
 
 <ng-template #weekendRow>
-  <div
-    style="
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    "
-  >
-    🥳 no interview for today! 🥳
-  </div>
+  <div class="weekend-row">🥳 no interview for today! 🥳</div>
 </ng-template>
+
+<app-assigned-modal
+  [isVisible]="isVisible"
+  [clickedCandidate]="clickedCandidate"
+></app-assigned-modal>

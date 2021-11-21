@@ -1,6 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { CalendarPageFacade } from './calendar-page.facade';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-page',
