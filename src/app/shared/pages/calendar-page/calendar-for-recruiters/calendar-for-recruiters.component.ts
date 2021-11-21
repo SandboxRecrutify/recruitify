@@ -19,28 +19,6 @@ export class CalendarForRecruitersComponent implements OnInit, DoCheck {
     });
   }
 
-  setDragulaValue(
-    interviewerSkill: string,
-    dragedCandidateSkill: string,
-    interviewerTime: number,
-    dragedCandidateTime: number[]
-  ): string {
-    const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
-    const isEqualSkill = interviewerSkill === dragedCandidateSkill;
-    return isTimeIncludes && isEqualSkill ? 'calendar' : '';
-  }
-
-  checkIsAvaliableToDrop(
-    interviewerSkill: string,
-    dragedCandidateSkill: string,
-    interviewerTime: number,
-    dragedCandidateTime: number[]
-  ) {
-    const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
-    const isEqualSkill = interviewerSkill === dragedCandidateSkill;
-    return isTimeIncludes && isEqualSkill;
-  }
-
   onNextDayButtonClick() {
     this.calendarService.getNextDay();
   }

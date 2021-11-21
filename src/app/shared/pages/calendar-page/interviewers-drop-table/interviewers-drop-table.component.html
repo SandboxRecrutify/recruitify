@@ -1,37 +1,34 @@
 <div class="timetable">
-  <div class="calendar_row" *ngFor="let interviewer of displayedInterviewers">
-    <div
-      class="calendar_staff"
-      [ngClass]="{
-        avaliableInterviewer: interviewer.skill === dragedCandidateSkill
-      }"
-    >
+  <div class="timetable_row" *ngFor="let interviewer of displayedInterviewers">
+    <div class="timetable_staff">
       {{ interviewer.name }}, {{ interviewer.skill }}
     </div>
-    <div class="time-grid" *ngIf="isWeekDay; else weekendRow">
+    <div class="timetable_grid" *ngIf="isWeekDay; else weekendRow">
       <div
-        class="time-grid_item"
+        class="timetable_grid-item"
         *ngFor="let time of interviewer.calendar[0].timetable"
       >
         <div
+          (click)="log(time.candidate.length > 0)"
           [ngClass]="{
             markedByInterviewer: time.isAvaliable,
-            avaliableToDrop:
-              checkIsAvaliableToDrop(
-                interviewer.skill,
-                dragedCandidateSkill,
-                time.time,
-                dragedCandidateTime
-              ) && !time.isAsigned
+            avaliableToDrop: checkIsAvaliableToDrop(
+              interviewer.skill,
+              dragedCandidateSkill,
+              time.time,
+              dragedCandidateTime
+            )
           }"
           [dragula]="
             setDragulaValue(
               interviewer.skill,
               dragedCandidateSkill,
               time.time,
-              dragedCandidateTime
+              dragedCandidateTime,
+              time.candidate.length
             )
           "
+          [(dragulaModel)]="time.candidate"
         ></div>
       </div>
     </div>

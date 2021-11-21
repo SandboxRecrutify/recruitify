@@ -1,4 +1,8 @@
-<div class="candidates" dragula="calendar">
+<div
+  class="candidates"
+  dragula="calendar"
+  [(dragulaModel)]="displayedCandidates"
+>
   <div
     class="candidate"
     *ngFor="let candidate of displayedCandidates"

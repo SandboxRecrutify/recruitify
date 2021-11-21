@@ -1,3 +1,4 @@
+import { CandidateCalendar } from './../models/CandidateCalendar';
 import { CalendarService } from './calendar.service';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription, BehaviorSubject } from 'rxjs';
@@ -10,8 +11,10 @@ export class DragNDropService {
   subs = new Subscription();
 
   candidatesTimeTable: any = [];
-  skill = new BehaviorSubject('');
-  time = new BehaviorSubject([]);
+  dragedCandidateSkill$ = new BehaviorSubject('');
+  dragedCandidateTime$ = new BehaviorSubject([]);
+
+  dragedCandidate!: any;
 
   constructor(
     private dragulaService: DragulaService,
@@ -24,6 +27,20 @@ export class DragNDropService {
     dragulaService.createGroup('calendar', {
       revertOnSpill: true,
     });
+
+    this.subs.add(
+      dragulaService
+        .dropModel('calendar')
+        .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+          console.log('dropModel:');
+          console.log(el);
+          console.log(source);
+          console.log(target);
+          console.log(sourceModel);
+          console.log(targetModel);
+          console.log(item);
+        })
+    );
 
     this.subs.add(
       dragulaService.drag('calendar').subscribe(({ el }) => {
@@ -57,12 +74,12 @@ export class DragNDropService {
   }
 
   onCandidateDrag(el: Element) {
-    let dragedCandidate = this.candidatesTimeTable.find(
+    this.dragedCandidate = this.candidatesTimeTable.find(
       (item: any) => +item.id === +el.id
     );
 
-    this.skill.next(dragedCandidate.skill);
-    this.time.next(dragedCandidate.bestTimeToConnect);
+    this.dragedCandidateSkill$.next(this.dragedCandidate.skill);
+    this.dragedCandidateTime$.next(this.dragedCandidate.bestTimeToConnect);
   }
 
   onCandidateDrop(el: Element, target: Element) {
@@ -71,13 +88,13 @@ export class DragNDropService {
       target.classList.add('assigned');
     }
 
-    this.time.next([]);
-    this.skill.next('');
+    this.dragedCandidateSkill$.next('');
+    this.dragedCandidateTime$.next([]);
   }
 
   onCandidateDragCancel() {
-    this.time.next([]);
-    this.skill.next('');
+    this.dragedCandidateSkill$.next('');
+    this.dragedCandidateTime$.next([]);
   }
 
   onCandidateOverAvaliableContainer(container: Element) {

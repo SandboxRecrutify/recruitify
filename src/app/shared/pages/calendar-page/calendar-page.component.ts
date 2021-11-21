@@ -11,8 +11,7 @@ export class CalendarPageComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   isInterviewer = this.userService.isInterviewer();
-  isManagerOrRecruiter =
-    this.userService.isRecruiter() || this.userService.isManager();
+  isRecruiter = this.userService.isRecruiter();
 
   ngOnInit(): void {}
 }

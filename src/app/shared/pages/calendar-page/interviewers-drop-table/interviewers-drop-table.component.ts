@@ -1,3 +1,4 @@
+import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { DragNDropService } from './../../../services/drag-n-drop.service';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
@@ -8,11 +9,11 @@ import { Component, DoCheck, Input, OnInit } from '@angular/core';
   styleUrls: ['./interviewers-drop-table.component.scss'],
 })
 export class InterviewersDropTableComponent implements OnInit, DoCheck {
-  @Input() displayedInterviewers: any;
+  @Input() displayedInterviewers!: InterviewerCalendar[];
 
-  dragedCandidateSkill: any = '';
-  dragedCandidateTime: any = [];
-  interviewersTimeTable: any;
+  dragedCandidateSkill: string = '';
+  dragedCandidateTime: number[] = [];
+  interviewersTimeTable!: any;
 
   isWeekDay!: boolean;
 
@@ -22,15 +23,19 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   ) {}
 
   ngDoCheck(): void {
-    this.dragNDropService.skill.subscribe((response) => {
+    this.dragNDropService.dragedCandidateSkill$.subscribe((response) => {
       this.dragedCandidateSkill = response;
     });
 
-    this.dragNDropService.time.subscribe((response) => {
+    this.dragNDropService.dragedCandidateTime$.subscribe((response) => {
       this.dragedCandidateTime = response;
     });
 
     this.isWeekDay = !this.calendarService.checkDayIsWeekend();
+  }
+
+  log(interv: any) {
+    console.log(interv);
   }
 
   ngOnInit(): void {
@@ -43,13 +48,17 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
     interviewerSkill: string,
     dragedCandidateSkill: string,
     interviewerTime: number,
-    dragedCandidateTime: number[]
+    dragedCandidateTime: number[],
+    candidateArr: any
   ): string {
     const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
     const isEqualSkill =
       interviewerSkill === dragedCandidateSkill ||
       interviewerSkill === 'Recruiter';
-    return isTimeIncludes && isEqualSkill ? 'calendar' : '';
+    const isCandidateAssigned = candidateArr === 0;
+    return isTimeIncludes && isEqualSkill && isCandidateAssigned
+      ? 'calendar'
+      : '';
   }
 
   checkIsAvaliableToDrop(
