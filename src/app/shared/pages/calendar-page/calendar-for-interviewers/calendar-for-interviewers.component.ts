@@ -21,7 +21,7 @@ export class CalendarForInterviewersComponent implements OnInit {
     );
   }
 
-  onPreviousBtn() {
+  onPreviousBtnClick() {
     this.displayedWeekDays = this.calendarPageFacade.getPreviousWeekDays(
       this.displayedWeekDays
     );

@@ -1,48 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { CalendarService } from './../../../services/calendar.service';
+import { Component, OnInit, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-for-recruiters',
   templateUrl: './calendar-for-recruiters.component.html',
   styleUrls: ['./calendar-for-recruiters.component.scss'],
 })
-export class CalendarForRecruitersComponent implements OnInit {
-  datepickerValue = new Date();
+export class CalendarForRecruitersComponent implements OnInit, DoCheck {
+  datepickerValue!: Date;
 
-  constructor() {}
+  constructor(private calendarService: CalendarService) {}
 
   ngOnInit(): void {}
 
-  setDragulaValue(
-    interviewerSkill: string,
-    dragedCandidateSkill: string,
-    interviewerTime: number,
-    dragedCandidateTime: number[]
-  ): string {
-    const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
-    const isEqualSkill = interviewerSkill === dragedCandidateSkill;
-    return isTimeIncludes && isEqualSkill ? 'calendar' : '';
-  }
-
-  checkIsAvaliableToDrop(
-    interviewerSkill: string,
-    dragedCandidateSkill: string,
-    interviewerTime: number,
-    dragedCandidateTime: number[]
-  ) {
-    const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
-    const isEqualSkill = interviewerSkill === dragedCandidateSkill;
-    return isTimeIncludes && isEqualSkill;
+  ngDoCheck(): void {
+    this.calendarService.datepickerValue$.subscribe((response) => {
+      this.datepickerValue = response;
+    });
   }
 
   onNextDayButtonClick() {
-    this.datepickerValue = new Date(
-      this.datepickerValue.getTime() + 24 * 60 * 60 * 1000
-    );
+    this.calendarService.getNextDay();
   }
 
   onPreviousDayButtonClick() {
-    this.datepickerValue = new Date(
-      this.datepickerValue.getTime() - 24 * 60 * 60 * 1000
-    );
+    this.calendarService.getPreviuosDay();
+  }
+
+  onCalendarDateChange(event: Date) {
+    this.calendarService.setPickedDay(event);
   }
 }

@@ -1,3 +1,4 @@
+import { CandidateCalendar } from './../../../models/CandidateCalendar';
 import { CalendarService } from './../../../services/calendar.service';
 import { DragNDropService } from './../../../services/drag-n-drop.service';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./candidates-grid.component.scss'],
 })
 export class CandidatesGridComponent implements OnInit {
-  @Input() displayedCandidates: any;
+  @Input() displayedCandidates!: any;
 
   candidatesTimeTable: any = [];
 

@@ -1,6 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { CalendarPageFacade } from './calendar-page.facade';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-page',
@@ -11,8 +10,7 @@ export class CalendarPageComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   isInterviewer = this.userService.isInterviewer();
-  isManagerOrRecruiter =
-    this.userService.isRecruiter() || this.userService.isManager();
+  isRecruiter = this.userService.isRecruiter();
 
   ngOnInit(): void {}
 }

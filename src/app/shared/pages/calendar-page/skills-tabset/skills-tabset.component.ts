@@ -1,3 +1,5 @@
+import { CandidateCalendar } from './../../../models/CandidateCalendar';
+import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { filter } from 'rxjs/operators';
 import { CalendarService } from './../../../services/calendar.service';
 
@@ -14,10 +16,10 @@ export class SkillsTabsetComponent implements OnInit, DoCheck {
   interviewersTimeTable: any = [];
   candidatesTimeTable: any = [];
 
-  displayedRecruiter: any = [];
-  displayedCandidatesForRecruiter: any = [];
-  displayedInterviewers: any = [];
-  displayedCandidates: any = [];
+  displayedRecruiter: InterviewerCalendar[] = [];
+  displayedCandidatesForRecruiter: CandidateCalendar[] = [];
+  displayedInterviewers: InterviewerCalendar[] = [];
+  displayedCandidates: CandidateCalendar[] = [];
 
   ngOnInit(): void {
     this.calendarService.getCandidatesTimeTable().subscribe((response) => {
