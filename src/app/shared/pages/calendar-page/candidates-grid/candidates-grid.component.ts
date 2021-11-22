@@ -1,4 +1,3 @@
-import { CandidateCalendar } from './../../../models/CandidateCalendar';
 import { CalendarService } from './../../../services/calendar.service';
 import { DragNDropService } from './../../../services/drag-n-drop.service';
 import { HttpClient } from '@angular/common/http';

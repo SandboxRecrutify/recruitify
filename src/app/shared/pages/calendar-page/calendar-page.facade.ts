@@ -1,7 +1,13 @@
+import { CandidateCalendar } from './../../models/CandidateCalendar';
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CalendarPageFacade {
+  isAssignedModalVisible$ = new BehaviorSubject(false);
+  isEmailModalVisible$ = new BehaviorSubject(false);
+  assignedCandidate$ = new BehaviorSubject([]);
+
   timeLine = [
     '09:00',
     '09:30',
@@ -34,7 +40,7 @@ export class CalendarPageFacade {
 
   getCurrentWeekDays() {
     let daysArr = [this.nearestMonday];
-    for (let i = 2; i <= 5; i++) {
+    for (let i = 2; i <= 7; i++) {
       let nextDay = new Date(
         this.today.setDate(this.today.getDate() - this.today.getDay() + i)
       );

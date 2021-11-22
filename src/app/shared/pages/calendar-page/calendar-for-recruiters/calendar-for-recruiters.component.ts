@@ -1,20 +1,21 @@
+import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-for-recruiters',
   templateUrl: './calendar-for-recruiters.component.html',
   styleUrls: ['./calendar-for-recruiters.component.scss'],
 })
-export class CalendarForRecruitersComponent implements OnInit, DoCheck {
+export class CalendarForRecruitersComponent implements OnInit {
   datepickerValue!: Date;
-  isModalVisible: boolean = false;
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(
+    public calendarService: CalendarService,
+    private calendarPageFacade: CalendarPageFacade
+  ) {}
 
-  ngOnInit(): void {}
-
-  ngDoCheck(): void {
+  ngOnInit(): void {
     this.calendarService.datepickerValue$.subscribe((response) => {
       this.datepickerValue = response;
     });
@@ -33,6 +34,6 @@ export class CalendarForRecruitersComponent implements OnInit, DoCheck {
   }
 
   onBtnSaveClick() {
-    this.isModalVisible = true;
+    this.calendarPageFacade.isEmailModalVisible$.next(true);
   }
 }

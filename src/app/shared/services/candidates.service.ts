@@ -18,4 +18,8 @@ export class CandidatesService extends ApiService {
   getCandidatesByProjectId(projectId: string): Observable<Candidate[]> {
     return super.get({ path: '/all/' + projectId });
   }
+
+  createCandidate(candidate: Candidate): Observable<Candidate> {
+    return super.post({ path: '' }, candidate);
+  }
 }

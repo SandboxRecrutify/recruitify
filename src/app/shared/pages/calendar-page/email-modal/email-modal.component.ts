@@ -1,3 +1,4 @@
+import { CalendarPageFacade } from './../calendar-page.facade';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,13 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./email-modal.component.scss'],
 })
 export class EmailModalComponent implements OnInit {
-  @Input() isModalVisible!: boolean;
+  isModalVisible!: boolean;
 
-  constructor() {}
+  constructor(private calendarPageFacade: CalendarPageFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.calendarPageFacade.isEmailModalVisible$.subscribe(
+      (response) => (this.isModalVisible = response)
+    );
+  }
 
   handleOk(): void {
+    console.log('Send e-mail to candidates');
     this.isModalVisible = false;
   }
 

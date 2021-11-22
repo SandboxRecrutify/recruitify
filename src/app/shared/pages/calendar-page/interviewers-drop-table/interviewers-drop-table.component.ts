@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { CalendarPageFacade } from './../calendar-page.facade';
 import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { DragNDropService } from './../../../services/drag-n-drop.service';
 import { CalendarService } from './../../../services/calendar.service';
@@ -17,13 +17,13 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   interviewersTimeTable!: any;
 
   isWeekDay!: boolean;
-  isModalVisible!: boolean;
 
   clickedCandidate: any;
 
   constructor(
     private calendarService: CalendarService,
-    private dragNDropService: DragNDropService
+    private dragNDropService: DragNDropService,
+    private calendarPageFacade: CalendarPageFacade
   ) {}
 
   ngDoCheck(): void {
@@ -36,14 +36,6 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
     });
 
     this.isWeekDay = !this.calendarService.checkDayIsWeekend();
-
-    this.calendarService.isModalVisible$.subscribe(
-      (response) => (this.isModalVisible = response)
-    );
-
-    this.calendarService.assignedCandidate$.subscribe(
-      (response) => (this.clickedCandidate = response)
-    );
   }
 
   ngOnInit(): void {
@@ -84,8 +76,8 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
 
   onItemClick(candidate: any) {
     if (candidate) {
-      this.calendarService.assignedCandidate$.next(candidate);
-      this.calendarService.isModalVisible$.next(true);
+      this.calendarPageFacade.assignedCandidate$.next(candidate);
+      this.calendarPageFacade.isAssignedModalVisible$.next(true);
     }
   }
 }

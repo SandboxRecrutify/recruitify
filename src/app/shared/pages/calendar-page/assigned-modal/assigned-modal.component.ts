@@ -1,34 +1,33 @@
-import { CalendarService } from './../../../services/calendar.service';
-import { Component, Input, OnInit, DoCheck } from '@angular/core';
+import { CalendarPageFacade } from './../calendar-page.facade';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-assigned-modal',
   templateUrl: './assigned-modal.component.html',
   styleUrls: ['./assigned-modal.component.scss'],
 })
-export class AssignedModalComponent implements OnInit, DoCheck {
+export class AssignedModalComponent implements OnInit {
   isModalVisible!: boolean;
   clickedCandidate!: any;
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(private calendarPageFacade: CalendarPageFacade) {}
 
-  ngOnInit(): void {}
-
-  ngDoCheck(): void {
-    this.calendarService.isModalVisible$.subscribe(
+  ngOnInit(): void {
+    this.calendarPageFacade.isAssignedModalVisible$.subscribe(
       (response) => (this.isModalVisible = response)
     );
 
-    this.calendarService.assignedCandidate$.subscribe(
+    this.calendarPageFacade.assignedCandidate$.subscribe(
       (response) => (this.clickedCandidate = response)
     );
   }
 
-  handleOk(): void {
-    this.calendarService.isModalVisible$.next(false);
+  handleDelete(): void {
+    console.log('Delete assigned candidate');
+    this.calendarPageFacade.isAssignedModalVisible$.next(false);
   }
 
   handleCancel(): void {
-    this.calendarService.isModalVisible$.next(false);
+    this.calendarPageFacade.isAssignedModalVisible$.next(false);
   }
 }

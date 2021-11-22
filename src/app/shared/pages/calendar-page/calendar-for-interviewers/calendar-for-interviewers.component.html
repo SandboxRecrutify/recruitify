@@ -1,5 +1,4 @@
 <div class="heading">
-  <button nz-button nzSize="small" nzType="primary">Save</button>
   <div class="week-btns">
     <a nz-button nzType="link" (click)="onPreviousBtnClick()"
       ><<< Previous week</a
@@ -30,12 +29,16 @@
   </div>
 </div>
 
-<div class="prompt">
-  <div class="prompt_img"></div>
-  <div class="prompt_text">
-    <div class="prompt_text-item">
-      LMB - if you can interview a candidate at this time
+<div class="footer">
+  <div class="prompt">
+    <div class="prompt_img"></div>
+    <div class="prompt_text">
+      <div class="prompt_text-item">
+        LMB - if you can interview a candidate at this time
+      </div>
+      <div class="prompt_text-item">RMB - cancel your choise</div>
     </div>
-    <div class="prompt_text-item">RMB - cancel your choise</div>
   </div>
+
+  <button nz-button nzSize="default" nzType="primary">Save</button>
 </div>

@@ -7,8 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CalendarService {
   datepickerValue$ = new BehaviorSubject(new Date());
-  isModalVisible$ = new BehaviorSubject(false);
-  assignedCandidate$ = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
 
