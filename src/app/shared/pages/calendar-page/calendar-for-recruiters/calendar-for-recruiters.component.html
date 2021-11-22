@@ -1,5 +1,7 @@
 <div class="menu">
-  <button nz-button nzType="primary" nzSize="small">Save</button>
+  <button nz-button nzType="primary" nzSize="small" (click)="onBtnSaveClick()">
+    Save
+  </button>
   <a nz-button nzType="link" (click)="onPreviousDayButtonClick()"><<<</a>
   <nz-date-picker
     nzSize="small"
@@ -10,3 +12,4 @@
   <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
 </div>
 <app-skills-tabset></app-skills-tabset>
+<app-email-modal [isModalVisible]="isModalVisible"></app-email-modal>

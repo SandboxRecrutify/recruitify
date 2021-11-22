@@ -8,6 +8,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 })
 export class CalendarForRecruitersComponent implements OnInit, DoCheck {
   datepickerValue!: Date;
+  isModalVisible: boolean = false;
 
   constructor(private calendarService: CalendarService) {}
 
@@ -29,5 +30,9 @@ export class CalendarForRecruitersComponent implements OnInit, DoCheck {
 
   onCalendarDateChange(event: Date) {
     this.calendarService.setPickedDay(event);
+  }
+
+  onBtnSaveClick() {
+    this.isModalVisible = true;
   }
 }
