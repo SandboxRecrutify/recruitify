@@ -9,9 +9,9 @@ export interface ProjectsOrderBy {
   order: 'asc' | 'desc';
 }
 export interface ProjectsFilters {
-  status: string;
-  primary: string[];
-  orderBy: ProjectsOrderBy;
+  status?: string;
+  primary?: string[];
+  orderBy?: ProjectsOrderBy;
 }
 @Component({
   selector: 'app-project-filters',

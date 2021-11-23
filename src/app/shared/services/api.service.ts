@@ -106,36 +106,7 @@ export abstract class ApiService {
     if (params.mock) {
       url += params.mock;
     } else if (params.odata) {
-      url = '?$count=true';
-      if (params.odata.top) {
-        url += this.buildOData('top', params.odata.top);
-      }
-      if (params.odata.skip) {
-        url += this.buildOData('skip', params.odata.skip);
-      }
-      if (params.odata.orderby) {
-        const orderBy = params.odata.orderby;
-        url += this.buildOData(
-          'orderby',
-          orderBy.names.join(',') + ' ' + orderBy.order
-        );
-      }
-      if (params.odata.filter) {
-        const filter = params.odata.filter;
-        const filterParams = filter.map((el) => {
-          if (Array.isArray(el) && el) {
-            return el.map((f) => `${f.property}${f.operator}`).join(' or ');
-          } else {
-            return el.property && `${el.property}`;
-          }
-        });
-
-        if (filterParams.includes('')) {
-          return (url += this.buildOData('filter', filterParams.join('')));
-        } else {
-          return (url += this.buildOData('filter', filterParams.join(' and ')));
-        }
-      }
+     this.buildOData(params.odata);
     } else if (params.login) {
     } else {
       url += params.path;
@@ -143,7 +114,44 @@ export abstract class ApiService {
     return url;
   }
 
-  private buildOData(query: string, value: any) {
+  private buildOData(odata: OData) {
+    const { top, skip, orderby, filter } = odata;
+    let url = '?$count=true';
+
+    url += this.buildODataPath(top, 'top');
+    url += this.buildODataPath(skip, 'skip');
+
+    url += this.buildODataPath(
+      orderby?.names.join(',') + ' ' + orderby?.order,
+      'orderby'
+    );
+
+    url += this.buildODataPath(this.buildFilterParams(filter), 'filter');
+
+    console.log(url);
+    return url;
+  }
+
+  private buildFilterParams(filter: Filter[] | undefined) {
+    const filterParams = filter?.map((el) => {
+      if (Array.isArray(el)) {
+        return el.map((f) => `${f.property}${f.operator}`).join(' or ');
+      } else {
+        return `${el.property}`;
+      }
+    });
+
+    return filterParams?.includes('') ? filterParams.join('') : filterParams?.join(' and ')
+  }
+
+  private buildODataPath(
+    parameter: number | string | undefined,
+    path: string
+  ): string {
+    return parameter ? this.buildODataQuery(path, parameter) : '';
+  }
+
+  private buildODataQuery(query: string, value: number | string): string {
     return (query && value && `&$${query}=${value}`) || '';
   }
 

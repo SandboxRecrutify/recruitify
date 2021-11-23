@@ -7,6 +7,8 @@ import { QueryParams } from '../../services/api.service';
 import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectsFilters } from './project-filters/project-filters.component';
+import { ProjectsQueries } from './projects-page.component';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectsPageFacade {
@@ -17,29 +19,41 @@ export class ProjectsPageFacade {
   deleteProjectLoading$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
+  ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>(
+    []
+  );
+
   constructor(
     private projectsService: ProjectsService,
     private message: NzMessageService
   ) {}
 
-  getProjectsList$(filters?: ProjectsFilters): Observable<Project[]> {
-    const skills = filters?.primary.map((p) => ({
+  getProjectsList(filters?: ProjectsQueries): void {
+    const skills = filters?.primary?.map((p) => ({
       property: 'primarySkills',
       operator: `/any(p: p/name eq '${p}')`,
     }));
-    const status = { property: filters?.status, operator: ' and ' };
+    const status = { property: filters?.status };
+    const searchText = {
+      property: filters?.query,
+      value: `contains(tolower(name), '${filters?.query}')`
+    };
+    // console.log(searchText)
     const queryParams = filters
       ? <QueryParams>{
           odata: {
             orderby: {
-              names: [filters.orderBy.property],
-              order: filters.orderBy.order,
+              names: [filters?.orderBy?.property],
+              order: filters?.orderBy?.order,
             },
             filter: [skills, status],
           },
         }
       : { odata: {} };
-    return this.projectsService.getProjects(queryParams);
+
+    this.projectsService.getProjects(queryParams).subscribe((projects) => {
+      this.ProjectsList$.next(projects);
+    });
   }
 
   getCreateProjectData$(): Observable<CreateProject> {
@@ -113,4 +127,4 @@ export class ProjectsPageFacade {
 }
 
 //for search
-//contains(name, 'searchText')
+//contains(tolower(name), 'search')
