@@ -14,7 +14,7 @@ export class InternshipsComponent implements OnInit {
   constructor(private projectsPageFacade: ProjectsPageFacade) {}
 
   ngOnInit(): void {
-    this.projectsPageFacade.getProjectsList$().subscribe((response) => {
+    this.projectsPageFacade.ProjectsList$.subscribe((response) => {
       this.activeProjects = response.filter((project) => project.isActive);
     });
   }

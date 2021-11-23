@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <app-projects-list [projects]="projects"></app-projects-list>
+  <app-projects-list [projects]="projectsPageFacade.ProjectsList$ | async"></app-projects-list>
   <app-create-project></app-create-project>
 </div>
 <app-project-filters

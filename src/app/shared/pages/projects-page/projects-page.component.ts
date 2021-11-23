@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/Project';
 import { ProjectsPageFacade } from './projects-page.facade';
 import { ProjectsFilters } from './project-filters/project-filters.component';
+import { filter } from 'rxjs/operators';
+
+export interface ProjectsQueries extends ProjectsFilters {
+  query?: string;
+}
 
 @Component({
   selector: 'app-projects-page',
@@ -12,15 +17,14 @@ import { ProjectsFilters } from './project-filters/project-filters.component';
 export class ProjectsPageComponent implements OnInit {
   isFiltersVisible: boolean = false;
   searchText: string = '';
+  filters: any = {};
 
   projects: Project[] = [];
 
-  constructor(private projectsPageFacade: ProjectsPageFacade) {}
+  constructor(public projectsPageFacade: ProjectsPageFacade) {}
 
   ngOnInit(): void {
-    this.projectsPageFacade.getProjectsList$().subscribe((projects) => {
-      this.projects = projects;
-    });
+    this.projectsPageFacade.getProjectsList();
   }
 
   toggleFiltersVisible(isVisible: boolean) {
@@ -31,13 +35,13 @@ export class ProjectsPageComponent implements OnInit {
     this.projectsPageFacade.toggleCreateProjectDrawer$.next(isVisible);
   }
 
-  applyProjectsFilters($event: ProjectsFilters) {
-    this.projectsPageFacade.getProjectsList$($event).subscribe((projects) => {
-      this.projects = projects;
-    });
+  applyProjectsFilters(filters: ProjectsFilters) {
+    this.filters = { ...this.filters, ...filters };
+    this.projectsPageFacade.getProjectsList(this.filters);
   }
 
-  onSearchChange($event: string) {
-    console.log($event);
+  onSearchChange(search: ProjectsQueries) {
+    this.filters = { ...this.filters, query: search };
+    this.projectsPageFacade.getProjectsList(this.filters);
   }
 }
