@@ -1,0 +1,450 @@
+[
+  {
+    "id": 1,
+    "name": "Michael Ivanov",
+    "skill": "JS",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          {
+            "time": 9,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 9,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": false,
+            "candidate": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Lol Kek",
+    "skill": "JS",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          {
+            "time": 9,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 9,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": true,
+            "candidate": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Elizveta Kiseleva",
+    "skill": ".NET",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          {
+            "time": 9,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 9,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": false,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": true,
+            "candidate": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Nastya Qwert",
+    "skill": "Recruiter",
+    "calendar": [
+      {
+        "day": "19.11.2021",
+        "timetable": [
+          {
+            "time": 9,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 9,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 10,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 11,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 12,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 13,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 14,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 15,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 16,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 17,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": true,
+            "candidate": []
+          },
+          {
+            "time": 18,
+            "isAvaliable": true,
+            "candidate": []
+          }
+        ]
+      }
+    ]
+  }
+]
