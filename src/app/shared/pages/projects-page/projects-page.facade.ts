@@ -6,9 +6,8 @@ import { CreateProject } from '../../models/CreateProject';
 import { QueryParams } from '../../services/api.service';
 import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { ProjectsFilters } from './project-filters/project-filters.component';
 import { ProjectsQueries } from './projects-page.component';
-import { filter } from 'rxjs/operators';
+
 
 @Injectable()
 export class ProjectsPageFacade {
@@ -42,7 +41,7 @@ export class ProjectsPageFacade {
           names: [filters?.orderBy?.property],
           order: filters?.orderBy?.order,
         }
-      : {};
+      : {names: ['StartDate'], order: 'desc'};
 
     const filter = [skills, status, searchText];
 

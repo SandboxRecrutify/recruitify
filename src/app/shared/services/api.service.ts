@@ -29,6 +29,7 @@ export interface OData {
   count?: boolean;
   orderby?: OrderBy;
   filter?: Filter[];
+  projectId?: string;
 }
 interface OrderBy {
   names?: string[];
@@ -94,7 +95,9 @@ export abstract class ApiService {
     if (params.mock) {
       return environment.mockApiUrl + MOCK;
     } else if (params.odata) {
-      return environment.apiUrl + ODATA + this.apiPath;
+      return params.odata.projectId
+        ? environment.apiUrl + ODATA + this.apiPath + '/GetByProject'
+        : environment.apiUrl + ODATA + this.apiPath;
     } else if (params.login) {
       return environment.apiUrl + TOKEN + this.apiPath.toLowerCase();
     } else {
@@ -107,7 +110,7 @@ export abstract class ApiService {
     if (params.mock) {
       url += params.mock;
     } else if (params.odata) {
-     url += this.buildOData(params.odata);
+      url += this.buildOData(params.odata);
     } else if (params.login) {
     } else {
       url += params.path;
@@ -116,38 +119,54 @@ export abstract class ApiService {
   }
 
   private buildOData(odata: OData) {
-    const { top, skip, orderby, filter } = odata;
+    const { top, skip, orderby, filter, projectId } = odata;
     let url = '?$count=true';
 
     url += this.buildODataPath(top, 'top');
     url += this.buildODataPath(skip, 'skip');
+    url += this.buildODataCandidatesPath(projectId, 'projectId');
 
     url += this.buildODataPath(
-      orderby && orderby.names ? orderby.names.join(',') + ' ' + orderby.order : undefined,
+      orderby && orderby.names
+        ? orderby.names.join(',') + ' ' + orderby.order
+        : undefined,
       'orderby'
     );
 
     url += this.buildODataPath(this.buildFilterParams(filter), 'filter');
-console.log(url)
+    console.log(url);
     return url;
   }
 
   private buildFilterParams(filter: Filter[] | undefined) {
-    const filterParams = filter?.filter(v => !!v).map((el) => {
-      return Array.isArray(el) && el.length > 0
-        ? `(${el.map((item) => `${item.value}`).join(' or ')})`
-        :  el.property && el.property !== EMPTY_STRING ? el.value : undefined;
-    });
-console.log(filterParams)
-    return filterParams?.filter(el => !!el).join(' and ')
+    const filterParams = filter
+      ?.filter((v) => !!v)
+      .map((el) => {
+        return Array.isArray(el) && el.length > 0
+          ? `(${el.map((item) => `${item.value}`).join(' or ')})`
+          : el.property && el.property !== EMPTY_STRING
+          ? el.value
+          : undefined;
+      });
+    console.log(filterParams);
+    return filterParams?.filter((el) => !!el).join(' and ');
   }
 
-  private buildODataPath( parameter: number | string | undefined, path: string): string {
+  private buildODataPath(
+    parameter: number | string | undefined,
+    path: string
+  ): string {
     return parameter ? this.buildODataQuery(path, parameter) : EMPTY_STRING;
+  }
+  private buildODataCandidatesPath(
+    parameter: string | undefined,
+    path: string
+  ): string {
+    return parameter ? `&${path}=${parameter}` : EMPTY_STRING;
   }
 
   private buildODataQuery(query: string, value: number | string): string {
-    return query && value && `&$${query}=${value}` || EMPTY_STRING;
+    return (query && value && `&$${query}=${value}`) || EMPTY_STRING;
   }
 
   private wrapRequest<T>(
