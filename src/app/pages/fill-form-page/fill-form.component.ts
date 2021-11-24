@@ -46,8 +46,8 @@ export class FillFormComponent implements OnInit {
   candidateForm = this.fb.group({
     name: [''],
     surname: [''],
-    skype: [''],
     email: [''],
+    contacts: this.fb.group({ type: ['skype'], value: [''] }),
     phoneNumber: [''],
     location: this.fb.group({
       city: [''],
@@ -61,14 +61,14 @@ export class FillFormComponent implements OnInit {
     additionalQuestions: [''],
     currentJob: [''],
     certificates: [''],
-    // contacts: [''],
-    // bestTimeToConnect: [[9, 10]],
+    // bestTimeToConnect: [['']],
   });
 
   submitForm() {
     this.candidateToSend = {
       ...this.candidateForm.value,
       bestTimeToConnect: [10, 11, 12],
+      contacts: [this.candidateForm.value.contacts],
     };
 
     console.log(this.candidateToSend);
