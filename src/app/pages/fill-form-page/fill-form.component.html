@@ -1,7 +1,7 @@
 <div class="fill_form">
   <div class="fill_form_container">
     <h2>Hi! Please, fill out the form</h2>
-    <form nz-form>
+    <form [formGroup]="candidateForm" nz-form>
       <nz-form-item>
         <div class="item-box">
           <div class="inner-item-box">
@@ -10,6 +10,7 @@
             >
             <nz-form-control>
               <input
+                formControlName="name"
                 nz-input
                 name="fname"
                 type="text"
@@ -25,6 +26,7 @@
             >
             <nz-form-control>
               <input
+                formControlName="surname"
                 nz-input
                 name="lname"
                 type="text"
@@ -44,6 +46,7 @@
             >
             <nz-form-control>
               <input
+                formControlName="skype"
                 nz-input
                 name="skype"
                 type="text"
@@ -63,6 +66,7 @@
             >
             <nz-form-control>
               <input
+                formControlName="email"
                 nz-input
                 name="email"
                 type="text"
@@ -82,6 +86,7 @@
             >
             <nz-form-control>
               <input
+                formControlName="phoneNumber"
                 nz-input
                 name="phone"
                 type="text"
@@ -93,13 +98,14 @@
         </div>
       </nz-form-item>
 
-      <div class="item-box">
+      <div class="item-box" formGroupName="location">
         <div class="inner-item-box">
           <nz-form-label nzRequired nzNoColon nzFor="location"
             >Location (City, Country)</nz-form-label
           >
           <nz-form-control>
             <input
+              formControlName="city"
               nz-input
               name="location"
               type="text"
@@ -112,6 +118,7 @@
         <div class="inner-item-box pad-left">
           <nz-form-control>
             <input
+              formControlName="country"
               nz-input
               name="location"
               type="text"
@@ -126,10 +133,14 @@
         <div class="item-box">
           <div class="inner-item-box pad-top">
             <nz-form-label nzNoColon nzRequired>English level</nz-form-label>
-            <nz-select nzAllowClear nzPlaceHolder="Choose your English level">
+            <nz-select
+              formControlName="englishLevel"
+              nzAllowClear
+              nzPlaceHolder="Choose your English level"
+            >
               <nz-option
                 *ngFor="let englishLevel of englishLevel$ | async | enumToArray"
-                [nzValue]="englishLevel[0]"
+                [nzValue]="+englishLevel[0]"
                 [nzLabel]="englishLevel[1]"
               ></nz-option>
             </nz-select>
@@ -138,10 +149,14 @@
       </nz-form-item>
 
       <nz-form-item>
-        <app-radio-button
-          title="Choose the language of Internship"
-          [options]="['English', 'Russian']"
-        ></app-radio-button>
+        <nz-form-label nzNoColon nzRequired style="margin-bottom: 10px">
+          Choose the language of Internship
+        </nz-form-label>
+
+        <nz-radio-group formControlName="projectLanguage">
+          <label nz-radio [nzValue]="0">English</label>
+          <label nz-radio [nzValue]="1">Russian</label>
+        </nz-radio-group>
       </nz-form-item>
 
       <nz-form-item>
@@ -149,6 +164,7 @@
           <div class="inner-item-box">
             <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
             <nz-select
+              formControlName="primarySkill"
               nzRequired
               nzAllowClear
               nzPlaceHolder="Primary skill"
@@ -156,7 +172,7 @@
             >
               <nz-option
                 *ngFor="let primarySkill of currentProjectSkills"
-                [nzValue]="primarySkill.id"
+                [nzValue]="{ id: primarySkill.id, name: primarySkill.name }"
                 [nzLabel]="primarySkill.name"
               ></nz-option>
             </nz-select>
@@ -165,10 +181,14 @@
       </nz-form-item>
 
       <nz-form-item>
-        <app-radio-button
-          title="Are you planning to join Exadel after the Training?"
-          [options]="['Yes', 'No']"
-        ></app-radio-button>
+        <nz-form-label nzNoColon nzRequired style="margin-bottom: 10px">
+          Are you planning to join Exadel after the Internship?
+        </nz-form-label>
+
+        <nz-radio-group formControlName="goingToExadel">
+          <label nz-radio [nzValue]="true">Yes</label>
+          <label nz-radio [nzValue]="false">No</label>
+        </nz-radio-group>
       </nz-form-item>
 
       <nz-form-item>
@@ -177,6 +197,7 @@
             <nz-form-label nzNoColon nzFor="comments">Comments</nz-form-label>
             <nz-form-control>
               <input
+                formControlName="additionalInfo"
                 nz-input
                 name="comments"
                 type="text"
@@ -194,6 +215,7 @@
             <nz-form-label nzNoColon>Do you have any questions?</nz-form-label>
             <nz-form-control>
               <input
+                formControlName="additionalQuestions"
                 nz-input
                 name="questions"
                 type="text"
@@ -211,6 +233,7 @@
             <nz-form-label nzNoColon nzFor="cjob">Current job</nz-form-label>
             <nz-form-control>
               <input
+                formControlName="currentJob"
                 nz-input
                 name="cjob"
                 type="text"
@@ -228,6 +251,7 @@
             <nz-form-label nzNoColon>Professional certificates</nz-form-label>
             <nz-form-control>
               <input
+                formControlName="certificates"
                 nz-input
                 name="certificates"
                 type="text"
@@ -240,7 +264,7 @@
       </nz-form-item>
 
       <nz-form-item class="btn">
-        <button nz-button><span>Submit</span></button>
+        <button nz-button (click)="submitForm()"><span>Submit</span></button>
         <!-- <nz-modal nzTitle="The first Modal" >
           <ng-container *nzModalContent>
           </ng-container>

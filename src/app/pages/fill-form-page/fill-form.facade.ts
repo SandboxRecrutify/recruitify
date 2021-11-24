@@ -14,9 +14,9 @@ export class FillFormFacade {
     private projectsService: ProjectsService
   ) {}
 
-  addCandidate(candidate: Candidate): Observable<boolean> {
-    return this.fillFormServices.addCandidate(candidate);
-  }
+  // addCandidate(candidate: Candidate): Observable<boolean> {
+  //   return this.fillFormServices.addCandidate(candidate);
+  // }
 
   get englishLevel$(): Observable<any> {
     return of(Object.entries(EnglishLevel));

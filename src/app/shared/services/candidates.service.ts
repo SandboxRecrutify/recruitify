@@ -19,7 +19,10 @@ export class CandidatesService extends ApiService {
     return super.get({ path: '/all/' + projectId });
   }
 
-  createCandidate(candidate: Candidate): Observable<Candidate> {
-    return super.post({ path: '' }, candidate);
+  createCandidate$(
+    candidate: Candidate,
+    projectId: string
+  ): Observable<Candidate> {
+    return super.post({ path: `?projectId=${projectId}` }, candidate);
   }
 }

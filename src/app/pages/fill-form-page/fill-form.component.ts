@@ -1,7 +1,16 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Candidate } from './../../shared/models/Candidate';
+import { CandidatesService } from './../../shared/services/candidates.service';
+import { CandidateService } from './../../shared/services/candidate.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  // FormGroup,
+  // Validators,
+  // FormControl,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
 import { FillFormFacade } from './fill-form.facade';
@@ -15,37 +24,71 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
 })
 export class FillFormComponent implements OnInit {
   currentProjectSkills!: PrimarySkill[];
-  validateForm!: FormGroup;
+  currnetProjectId!: string;
   englishLevel$: Observable<any>;
-  primarySkills$: Observable<any>;
+
+  candidateToSend!: Candidate;
+
   constructor(
     private fb: FormBuilder,
     private fillFormFacade: FillFormFacade,
     private route: ActivatedRoute,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private candidatesService: CandidatesService,
+    private message: NzMessageService
   ) {
     this.englishLevel$ = fillFormFacade.englishLevel$;
     fillFormFacade.englishLevel$.subscribe((next) => {
       console.log(next);
     });
-
-    this.primarySkills$ = fillFormFacade.primarySkills$;
   }
 
+  candidateForm = this.fb.group({
+    name: [''],
+    surname: [''],
+    skype: [''],
+    email: [''],
+    phoneNumber: [''],
+    location: this.fb.group({
+      city: [''],
+      country: [''],
+    }),
+    englishLevel: [''],
+    projectLanguage: [''],
+    primarySkill: [''],
+    goingToExadel: [''],
+    additionalInfo: [''],
+    additionalQuestions: [''],
+    currentJob: [''],
+    certificates: [''],
+    // contacts: [''],
+    // bestTimeToConnect: [[9, 10]],
+  });
+
   submitForm() {
-    console.log(this.validateForm.value);
+    this.candidateToSend = {
+      ...this.candidateForm.value,
+      bestTimeToConnect: [10, 11, 12],
+    };
+
+    console.log(this.candidateToSend);
+
+    this.candidatesService
+      .createCandidate$(this.candidateToSend, this.currnetProjectId)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          this.message.success('Success!');
+        },
+        () => {
+          this.message.error('Something went wrong!');
+        }
+      );
   }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      skype: [null, [Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      phoneNumber: [null, [Validators.required]],
-    });
-
     this.route.params.subscribe((params) => {
+      this.currnetProjectId = params.id;
       this.projectsService.getProjectById(params.id).subscribe((response) => {
         this.currentProjectSkills = response.primarySkills;
       });
