@@ -81,22 +81,7 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       return false;
     });
   }
-  onRegistrationDateChange(dates: (Date | null)[]): void {
-    this.form.patchValue({ dates: [] });
-    if (dates[1]) {
-      this.disableDatesFrom = dates[1];
-    }
-    console.log(dates[0]);
 
-    const isSame = dayjs(dates[0]).isSame(dayjs(dates[1]));
-    if (isSame) {
-      const control = this.form.get('registrationDates');
-      control?.setErrors({ same: true });
-      console.log(control?.errors);
-      control?.updateValueAndValidity();
-      control?.markAsDirty();
-    }
-  }
   handleCancel(): void {
     this.form.reset();
     this.form.patchValue({ isActive: true });
@@ -254,6 +239,19 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.projectsFacade.deleteProjectLoading$.subscribe((deleting) => {
         this.isDeleting = deleting;
+      })
+    );
+    //
+    this.subscriptions.push(
+      this.form.controls.registrationDates.valueChanges.subscribe((dates) => {
+        this.form.patchValue({ dates: [] });
+        if (dates[1]) {
+          this.disableDatesFrom = dates[1];
+        }
+        const isSame = dayjs(dates[0]).isSame(dayjs(dates[1]));
+        if (isSame) {
+          this.form.controls.registrationDates.setErrors({ same: true });
+        }
       })
     );
   }

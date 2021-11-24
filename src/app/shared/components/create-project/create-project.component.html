@@ -41,7 +41,7 @@
           nzJustify="space-between"
           style="margin-bottom: 0.5rem"
         >
-          <span>Primary Skills</span>
+          <nz-form-label nzRequired>Primary Skills</nz-form-label>
           <button
             nz-popover
             nzPopoverTitle="Choose primary skill"
@@ -190,7 +190,6 @@
           </nz-form-label>
           <nz-form-control [nzErrorTip]="registrationDatesError">
             <nz-range-picker
-              (nzOnCalendarChange)="onRegistrationDateChange($event)"
               [nzDisabledDate]="disabledDate"
               class="datePicker"
               formControlName="registrationDates"
