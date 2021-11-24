@@ -3,12 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
+import { Project } from '../../models/Project';
 import { QueryParams } from '../../services/api.service';
-import { Project, StaffRole } from '../../models/Project';
 import { ProjectsService } from '../../services/projects.service';
-import { ProjectsFilters } from './project-filters/project-filters.component';
 import { ProjectsQueries } from './projects-page.component';
-import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectsPageFacade {
@@ -19,7 +17,9 @@ export class ProjectsPageFacade {
   deleteProjectLoading$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
+  ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>(
+    []
+  );
 
   constructor(
     private projectsService: ProjectsService,
@@ -31,7 +31,7 @@ export class ProjectsPageFacade {
       property: skill,
       value: `primarySkills/any(p: p/name eq '${skill}')`,
     }));
-    const status = { property: filters?.status, value: filters?.status};
+    const status = { property: filters?.status, value: filters?.status };
     const searchText = {
       property: filters?.query,
       value: `contains(tolower(name), '${filters?.query}')`,
@@ -46,14 +46,16 @@ export class ProjectsPageFacade {
 
     const filter = [skills, status, searchText];
 
-    this.projectsService.getProjects(<QueryParams>{
-      odata: {
-        orderby,
-        filter
-      },
-    }).subscribe((projects) => {
-      this.ProjectsList$.next(projects);
-    });
+    this.projectsService
+      .getProjects(<QueryParams>{
+        odata: {
+          orderby,
+          filter,
+        },
+      })
+      .subscribe((projects) => {
+        this.ProjectsList$.next(projects);
+      });
   }
 
   getCreateProjectData$(): Observable<CreateProject> {
@@ -116,8 +118,8 @@ export class ProjectsPageFacade {
       ...restForm,
       startDate: dates[0],
       endDate: dates[1],
-      registrationStartDate: registrationDates[0],
-      registrationEndDate: registrationDates[1],
+      startRegistrationDate: registrationDates[0],
+      endRegistrationDate: registrationDates[1],
       primarySkills: Array.from(primarySkillsMap.entries()).map((el) => ({
         id: el[0],
         ...el[1].value,

@@ -22,8 +22,12 @@
     </div>
   </div>
 
-  <app-projects-list [projects]="projectsPageFacade.ProjectsList$ | async"></app-projects-list>
-  <app-create-project></app-create-project>
+  <app-projects-list
+    [projects]="projectsPageFacade.ProjectsList$ | async"
+  ></app-projects-list>
+  <app-create-project
+    (onProjectListChange)="onProjectListChange()"
+  ></app-create-project>
 </div>
 <app-project-filters
   [isVisible]="isFiltersVisible"
