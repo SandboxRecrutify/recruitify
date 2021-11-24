@@ -8,6 +8,7 @@ import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectsQueries } from './projects-page.component';
 
+
 @Injectable()
 export class ProjectsPageFacade {
   projectDetails$ = new Subject<Project>();
@@ -42,7 +43,7 @@ export class ProjectsPageFacade {
           names: [filters?.orderBy?.property],
           order: filters?.orderBy?.order,
         }
-      : {};
+      : {names: ['StartDate'], order: 'desc'};
 
     const filter = [skills, status, searchText];
 

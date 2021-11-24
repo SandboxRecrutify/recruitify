@@ -17,7 +17,7 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
   filters: any = {};
 
-  projects: Project[] = [];
+  // projects: Project[] = [];
 
   constructor(public projectsPageFacade: ProjectsPageFacade) {}
 
