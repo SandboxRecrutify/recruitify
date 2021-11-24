@@ -1,19 +1,26 @@
 <div class="menu" *ngIf="isRecruiter || isManager">
   <div class="menu_email" *ngIf="isRecruiter">
-    <button nz-button nzType="primary">Send test task</button>
+    <button
+      nz-button
+      nzSize="small"
+      nzType="primary"
+      (click)="printEmailModal()"
+    >
+      Send test task
+    </button>
   </div>
-
   <div class="menu_test" *ngIf="isRecruiter">
-    <button nz-button nzType="primary">Set test result</button>
-    <input nz-input class="menu_test-input" />
+    <button nz-button nzSize="small" nzType="primary">Set test result</button>
+    <input nz-input nzSize="small" class="menu_test-input" />
   </div>
 
   <div class="menu_status">
     <nz-select
+      *ngIf="isRecruiter; else selectForManager"
+      nzSize="small"
       class="menu_status-select"
       id="status"
       nzPlaceHolder="Set status"
-      *ngIf="isRecruiter; else selectForManager"
     >
       <nz-option
         *ngFor="let status of candidateStatuses"
@@ -53,6 +60,7 @@
     </ng-template>
 
     <button
+      nzSize="small"
       nz-button
       class="menu_status-btn"
       nzType="primary"
@@ -62,3 +70,5 @@
     </button>
   </div>
 </div>
+
+<app-send-email-modal></app-send-email-modal>

@@ -48,4 +48,8 @@ export class DropdownMenuComponent implements OnInit {
   printStatusSubmitMessage(type: string): void {
     this.message.create(type, `Status was successfully set`);
   }
+
+  printEmailModal() {
+    this.candidatesPageFacade.isEmailModalVisible$.next(true);
+  }
 }
