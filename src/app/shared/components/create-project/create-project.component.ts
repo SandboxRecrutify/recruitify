@@ -97,7 +97,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     if (this.form.valid && isPrimarySkillsValid) {
       const toSend = this.projectsFacade.prepareProjectForCreation(
         this.form.value,
-        this.data?.staffGroup!,
         this.primarySkills
       );
       if (this.editingId) {
@@ -110,7 +109,7 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   }
   /// delete project
   deleteProject() {
-    console.log('deleted');
+    // console.log('deleted');
     this.projectsFacade.deleteProject(this.editingId!);
     this.handleCancel();
   }
