@@ -7,7 +7,7 @@ import { Project } from 'src/app/shared/models/Project';
   styleUrls: ['./projects-list.component.scss'],
 })
 export class ProjectsListComponent implements OnInit {
-  @Input() projects: Project[] = [];
+  @Input() projects: Project[] | null = [];
 
   constructor() {}
 

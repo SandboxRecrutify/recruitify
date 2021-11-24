@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 export const GET = 'Get';
 export const POST = 'Post';
@@ -14,6 +14,7 @@ export const API = '/api';
 export const TOKEN = '/connect/token';
 export const MOCK = '/assets';
 
+const EMPTY_STRING = '';
 export interface QueryParams {
   path?: string;
   odata?: OData;
@@ -30,7 +31,7 @@ export interface OData {
   filter?: Filter[];
 }
 interface OrderBy {
-  names: string[];
+  names?: string[];
   order?: 'asc' | 'desc' | '';
 }
 
@@ -102,40 +103,11 @@ export abstract class ApiService {
   }
 
   private getQueryOptions(params: QueryParams): string {
-    let url = '';
+    let url = EMPTY_STRING;
     if (params.mock) {
       url += params.mock;
     } else if (params.odata) {
-      url = '?$count=true';
-      if (params.odata.top) {
-        url += this.buildOData('top', params.odata.top);
-      }
-      if (params.odata.skip) {
-        url += this.buildOData('skip', params.odata.skip);
-      }
-      if (params.odata.orderby) {
-        const orderBy = params.odata.orderby;
-        url += this.buildOData(
-          'orderby',
-          orderBy.names.join(',') + ' ' + orderBy.order
-        );
-      }
-      if (params.odata.filter) {
-        const filter = params.odata.filter;
-        const filterParams = filter.map((el) => {
-          if (Array.isArray(el) && el) {
-            return el.map((f) => `${f.property}${f.operator}`).join(' or ');
-          } else {
-            return el.property && `${el.property}`;
-          }
-        });
-
-        if (filterParams.includes('')) {
-          return (url += this.buildOData('filter', filterParams.join('')));
-        } else {
-          return (url += this.buildOData('filter', filterParams.join(' and ')));
-        }
-      }
+     url += this.buildOData(params.odata);
     } else if (params.login) {
     } else {
       url += params.path;
@@ -143,8 +115,39 @@ export abstract class ApiService {
     return url;
   }
 
-  private buildOData(query: string, value: any) {
-    return (query && value && `&$${query}=${value}`) || '';
+  private buildOData(odata: OData) {
+    const { top, skip, orderby, filter } = odata;
+    let url = '?$count=true';
+
+    url += this.buildODataPath(top, 'top');
+    url += this.buildODataPath(skip, 'skip');
+
+    url += this.buildODataPath(
+      orderby && orderby.names ? orderby.names.join(',') + ' ' + orderby.order : undefined,
+      'orderby'
+    );
+
+    url += this.buildODataPath(this.buildFilterParams(filter), 'filter');
+console.log(url)
+    return url;
+  }
+
+  private buildFilterParams(filter: Filter[] | undefined) {
+    const filterParams = filter?.filter(v => !!v).map((el) => {
+      return Array.isArray(el) && el.length > 0
+        ? `(${el.map((item) => `${item.value}`).join(' or ')})`
+        :  el.property && el.property !== EMPTY_STRING ? el.value : undefined;
+    });
+console.log(filterParams)
+    return filterParams?.filter(el => !!el).join(' and ')
+  }
+
+  private buildODataPath( parameter: number | string | undefined, path: string): string {
+    return parameter ? this.buildODataQuery(path, parameter) : EMPTY_STRING;
+  }
+
+  private buildODataQuery(query: string, value: number | string): string {
+    return query && value && `&$${query}=${value}` || EMPTY_STRING;
   }
 
   private wrapRequest<T>(
