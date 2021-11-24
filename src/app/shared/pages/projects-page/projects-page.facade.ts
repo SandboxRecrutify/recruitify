@@ -19,9 +19,7 @@ export class ProjectsPageFacade {
   deleteProjectLoading$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
 
-  ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>(
-    []
-  );
+  ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
 
   constructor(
     private projectsService: ProjectsService,
@@ -29,29 +27,31 @@ export class ProjectsPageFacade {
   ) {}
 
   getProjectsList(filters?: ProjectsQueries): void {
-    const skills = filters?.primary?.map((p) => ({
-      property: 'primarySkills',
-      operator: `/any(p: p/name eq '${p}')`,
+    const skills = filters?.primary?.map((skill) => ({
+      property: skill,
+      value: `primarySkills/any(p: p/name eq '${skill}')`,
     }));
-    const status = { property: filters?.status };
+    const status = { property: filters?.status, value: filters?.status};
     const searchText = {
       property: filters?.query,
-      value: `contains(tolower(name), '${filters?.query}')`
+      value: `contains(tolower(name), '${filters?.query}')`,
     };
-    // console.log(searchText)
-    const queryParams = filters
-      ? <QueryParams>{
-          odata: {
-            orderby: {
-              names: [filters?.orderBy?.property],
-              order: filters?.orderBy?.order,
-            },
-            filter: [skills, status],
-          },
-        }
-      : { odata: {} };
 
-    this.projectsService.getProjects(queryParams).subscribe((projects) => {
+    const orderby = filters?.orderBy
+      ? {
+          names: [filters?.orderBy?.property],
+          order: filters?.orderBy?.order,
+        }
+      : {};
+
+    const filter = [skills, status, searchText];
+
+    this.projectsService.getProjects(<QueryParams>{
+      odata: {
+        orderby,
+        filter
+      },
+    }).subscribe((projects) => {
       this.ProjectsList$.next(projects);
     });
   }
