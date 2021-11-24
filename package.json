@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy --repo=https://github.com/SandboxRecrutify/recruitify.git --base-href \"https://sandboxrecrutify.github.io/recruitify/\""
   },
   "private": true,
   "dependencies": {
