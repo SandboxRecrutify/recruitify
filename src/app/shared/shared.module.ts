@@ -83,6 +83,7 @@ import { SkillsTabsetComponent } from './pages/calendar-page/skills-tabset/skill
 import { ProfileFeedbacksComponent } from './pages/profile-page/profile-feedbacks/profile-feedbacks.component';
 import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-modal/add-feedback-modal.component';
 import { AssignedModalComponent } from './pages/calendar-page/assigned-modal/assigned-modal.component';
+import { EmailModalComponent } from './pages/calendar-page/email-modal/email-modal.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { AssignedModalComponent } from './pages/calendar-page/assigned-modal/ass
     ProfileFeedbacksComponent,
     AddFeedbackModalComponent,
     AssignedModalComponent,
+    EmailModalComponent,
   ],
   imports: [
     NzBreadCrumbModule,

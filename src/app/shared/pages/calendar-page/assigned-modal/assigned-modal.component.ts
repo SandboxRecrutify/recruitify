@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { CalendarPageFacade } from './../calendar-page.facade';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-assigned-modal',
@@ -6,18 +7,27 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./assigned-modal.component.scss'],
 })
 export class AssignedModalComponent implements OnInit {
-  @Input() isVisible!: any;
-  @Input() clickedCandidate!: any;
+  isModalVisible!: boolean;
+  clickedCandidate!: any;
 
-  constructor() {}
+  constructor(private calendarPageFacade: CalendarPageFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.calendarPageFacade.isAssignedModalVisible$.subscribe(
+      (response) => (this.isModalVisible = response)
+    );
 
-  handleOk(): void {
-    this.isVisible = false;
+    this.calendarPageFacade.assignedCandidate$.subscribe(
+      (response) => (this.clickedCandidate = response)
+    );
+  }
+
+  handleDelete(): void {
+    console.log('Delete assigned candidate');
+    this.calendarPageFacade.isAssignedModalVisible$.next(false);
   }
 
   handleCancel(): void {
-    this.isVisible = false;
+    this.calendarPageFacade.isAssignedModalVisible$.next(false);
   }
 }

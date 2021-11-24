@@ -1,80 +1,76 @@
 @use "../../../globals" as *;
 
+.fill_form {
+  height: 100vh;
+  &_container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+  }
 
-.fill_form{
-    height:100vh;
-    &_container{
-        // height: 800px;
-        width: 500px;
-        margin: 0 auto;
-        padding: 40px;
-    } 
+  form {
+    padding-top: 10px;
+  }
 
-    form{
-        padding-top: 10px;
-    }
-    
-    h2{
-        color: $primaryColor;
-        font-weight: 700;
-        font-size: 18px;
-    }
+  h2 {
+    color: $primaryColor;
+    font-weight: 600;
+    font-size: 18px;
+  }
 
-    input{
-        border: none;
-        border-bottom: 2px solid $primaryColor;
-        background-color: $bgColor;
-    }
-    
-    .item-box{
-        display: flex;
-        width: 100%;
-        align-items: flex-end;
-    }
+  input {
+    border: none;
+    border-bottom: 2px solid $primaryColor;
+    background-color: $bgColor;
+  }
 
-    .inner-item-box{
-        width: 100%;
-        margin: 0;
-    }
+  .item-box {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+  }
 
-    .ant-form-item-label{
-        color: $primaryColor;
-    }
+  .inner-item-box {
+    width: 100%;
+    margin: 0;
+  }
 
-    .pad-left{
-        padding-left: 10px;
-        width: 100%;
-    }
+  .ant-form-item-label {
+    color: $primaryColor;
+  }
 
-    .mar-top{
-       margin-top: 15px;
-    }
+  .pad-left {
+    padding-left: 10px;
+    width: 100%;
+  }
 
-    .pad-top{
-        padding-top: 20px
-    }
-   
-    nz-form-control{
-        width: 100%;
-    }
+  .mar-top {
+    margin-top: 15px;
+  }
 
-    nz-select{
-        padding: 10px 0;
-    }
+  .pad-top {
+    padding-top: 20px;
+  }
 
-    .color{
-        color: $primaryColor;
-    }
+  nz-form-control {
+    width: 100%;
+  }
 
-    .btn{
-        display: flex;
-        justify-content: flex-end;
-    }
+  nz-select {
+    padding: 10px 0;
+  }
 
-    button{
-        background: $primaryColor;
-        color: white;
-    }
+  .color {
+    color: $primaryColor;
+  }
 
+  .btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  button {
+    background: $primaryColor;
+    color: white;
+  }
 }
-

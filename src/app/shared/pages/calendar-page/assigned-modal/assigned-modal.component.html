@@ -1,20 +1,33 @@
 <nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Day, Date | Time"
+  [(nzVisible)]="isModalVisible"
+  [nzTitle]="modalTitle"
   [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
   nzWidth="350px"
 >
   <ng-container *nzModalContent>
     <p class="modal-text-name">
-      {{ clickedCandidate.name }} {{ clickedCandidate.surname }}
+      {{ clickedCandidate.name }} {{ clickedCandidate.surname }},
+      {{ clickedCandidate.skill }}
     </p>
+
     <p class="modal-text">Project: {{ clickedCandidate.project }}</p>
+    <p class="modal-text">Status: New</p>
     <p class="modal-text">E-mail: {{ clickedCandidate.email }}</p>
     <p class="modal-text">Skype: {{ clickedCandidate.skype }}</p>
   </ng-container>
 </nz-modal>
 
 <ng-template #modalFooter>
-  <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-  <button nz-button nzType="primary" (click)="handleOk()">Delete</button>
+  <button nz-button nzType="default" (click)="handleDelete()">
+    Delete candidate
+  </button>
+  <button nz-button nzType="primary" (click)="handleCancel()">Cancel</button>
+</ng-template>
+
+<ng-template #modalTitle>
+  <div class="modal_header">
+    <p>Monday, 22.11</p>
+    <p>9:30</p>
+  </div>
 </ng-template>

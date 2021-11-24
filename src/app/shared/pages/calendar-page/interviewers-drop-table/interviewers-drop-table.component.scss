@@ -77,6 +77,12 @@
 
 .assigned {
   background-color: #76cc48;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.assigned:hover {
+  opacity: 0.8;
 }
 
 .weekend-row {

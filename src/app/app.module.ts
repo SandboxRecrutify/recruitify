@@ -1,5 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
 import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
+
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -58,6 +59,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     BrowserAnimationsModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     NzTableModule,
     NzDropDownModule,
     NzIconModule,

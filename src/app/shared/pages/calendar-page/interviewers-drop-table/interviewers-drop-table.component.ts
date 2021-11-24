@@ -1,3 +1,4 @@
+import { CalendarPageFacade } from './../calendar-page.facade';
 import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { DragNDropService } from './../../../services/drag-n-drop.service';
 import { CalendarService } from './../../../services/calendar.service';
@@ -17,13 +18,12 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
 
   isWeekDay!: boolean;
 
-  isVisible: boolean = false;
-
   clickedCandidate: any;
 
   constructor(
     private calendarService: CalendarService,
-    private dragNDropService: DragNDropService
+    private dragNDropService: DragNDropService,
+    private calendarPageFacade: CalendarPageFacade
   ) {}
 
   ngDoCheck(): void {
@@ -76,9 +76,8 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
 
   onItemClick(candidate: any) {
     if (candidate) {
-      this.clickedCandidate = candidate;
-      this.isVisible = true;
+      this.calendarPageFacade.assignedCandidate$.next(candidate);
+      this.calendarPageFacade.isAssignedModalVisible$.next(true);
     }
-    console.log(candidate);
   }
 }

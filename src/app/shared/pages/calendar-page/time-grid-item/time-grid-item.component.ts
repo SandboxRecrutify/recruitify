@@ -9,6 +9,4 @@ export class TimeGridItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  onItemMarked() {}
 }

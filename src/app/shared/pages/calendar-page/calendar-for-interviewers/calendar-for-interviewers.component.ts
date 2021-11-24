@@ -8,20 +8,19 @@ import * as dayjs from 'dayjs';
   styleUrls: ['./calendar-for-interviewers.component.scss'],
 })
 export class CalendarForInterviewersComponent implements OnInit {
-  currentWeek = this.calendarPageFacade.getCurrentWeekDays();
-  displayedWeekDays: Date[] = this.currentWeek;
+  displayedWeekDays: Date[] = this.calendarPageFacade.getCurrentWeekDays();
 
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 
   ngOnInit(): void {}
 
-  onNextBtnClick() {
+  onNextBtnClick(): void {
     this.displayedWeekDays = this.calendarPageFacade.getNextWeekDays(
       this.displayedWeekDays
     );
   }
 
-  onPreviousBtnClick() {
+  onPreviousBtnClick(): void {
     this.displayedWeekDays = this.calendarPageFacade.getPreviousWeekDays(
       this.displayedWeekDays
     );
