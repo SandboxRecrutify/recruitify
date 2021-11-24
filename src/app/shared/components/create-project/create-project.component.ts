@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
@@ -15,6 +21,8 @@ import { ProjectsPageFacade } from '../../pages/projects-page/projects-page.faca
   styleUrls: ['./create-project.component.scss'],
 })
 export class CreateProjectComponent implements OnInit, OnDestroy {
+  @Output() onProjectListChange = new EventEmitter();
+
   isVisible: boolean = false;
   primarySkills: Map<string, FormGroup> = new Map();
   isPrimarySkillsTouched: boolean = false;
@@ -23,6 +31,7 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   editingId: string | undefined;
   isLoading = false;
   isDeleting = false;
+  disableDatesFrom: Date | undefined;
 
   private subscriptions: Subscription[] = [];
   constructor(
@@ -35,6 +44,15 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   //disable dates before today
   disabledDate = (current: Date): boolean => {
     return current && dayjs().add(-1, 'day').isAfter(dayjs(current));
+  };
+  //disable dates before today
+  disabledProjectDate = (current: Date): boolean => {
+    return (
+      current &&
+      dayjs(this.disableDatesFrom)
+        .add(this.disableDatesFrom ? 0 : -1, 'day')
+        .isAfter(dayjs(current))
+    );
   };
 
   onPrimarySkillToggle(value: boolean, primarySkill: PrimarySkill) {
@@ -63,7 +81,22 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       return false;
     });
   }
+  onRegistrationDateChange(dates: (Date | null)[]): void {
+    this.form.patchValue({ dates: [] });
+    if (dates[1]) {
+      this.disableDatesFrom = dates[1];
+    }
+    console.log(dates[0]);
 
+    const isSame = dayjs(dates[0]).isSame(dayjs(dates[1]));
+    if (isSame) {
+      const control = this.form.get('registrationDates');
+      control?.setErrors({ same: true });
+      console.log(control?.errors);
+      control?.updateValueAndValidity();
+      control?.markAsDirty();
+    }
+  }
   handleCancel(): void {
     this.form.reset();
     this.form.patchValue({ isActive: true });
@@ -105,13 +138,17 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       } else {
         this.projectsFacade.createProject(toSend);
       }
+      this.handleCancel();
+      // TODO: make it on success
+      this.onProjectListChange.emit();
     }
   }
   /// delete project
   deleteProject() {
-    // console.log('deleted');
     this.projectsFacade.deleteProject(this.editingId!);
     this.handleCancel();
+    // TODO: make it on success
+    this.onProjectListChange.emit();
   }
 
   ngOnInit(): void {

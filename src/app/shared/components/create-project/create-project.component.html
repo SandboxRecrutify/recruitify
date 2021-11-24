@@ -183,6 +183,32 @@
         </nz-form-item>
       </div>
       <!-- dates -->
+      <div nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="registrationDates"
+            >Choose start and end dates of registration
+          </nz-form-label>
+          <nz-form-control [nzErrorTip]="registrationDatesError">
+            <nz-range-picker
+              (nzOnCalendarChange)="onRegistrationDateChange($event)"
+              [nzDisabledDate]="disabledDate"
+              class="datePicker"
+              formControlName="registrationDates"
+              id="registrationDates"
+            ></nz-range-picker>
+            <ng-template #registrationDatesError let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                Please choose start and end dates of registration
+              </ng-container>
+              <ng-container *ngIf="control.hasError('same')">
+                Start and end registration dates cannot be the same
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <!-- dates -->
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="dates"
@@ -190,7 +216,7 @@
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter dates">
             <nz-range-picker
-              [nzDisabledDate]="disabledDate"
+              [nzDisabledDate]="disabledProjectDate"
               class="datePicker"
               formControlName="dates"
               id="dates"
@@ -216,22 +242,7 @@
           </nz-form-control>
         </nz-form-item>
       </div>
-      <!-- dates -->
-      <div nz-col [nzSpan]="24">
-        <nz-form-item>
-          <nz-form-label nzRequired nzFor="registrationDates"
-            >Choose start and end dates of registration
-          </nz-form-label>
-          <nz-form-control nzErrorTip="Please enter dates of registration">
-            <nz-range-picker
-              [nzDisabledDate]="disabledDate"
-              class="datePicker"
-              formControlName="registrationDates"
-              id="registrationDates"
-            ></nz-range-picker>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+
       <!-- description -->
       <div nz-col [nzSpan]="24">
         <nz-form-item>
