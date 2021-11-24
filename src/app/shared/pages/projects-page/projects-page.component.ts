@@ -1,9 +1,7 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../models/Project';
-import { ProjectsPageFacade } from './projects-page.facade';
 import { ProjectsFilters } from './project-filters/project-filters.component';
-import { filter } from 'rxjs/operators';
+import { ProjectsPageFacade } from './projects-page.facade';
 
 export interface ProjectsQueries extends ProjectsFilters {
   query?: string;
@@ -19,7 +17,7 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
   filters: any = {};
 
-  projects: Project[] = [];
+  // projects: Project[] = [];
 
   constructor(public projectsPageFacade: ProjectsPageFacade) {}
 
@@ -42,6 +40,9 @@ export class ProjectsPageComponent implements OnInit {
 
   onSearchChange(search: ProjectsQueries) {
     this.filters = { ...this.filters, query: search };
+    this.projectsPageFacade.getProjectsList(this.filters);
+  }
+  onProjectListChange() {
     this.projectsPageFacade.getProjectsList(this.filters);
   }
 }

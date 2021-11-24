@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../../models/Project';
+import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
@@ -58,7 +59,11 @@ export class CandidatesPageFacade {
   isManager: boolean = this.userServise.isManager();
 
   getProjectCandidates$(projectId: string): Observable<Candidate[]> {
-    return this.candidatesService.getCandidatesByProjectId(projectId);
+    return this.candidatesService.getCandidatesByProjectId(<QueryParams>{
+      odata: {
+        projectId
+      }
+    });
   }
 
   getProjectData$(projectId: string): Observable<Project> {
