@@ -31,6 +31,10 @@ export class CandidatesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.candidatesPageFacade.getAllCandidates().subscribe((response) => {
+      console.log(response);
+    });
+
     this.route.params.subscribe((params: Params) => {
       this.currentProjectId = params.id;
       if (params.id) {
@@ -51,8 +55,13 @@ export class CandidatesPageComponent implements OnInit {
             this.currentProjectName = project.name;
           });
       } else {
-        this.router.navigate([paths.fof]);
-        this.message.error('Project not found!');
+        this.isLoading = true;
+        // this.router.navigate([paths.fof]);
+        // this.message.error('Project not found!');
+        this.candidatesPageFacade.getAllCandidates().subscribe((response) => {
+          this.candidatesList = response;
+          this.isLoading = false;
+        });
       }
     });
   }

@@ -64,4 +64,8 @@ export class CandidatesPageFacade {
   getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
   }
+
+  getAllCandidates() {
+    return this.candidatesService.getCandidates();
+  }
 }
