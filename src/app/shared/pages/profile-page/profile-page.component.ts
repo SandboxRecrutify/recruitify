@@ -1,3 +1,5 @@
+import { CandidateProjectResults } from './../../models/CandidateProjectResults';
+import { Project } from 'src/app/shared/models/Project';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,6 +33,8 @@ export class ProfilePageComponent implements OnInit {
   prevProjects: any[] = [];
   isLoading = false;
 
+  candidatesCurrentProject!: any;
+
   constructor(
     private profilePageFacade: ProfilePageFacade,
     private router: Router,
@@ -51,6 +55,13 @@ export class ProfilePageComponent implements OnInit {
           (candidate) => {
             this.isLoading = false;
             this.candidate = candidate;
+            console.log(candidate);
+            this.candidatesCurrentProject = candidate.projectResults.find(
+              (project) => {
+                return project.projectId === this.currentProjectId;
+              }
+            );
+            console.log(this.candidatesCurrentProject);
           },
           () => {
             this.isLoading = false;
@@ -65,8 +76,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   printCandidatePrimarySkills(candidate?: Candidate) {
-    return candidate?.primarySkills.map((skill) => skill.name).join(' | ');
+    // return candidate?.primarySkills.map((skill) => skill.name).join(' | ');
+    // return candidate?.projectResults.map((skill) => console.log(skill.name));
   }
+
   getTestResult() {
     return (
       this.candidate?.projectResults[0].feedbacks.find((feedback) => {
