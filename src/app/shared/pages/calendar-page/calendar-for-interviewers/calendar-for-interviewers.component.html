@@ -1,5 +1,35 @@
+<div
+  style="
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    position: absolute;
+    top: 25px;
+    left: 20px;
+  "
+>
+  <label style="font-size: 12px">Working weekends</label>
+  <nz-switch
+    nzSize="small"
+    [(ngModel)]="switchWeekends"
+    (ngModelChange)="printWeekends()"
+  ></nz-switch>
+</div>
+
+<!-- <label style="font-size: 12px" nz-checkbox [(ngModel)]="saturdayChecked">
+  Working saturday
+</label>
+<label
+  style="font-size: 12px"
+  nz-checkbox
+  [(ngModel)]="sundayChecked"
+  (ngModelChange)="sunClick()"
+>
+  Working sunday
+</label> -->
+
 <div class="heading">
-  <div class="week-btns">
+  <div class="week-btns" *ngIf="!isBtnSaveVisible; else btnsWithPopconfirm">
     <a nz-button nzType="link" (click)="onPreviousBtnClick()"
       ><<< Previous week</a
     >
@@ -15,8 +45,9 @@
     <div
       class="calendar_weekday"
       *ngFor="let day of displayedWeekDays"
-      appCalendarItem
-      [day]="day.getDay()"
+      [ngStyle]="
+        day.getDate() === today.getDate() ? { background: '#faecc0' } : null
+      "
     >
       {{ day | date: "MMM, d" }}
       {{ day | date: "ccc" }}
@@ -25,6 +56,7 @@
   <div class="calendar_time-grid" appCalendarItem>
     <app-time-grid-row
       *ngFor="let day of displayedWeekDays"
+      [day]="day"
     ></app-time-grid-row>
   </div>
 </div>
@@ -40,5 +72,36 @@
     </div>
   </div>
 
-  <button nz-button nzSize="default" nzType="primary">Save</button>
+  <button
+    *ngIf="isBtnSaveVisible"
+    nz-button
+    nzSize="default"
+    nzType="primary"
+    (click)="onSaveBtnClick()"
+  >
+    Save
+  </button>
 </div>
+
+<ng-template #btnsWithPopconfirm>
+  <div class="week-btns">
+    <a
+      nz-button
+      nzType="link"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure? Current data will not be saved"
+      nzPopconfirmPlacement="right"
+      (nzOnConfirm)="onPreviousBtnClick()"
+      ><<< Previous week</a
+    >
+    <a
+      nz-button
+      nzType="link"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure? Current data will not be saved"
+      nzPopconfirmPlacement="left"
+      (nzOnConfirm)="onNextBtnClick()"
+      >Nest week >>></a
+    >
+  </div>
+</ng-template>

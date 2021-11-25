@@ -1,1 +1,7 @@
-<div class="time-grid_item"></div>
+<div
+  (mousedown)="getItemDay()"
+  [ngClass]="{
+    'time-grid_item--last': day < today,
+    'time-grid_item': day >= today
+  }"
+></div>
