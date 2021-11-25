@@ -32,8 +32,11 @@
           <div class="main-info_heading">
             <p class="name">{{ candidate?.name }} {{ candidate?.surname }}</p>
             <p class="stack">
-              Primary Skill
-              <!-- {{ printCandidatePrimarySkills(candidate) }} -->
+              {{
+                candidatesCurrentProject.primarySkill
+                  ? candidatesCurrentProject.primarySkill.name
+                  : ""
+              }}
             </p>
           </div>
           <p class="location">
@@ -64,7 +67,12 @@
           <p><span>Test result:</span> {{ getTestResult() }}</p>
           <p>
             <span>Status:</span>
-            {{candidate &&  candidateStatuses[candidate?.projectResults?.[0]?.status!] }}
+            {{
+              candidatesCurrentProject
+                ? candidateStatuses[candidatesCurrentProject.status]
+                : null
+            }}
+            <!-- {{candidate &&  candidateStatuses[candidate?.projectResults?.[0]?.status!] }} -->
           </p>
           <div>
             <span>Previous projects:</span>
@@ -76,7 +84,8 @@
         <div class="add-info">
           <p class="add-info_title">Additional information</p>
           <p>
-            <span>Date of application: </span>{{ candidate?.registrationDate }}
+            <span>Date of application: </span
+            >{{ candidate?.registrationDate | date }}
           </p>
           <p>
             <span>Best time to contact:</span>
