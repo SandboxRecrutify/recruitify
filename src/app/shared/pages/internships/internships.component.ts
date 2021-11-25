@@ -1,3 +1,5 @@
+import { QueryParams } from './../../services/api.service';
+import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { Project } from 'src/app/shared/models/Project';
 import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
 import { Component, OnInit } from '@angular/core';
@@ -11,12 +13,17 @@ import * as dayjs from 'dayjs';
 export class InternshipsComponent implements OnInit {
   activeProjects!: Project[];
 
-  constructor(private projectsPageFacade: ProjectsPageFacade) {}
+  constructor(
+    private projectsPageFacade: ProjectsPageFacade,
+    private projectsService: ProjectsService
+  ) {}
 
   ngOnInit(): void {
-    this.projectsPageFacade.ProjectsList$.subscribe((response) => {
-      this.activeProjects = response.filter((project) => project.isActive);
-    });
+    this.projectsService
+      .getProjects(<QueryParams>{ odata: { status } })
+      .subscribe((response) => {
+        this.activeProjects = response.filter((project) => project.isActive);
+      });
   }
 
   getProjectDuration(start: string | Date, end: string | Date) {

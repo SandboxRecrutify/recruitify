@@ -46,8 +46,8 @@ export class FillFormComponent implements OnInit {
   candidateForm = this.fb.group({
     name: [''],
     surname: [''],
-    skype: [''],
     email: [''],
+    contacts: this.fb.group({ type: ['Skype'], value: [''] }),
     phoneNumber: [''],
     location: this.fb.group({
       city: [''],
@@ -61,14 +61,13 @@ export class FillFormComponent implements OnInit {
     additionalQuestions: [''],
     currentJob: [''],
     certificates: [''],
-    // contacts: [''],
-    // bestTimeToConnect: [[9, 10]],
   });
 
   submitForm() {
     this.candidateToSend = {
       ...this.candidateForm.value,
       bestTimeToConnect: [10, 11, 12],
+      contacts: [this.candidateForm.value.contacts],
     };
 
     console.log(this.candidateToSend);
@@ -84,6 +83,8 @@ export class FillFormComponent implements OnInit {
           this.message.error('Something went wrong!');
         }
       );
+
+    this.candidateForm.reset();
   }
 
   ngOnInit(): void {

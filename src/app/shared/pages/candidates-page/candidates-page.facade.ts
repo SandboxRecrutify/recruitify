@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Project } from '../../models/Project';
 import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
@@ -48,25 +48,31 @@ export class CandidatesPageFacade {
   ];
   candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
 
+  candidateList$ = this.candidatesService.getCandidates();
+  isRecruiter: boolean = this.userServise.isRecruiter();
+  isManager: boolean = this.userServise.isManager();
+
+  isEmailModalVisible$ = new BehaviorSubject(false);
+
   constructor(
     private candidatesService: CandidatesService,
     private userServise: UserService,
     private projectsService: ProjectsService
   ) {}
 
-  candidateList$ = this.candidatesService.getCandidates();
-  isRecruiter: boolean = this.userServise.isRecruiter();
-  isManager: boolean = this.userServise.isManager();
-
   getProjectCandidates$(projectId: string): Observable<Candidate[]> {
     return this.candidatesService.getCandidatesByProjectId(<QueryParams>{
       odata: {
-        projectId
-      }
+        projectId,
+      },
     });
   }
 
   getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
+  }
+
+  getAllCandidates() {
+    return this.candidatesService.getCandidates();
   }
 }
