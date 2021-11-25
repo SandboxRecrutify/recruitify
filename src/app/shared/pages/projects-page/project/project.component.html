@@ -6,9 +6,11 @@
 >
   <div class="project-info">
     <div class="description">
-      <p class='skills'>
+      <p class="skills">
         Primary skills:
-        <span *ngFor="let item of card.primarySkills"> {{ item.name }}</span>
+        <span *ngFor="let item of card.primarySkills; index as i">
+          {{ item.name + (card.primarySkills.length - 1 === i ? "" : " | ") }}
+        </span>
       </p>
       <p>Status: {{ card.isActive ? "Active" : "Closed" }}</p>
       <p>Start: {{ card.startDate | date }}</p>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Project } from '../../models/Project';
 import { ProjectsFilters } from './project-filters/project-filters.component';
 import { ProjectsPageFacade } from './projects-page.facade';
@@ -13,16 +14,22 @@ export interface ProjectsQueries extends ProjectsFilters {
   styleUrls: ['./projects-page.component.scss'],
 })
 export class ProjectsPageComponent implements OnInit {
+  isLoading = false;
   isFiltersVisible: boolean = false;
   searchText: string = '';
   filters: any = {};
-
+  subscription: Subscription | null = null;
   // projects: Project[] = [];
 
   constructor(public projectsPageFacade: ProjectsPageFacade) {}
 
   ngOnInit(): void {
     this.projectsPageFacade.getProjectsList();
+    this.subscription = this.projectsPageFacade.projectListLoading$.subscribe(
+      (value) => {
+        this.isLoading = value;
+      }
+    );
   }
 
   toggleFiltersVisible(isVisible: boolean) {
@@ -44,5 +51,10 @@ export class ProjectsPageComponent implements OnInit {
   }
   onProjectListChange() {
     this.projectsPageFacade.getProjectsList(this.filters);
+  }
+
+  onSearchClear() {
+    this.projectsPageFacade.getProjectsList()
+    this.searchText = ''
   }
 }
