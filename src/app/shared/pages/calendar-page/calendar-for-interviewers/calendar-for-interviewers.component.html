@@ -16,18 +16,6 @@
   ></nz-switch>
 </div>
 
-<!-- <label style="font-size: 12px" nz-checkbox [(ngModel)]="saturdayChecked">
-  Working saturday
-</label>
-<label
-  style="font-size: 12px"
-  nz-checkbox
-  [(ngModel)]="sundayChecked"
-  (ngModelChange)="sunClick()"
->
-  Working sunday
-</label> -->
-
 <div class="heading">
   <div class="week-btns" *ngIf="!isBtnSaveVisible; else btnsWithPopconfirm">
     <a nz-button nzType="link" (click)="onPreviousBtnClick()"

@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule, Provider } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -70,6 +71,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     NzModalModule,
     NzFormModule,
     NzMessageModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
