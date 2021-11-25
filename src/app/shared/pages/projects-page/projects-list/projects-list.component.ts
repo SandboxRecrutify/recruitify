@@ -8,6 +8,7 @@ import { Project } from 'src/app/shared/models/Project';
 })
 export class ProjectsListComponent implements OnInit {
   @Input() projects: Project[] | null = [];
+  @Input() loading: boolean = false;
 
   constructor() {}
 

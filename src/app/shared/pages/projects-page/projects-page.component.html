@@ -23,6 +23,7 @@
   </div>
 
   <app-projects-list
+    [loading]="isLoading"
     [projects]="projectsPageFacade.ProjectsList$ | async"
   ></app-projects-list>
   <app-create-project

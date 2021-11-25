@@ -40,7 +40,7 @@ export class ProjectsService extends ApiService {
   editProject$(project: Project): Observable<Project> {
     return super.put<any, Project>({ path: '' }, project);
   }
-  deleteProject$(id: string): Observable<Project> {
+  deleteProject$(id: string): Observable<void> {
     return super.delete<any>({ path: '/' + id });
   }
 }

@@ -8,6 +8,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { paths } from 'src/app/app-routing.constants';
 import { environment } from 'src/environments/environment';
@@ -38,7 +39,8 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private projectsFacade: ProjectsPageFacade,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   //disable dates before today
@@ -117,23 +119,60 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         this.form.value,
         this.primarySkills
       );
+
+      this.isLoading = true;
       if (this.editingId) {
         toSend.id = this.editingId;
-        this.projectsFacade.editProject(toSend);
+
+        this.projectsFacade.editProject$(toSend).subscribe(
+          // success
+          () => {
+            this.message.success('Project updated successfully!');
+            this.isLoading = false;
+            this.handleCancel();
+            this.onProjectListChange.emit();
+          },
+          //error
+          () => {
+            this.message.error('Something went wrong!');
+            this.isLoading = false;
+          }
+        );
       } else {
-        this.projectsFacade.createProject(toSend);
+        this.projectsFacade.createProject$(toSend).subscribe(
+          // success
+          () => {
+            this.message.success('Project created successfully!');
+            this.isLoading = false;
+            this.handleCancel();
+            this.onProjectListChange.emit();
+          },
+          //error
+          () => {
+            this.message.error('Something went wrong!');
+            this.isLoading = false;
+          }
+        );
       }
-      this.handleCancel();
-      // TODO: make it on success
-      this.onProjectListChange.emit();
     }
   }
   /// delete project
   deleteProject() {
-    this.projectsFacade.deleteProject(this.editingId!);
-    this.handleCancel();
-    // TODO: make it on success
-    this.onProjectListChange.emit();
+    this.isDeleting = true;
+    this.subscriptions.push(
+      this.projectsFacade.deleteProject$(this.editingId!).subscribe(
+        () => {
+          this.message.success('Project deleted successfully!');
+          this.isDeleting = false;
+          this.handleCancel();
+          this.onProjectListChange.emit();
+        },
+        () => {
+          this.message.error('Something went wrong!');
+          this.isDeleting = false;
+        }
+      )
+    );
   }
 
   ngOnInit(): void {
@@ -230,30 +269,25 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         }
       })
     );
-    // subscribe to loadings
-    this.subscriptions.push(
-      this.projectsFacade.createProjectLoading$.subscribe((loading) => {
-        this.isLoading = loading;
-      })
-    );
-    this.subscriptions.push(
-      this.projectsFacade.deleteProjectLoading$.subscribe((deleting) => {
-        this.isDeleting = deleting;
-      })
-    );
+
     //
-    this.subscriptions.push(
-      this.form.controls.registrationDates.valueChanges.subscribe((dates) => {
-        this.form.patchValue({ dates: [] });
-        if (dates[1]) {
-          this.disableDatesFrom = dates[1];
-        }
-        const isSame = dayjs(dates[0]).isSame(dayjs(dates[1]));
-        if (isSame) {
-          this.form.controls.registrationDates.setErrors({ same: true });
-        }
-      })
-    );
+    const registrationDates = this.form.get('registrationDates');
+    if (registrationDates) {
+      this.subscriptions.push(
+        registrationDates.valueChanges.subscribe((dates) => {
+          if (dates) {
+            if (dates[1]) {
+              // this.form.controls.dates.setValue([]);
+              this.disableDatesFrom = dates[1];
+            }
+            const isSame = dayjs(dates[0]).isSame(dayjs(dates[1]));
+            if (isSame) {
+              this.form.controls.registrationDates.setErrors({ same: true });
+            }
+          }
+        })
+      );
+    }
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
