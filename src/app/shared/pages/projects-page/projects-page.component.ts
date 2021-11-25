@@ -52,4 +52,9 @@ export class ProjectsPageComponent implements OnInit {
   onProjectListChange() {
     this.projectsPageFacade.getProjectsList(this.filters);
   }
+
+  onSearchClear() {
+    this.projectsPageFacade.getProjectsList()
+    this.searchText = ''
+  }
 }

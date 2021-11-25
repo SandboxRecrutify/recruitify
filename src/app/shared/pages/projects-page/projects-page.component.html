@@ -7,7 +7,7 @@
       <div class="filter" (click)="toggleFiltersVisible(true)">
         <img src="assets/images/Vector.png" alt="filter" />
       </div>
-      <nz-input-group [nzSuffix]="suffixIconSearch">
+      <nz-input-group [nzSuffix]="inputClearTpl">
         <input
           type="text"
           nz-input
@@ -16,8 +16,15 @@
           (ngModelChange)="onSearchChange($event)"
         />
       </nz-input-group>
-      <ng-template #suffixIconSearch>
-        <i nz-icon nzType="search"></i>
+      <ng-template #inputClearTpl>
+        <i
+          nz-icon
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          *ngIf="searchText"
+          (click)="onSearchClear()"
+        ></i>
       </ng-template>
     </div>
   </div>
