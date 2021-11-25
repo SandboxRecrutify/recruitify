@@ -8,15 +8,12 @@ import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectsQueries } from './projects-page.component';
 
-
 @Injectable()
 export class ProjectsPageFacade {
   projectDetails$ = new Subject<Project>();
   toggleCreateProjectDrawer$: Subject<boolean> = new Subject<boolean>();
-  createProjectLoading$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-  deleteProjectLoading$: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
+  // createProjectLoading$: BehaviorSubject<boolean> =
+  //   new BehaviorSubject<boolean>(false);
 
   ProjectsList$: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>(
     []
@@ -43,7 +40,7 @@ export class ProjectsPageFacade {
           names: [filters?.orderBy?.property],
           order: filters?.orderBy?.order,
         }
-      : {names: ['StartDate'], order: 'desc'};
+      : { names: ['StartDate'], order: 'desc' };
 
     const filter = [skills, status, searchText];
 
@@ -63,50 +60,16 @@ export class ProjectsPageFacade {
     return this.projectsService.getCreateProjectData();
   }
 
-  createProject(project: Project): void {
-    // TODO move it to componenet
-    this.createProjectLoading$.next(true);
-    this.projectsService.createProject$(project).subscribe(
-      (value) => {
-        console.log(value);
-        this.message.success('Project created successfully!');
-        this.createProjectLoading$.next(false);
-      },
-      () => {
-        this.message.error('Something went wrong!');
-        this.createProjectLoading$.next(false);
-      }
-    );
+  createProject$(project: Project): Observable<Project> {
+    return this.projectsService.createProject$(project);
   }
-  editProject(project: Project): void {
-    // TODO move it to componenet
-    this.createProjectLoading$.next(true);
-    this.projectsService.editProject$(project).subscribe(
-      (value) => {
-        console.log(value);
-        this.message.success('Project updated successfully!');
-        this.createProjectLoading$.next(false);
-      },
-      () => {
-        this.message.error('Something went wrong!');
-        this.createProjectLoading$.next(false);
-      }
-    );
+
+  editProject$(project: Project): Observable<Project> {
+    return this.projectsService.editProject$(project);
   }
-  deleteProject(id: string) {
-    // TODO move it to componenet
-    this.deleteProjectLoading$.next(true);
-    this.projectsService.deleteProject$(id).subscribe(
-      (value) => {
-        console.log(value);
-        this.message.success('Project deleted successfully!');
-        this.deleteProjectLoading$.next(false);
-      },
-      () => {
-        this.message.error('Something went wrong!');
-        this.deleteProjectLoading$.next(false);
-      }
-    );
+
+  deleteProject$(id: string): Observable<void> {
+    return this.projectsService.deleteProject$(id);
   }
 
   prepareProjectForCreation(
