@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CreateProject } from '../../models/CreateProject';
 import { Project } from '../../models/Project';
@@ -10,6 +9,7 @@ import { ProjectsQueries } from './projects-page.component';
 
 @Injectable()
 export class ProjectsPageFacade {
+  projectListLoading$ = new BehaviorSubject(false);
   projectDetails$ = new Subject<Project>();
   toggleCreateProjectDrawer$: Subject<boolean> = new Subject<boolean>();
   // createProjectLoading$: BehaviorSubject<boolean> =
@@ -19,12 +19,10 @@ export class ProjectsPageFacade {
     []
   );
 
-  constructor(
-    private projectsService: ProjectsService,
-    private message: NzMessageService
-  ) {}
+  constructor(private projectsService: ProjectsService) {}
 
   getProjectsList(filters?: ProjectsQueries): void {
+    this.projectListLoading$.next(true);
     const skills = filters?.primary?.map((skill) => ({
       property: skill,
       value: `primarySkills/any(p: p/name eq '${skill}')`,
@@ -51,9 +49,15 @@ export class ProjectsPageFacade {
           filter,
         },
       })
-      .subscribe((projects) => {
-        this.ProjectsList$.next(projects);
-      });
+      .subscribe(
+        (projects) => {
+          this.projectListLoading$.next(false);
+          this.ProjectsList$.next(projects);
+        },
+        () => {
+          this.projectListLoading$.next(false);
+        }
+      );
   }
 
   getCreateProjectData$(): Observable<CreateProject> {
