@@ -1,6 +1,11 @@
+.time-grid_item--last {
+  height: 100%;
+  opacity: 0.85;
+  background: #ffffff;
+}
+
 .time-grid_item {
   height: 100%;
-  transition: 0.3s;
   background: #ffffff;
   transition: 0.3s;
 }

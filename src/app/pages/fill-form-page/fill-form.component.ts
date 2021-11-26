@@ -5,12 +5,7 @@ import { CandidateService } from './../../shared/services/candidate.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  // FormGroup,
-  // Validators,
-  // FormControl,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
 import { FillFormFacade } from './fill-form.facade';
@@ -23,10 +18,10 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
   providers: [FillFormFacade, EnumToArrayPipe],
 })
 export class FillFormComponent implements OnInit {
+  listTime: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   currentProjectSkills!: PrimarySkill[];
   currnetProjectId!: string;
   englishLevel$: Observable<any>;
-
   candidateToSend!: Candidate;
 
   constructor(
@@ -43,34 +38,48 @@ export class FillFormComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.currnetProjectId = params.id;
+      this.projectsService.getProjectById(params.id).subscribe((response) => {
+        this.currentProjectSkills = response.primarySkills;
+      });
+    });
+  }
+
   candidateForm = this.fb.group({
-    name: [''],
-    surname: [''],
-    email: [''],
-    contacts: this.fb.group({ type: ['Skype'], value: [''] }),
-    phoneNumber: [''],
-    location: this.fb.group({
-      city: [''],
-      country: [''],
+    name: ['', Validators.required],
+    surname: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    contacts: this.fb.group({
+      type: ['Skype'],
+      value: ['', Validators.required],
     }),
-    englishLevel: [''],
-    projectLanguage: [''],
-    primarySkill: [''],
-    goingToExadel: [''],
+    phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
+    location: this.fb.group({
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+    }),
+    englishLevel: ['', Validators.required],
+    projectLanguage: ['', Validators.required],
+    primarySkill: ['', Validators.required],
+    goingToExadel: ['', Validators.required],
     additionalInfo: [''],
     additionalQuestions: [''],
     currentJob: [''],
     certificates: [''],
+    bestTimeToConnect: [[], Validators.required],
   });
 
   submitForm() {
-    this.candidateToSend = {
-      ...this.candidateForm.value,
-      bestTimeToConnect: [10, 11, 12],
-      contacts: [this.candidateForm.value.contacts],
-    };
+    if (this.candidateForm.valid) {
+      this.candidateToSend = {
+        ...this.candidateForm.value,
+        contacts: [this.candidateForm.value.contacts],
+      };
 
-    console.log(this.candidateToSend);
+      console.log(this.candidateToSend);
+    }
 
     this.candidatesService
       .createCandidate$(this.candidateToSend, this.currnetProjectId)
@@ -85,14 +94,5 @@ export class FillFormComponent implements OnInit {
       );
 
     this.candidateForm.reset();
-  }
-
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.currnetProjectId = params.id;
-      this.projectsService.getProjectById(params.id).subscribe((response) => {
-        this.currentProjectSkills = response.primarySkills;
-      });
-    });
   }
 }

@@ -47,18 +47,14 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   setDragulaValue(
     interviewerSkill: string,
     dragedCandidateSkill: string,
-    interviewerTime: number,
-    dragedCandidateTime: number[],
+
     candidateArr: any
   ): string {
-    const isTimeIncludes = dragedCandidateTime.includes(interviewerTime);
     const isEqualSkill =
       interviewerSkill === dragedCandidateSkill ||
       interviewerSkill === 'Recruiter';
     const isCandidateAssigned = candidateArr === 0;
-    return isTimeIncludes && isEqualSkill && isCandidateAssigned
-      ? 'calendar'
-      : '';
+    return isEqualSkill && isCandidateAssigned ? 'calendar' : '';
   }
 
   checkIsAvaliableToDrop(

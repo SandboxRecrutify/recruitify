@@ -1,31 +1,32 @@
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Renderer2,
-  Input,
-  OnInit,
-  OnChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { CalendarPageFacade } from './../pages/calendar-page/calendar-page.facade';
+import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appCalendarItem]',
 })
-export class CalendarItemDirective implements OnInit {
-  @Input('day') day!: number;
+export class CalendarItemDirective {
   isMouseDown = false;
-  today = new Date().getDay();
+  today = new Date();
+  clickedItemDay!: Date;
 
-  constructor(private el: ElementRef, private render: Renderer2) {}
+  constructor(
+    private el: ElementRef,
+    private render: Renderer2,
+    private calendarPageFacade: CalendarPageFacade
+  ) {
+    calendarPageFacade.clickedDay$.subscribe(
+      (response) => (this.clickedItemDay = response)
+    );
+  }
 
   @HostListener('mousedown', ['$event']) onMouseDown(event: Event | any) {
-    let isNotChecked = !event.target.style.background;
-    let isItem = event.target.classList.contains('time-grid_item');
-    if (event.which === 1 && isNotChecked && isItem) {
+    const isFuture = this.clickedItemDay >= this.today;
+    const isNotChecked = !event.target.style.background;
+    const isItem = event.target.classList.contains('time-grid_item');
+    if (event.which === 1 && isNotChecked && isItem && isFuture) {
       this.render.setStyle(event.target, 'background', '#CADDC0');
       this.isMouseDown = true;
+      this.calendarPageFacade.isSaveBtnVisible$.next(true);
     }
   }
 
@@ -47,11 +48,5 @@ export class CalendarItemDirective implements OnInit {
   @HostListener('contextmenu', ['$event']) onRightClick(event: Event) {
     event.preventDefault();
     this.render.setStyle(event.target, 'background', '');
-  }
-
-  ngOnInit(): void {
-    this.today === this.day
-      ? this.render.setStyle(this.el.nativeElement, 'background', '#faecc0')
-      : null;
   }
 }

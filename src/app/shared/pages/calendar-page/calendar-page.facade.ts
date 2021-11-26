@@ -1,4 +1,3 @@
-import { CandidateCalendar } from './../../models/CandidateCalendar';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -6,7 +5,10 @@ import { Injectable } from '@angular/core';
 export class CalendarPageFacade {
   isAssignedModalVisible$ = new BehaviorSubject(false);
   isEmailModalVisible$ = new BehaviorSubject(false);
+  isSaveBtnVisible$ = new BehaviorSubject(false);
   assignedCandidate$ = new BehaviorSubject([]);
+  isWorkingWeekends$ = new BehaviorSubject(false);
+  clickedDay$ = new BehaviorSubject(new Date());
 
   timeLine = [
     '09:00',

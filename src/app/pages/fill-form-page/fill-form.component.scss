@@ -1,63 +1,40 @@
 @use "../../../globals" as *;
 
 .fill_form {
-  height: 100vh;
-  &_container {
-    width: 500px;
-    margin: 0 auto;
-    padding: 40px;
-  }
+  padding: 40px 0;
 
-  form {
-    padding-top: 10px;
+  &_container {
+    width: 450px;
+    margin: 0 auto;
   }
 
   h2 {
+    margin-bottom: 20px;
     color: $primaryColor;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
   }
 
-  input {
-    border: none;
-    border-bottom: 2px solid $primaryColor;
-    background-color: $bgColor;
+  nz-form-label {
+    font-weight: 500;
   }
 
   .item-box {
-    display: flex;
     width: 100%;
-    align-items: flex-end;
+    display: flex;
+    gap: 20px;
   }
 
   .inner-item-box {
     width: 100%;
-    margin: 0;
   }
 
   .ant-form-item-label {
     color: $primaryColor;
   }
 
-  .pad-left {
-    padding-left: 10px;
-    width: 100%;
-  }
-
-  .mar-top {
-    margin-top: 15px;
-  }
-
-  .pad-top {
-    padding-top: 20px;
-  }
-
   nz-form-control {
     width: 100%;
-  }
-
-  nz-select {
-    padding: 10px 0;
   }
 
   .color {

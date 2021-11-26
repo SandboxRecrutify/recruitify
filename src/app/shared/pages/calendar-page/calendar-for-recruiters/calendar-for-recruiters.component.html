@@ -1,7 +1,4 @@
 <div class="menu">
-  <button nz-button nzType="primary" nzSize="small" (click)="onBtnSaveClick()">
-    Save
-  </button>
   <a nz-button nzType="link" (click)="onPreviousDayButtonClick()"><<<</a>
   <nz-date-picker
     nzSize="small"
@@ -10,6 +7,9 @@
     (ngModelChange)="onCalendarDateChange($event)"
   ></nz-date-picker>
   <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
+  <button nz-button nzType="primary" nzSize="small" (click)="onBtnSaveClick()">
+    Save
+  </button>
 </div>
 <app-skills-tabset></app-skills-tabset>
 <app-email-modal></app-email-modal>
