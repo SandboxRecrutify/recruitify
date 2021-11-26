@@ -14,8 +14,15 @@
               <strong>
                 {{ tab.userName || "userName" }}
               </strong>
+
+              <span class="feedbacks_date"
+                >({{ tab.createdOn }} at {{ tab.createdTime }})
+              </span>
             </p>
-            <app-rating-stars [rate]="" [isDisabled]="true"></app-rating-stars>
+            <app-rating-stars
+              [rate]="tab.rating"
+              [isDisabled]="true"
+            ></app-rating-stars>
           </div>
           <div>
             {{ tab.textFeedback }}
