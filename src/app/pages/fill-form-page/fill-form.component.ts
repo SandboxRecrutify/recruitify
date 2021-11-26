@@ -24,6 +24,21 @@ export class FillFormComponent implements OnInit {
   englishLevel$: Observable<any>;
   candidateToSend!: Candidate;
 
+  contactFields: any = [];
+
+  socLink: string = '';
+
+  log() {
+    console.log(this.socLink);
+  }
+
+  onAddClick() {
+    if (this.contactFields.length < 5) {
+      this.contactFields.push({ type: '', value: '' });
+      console.log(this.contactFields);
+    }
+  }
+
   constructor(
     private fb: FormBuilder,
     private fillFormFacade: FillFormFacade,
@@ -36,6 +51,9 @@ export class FillFormComponent implements OnInit {
     fillFormFacade.englishLevel$.subscribe((next) => {
       console.log(next);
     });
+
+    // let url = new URL('https://github.com/').host;
+    // console.log(url);
   }
 
   ngOnInit(): void {
@@ -52,8 +70,8 @@ export class FillFormComponent implements OnInit {
     surname: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     contacts: this.fb.group({
-      type: ['Skype'],
-      value: ['', Validators.required],
+      skype: ['', Validators.required],
+      social: [''],
     }),
     phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
     location: this.fb.group({
@@ -72,6 +90,9 @@ export class FillFormComponent implements OnInit {
   });
 
   submitForm() {
+    const contactsToSend = [this.candidateForm.value.contacts];
+    console.log(contactsToSend);
+
     if (this.candidateForm.valid) {
       this.candidateToSend = {
         ...this.candidateForm.value,
@@ -79,20 +100,22 @@ export class FillFormComponent implements OnInit {
       };
 
       console.log(this.candidateToSend);
+
+      // this.candidatesService
+      //   .createCandidate$(this.candidateToSend, this.currnetProjectId)
+      //   .subscribe(
+      //     (response) => {
+      //       console.log(response);
+      //       this.message.success(
+      //         'Thanks! Our recruiter will contact you shortly!'
+      //       );
+      //     },
+      //     () => {
+      //       this.message.error('Something went wrong!');
+      //     }
+      //   );
+
+      // this.candidateForm.reset();
     }
-
-    this.candidatesService
-      .createCandidate$(this.candidateToSend, this.currnetProjectId)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.message.success('Success!');
-        },
-        () => {
-          this.message.error('Something went wrong!');
-        }
-      );
-
-    this.candidateForm.reset();
   }
 }

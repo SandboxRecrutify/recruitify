@@ -3,7 +3,7 @@
     <h2>Hi! Please, fill out the form</h2>
     <form [formGroup]="candidateForm" nz-form>
       <div class="item-box">
-        <nz-form-item style="width: 100%">
+        <nz-form-item>
           <div class="inner-item-box">
             <nz-form-label nzRequired nzNoColon nzFor="fname">
               First Name
@@ -21,7 +21,7 @@
           </div>
         </nz-form-item>
 
-        <nz-form-item style="width: 100%">
+        <nz-form-item>
           <div class="inner-item-box">
             <nz-form-label nzRequired nzNoColon nzFor="lname">
               Last Name
@@ -49,7 +49,7 @@
               </nz-form-label>
               <nz-form-control [nzErrorTip]="requiredError">
                 <input
-                  formControlName="value"
+                  formControlName="skype"
                   nz-input
                   name="skype"
                   type="text"
@@ -64,8 +64,26 @@
         <div>
           <nz-form-item>
             <nz-form-label nzNoColon>
-              Add links to your social networks
+              <div class="soc-label">Add links to your social networks</div>
+
+              <div class="soc-add-btn" (click)="onAddClick()"></div>
             </nz-form-label>
+            <div style="width: 100%">
+              <nz-form-control
+                style="width: 100%"
+                *ngFor="let item of contactFields"
+              >
+                <input
+                  formControlName="social"
+                  style="margin-top: 5px"
+                  nz-input
+                  name="link"
+                  type="text"
+                  id="link"
+                  placeholder="Paste the link"
+                />
+              </nz-form-control>
+            </div>
           </nz-form-item>
         </div>
       </div>
