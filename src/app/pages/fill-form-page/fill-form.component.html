@@ -40,7 +40,7 @@
         </nz-form-item>
       </div>
 
-      <div formGroupName="contacts">
+      <div>
         <nz-form-item>
           <div class="item-box">
             <div class="inner-item-box">
@@ -60,32 +60,32 @@
             </div>
           </div>
         </nz-form-item>
+      </div>
 
-        <div>
-          <nz-form-item>
-            <nz-form-label nzNoColon>
-              <div class="soc-label">Add links to your social networks</div>
+      <div formGroupName="contacts">
+        <nz-form-item>
+          <nz-form-label nzNoColon>
+            <div class="soc-label">Add links to your social networks</div>
 
-              <div class="soc-add-btn" (click)="onAddClick()"></div>
-            </nz-form-label>
-            <div style="width: 100%">
-              <nz-form-control
-                style="width: 100%"
-                *ngFor="let item of contactFields"
-              >
-                <input
-                  formControlName="social"
-                  style="margin-top: 5px"
-                  nz-input
-                  name="link"
-                  type="text"
-                  id="link"
-                  placeholder="Paste the link"
-                />
-              </nz-form-control>
-            </div>
-          </nz-form-item>
-        </div>
+            <div class="soc-add-btn" (click)="onAddClick()"></div>
+          </nz-form-label>
+          <div style="width: 100%">
+            <nz-form-control
+              style="width: 100%"
+              *ngFor="let item of contactFields; let i = index"
+            >
+              <input
+                style="margin-top: 5px"
+                nz-input
+                name="link"
+                type="text"
+                id="link"
+                placeholder="Paste the link here"
+                [formControlName]="'contact' + i"
+              />
+            </nz-form-control>
+          </div>
+        </nz-form-item>
       </div>
 
       <nz-form-item>
@@ -237,7 +237,7 @@
               formControlName="bestTimeToConnect"
             >
               <nz-option
-                *ngFor="let time of listTime"
+                *ngFor="let time of bestTimeToContact"
                 [nzLabel]="time"
                 [nzValue]="time"
               ></nz-option>
@@ -335,8 +335,8 @@
         <button
           type="submit"
           nz-button
-          (click)="submitForm()"
           [disabled]="candidateForm.invalid"
+          (click)="submitForm()"
         >
           Submit
         </button>

@@ -7,7 +7,13 @@
     (ngModelChange)="onCalendarDateChange($event)"
   ></nz-date-picker>
   <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
-  <button nz-button nzType="primary" nzSize="small" (click)="onBtnSaveClick()">
+  <button
+    *ngIf="isBtnSaveVisible"
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    (click)="onBtnSaveClick()"
+  >
     Save
   </button>
 </div>

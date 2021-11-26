@@ -1,22 +1,20 @@
+// import { FillFormComponent } from './fill-form.component';
 import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { FillFormServices } from 'src/app/services/fill-form.service';
-import { Candidate } from 'src/app/shared/models/Candidate';
+import { Validators, FormGroup } from '@angular/forms';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+// import { FillFormServices } from 'src/app/services/fill-form.service';
 import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 
 @Injectable()
 export class FillFormFacade {
+  bestTimeToContact: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   primarySkills$!: Observable<any>;
+
   constructor(
-    private fillFormServices: FillFormServices,
+    // private fillFormServices: FillFormServices,
     private projectsService: ProjectsService
   ) {}
-
-  // addCandidate(candidate: Candidate): Observable<boolean> {
-  //   return this.fillFormServices.addCandidate(candidate);
-  // }
 
   get englishLevel$(): Observable<any> {
     return of(Object.entries(EnglishLevel));
@@ -38,5 +36,45 @@ export class FillFormFacade {
         testLink: 'https://exadel.com/tests/qa',
       },
     ]);
+  }
+
+  createCandidateObjToSend(candidateForm: FormGroup) {
+    const { contact0, contact1, contact2, contact3, contact4 } =
+      candidateForm.value.contacts;
+
+    const linksArrWithoutEmpty = [
+      contact0,
+      contact1,
+      contact2,
+      contact3,
+      contact4,
+    ].filter((link) => link);
+
+    const linksArrToSend = linksArrWithoutEmpty.map((link) => {
+      try {
+        const contactUrlHost = new URL(link).host || '';
+        return { type: contactUrlHost, value: link };
+      } catch (error) {
+        return { type: '', value: link };
+      }
+    });
+
+    const skypeToSend = {
+      type: 'Skype',
+      value: candidateForm.value.skype,
+    };
+
+    const contactsArrToSend = [...linksArrToSend, skypeToSend];
+
+    const candidateToSend = {
+      ...candidateForm.value,
+      contacts: contactsArrToSend,
+    };
+
+    delete candidateToSend.skype;
+
+    console.log(candidateToSend);
+
+    return candidateToSend;
   }
 }
