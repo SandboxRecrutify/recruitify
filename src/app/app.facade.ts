@@ -7,6 +7,7 @@ import { paths } from './app-routing.constants';
 import { LocalStorageService } from './services/local-storage.service';
 import { User, UserData, UserResponse } from './shared/models/User';
 import { AuthService } from './shared/services/auth.service';
+import { UserService } from './shared/services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppFacade {
@@ -46,14 +47,15 @@ export class AppFacade {
     this.isUserLoading$.next(true);
     this.auth.login(user).subscribe(
       (response: UserResponse) => {
-        this.lsService.setItem(this.USER_KEY, {
-          email: user.email,
-          token: response.access_token,
-        });
+        const decodedUser: User = this.auth.jwtDecode(response.access_token);
+        console.log(decodedUser);
         this.user = {
           email: user.email,
           token: response.access_token,
+          roles: decodedUser.role,
+          name: decodedUser.name,
         };
+        this.lsService.setItem(this.USER_KEY, this.user);
         this.router.navigate([this.INITIAL_PATH]);
         this.message.success('Login successful');
         this.isUserLoading$.next(false);

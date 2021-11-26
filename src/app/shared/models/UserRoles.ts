@@ -1,12 +1,12 @@
 export interface UserRoles {
-  roles: Role[]
-  projectId: string
+  roles: (keyof typeof Role)[];
+  projectId: string;
 }
 
 export enum Role {
-    Admin,
-    Manager,
-    Recruiter,
-    Interviewer,
-    Mentor,
+  Admin,
+  Manager,
+  Recruiter,
+  Interviewer,
+  Mentor,
 }
