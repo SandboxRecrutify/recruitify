@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Project } from '../../models/Project';
+import { UserRole } from '../../models/UserRole';
 import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
 import { Candidate } from './../../models/Candidate';
@@ -49,8 +50,8 @@ export class CandidatesPageFacade {
   candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
 
   candidateList$ = this.candidatesService.getCandidates();
-  isRecruiter: boolean = this.userServise.isRecruiter();
-  isManager: boolean = this.userServise.isManager();
+  isRecruiter: boolean = this.userServise.checkRole(UserRole.recruiter);
+  isManager: boolean = this.userServise.checkRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 
