@@ -40,25 +40,35 @@
         </nz-form-item>
       </div>
 
-      <nz-form-item formGroupName="contacts">
-        <div class="item-box">
-          <div class="inner-item-box">
-            <nz-form-label nzRequired nzNoColon nzFor="skype">
-              Skype
-            </nz-form-label>
-            <nz-form-control [nzErrorTip]="requiredError">
-              <input
-                formControlName="value"
-                nz-input
-                name="skype"
-                type="text"
-                id="skype"
-                placeholder="Enter your Skype login"
-              />
-            </nz-form-control>
+      <div formGroupName="contacts">
+        <nz-form-item>
+          <div class="item-box">
+            <div class="inner-item-box">
+              <nz-form-label nzRequired nzNoColon nzFor="skype">
+                Skype
+              </nz-form-label>
+              <nz-form-control [nzErrorTip]="requiredError">
+                <input
+                  formControlName="value"
+                  nz-input
+                  name="skype"
+                  type="text"
+                  id="skype"
+                  placeholder="Enter your Skype login"
+                />
+              </nz-form-control>
+            </div>
           </div>
+        </nz-form-item>
+
+        <div>
+          <nz-form-item>
+            <nz-form-label nzNoColon>
+              Add links to your social networks
+            </nz-form-label>
+          </nz-form-item>
         </div>
-      </nz-form-item>
+      </div>
 
       <nz-form-item>
         <div class="item-box">
