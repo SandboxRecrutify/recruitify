@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
-import { AppRadioButtonComponent } from './pages/fill-form-page/radio-button/radio-button.components';
 
 // Ng-zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -45,12 +44,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    StartPageComponent,
-    FillFormComponent,
-    AppRadioButtonComponent,
-  ],
+  declarations: [AppComponent, StartPageComponent, FillFormComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

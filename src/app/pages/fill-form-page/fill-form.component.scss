@@ -15,10 +15,6 @@
     font-size: 18px;
   }
 
-  nz-form-label {
-    font-weight: 500;
-  }
-
   .item-box {
     width: 100%;
     display: flex;
@@ -31,10 +27,6 @@
 
   .ant-form-item-label {
     color: $primaryColor;
-  }
-
-  nz-form-control {
-    width: 100%;
   }
 
   .color {
@@ -50,4 +42,30 @@
     background: $primaryColor;
     color: white;
   }
+
+  nz-form-control,
+  nz-form-item {
+    width: 100%;
+  }
+
+  nz-form-label {
+    font-weight: 500;
+  }
+}
+
+.soc-label {
+  margin-right: 20px;
+}
+
+.soc-add-btn {
+  width: 20px;
+  height: 20px;
+  background: url(/assets/images/add.svg) no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.soc-add-btn:hover {
+  filter: opacity(80%);
 }

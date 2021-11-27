@@ -1,3 +1,4 @@
+import { CalendarPageFacade } from './../pages/calendar-page/calendar-page.facade';
 import { CandidateCalendar } from './../models/CandidateCalendar';
 import { CalendarService } from './calendar.service';
 import { DragulaService } from 'ng2-dragula';
@@ -18,7 +19,8 @@ export class DragNDropService {
 
   constructor(
     private dragulaService: DragulaService,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private calendarPageFacade: CalendarPageFacade
   ) {
     calendarService.getCandidatesTimeTable().subscribe((responce) => {
       this.candidatesTimeTable = responce;
@@ -63,6 +65,7 @@ export class DragNDropService {
     this.subs.add(
       dragulaService.drop('calendar').subscribe(({ el, target }) => {
         this.onCandidateDrop(el, target);
+        this.calendarPageFacade.isSaveBtnVisible$.next(true);
       })
     );
 

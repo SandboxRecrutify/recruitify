@@ -1,12 +1,10 @@
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Candidate } from './../../shared/models/Candidate';
 import { CandidatesService } from './../../shared/services/candidates.service';
-import { CandidateService } from './../../shared/services/candidate.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
 import { FillFormFacade } from './fill-form.facade';
 import { PrimarySkill } from 'src/app/shared/models/Project';
@@ -18,43 +16,16 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
   providers: [FillFormFacade, EnumToArrayPipe],
 })
 export class FillFormComponent implements OnInit {
-  listTime: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  bestTimeToContact: number[] = this.fillFormFacade.bestTimeToContact;
   currentProjectSkills!: PrimarySkill[];
   currnetProjectId!: string;
   englishLevel$: Observable<any>;
-  candidateToSend!: Candidate;
-
-  constructor(
-    private fb: FormBuilder,
-    private fillFormFacade: FillFormFacade,
-    private route: ActivatedRoute,
-    private projectsService: ProjectsService,
-    private candidatesService: CandidatesService,
-    private message: NzMessageService
-  ) {
-    this.englishLevel$ = fillFormFacade.englishLevel$;
-    fillFormFacade.englishLevel$.subscribe((next) => {
-      console.log(next);
-    });
-  }
-
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.currnetProjectId = params.id;
-      this.projectsService.getProjectById(params.id).subscribe((response) => {
-        this.currentProjectSkills = response.primarySkills;
-      });
-    });
-  }
 
   candidateForm = this.fb.group({
     name: ['', Validators.required],
     surname: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    contacts: this.fb.group({
-      type: ['Skype'],
-      value: ['', Validators.required],
-    }),
+    skype: ['', Validators.required],
     phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
     location: this.fb.group({
       city: ['', Validators.required],
@@ -69,30 +40,69 @@ export class FillFormComponent implements OnInit {
     currentJob: [''],
     certificates: [''],
     bestTimeToConnect: [[], Validators.required],
+    contacts: this.fb.group({
+      contact0: [''],
+      contact1: [''],
+      contact2: [''],
+      contact3: [''],
+      contact4: [''],
+    }),
   });
 
-  submitForm() {
-    if (this.candidateForm.valid) {
-      this.candidateToSend = {
-        ...this.candidateForm.value,
-        contacts: [this.candidateForm.value.contacts],
-      };
+  constructor(
+    private fb: FormBuilder,
+    private fillFormFacade: FillFormFacade,
+    private route: ActivatedRoute,
+    private projectsService: ProjectsService,
+    private candidatesService: CandidatesService,
+    private message: NzMessageService
+  ) {
+    this.englishLevel$ = fillFormFacade.englishLevel$;
+  }
 
-      console.log(this.candidateToSend);
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.currnetProjectId = params.id;
+      this.projectsService.getProjectById(params.id).subscribe((response) => {
+        this.currentProjectSkills = response.primarySkills;
+      });
+    });
+  }
+
+  contactFields: number[] = [];
+
+  onAddClick() {
+    if (this.contactFields.length < 5) {
+      this.contactFields.push(1);
     }
+  }
 
-    this.candidatesService
-      .createCandidate$(this.candidateToSend, this.currnetProjectId)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.message.success('Success!');
-        },
-        () => {
-          this.message.error('Something went wrong!');
-        }
-      );
+  submitForm() {
+    const candidateToSend = this.fillFormFacade.createCandidateObjToSend(
+      this.candidateForm
+    );
+    // for (const i in this.candidateForm.controls) {
+    //   if (this.candidateForm.controls.hasOwnProperty(i)) {
+    //     this.candidateForm.controls[i].markAsDirty();
+    //     this.candidateForm.controls[i].updateValueAndValidity();
+    //   }
+    // }
 
-    this.candidateForm.reset();
+    if (this.candidateForm.valid) {
+      this.candidatesService
+        .createCandidate$(candidateToSend, this.currnetProjectId)
+        .subscribe(
+          (response) => {
+            console.log(response);
+            this.message.success(
+              'Thanks! Our recruiter will contact you shortly!'
+            );
+          },
+          () => {
+            this.message.error('Something went wrong :(');
+          }
+        );
+      this.candidateForm.reset();
+    }
   }
 }
