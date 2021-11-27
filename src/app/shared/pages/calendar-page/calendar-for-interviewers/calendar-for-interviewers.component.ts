@@ -1,7 +1,6 @@
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CalendarPageFacade } from '../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';
-import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-calendar-for-interviewers',
@@ -10,9 +9,10 @@ import * as dayjs from 'dayjs';
 })
 export class CalendarForInterviewersComponent implements OnInit {
   today = new Date();
-  displayedWeekDays: Date[] = this.calendarPageFacade.getCurrentWeekDays();
   isBtnSaveVisible: boolean = false;
-  switchWeekends = false;
+  isWorkingWeekends!: boolean;
+  countOfDisplayedDays!: number;
+  displayedWeekDays!: Date[];
 
   constructor(
     private calendarPageFacade: CalendarPageFacade,
@@ -23,28 +23,37 @@ export class CalendarForInterviewersComponent implements OnInit {
     this.calendarPageFacade.isSaveBtnVisible$.subscribe(
       (response) => (this.isBtnSaveVisible = response)
     );
+
+    this.calendarPageFacade.isWorkingWeekends$.subscribe((response) => {
+      this.isWorkingWeekends = response;
+
+      const countOfDays = response ? 7 : 5;
+
+      this.displayedWeekDays =
+        this.calendarPageFacade.getCurrentWeekDays(countOfDays);
+    });
   }
 
   onNextBtnClick(): void {
     this.displayedWeekDays = this.calendarPageFacade.getNextWeekDays(
       this.displayedWeekDays
     );
-    this.isBtnSaveVisible = false;
+    this.calendarPageFacade.isSaveBtnVisible$.next(false);
   }
 
   onPreviousBtnClick(): void {
     this.displayedWeekDays = this.calendarPageFacade.getPreviousWeekDays(
       this.displayedWeekDays
     );
-    this.isBtnSaveVisible = false;
+    this.calendarPageFacade.isSaveBtnVisible$.next(false);
   }
 
   onSaveBtnClick(): void {
     this.popMessage.success('Changes saved');
-    this.isBtnSaveVisible = false;
+    this.calendarPageFacade.isSaveBtnVisible$.next(false);
   }
 
   printWeekends() {
-    this.calendarPageFacade.isWorkingWeekends$.next(this.switchWeekends);
+    this.calendarPageFacade.isWorkingWeekends$.next(this.isWorkingWeekends);
   }
 }
