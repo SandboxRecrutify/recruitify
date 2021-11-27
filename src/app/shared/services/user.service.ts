@@ -10,8 +10,7 @@ type Roles = keyof typeof Role;
 export class UserService {
   constructor(private localstorage: LocalStorageService) {}
 
-  getUserRole(): UserRoles[] {
-    // TODO: get user role from CORRECT place
+  getUserRoles(): UserRoles[] {
     try {
       return this.localstorage.getItem('user').roles;
     } catch (error) {
@@ -19,17 +18,17 @@ export class UserService {
     }
   }
   checkRole(role: Roles): boolean {
-    const roles = this.getUserRole()[0].roles;
+    const roles = this.getUserRoles()[0].roles;
     return roles.includes(role);
   }
 
   checkRoleInProject(projectId: string, role: Roles): boolean {
     const projectRoles = this.getProjectRoles(projectId);
-    return projectRoles?.roles.includes(role) ? true : false;
+    return projectRoles?.includes(role) ? true : false;
   }
 
-  getProjectRoles(projectId: string): UserRoles | undefined {
-    const roles = this.getUserRole();
-    return roles.find((r) => r.projectId === projectId);
+  getProjectRoles(projectId: string): Roles[] | undefined {
+    const roles = this.getUserRoles();
+    return roles.find((r) => r.projectId === projectId)?.roles;
   }
 }
