@@ -3,7 +3,7 @@ export interface Feedback {
   rating?: number;
   userId?: string;
   userName?: string;
-  type?: number;
+  type?: string;
   isRecommended?: boolean;
   createdOn?: Date | string;
   createdTime?: string;

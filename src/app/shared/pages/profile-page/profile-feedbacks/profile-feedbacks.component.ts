@@ -34,7 +34,7 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
     if (this.feedbacks.length > 0) {
       this.feedbacks.forEach((feedback) => {
         this.tabs.forEach((tab, index) => {
-          if (this.feedbackTypes[feedback.type!] === tab.value) {
+          if (this.feedbackTypes[feedback.rating!] === tab.value) {
             Object.assign(this.tabs[index], {
               ...feedback,
               createdOn: dayjs(feedback.createdOn).format('DD.MM.YYYY'),
