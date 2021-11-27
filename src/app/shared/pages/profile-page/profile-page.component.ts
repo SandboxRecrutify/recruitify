@@ -79,7 +79,7 @@ export class ProfilePageComponent implements OnInit {
     return (
       this.candidate?.projectResults[0].feedbacks.find((feedback) => {
         //feedback type 0 is test result
-        return feedback.type === 0;
+        // return feedback.type === 0;
       })?.rating || 'none'
     );
   }
