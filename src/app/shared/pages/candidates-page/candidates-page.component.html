@@ -5,12 +5,25 @@
       {{ currentProjectName || "" }}
     </h3>
     <div class="candidates_filter-wrap">
-      <input
-        nz-input
-        placeholder="candidate's name"
-        [(ngModel)]="searchValue"
-        (ngModelChange)="onSearchChange($event)"
-      />
+      <nz-input-group [nzSuffix]="inputClearTpl">
+        <input
+          type="text"
+          nz-input
+          placeholder="Search project"
+          [(ngModel)]="searchValue"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </nz-input-group>
+      <ng-template #inputClearTpl>
+        <i
+          nz-icon
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          *ngIf="searchValue"
+          (click)="onSearchClear()"
+        ></i>
+      </ng-template>
       <div class="candidates_filter-btn" (click)="openDrawer()"></div>
     </div>
   </div>

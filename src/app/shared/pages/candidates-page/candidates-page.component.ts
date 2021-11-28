@@ -86,8 +86,14 @@ export class CandidatesPageComponent implements OnInit {
   }
 
   onSearchChange(search: candidatesQueries) {
-    // this.filters = { ...this.filters, query: search };
-    // this.candidatesPageFacade.getAllCandidates(this.filters)
+    this.filters = { ...this.filters, query: search };
+    this.candidatesPageFacade.getAllCandidates(this.filters)
+  }
+
+  onSearchClear() {
+    this.searchValue = ''
+    this.filters = { ...this.filters, query: this.searchValue };
+    this.candidatesPageFacade.getAllCandidates(this.filters)
   }
 }
 

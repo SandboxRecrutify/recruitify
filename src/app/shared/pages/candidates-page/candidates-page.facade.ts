@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { CandidatesFilters } from './candidates-table/candidates-table.component';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -78,17 +79,22 @@ export class CandidatesPageFacade {
     });
   }
 
-  getAllCandidates(filters?: CandidatesFilters) {
-
+  getAllCandidates(filters?: candidatesQueries) {
+    const searchText = {
+      property: filters?.query,
+      value: `contains(tolower(name), '${filters?.query}') or contains(tolower(surname), '${filters?.query}')`,
+    };
     const candidatesSort = filters?.orderBy ? {
       names: [filters.orderBy.map(el => `${el.property} ${el.order}`)],
       // order: [filters.orderBy.map(el => `${el.order}`)]
     } : {}
+    const filter = [searchText]
     console.log(candidatesSort)
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {
-          orderby: candidatesSort
+          orderby: candidatesSort,
+          filter
         },
       })
       .subscribe(
