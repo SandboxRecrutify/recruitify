@@ -1,3 +1,4 @@
+import { CandidatesFilters } from './candidates-table/candidates-table.component';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Project } from '../../models/Project';
@@ -7,6 +8,7 @@ import { ProjectsService } from '../../services/projects.service';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
 import { UserService } from './../../services/user.service';
+import { candidatesQueries } from './candidates-page.component';
 
 @Injectable()
 export class CandidatesPageFacade {
@@ -49,31 +51,50 @@ export class CandidatesPageFacade {
   ];
   candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
 
-  candidateList$ = this.candidatesService.getCandidates();
-  isRecruiter: boolean = this.userServise.checkRole(UserRole.recruiter);
-  isManager: boolean = this.userServise.checkRole(UserRole.manager);
+  // candidateList$ = this.candidatesService.getCandidates();
+  candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<Candidate[]>([]);
+
+  isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
+  isManager: boolean = this.userService.checkRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 
   constructor(
     private candidatesService: CandidatesService,
-    private userServise: UserService,
+    private userService: UserService,
     private projectsService: ProjectsService
   ) {}
 
-  getProjectCandidates$(projectId: string): Observable<Candidate[]> {
+ getProjectData$(projectId: string): Observable<Project> {
+    return this.projectsService.getProjectById(projectId);
+  }
+
+
+  getProjectCandidates$(filters?: candidatesQueries): Observable<Candidate[]> {
     return this.candidatesService.getCandidatesByProjectId(<QueryParams>{
       odata: {
-        projectId,
+        projectId: filters?.id
       },
     });
   }
 
-  getProjectData$(projectId: string): Observable<Project> {
-    return this.projectsService.getProjectById(projectId);
-  }
+  getAllCandidates(filters?: CandidatesFilters) {
 
-  getAllCandidates() {
-    return this.candidatesService.getCandidates();
+    const candidatesSort = filters?.orderBy ? {
+      names: [filters.orderBy.map(el => `${el.property} ${el.order}`)],
+      // order: [filters.orderBy.map(el => `${el.order}`)]
+    } : {}
+    console.log(candidatesSort)
+    this.candidatesService
+      .getCandidates(<QueryParams>{
+        odata: {
+          orderby: candidatesSort
+        },
+      })
+      .subscribe(
+        (candidates) => {
+          this.candidatesList$.next(candidates);
+        }
+      );
   }
 }

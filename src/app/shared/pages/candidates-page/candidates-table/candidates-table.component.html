@@ -3,6 +3,7 @@
   #nzTable
   [nzData]="candidatesList"
   nzTableLayout="fixed"
+  (nzQueryParams)="onQueryParamsChange($event)"
 >
   <thead>
     <tr>
@@ -13,28 +14,70 @@
         (nzCheckedChange)="onAllChecked($event)"
       ></th>
       <th
-        [nzSortFn]="sortAlphabetically"
+        nzColumnKey="name"
+        [nzSortFn]="true"
         [nzSortDirections]="['ascend', 'descend', null]"
+        [nzSortPriority]="true"
       >
         Name
       </th>
       <th
-        [nzSortFn]="sortAlphabetically"
+        nzColumnKey="primarySkill"
+        [nzSortFn]="true"
         [nzSortDirections]="['ascend', 'descend', null]"
+        [nzSortPriority]="true"
       >
         Primary skill
       </th>
       <th
-        [nzSortFn]="sortAlphabetically"
+        nzColumnKey="status"
+        [nzSortFn]="true"
         [nzSortDirections]="['ascend', 'descend', null]"
+        [nzSortPriority]="true"
       >
         Status
       </th>
-      <th nzWidth="90px" nzSortOrder="null">Test</th>
-      <th nzSortOrder="null">Recruter</th>
-      <th nzSortOrder="null">Entry Interview</th>
-      <th nzSortOrder="null">Mentor</th>
-      <th nzSortOrder="null">Finish Interview</th>
+      <th
+        nzWidth="90px"
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="test"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Test
+      </th>
+      <th
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="entryInterview"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Entry Interview
+      </th>
+      <th
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="mentor"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Mentor
+      </th>
+      <th
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="finishInterview"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Finish Interview
+      </th>
+      <th
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="recruiter"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Recruiter
+      </th>
       <th nzWidth="60px"></th>
     </tr>
   </thead>
@@ -46,16 +89,19 @@
       ></td>
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
       <td>
-        <p *ngFor="let skill of candidate.primarySkills">
-          {{ skill.name }}
+        <p *ngFor="let skill of candidate.projectResults">
+          {{ skill.primarySkill.name }}
         </p>
       </td>
       <td>
-        {{
+        <p *ngFor="let status of candidate.projectResults">
+          {{ status.status}}
+        </p>
+        <!-- {{
           candidate.projectResults[0]
             ? candidateStatuses[candidate.projectResults[0].status]
             : "none"
-        }}
+        }} -->
       </td>
       <td>
         {{ getFeedbackRate(candidate, "Test") }}
@@ -94,3 +140,5 @@
     </tr>
   </tbody>
 </nz-table>
+
+<!-- projectResults -->

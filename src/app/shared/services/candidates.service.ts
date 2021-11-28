@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Candidate } from '../models/Candidate';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,12 +12,12 @@ export class CandidatesService extends ApiService {
     super(httpClient, CANDIDATE_API, CandidatesService.name);
   }
 
-  getCandidates(): Observable<Candidate[]> {
-    return super.get({ odata: {} }).pipe(map((d: any) => d.value));
+  getCandidates(filters: QueryParams): Observable<Candidate[]> {
+    return super.get(filters).pipe(map((d: any) => d.value));
   }
-  
-  getCandidatesByProjectId(projectId: QueryParams): Observable<Candidate[]> {
-    return super.get(projectId).pipe(map((d: any) => d.value));
+
+  getCandidatesByProjectId(filters: QueryParams): Observable<Candidate[]> {
+    return super.get(filters).pipe(map((d: any) => d.value));
   }
 
   createCandidate$(

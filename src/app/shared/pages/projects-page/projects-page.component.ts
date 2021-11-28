@@ -19,7 +19,7 @@ export class ProjectsPageComponent implements OnInit {
   searchText: string = '';
   filters: any = {};
   subscription: Subscription | null = null;
-  // projects: Project[] = [];
+
 
   constructor(public projectsPageFacade: ProjectsPageFacade) {}
 
@@ -54,7 +54,9 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   onSearchClear() {
-    this.projectsPageFacade.getProjectsList()
     this.searchText = ''
+    this.filters = { ...this.filters, query: this.searchText };
+    this.projectsPageFacade.getProjectsList(this.filters)
+
   }
 }
