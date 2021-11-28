@@ -29,19 +29,19 @@ export class DragNDropService {
       revertOnSpill: true,
     });
 
-    // this.subs.add(
-    //   dragulaService
-    //     .dropModel('calendar')
-    //     .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-    //       console.log('dropModel:');
-    //       console.log(el);
-    //       console.log(source);
-    //       console.log(target);
-    //       console.log(sourceModel);
-    //       console.log(targetModel);
-    //       console.log(item);
-    //     })
-    // );
+    this.subs.add(
+      dragulaService
+        .dropModel('calendar')
+        .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+          // console.log('dropModel:');
+          // console.log(el);
+          // console.log(source);
+          // console.log(target);
+          // console.log(sourceModel);
+          // console.log(targetModel);
+          // console.log(item);
+        })
+    );
 
     this.subs.add(
       dragulaService.drag('calendar').subscribe(({ el }) => {

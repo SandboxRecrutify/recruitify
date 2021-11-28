@@ -84,4 +84,9 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   setPopTrigger(candidate: any) {
     return candidate ? 'click' : null;
   }
+
+  onRemoveBtnClick(assignedCandiate: any) {
+    console.log(assignedCandiate);
+    console.log(this.displayedInterviewers);
+  }
 }
