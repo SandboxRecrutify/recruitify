@@ -55,13 +55,8 @@ export class ProfilePageComponent implements OnInit {
           (candidate) => {
             this.isLoading = false;
             this.candidate = candidate;
-            console.log(candidate);
-            this.candidatesCurrentProject = candidate.projectResults.find(
-              (project) => {
-                return project.projectId === this.currentProjectId;
-              }
-            );
-            console.log(this.candidatesCurrentProject);
+            console.log('candidate', candidate);
+            this.candidatesCurrentProject = candidate.projectResults[0];
           },
           () => {
             this.isLoading = false;
@@ -84,7 +79,7 @@ export class ProfilePageComponent implements OnInit {
     return (
       this.candidate?.projectResults[0].feedbacks.find((feedback) => {
         //feedback type 0 is test result
-        return feedback.type === 0;
+        // return feedback.type === 0;
       })?.rating || 'none'
     );
   }

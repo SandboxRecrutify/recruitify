@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import * as dayjs from 'dayjs';
 import { Feedback, FeedbackTab } from 'src/app/shared/models/Feedback';
 import { CandidatesPageFacade } from '../../candidates-page/candidates-page.facade';
 
@@ -33,8 +34,12 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
     if (this.feedbacks.length > 0) {
       this.feedbacks.forEach((feedback) => {
         this.tabs.forEach((tab, index) => {
-          if (this.feedbackTypes[feedback.type!] === tab.value) {
-            Object.assign(this.tabs[index], feedback);
+          if (this.feedbackTypes[feedback.rating!] === tab.value) {
+            Object.assign(this.tabs[index], {
+              ...feedback,
+              createdOn: dayjs(feedback.createdOn).format('DD.MM.YYYY'),
+              createdTime: dayjs(feedback.createdOn).format('HH:mm'),
+            });
           }
         });
       });

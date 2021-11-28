@@ -1,6 +1,8 @@
-import { UserRole } from '../models/UserRole';
-import { LocalStorageService } from './../../services/local-storage.service';
 import { Injectable } from '@angular/core';
+import { Role, UserRoles } from '../models/UserRoles';
+import { LocalStorageService } from './../../services/local-storage.service';
+
+type Roles = keyof typeof Role;
 
 @Injectable({
   providedIn: 'root',
@@ -8,28 +10,25 @@ import { Injectable } from '@angular/core';
 export class UserService {
   constructor(private localstorage: LocalStorageService) {}
 
-  getUserRole(): string {
-    const userRole = this.localstorage.getItem('user').role;
-    return userRole;
+  getUserRoles(): UserRoles[] {
+    try {
+      return this.localstorage.getItem('user').roles;
+    } catch (error) {
+      return [];
+    }
+  }
+  checkRole(role: Roles): boolean {
+    const roles = this.getUserRoles()[0].roles;
+    return roles.includes(role);
   }
 
-  isManager(): boolean {
-    return this.getUserRole() === UserRole.manager;
+  checkRoleInProject(projectId: string, role: Roles): boolean {
+    const projectRoles = this.getProjectRoles(projectId);
+    return projectRoles?.includes(role) ? true : false;
   }
 
-  isMentor(): boolean {
-    return this.getUserRole() === UserRole.mentor;
-  }
-
-  isInterviewer(): boolean {
-    return this.getUserRole() === UserRole.interviewer;
-  }
-
-  isRecruiter(): boolean {
-    return this.getUserRole() === UserRole.recruiter;
-  }
-
-  isAdmin(): boolean {
-    return this.getUserRole() === UserRole.admin;
+  getProjectRoles(projectId: string): Roles[] | undefined {
+    const roles = this.getUserRoles();
+    return roles.find((r) => r.projectId === projectId)?.roles;
   }
 }

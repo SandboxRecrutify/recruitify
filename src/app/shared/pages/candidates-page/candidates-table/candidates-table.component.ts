@@ -39,13 +39,24 @@ export class CandidatesTableComponent implements OnInit {
 
   // TODO chande feedback model.
   getFeedbackRate(candidate: Candidate, feedbackType: string) {
-    try {
-      const feedback = candidate.projectResults[0].feedbacks.find((item) => {
-        return item.type === this.feedbackTypes.indexOf(feedbackType);
-      });
-      return typeof feedback?.rating === 'number' ? feedback.rating : '-';
-    } catch (error) {
-      return '-';
+    if (this.currentProjectId) {
+      const candidateProjectResults = candidate.projectResults.find(
+        (project) => project.projectId === this.currentProjectId
+      );
+
+      const feedback = candidateProjectResults?.feedbacks.find(
+        (feedback) => feedback.type === feedbackType
+      );
+      return feedback?.rating;
+    } else {
+      try {
+        const feedback = candidate.projectResults[0].feedbacks.find(
+          (feedback) => feedback.type === feedbackType
+        );
+        return feedback?.rating;
+      } catch (error) {
+        return null;
+      }
     }
   }
 

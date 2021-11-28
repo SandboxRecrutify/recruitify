@@ -2,6 +2,7 @@ import { CandidatesFilters } from './candidates-table/candidates-table.component
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Project } from '../../models/Project';
+import { UserRole } from '../../models/UserRole';
 import { QueryParams } from '../../services/api.service';
 import { ProjectsService } from '../../services/projects.service';
 import { Candidate } from './../../models/Candidate';
@@ -53,8 +54,8 @@ export class CandidatesPageFacade {
   // candidateList$ = this.candidatesService.getCandidates();
   candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<Candidate[]>([]);
 
-  isRecruiter: boolean = this.userService.isRecruiter();
-  isManager: boolean = this.userService.isManager();
+  isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
+  isManager: boolean = this.userService.checkRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 

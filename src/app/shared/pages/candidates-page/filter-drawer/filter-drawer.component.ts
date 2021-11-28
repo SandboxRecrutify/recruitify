@@ -1,6 +1,7 @@
 import { UserService } from './../../../services/user.service';
 import { Candidate } from './../../../models/Candidate';
 import { Component, Input, OnInit } from '@angular/core';
+import { UserRole } from 'src/app/shared/models/UserRole';
 
 @Component({
   selector: 'app-filter-drawer',
@@ -11,7 +12,7 @@ export class FilterDrawerComponent implements OnInit {
   @Input() drawerVisible: any;
   @Input() candidatesList!: Candidate[];
 
-  isAdmin = this.userService.isAdmin();
+  isAdmin = this.userService.checkRole(UserRole.admin);
 
   listOfOption = [
     { label: '123', value: '123' },

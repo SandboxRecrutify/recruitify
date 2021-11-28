@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { paths } from './app-routing.constants';
-import { LocalStorageService } from './services/local-storage.service';
-import { User, UserData, UserResponse } from './shared/models/User';
-import { AuthService } from './shared/services/auth.service';
+import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { NzMessageService } from 'ng-zorro-antd/message'
+import { BehaviorSubject, Observable, of } from 'rxjs'
+import { catchError, map } from 'rxjs/operators'
+import { paths } from './app-routing.constants'
+import { LocalStorageService } from './services/local-storage.service'
+import { User, UserData, UserResponse } from './shared/models/User'
+import { AuthService } from './shared/services/auth.service'
 
 @Injectable({ providedIn: 'root' })
 export class AppFacade {
@@ -46,14 +46,15 @@ export class AppFacade {
     this.isUserLoading$.next(true);
     this.auth.login(user).subscribe(
       (response: UserResponse) => {
-        this.lsService.setItem(this.USER_KEY, {
-          email: user.email,
-          token: response.access_token,
-        });
+        const decodedUser: User = this.auth.jwtDecode(response.access_token);
+        console.log(decodedUser);
         this.user = {
           email: user.email,
           token: response.access_token,
+          roles: decodedUser.role,
+          name: decodedUser.name,
         };
+        this.lsService.setItem(this.USER_KEY, this.user);
         this.router.navigate([this.INITIAL_PATH]);
         this.message.success('Login successful');
         this.isUserLoading$.next(false);
@@ -71,6 +72,7 @@ export class AppFacade {
     this.auth.logout().subscribe(() => {
       this.lsService.removeItem(this.USER_KEY);
       this.router.navigate([paths.login]);
+      this.user = undefined
     });
   }
 }

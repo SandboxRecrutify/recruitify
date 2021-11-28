@@ -8,13 +8,7 @@
   <ng-template #editHead>Update your feedback</ng-template>
   <ng-template #createHead>Add new feedback</ng-template>
   <ng-container *nzModalContent>
-    <form
-      nzLayout="vertical"
-      nz-row
-      [nzGutter]="[16, 16]"
-      nz-form
-      [formGroup]="form"
-    >
+    <form nzLayout="vertical" nz-row [nzGutter]="16" nz-form [formGroup]="form">
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="feedbackType">
@@ -28,25 +22,25 @@
               formControlName="feedbackType"
               id="feedbackType"
             >
-              <!-- <nz-option
+              <nz-option
                 *ngFor="let role of roles"
-                [nzValue]="role.userId"
-                [nzLabel]="role.userName"
+                [nzValue]="role.feedbackType"
+                [nzLabel]="role.roleName"
               >
-              </nz-option> -->
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
-      <div nz-col [nzSpan]="4"></div>
-      <div nz-col [nzSpan]="8">
+      <!-- <div nz-col [nzSpan]="4"></div> -->
+      <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="rating">
             Feedback rating
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter feedback rating">
-            <app-rating-stars formControlName="rating"></app-rating-stars>
+            <nz-rate nzCount="4" formControlName="rating"></nz-rate>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -68,7 +62,7 @@
             </nz-textarea-count>
             <ng-template #textFeedbackError let-control>
               <ng-container *ngIf="control.hasError('required')">
-                please enter feedback text
+                Please enter feedback text
               </ng-container>
               <ng-container *ngIf="control.hasError('minlength')">
                 min. length is 10 characters

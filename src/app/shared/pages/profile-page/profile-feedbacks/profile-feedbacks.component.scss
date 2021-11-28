@@ -1,3 +1,4 @@
+@use "../../../../../globals/" as *;
 .feedbacks {
   width: 100%;
   &_read {
@@ -26,5 +27,9 @@
       height: 100px;
       margin-bottom: 5px;
     }
+  }
+  &_date {
+    font-size: 0.75rem;
+    color: $secondaryColor;
   }
 }

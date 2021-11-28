@@ -2,6 +2,7 @@ import { UserService } from './../../../shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AppFacade } from 'src/app/app.facade';
 import { User } from 'src/app/shared/models/User';
+import { UserRole } from 'src/app/shared/models/UserRole';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { User } from 'src/app/shared/models/User';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAdmin: boolean = this.userService.isAdmin();
+  isAdmin: boolean = this.userService.checkRole(UserRole.admin);
   user: User | undefined;
   constructor(private appFacade: AppFacade, private userService: UserService) {}
 
