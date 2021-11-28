@@ -9,9 +9,10 @@
   background-attachment: fixed;
 
   .container {
-    width: 85%;
+    max-width: 1200px;
+    // width: 85%;
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 60px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 30px;
@@ -23,8 +24,9 @@
   }
 
   .card {
-    min-height: 460px;
-    align-self: start;
+    // min-height: 460px;
+    // width: 49%;
+    // align-self: start;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -64,6 +66,31 @@
       width: 190px;
       height: 45px;
       font-size: 16px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .container {
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 30px;
+    }
+  }
+
+  @media (max-width: 470px) {
+    .card_heading {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .card_info--reg {
+      flex-direction: row;
+
+      p {
+        text-align: left;
+      }
     }
   }
 }

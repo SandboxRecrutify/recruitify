@@ -51,6 +51,17 @@
   nz-form-label {
     font-weight: 500;
   }
+
+  @media (max-width: 460px) {
+    .fill_form {
+      padding: 40px 0px;
+
+      &_container {
+        width: 95%;
+        // margin: 0 auto;
+      }
+    }
+  }
 }
 
 .soc-label {
