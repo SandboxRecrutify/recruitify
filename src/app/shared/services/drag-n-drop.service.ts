@@ -1,5 +1,4 @@
 import { CalendarPageFacade } from './../pages/calendar-page/calendar-page.facade';
-import { CandidateCalendar } from './../models/CandidateCalendar';
 import { CalendarService } from './calendar.service';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription, BehaviorSubject } from 'rxjs';
@@ -87,7 +86,7 @@ export class DragNDropService {
 
   onCandidateDrop(el: Element, target: Element) {
     if (target.classList.contains('markedByInterviewer')) {
-      el.className = 'd-none';
+      // el.className = 'd-none';
       target.classList.add('assigned');
     }
 
