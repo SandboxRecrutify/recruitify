@@ -1,23 +1,14 @@
-<div
-  style="
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    position: absolute;
-    top: 25px;
-    left: 20px;
-  "
->
-  <label style="font-size: 12px">Working weekends</label>
-  <nz-switch
-    nzSize="small"
-    [(ngModel)]="switchWeekends"
-    (ngModelChange)="printWeekends()"
-  ></nz-switch>
-</div>
-
 <div class="heading">
-  <div class="week-btns" *ngIf="!isBtnSaveVisible; else btnsWithPopconfirm">
+  <div class="heading_switcher">
+    <label>Working weekends</label>
+    <nz-switch
+      nzSize="small"
+      [(ngModel)]="isWorkingWeekends"
+      (ngModelChange)="printWeekends()"
+    ></nz-switch>
+  </div>
+
+  <div class="heading_btns" *ngIf="!isBtnSaveVisible; else btnsWithPopconfirm">
     <a nz-button nzType="link" (click)="onPreviousBtnClick()"
       ><<< Previous week</a
     >
@@ -72,12 +63,12 @@
 </div>
 
 <ng-template #btnsWithPopconfirm>
-  <div class="week-btns">
+  <div class="heading_btns">
     <a
       nz-button
       nzType="link"
       nz-popconfirm
-      nzPopconfirmTitle="Are you sure? Current data will not be saved"
+      nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
       nzPopconfirmPlacement="right"
       (nzOnConfirm)="onPreviousBtnClick()"
       ><<< Previous week</a
@@ -86,7 +77,7 @@
       nz-button
       nzType="link"
       nz-popconfirm
-      nzPopconfirmTitle="Are you sure? Current data will not be saved"
+      nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
       nzPopconfirmPlacement="left"
       (nzOnConfirm)="onNextBtnClick()"
       >Nest week >>></a

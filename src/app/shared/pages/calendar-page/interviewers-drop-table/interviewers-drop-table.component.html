@@ -10,6 +10,11 @@
       >
         <div
           (click)="onItemClick(time.candidate[0])"
+          nz-popover
+          [nzPopoverTrigger]="setPopTrigger(time.candidate[0])"
+          [nzPopoverTitle]="popTitle"
+          [nzPopoverContent]="popBody"
+          nzPopoverPlacement="left"
           [ngClass]="{
             markedByInterviewer: time.isAvaliable,
             avaliableToDrop: checkIsAvaliableToDrop(
@@ -38,3 +43,30 @@
 </ng-template>
 
 <app-assigned-modal></app-assigned-modal>
+
+<ng-template #popTitle>
+  <div class="pop-title">
+    <p>Mon, 22.11</p>
+    <p>9:30</p>
+  </div>
+</ng-template>
+
+<ng-template #popBody>
+  <div class="pop-body">
+    <p class="pop-body_name">
+      {{ assignedCandidate.name }} {{ assignedCandidate.surname }},
+      {{ assignedCandidate.skill }}
+    </p>
+    <p>Status: New</p>
+    <p>E-mail: {{ assignedCandidate.email }}</p>
+    <p>Skype: {{ assignedCandidate.skype }}</p>
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="small"
+      (click)="onRemoveBtnClick(assignedCandidate)"
+    >
+      Remove
+    </button>
+  </div>
+</ng-template>

@@ -1,21 +1,63 @@
-<div class="menu">
-  <a nz-button nzType="link" (click)="onPreviousDayButtonClick()"><<<</a>
-  <nz-date-picker
-    nzSize="small"
-    nzFormat="dd.MM.yyyy"
-    [(ngModel)]="datepickerValue"
-    (ngModelChange)="onCalendarDateChange($event)"
-  ></nz-date-picker>
-  <a nz-button nzType="link" (click)="onNextDayButtonClick()">>>></a>
-  <button
-    *ngIf="isBtnSaveVisible"
-    nz-button
-    nzType="primary"
-    nzSize="small"
-    (click)="onBtnSaveClick()"
-  >
-    Save
-  </button>
+<div style="min-width: 1160px">
+  <div class="menu">
+    <a
+      nz-button
+      nzType="link"
+      *ngIf="!isBtnSaveVisible; else prevBtnWithPop"
+      (click)="onPreviousDayButtonClick()"
+      ><<<</a
+    >
+    <nz-date-picker
+      nzSize="small"
+      nzFormat="dd.MM.yyyy"
+      [(ngModel)]="datepickerValue"
+      (ngModelChange)="onCalendarDateChange($event)"
+    ></nz-date-picker>
+    <a
+      nz-button
+      nzType="link"
+      *ngIf="!isBtnSaveVisible; else nextBtnWithPop"
+      (click)="onNextDayButtonClick()"
+      >>>></a
+    >
+    <button
+      *ngIf="isBtnSaveVisible"
+      nz-button
+      nzType="primary"
+      nzSize="small"
+      nz-popconfirm
+      nzPopconfirmTitle="Сonfirm sending email to (5) candidates"
+      nzPopconfirmPlacement="right"
+    >
+      <!-- (nzOnConfirm)="onPreviousBtnClick()" -->
+      <!-- (click)="onBtnSaveClick()" -->
+      Save
+    </button>
+  </div>
+  <app-skills-tabset></app-skills-tabset>
+  <app-email-modal></app-email-modal>
 </div>
-<app-skills-tabset></app-skills-tabset>
-<app-email-modal></app-email-modal>
+
+<ng-template #prevBtnWithPop>
+  <a
+    nz-button
+    nzType="link"
+    nz-popconfirm
+    nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
+    nzPopconfirmPlacement="left"
+    (nzOnConfirm)="onPreviousDayButtonClick()"
+    ><<<</a
+  >
+</ng-template>
+
+<ng-template #nextBtnWithPop>
+  <a
+    nz-button
+    nzType="link"
+    nz-popconfirm
+    nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
+    nzPopconfirmPlacement="left"
+    (nzOnConfirm)="onNextDayButtonClick()"
+    >>>></a
+  >
+</ng-template>

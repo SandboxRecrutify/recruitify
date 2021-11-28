@@ -18,7 +18,7 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
 
   isWeekDay!: boolean;
 
-  clickedCandidate: any;
+  assignedCandidate: any;
 
   constructor(
     private calendarService: CalendarService,
@@ -27,6 +27,10 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   ) {}
 
   ngDoCheck(): void {
+    this.calendarPageFacade.assignedCandidate$.subscribe(
+      (response) => (this.assignedCandidate = response)
+    );
+
     this.dragNDropService.dragedCandidateSkill$.subscribe((response) => {
       this.dragedCandidateSkill = response;
     });
@@ -73,7 +77,16 @@ export class InterviewersDropTableComponent implements OnInit, DoCheck {
   onItemClick(candidate: any) {
     if (candidate) {
       this.calendarPageFacade.assignedCandidate$.next(candidate);
-      this.calendarPageFacade.isAssignedModalVisible$.next(true);
+      // this.calendarPageFacade.isAssignedModalVisible$.next(true);
     }
+  }
+
+  setPopTrigger(candidate: any) {
+    return candidate ? 'click' : null;
+  }
+
+  onRemoveBtnClick(assignedCandiate: any) {
+    console.log(assignedCandiate);
+    console.log(this.displayedInterviewers);
   }
 }

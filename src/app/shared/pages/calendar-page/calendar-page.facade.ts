@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -40,14 +40,15 @@ export class CalendarPageFacade {
 
   constructor() {}
 
-  getCurrentWeekDays() {
-    let daysArr = [this.nearestMonday];
-    for (let i = 2; i <= 7; i++) {
+  getCurrentWeekDays(daysCount: number) {
+    const daysArr = [this.nearestMonday];
+    for (let i = 2; i <= daysCount; i++) {
       let nextDay = new Date(
-        this.today.setDate(this.today.getDate() - this.today.getDay() + i)
+        new Date().setDate(new Date().getDate() - new Date().getDay() + i)
       );
       daysArr.push(nextDay);
     }
+    console.log(daysArr);
     return daysArr;
   }
 
