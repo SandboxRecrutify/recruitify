@@ -35,10 +35,9 @@ export class ProjectsPageFacade {
 
     const orderby = filters?.orderBy
       ? {
-          names: [filters?.orderBy?.property],
-          order: filters?.orderBy?.order,
+          names: [`${filters?.orderBy?.property} ${filters?.orderBy?.order}`],
         }
-      : { names: ['StartDate'], order: 'desc' };
+      : { names: ['StartDate desc']};
 
     const filter = [skills, status, searchText];
 
@@ -96,5 +95,3 @@ export class ProjectsPageFacade {
   }
 }
 
-//for search
-//contains(tolower(name), 'search')

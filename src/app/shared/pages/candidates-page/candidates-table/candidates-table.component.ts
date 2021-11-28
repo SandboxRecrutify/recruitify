@@ -1,8 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { paths } from 'src/app/app-routing.constants';
 import { Candidate } from './../../../models/Candidate';
 import { CandidatesPageFacade } from './../candidates-page.facade';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
+
+export interface CandidatesOrderBy {
+  property: string;
+  order: string;
+}
+export interface CandidatesFilters {
+  orderBy?: CandidatesOrderBy[];
+}
 @Component({
   selector: 'app-candidates-table',
   templateUrl: './candidates-table.component.html',
@@ -12,6 +21,8 @@ export class CandidatesTableComponent implements OnInit {
   @Input() candidatesList!: Candidate[];
   @Input() currentProjectId!: string;
   @Input() isLoading: boolean = false;
+
+  @Output() onFilters: EventEmitter<CandidatesFilters> = new EventEmitter<CandidatesFilters>();
 
   paths = paths;
   checked = false;
@@ -68,6 +79,19 @@ export class CandidatesTableComponent implements OnInit {
       !this.checked;
   }
 
-  sortAlphabetically = (a: Candidate, b: Candidate) =>
-    a.name.localeCompare(b.name);
+  onQueryParamsChange(params: NzTableQueryParams) {
+    console.log(params);
+    const { pageSize, pageIndex, sort, filter } = params;
+    const currentSort: CandidatesOrderBy[] = sort.filter(item => item.value !== null).map((el => ({
+            property: el.key,
+            order: el.value !== null ? el.value.slice(0, -3) : ''
+          }
+      )))
+    console.log(currentSort)
+    const filters: CandidatesFilters  = {
+      orderBy: currentSort
+    }
+    this.onFilters.emit(filters);
+  }
+
 }

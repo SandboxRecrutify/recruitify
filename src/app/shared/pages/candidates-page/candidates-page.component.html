@@ -9,7 +9,7 @@
         nz-input
         placeholder="candidate's name"
         [(ngModel)]="searchValue"
-        (change)="searchName()"
+        (ngModelChange)="onSearchChange($event)"
       />
       <div class="candidates_filter-btn" (click)="openDrawer()"></div>
     </div>
@@ -19,6 +19,7 @@
     [isLoading]="isLoading"
     [currentProjectId]="currentProjectId"
     [candidatesList]="candidatesList"
+    (onFilters)="applyCandidatesFilters($event)"
   ></app-candidates-table>
 
   <app-filter-drawer

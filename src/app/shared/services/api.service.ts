@@ -33,7 +33,7 @@ export interface OData {
 }
 interface OrderBy {
   names?: string[];
-  order?: 'asc' | 'desc' | '';
+  // order?: 'asc' | 'desc' | '';
 }
 
 interface Filter {
@@ -128,7 +128,7 @@ export abstract class ApiService {
 
     url += this.buildODataPath(
       orderby && orderby.names
-        ? orderby.names.join(',') + ' ' + orderby.order
+        ? orderby.names.join(',') //+ ' ' + orderby.order
         : undefined,
       'orderby'
     );
