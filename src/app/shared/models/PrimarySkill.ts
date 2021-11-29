@@ -1,4 +1,4 @@
 export interface PrimarySkill {
-  primarySkillId: string;
-  primarySkillName: string;
+  id: string;
+  name: string;
 }

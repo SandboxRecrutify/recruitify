@@ -57,6 +57,5 @@ export class ProjectsPageComponent implements OnInit {
     this.searchText = ''
     this.filters = { ...this.filters, query: this.searchText };
     this.projectsPageFacade.getProjectsList(this.filters)
-
   }
 }

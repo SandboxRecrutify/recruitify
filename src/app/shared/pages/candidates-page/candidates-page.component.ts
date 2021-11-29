@@ -38,7 +38,7 @@ export class CandidatesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.candidatesPageFacade.getAllCandidates()
+    // this.candidatesPageFacade.getAllCandidates()
 
     this.route.params.subscribe((params: Params) => {
       this.currentProjectId = params.id;

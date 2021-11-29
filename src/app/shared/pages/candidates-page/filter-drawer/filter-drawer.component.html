@@ -15,14 +15,14 @@
             <nz-select
               nzSize="small"
               nzMode="tags"
-              [nzMaxTagCount]="2"
+              [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Location"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let item of locations"
+                [nzLabel]="item"
+                [nzValue]="item"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -32,14 +32,14 @@
             <nz-select
               nzSize="small"
               nzMode="tags"
-              [nzMaxTagCount]="2"
+              [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Date"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let item of registrationDates"
+                [nzLabel]="item | date:'dd MMMM yyyy'"
+                [nzValue]="item"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -49,14 +49,14 @@
             <nz-select
               nzSize="small"
               nzMode="tags"
-              [nzMaxTagCount]="2"
+              [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="English level"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let option of englishLevel | enumToArray"
+                [nzValue]="+option[0]"
+                [nzLabel]="option[1]"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -66,14 +66,14 @@
             <nz-select
               nzSize="small"
               nzMode="tags"
-              [nzMaxTagCount]="2"
+              [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Skill"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let option of primarySkills"
+                [nzLabel]="option.name"
+                [nzValue]="option.name"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -83,14 +83,14 @@
             <nz-select
               nzSize="small"
               nzMode="tags"
-              [nzMaxTagCount]="2"
+              [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Status"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let option of status | enumToArray"
+                [nzValue]="+option[0]"
+                [nzLabel]="option[1]"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -102,12 +102,12 @@
               nzMode="tags"
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Test"
+              nzPlaceHolder="Test result"
             >
               <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
+                *ngFor="let item of test"
+                [nzLabel]="item"
+                [nzValue]="item"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -119,13 +119,11 @@
               nzMode="tags"
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Recruiter"
+              nzPlaceHolder="Recruiter Feedback"
             >
-              <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
-              ></nz-option>
+              <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
+                <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -136,13 +134,11 @@
               nzMode="tags"
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Interview 1"
+              nzPlaceHolder="Entry Interview"
             >
-              <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
-              ></nz-option>
+            <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
+              <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+            </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -153,13 +149,11 @@
               nzMode="tags"
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Mentor"
+              nzPlaceHolder="Mentor Feedback"
             >
-              <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
-              ></nz-option>
+            <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
+                <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+              </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -170,13 +164,11 @@
               nzMode="tags"
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Interview 2"
+              nzPlaceHolder="Final Interview"
             >
-              <nz-option
-                *ngFor="let option of listOfOption"
-                [nzLabel]="option.label"
-                [nzValue]="option.value"
-              ></nz-option>
+            <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
+              <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+            </nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
