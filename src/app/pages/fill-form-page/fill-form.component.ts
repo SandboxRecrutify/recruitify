@@ -81,22 +81,12 @@ export class FillFormComponent implements OnInit {
     const candidateToSend = this.fillFormFacade.createCandidateObjToSend(
       this.candidateForm
     );
-    // for (const i in this.candidateForm.controls) {
-    //   if (this.candidateForm.controls.hasOwnProperty(i)) {
-    //     this.candidateForm.controls[i].markAsDirty();
-    //     this.candidateForm.controls[i].updateValueAndValidity();
-    //   }
-    // }
-
     if (this.candidateForm.valid) {
       this.candidatesService
         .createCandidate$(candidateToSend, this.currnetProjectId)
         .subscribe(
           (response) => {
             console.log(response);
-            this.message.success(
-              'Thanks! Our recruiter will contact you shortly!'
-            );
           },
           () => {
             this.message.error('Something went wrong :(');

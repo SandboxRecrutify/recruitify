@@ -12,6 +12,7 @@ import { FourOFourComponent } from './shared/pages/four-o-four/four-o-four.compo
 import { ProfilePageComponent } from './shared/pages/profile-page/profile-page.component';
 import { ProjectsPageComponent } from './shared/pages/projects-page/projects-page.component';
 import { FillFormComponent } from './pages/fill-form-page/fill-form.component';
+import { FinishPageComponent } from './shared/pages/finish-page/finish-page.component';
 
 // consts
 import { paths } from './app-routing.constants';
@@ -23,10 +24,10 @@ const mainRouter: Routes = [
     component: LoginPageComponent,
     canActivate: [AuthGuard],
   },
-  // { path: paths.fillForm, component: FillFormComponent },
-  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
   { path: paths.start, component: StartPageComponent },
   { path: paths.internships, component: InternshipsComponent },
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
+  { path: paths.finish, component: FinishPageComponent },
   {
     path: paths.projects,
     component: ProjectsPageComponent,

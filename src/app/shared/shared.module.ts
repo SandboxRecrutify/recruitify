@@ -85,6 +85,7 @@ import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-mod
 import { AssignedModalComponent } from './pages/calendar-page/assigned-modal/assigned-modal.component';
 import { EmailModalComponent } from './pages/calendar-page/email-modal/email-modal.component';
 import { SendEmailModalComponent } from './pages/candidates-page/send-email-modal/send-email-modal.component';
+import { FinishPageComponent } from './pages/finish-page/finish-page.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { SendEmailModalComponent } from './pages/candidates-page/send-email-moda
     AssignedModalComponent,
     EmailModalComponent,
     SendEmailModalComponent,
+    FinishPageComponent,
   ],
   imports: [
     NzBreadCrumbModule,
