@@ -8,31 +8,10 @@
         class="timetable_grid-item"
         *ngFor="let time of interviewer.calendar[0].timetable"
       >
-        <div
-          (click)="onItemClick(time.candidate[0])"
-          nz-popover
-          [nzPopoverTrigger]="setPopTrigger(time.candidate[0])"
-          [nzPopoverTitle]="popTitle"
-          [nzPopoverContent]="popBody"
-          nzPopoverPlacement="left"
-          [ngClass]="{
-            markedByInterviewer: time.isAvaliable,
-            avaliableToDrop: checkIsAvaliableToDrop(
-              interviewer.skill,
-              dragedCandidateSkill,
-              time.time,
-              dragedCandidateTime
-            )
-          }"
-          [dragula]="
-            setDragulaValue(
-              interviewer.skill,
-              dragedCandidateSkill,
-              time.candidate.length
-            )
-          "
-          [(dragulaModel)]="time.candidate"
-        ></div>
+        <app-drop-item
+          [timetableTime]="time"
+          [currentInterviewer]="interviewer"
+        ></app-drop-item>
       </div>
     </div>
   </div>
@@ -40,33 +19,4 @@
 
 <ng-template #weekendRow>
   <div class="weekend-row">🥳 no interview for today! 🥳</div>
-</ng-template>
-
-<app-assigned-modal></app-assigned-modal>
-
-<ng-template #popTitle>
-  <div class="pop-title">
-    <p>Mon, 22.11</p>
-    <p>9:30</p>
-  </div>
-</ng-template>
-
-<ng-template #popBody>
-  <div class="pop-body">
-    <p class="pop-body_name">
-      {{ assignedCandidate.name }} {{ assignedCandidate.surname }},
-      {{ assignedCandidate.skill }}
-    </p>
-    <p>Status: New</p>
-    <p>E-mail: {{ assignedCandidate.email }}</p>
-    <p>Skype: {{ assignedCandidate.skype }}</p>
-    <button
-      nz-button
-      nzType="primary"
-      nzSize="small"
-      (click)="onRemoveBtnClick(assignedCandidate)"
-    >
-      Remove
-    </button>
-  </div>
 </ng-template>

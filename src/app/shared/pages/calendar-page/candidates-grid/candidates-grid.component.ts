@@ -1,7 +1,5 @@
-import { CalendarService } from './../../../services/calendar.service';
-import { DragNDropService } from './../../../services/drag-n-drop.service';
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { CalendarPageFacade } from './../calendar-page.facade';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -9,19 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./candidates-grid.component.scss'],
 })
 export class CandidatesGridComponent implements OnInit {
-  @Input() displayedCandidates!: any;
+  displayedCandidates: any = [];
 
-  candidatesTimeTable: any = [];
-
-  constructor(
-    private http: HttpClient,
-    private calendarService: CalendarService,
-    private dragNDropService: DragNDropService
-  ) {}
+  constructor(private calendarPageFacade: CalendarPageFacade) {}
 
   ngOnInit(): void {
-    this.calendarService.getCandidatesTimeTable().subscribe((responce) => {
-      this.candidatesTimeTable = responce;
+    this.calendarPageFacade.displayedCandidates$.subscribe((response) => {
+      this.displayedCandidates = response;
     });
   }
 }

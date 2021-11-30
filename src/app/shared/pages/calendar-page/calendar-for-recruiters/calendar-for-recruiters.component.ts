@@ -17,7 +17,7 @@ export class CalendarForRecruitersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.calendarService.datepickerValue$.subscribe((response) => {
+    this.calendarPageFacade.datepickerValue$.subscribe((response) => {
       this.datepickerValue = response;
     });
 
@@ -27,22 +27,21 @@ export class CalendarForRecruitersComponent implements OnInit {
   }
 
   onNextDayButtonClick() {
-    this.calendarService.getNextDay();
+    this.calendarPageFacade.getNextDay();
     this.isBtnSaveVisible = false;
   }
 
   onPreviousDayButtonClick() {
-    this.calendarService.getPreviuosDay();
+    this.calendarPageFacade.getPreviuosDay();
     this.isBtnSaveVisible = false;
   }
 
   onCalendarDateChange(event: Date) {
-    this.calendarService.setPickedDay(event);
+    this.calendarPageFacade.setPickedDay(event);
     this.isBtnSaveVisible = false;
   }
 
-  onBtnSaveClick() {
-    this.calendarPageFacade.isEmailModalVisible$.next(true);
+  onSaveConfirm() {
     this.isBtnSaveVisible = false;
   }
 }

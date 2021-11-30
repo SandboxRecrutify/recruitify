@@ -20,22 +20,22 @@
       (click)="onNextDayButtonClick()"
       >>>></a
     >
-    <button
-      *ngIf="isBtnSaveVisible"
-      nz-button
-      nzType="primary"
-      nzSize="small"
-      nz-popconfirm
-      nzPopconfirmTitle="Сonfirm sending email to (5) candidates"
-      nzPopconfirmPlacement="right"
-    >
-      <!-- (nzOnConfirm)="onPreviousBtnClick()" -->
-      <!-- (click)="onBtnSaveClick()" -->
-      Save
-    </button>
   </div>
+
+  <button
+    class="save-btn"
+    *ngIf="isBtnSaveVisible"
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    nz-popconfirm
+    nzPopconfirmTitle="Сonfirm sending email to (n) candidates"
+    nzPopconfirmPlacement="right"
+    (nzOnConfirm)="onSaveConfirm()"
+  >
+    Save
+  </button>
   <app-skills-tabset></app-skills-tabset>
-  <app-email-modal></app-email-modal>
 </div>
 
 <ng-template #prevBtnWithPop>
