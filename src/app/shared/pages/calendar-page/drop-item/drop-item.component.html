@@ -1,0 +1,52 @@
+<div
+  (click)="
+    onItemClick(
+      timetableTime.candidate[0],
+      timetableTime.time,
+      currentInterviewer.id
+    )
+  "
+  nz-popover
+  [nzPopoverTrigger]="setPopTrigger(timetableTime.candidate[0])"
+  [nzPopoverTitle]="popTitle"
+  [nzPopoverContent]="popBody"
+  nzPopoverPlacement="left"
+  [(nzPopoverVisible)]="isPopVisible"
+  [ngClass]="{
+    markedByInterviewer: timetableTime.isAvaliable,
+    avaliableToDrop: setIsAvaliableToDrop(
+      timetableTime.time,
+      dragedCandidate.bestTimeToConnect
+    ),
+    assigned: timetableTime.candidate[0]
+  }"
+  [dragula]="setDragulaValue(timetableTime.candidate)"
+  [(dragulaModel)]="timetableTime.candidate"
+></div>
+
+<ng-template #popTitle>
+  <div class="pop-title">
+    <p>{{ assignedCandidate.assignedDate | date: "EE, dd.mm" }}</p>
+    <p>{{ assignedCandidate.assignedDate | date: "HH:mm" }}</p>
+  </div>
+</ng-template>
+
+<ng-template #popBody>
+  <div class="pop-body">
+    <p class="pop-body_name">
+      {{ assignedCandidate.name }} {{ assignedCandidate.surname }},
+      {{ assignedCandidate.skill }}
+    </p>
+    <p>Status: New</p>
+    <p>E-mail: {{ assignedCandidate.email }}</p>
+    <p>Skype: {{ assignedCandidate.skype }}</p>
+    <button
+      nz-button
+      nzType="primary"
+      nzSize="small"
+      (click)="onRemoveBtnClick(assignedCandidate)"
+    >
+      Remove
+    </button>
+  </div>
+</ng-template>

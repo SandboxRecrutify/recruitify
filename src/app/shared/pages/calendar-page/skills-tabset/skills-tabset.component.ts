@@ -1,25 +1,20 @@
-import { CandidateCalendar } from './../../../models/CandidateCalendar';
-import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
-import { filter } from 'rxjs/operators';
+import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
-
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-skills-tabset',
   templateUrl: './skills-tabset.component.html',
   styleUrls: ['./skills-tabset.component.scss'],
 })
-export class SkillsTabsetComponent implements OnInit, DoCheck {
-  constructor(private calendarService: CalendarService) {}
-
+export class SkillsTabsetComponent implements OnInit {
   interviewersTimeTable: any = [];
   candidatesTimeTable: any = [];
 
-  displayedRecruiter: InterviewerCalendar[] = [];
-  displayedCandidatesForRecruiter: CandidateCalendar[] = [];
-  displayedInterviewers: InterviewerCalendar[] = [];
-  displayedCandidates: CandidateCalendar[] = [];
+  constructor(
+    private calendarService: CalendarService,
+    private calendarPageFacade: CalendarPageFacade
+  ) {}
 
   ngOnInit(): void {
     this.calendarService.getCandidatesTimeTable().subscribe((response) => {
@@ -27,14 +22,11 @@ export class SkillsTabsetComponent implements OnInit, DoCheck {
     });
     this.calendarService.getInterviewersTimeTable().subscribe((response) => {
       this.interviewersTimeTable = response;
+      this.setRecruiterAndAllCandidates();
     });
   }
 
-  ngDoCheck(): void {
-    this.getRecruitersAndCandidates();
-  }
-
-  getTabNames() {
+  setTabNames() {
     const interviewersSkills = this.interviewersTimeTable.map(
       (item: any) => item.skill
     );
@@ -49,19 +41,27 @@ export class SkillsTabsetComponent implements OnInit, DoCheck {
     return resultArrWithoutRecruiter;
   }
 
-  getRecruitersAndCandidates() {
-    this.displayedRecruiter = this.interviewersTimeTable.filter(
-      (interviewer: any) => interviewer.skill === 'Recruiter'
+  setRecruiterAndAllCandidates() {
+    this.calendarPageFacade.displayedInterviewers$.next(
+      this.interviewersTimeTable.filter(
+        (interviewer: any) => interviewer.skill === 'Recruiter'
+      )
     );
-    this.displayedCandidatesForRecruiter = this.candidatesTimeTable;
+
+    this.calendarPageFacade.displayedCandidates$.next(this.candidatesTimeTable);
   }
 
-  getCandidatesAndInterviewersByTabName(tabName: any) {
-    this.displayedInterviewers = this.interviewersTimeTable.filter(
-      (interviewer: any) => interviewer.skill === tabName
+  setInterviewersAndCandidatesBySkill(tabName: any) {
+    this.calendarPageFacade.displayedInterviewers$.next(
+      this.interviewersTimeTable.filter(
+        (interviewer: any) => interviewer.skill === tabName
+      )
     );
-    this.displayedCandidates = this.candidatesTimeTable.filter(
-      (interviewer: any) => interviewer.skill === tabName
+
+    this.calendarPageFacade.displayedCandidates$.next(
+      this.candidatesTimeTable.filter(
+        (interviewer: any) => interviewer.skill === tabName
+      )
     );
   }
 }
