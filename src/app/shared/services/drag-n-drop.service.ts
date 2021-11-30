@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class DragNDropService {
   subs = new Subscription();
   candidatesTimeTable: any = [];
+  dragedCandidate: any;
 
   constructor(
     private dragulaService: DragulaService,
@@ -26,7 +27,7 @@ export class DragNDropService {
       dragulaService
         .dropModel('calendar')
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-          console.log(sourceModel);
+          // console.log(sourceModel);
           this.calendarPageFacade.displayedCandidates$.next(sourceModel);
         })
     );
@@ -63,10 +64,11 @@ export class DragNDropService {
   }
 
   onCandidateDrag(el: Element) {
-    const dragedCandidate = this.candidatesTimeTable.find(
+    this.dragedCandidate = this.candidatesTimeTable.find(
       (item: any) => +item.id === +el.id
     );
-    this.calendarPageFacade.dragedCandidate$.next(dragedCandidate);
+    this.calendarPageFacade.dragedCandidate$.next(this.dragedCandidate);
+    console.log(this.dragedCandidate);
   }
 
   onCandidateDrop(el: Element, target: Element) {
@@ -74,6 +76,7 @@ export class DragNDropService {
       el.classList.add('d-none');
       this.calendarPageFacade.isSaveBtnVisible$.next(true);
     }
+    console.log(this.dragedCandidate);
 
     this.calendarPageFacade.dragedCandidate$.next({});
   }
