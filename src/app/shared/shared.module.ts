@@ -83,7 +83,9 @@ import { SkillsTabsetComponent } from './pages/calendar-page/skills-tabset/skill
 import { ProfileFeedbacksComponent } from './pages/profile-page/profile-feedbacks/profile-feedbacks.component';
 import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-modal/add-feedback-modal.component';
 import { SendEmailModalComponent } from './pages/candidates-page/send-email-modal/send-email-modal.component';
+import { FinishPageComponent } from './pages/finish-page/finish-page.component';
 import { DropItemComponent } from './pages/calendar-page/drop-item/drop-item.component';
+
 
 @NgModule({
   declarations: [
@@ -118,6 +120,7 @@ import { DropItemComponent } from './pages/calendar-page/drop-item/drop-item.com
     ProfileFeedbacksComponent,
     AddFeedbackModalComponent,
     SendEmailModalComponent,
+    FinishPageComponent,
     DropItemComponent,
   ],
   imports: [

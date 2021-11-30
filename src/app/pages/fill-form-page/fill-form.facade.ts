@@ -11,10 +11,7 @@ export class FillFormFacade {
   bestTimeToContact: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   primarySkills$!: Observable<any>;
 
-  constructor(
-    // private fillFormServices: FillFormServices,
-    private projectsService: ProjectsService
-  ) {}
+  constructor(private projectsService: ProjectsService) {}
 
   get englishLevel$(): Observable<any> {
     return of(Object.entries(EnglishLevel));

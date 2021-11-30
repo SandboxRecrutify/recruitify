@@ -337,6 +337,7 @@
           nz-button
           [disabled]="candidateForm.invalid"
           (click)="submitForm()"
+          [routerLink]="['/finish']"
         >
           Submit
         </button>
