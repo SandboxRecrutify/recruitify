@@ -82,9 +82,8 @@ import { InterviewersDropTableComponent } from './pages/calendar-page/interviewe
 import { SkillsTabsetComponent } from './pages/calendar-page/skills-tabset/skills-tabset.component';
 import { ProfileFeedbacksComponent } from './pages/profile-page/profile-feedbacks/profile-feedbacks.component';
 import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-modal/add-feedback-modal.component';
-import { AssignedModalComponent } from './pages/calendar-page/assigned-modal/assigned-modal.component';
-import { EmailModalComponent } from './pages/calendar-page/email-modal/email-modal.component';
 import { SendEmailModalComponent } from './pages/candidates-page/send-email-modal/send-email-modal.component';
+import { DropItemComponent } from './pages/calendar-page/drop-item/drop-item.component';
 
 @NgModule({
   declarations: [
@@ -118,9 +117,8 @@ import { SendEmailModalComponent } from './pages/candidates-page/send-email-moda
     SkillsTabsetComponent,
     ProfileFeedbacksComponent,
     AddFeedbackModalComponent,
-    AssignedModalComponent,
-    EmailModalComponent,
     SendEmailModalComponent,
+    DropItemComponent,
   ],
   imports: [
     NzBreadCrumbModule,

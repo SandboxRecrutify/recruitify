@@ -1,7 +1,6 @@
 import { CalendarPageFacade } from './../pages/calendar-page/calendar-page.facade';
-import { CalendarService } from './calendar.service';
 import { DragulaService } from 'ng2-dragula';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,19 +8,13 @@ import { Injectable } from '@angular/core';
 })
 export class DragNDropService {
   subs = new Subscription();
-
   candidatesTimeTable: any = [];
-  dragedCandidateSkill$ = new BehaviorSubject('');
-  dragedCandidateTime$ = new BehaviorSubject([]);
-
-  dragedCandidate!: any;
 
   constructor(
     private dragulaService: DragulaService,
-    private calendarService: CalendarService,
     private calendarPageFacade: CalendarPageFacade
   ) {
-    calendarService.getCandidatesTimeTable().subscribe((responce) => {
+    calendarPageFacade.displayedCandidates$.subscribe((responce) => {
       this.candidatesTimeTable = responce;
     });
 
@@ -33,13 +26,8 @@ export class DragNDropService {
       dragulaService
         .dropModel('calendar')
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-          // console.log('dropModel:');
-          // console.log(el);
-          // console.log(source);
-          // console.log(target);
-          // console.log(sourceModel);
-          // console.log(targetModel);
-          // console.log(item);
+          console.log(sourceModel);
+          this.calendarPageFacade.displayedCandidates$.next(sourceModel);
         })
     );
 
@@ -64,7 +52,6 @@ export class DragNDropService {
     this.subs.add(
       dragulaService.drop('calendar').subscribe(({ el, target }) => {
         this.onCandidateDrop(el, target);
-        this.calendarPageFacade.isSaveBtnVisible$.next(true);
       })
     );
 
@@ -76,27 +63,23 @@ export class DragNDropService {
   }
 
   onCandidateDrag(el: Element) {
-    this.dragedCandidate = this.candidatesTimeTable.find(
+    const dragedCandidate = this.candidatesTimeTable.find(
       (item: any) => +item.id === +el.id
     );
-
-    this.dragedCandidateSkill$.next(this.dragedCandidate.skill);
-    this.dragedCandidateTime$.next(this.dragedCandidate.bestTimeToConnect);
+    this.calendarPageFacade.dragedCandidate$.next(dragedCandidate);
   }
 
   onCandidateDrop(el: Element, target: Element) {
     if (target.classList.contains('markedByInterviewer')) {
-      // el.className = 'd-none';
-      target.classList.add('assigned');
+      el.classList.add('d-none');
+      this.calendarPageFacade.isSaveBtnVisible$.next(true);
     }
 
-    this.dragedCandidateSkill$.next('');
-    this.dragedCandidateTime$.next([]);
+    this.calendarPageFacade.dragedCandidate$.next({});
   }
 
   onCandidateDragCancel() {
-    this.dragedCandidateSkill$.next('');
-    this.dragedCandidateTime$.next([]);
+    this.calendarPageFacade.dragedCandidate$.next({});
   }
 
   onCandidateOverAvaliableContainer(container: Element) {
