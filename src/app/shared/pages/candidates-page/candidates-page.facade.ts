@@ -10,6 +10,7 @@ import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
 import { UserService } from './../../services/user.service';
 import { candidatesQueries } from './candidates-page.component';
+import { CreateFeedbackParams } from '../../models/CreateFeedbackParams';
 
 @Injectable()
 export class CandidatesPageFacade {
@@ -65,6 +66,10 @@ export class CandidatesPageFacade {
     private userService: UserService,
     private projectsService: ProjectsService
   ) {}
+
+  createFeedback$(params:CreateFeedbackParams){
+    return this.candidatesService.createFeedback$(params)
+  }
 
  getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);

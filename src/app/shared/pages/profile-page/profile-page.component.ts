@@ -1,5 +1,3 @@
-import { CandidateProjectResults } from './../../models/CandidateProjectResults';
-import { Project } from 'src/app/shared/models/Project';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
