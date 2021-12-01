@@ -23,10 +23,21 @@ export class UserService {
     return roles.find((r) => r.projectId === this.globalRoleId)?.roles;
   }
 
-  checkGlobalRole(role: Roles): boolean {
+  checkGlobalRole(role: Roles | Roles[]): boolean {
     const globalRoles = this.getGlobalRoles();
-    if (globalRoles) {
-      return globalRoles.includes(role);
+    if (Array.isArray(role)) {
+      let count = 0;
+      role.forEach((r) => {
+        if (globalRoles?.includes(r)) {
+          ++count;
+        }
+      });
+      console.log(count);
+      return count === role.length;
+    } else {
+      if (globalRoles) {
+        return globalRoles.includes(role);
+      }
     }
     return false;
   }
