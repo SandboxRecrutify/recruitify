@@ -235,8 +235,8 @@
                 required
               >
                 <nz-option
+                  [nzValue]="{ id: primarySkill.id }"
                   *ngFor="let primarySkill of currentProjectSkills"
-                  [nzValue]="{ id: primarySkill.id, name: primarySkill.name }"
                   [nzLabel]="primarySkill.name"
                 ></nz-option>
               </nz-select>

@@ -7,7 +7,7 @@ export class CalendarPageFacade {
   isWorkingWeekends$ = new BehaviorSubject(false);
   clickedDay$ = new BehaviorSubject(new Date());
 
-  assignedCandidate$ = new BehaviorSubject([]);
+  assignedCandidate$ = new BehaviorSubject({});
   dragedCandidate$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   displayedCandidates$: BehaviorSubject<any> = new BehaviorSubject([]);
