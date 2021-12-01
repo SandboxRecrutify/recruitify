@@ -24,9 +24,9 @@ const mainRouter: Routes = [
     component: LoginPageComponent,
     canActivate: [AuthGuard],
   },
-  { path: paths.start, component: StartPageComponent },
-  { path: paths.internships, component: InternshipsComponent },
-  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
+  { path: paths.start, component: StartPageComponent }, //
+  { path: paths.internships, component: InternshipsComponent }, //
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent }, //
   { path: paths.finish, component: FinishPageComponent },
   {
     path: paths.projects,
@@ -54,6 +54,7 @@ const mainRouter: Routes = [
     canActivate: [AppGuard],
   },
   {
+    //
     path: paths.fof,
     component: FourOFourComponent,
   },
@@ -79,6 +80,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
+  { path: paths.start, component: StartPageComponent },
+  { path: paths.internships, component: InternshipsComponent },
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
 ];
 
 @NgModule({

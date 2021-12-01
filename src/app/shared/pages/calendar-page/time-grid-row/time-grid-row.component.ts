@@ -1,5 +1,7 @@
+import { CalendarService } from './../../../services/calendar.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-time-grid-row',
@@ -8,8 +10,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TimeGridRowComponent implements OnInit {
   @Input() day!: Date;
-  time = this.calendarPageFacade.timeLine;
+  time: string[] = this.calendarPageFacade.timeLine;
   workingWeekends!: boolean;
+
+  interviewerTimeTable = [];
 
   constructor(private calendarPageFacade: CalendarPageFacade) {}
 
