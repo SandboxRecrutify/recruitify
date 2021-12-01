@@ -62,13 +62,20 @@ export class FillFormFacade {
     };
 
     const contactsArrToSend = [...linksArrToSend, skypeToSend];
+    const locationObjToSend = {
+      city: candidateForm.value.city,
+      country: candidateForm.value.country,
+    };
 
     const candidateToSend = {
       ...candidateForm.value,
       contacts: contactsArrToSend,
+      location: locationObjToSend,
     };
 
     delete candidateToSend.skype;
+    delete candidateToSend.city;
+    delete candidateToSend.country;
 
     console.log(candidateToSend);
 
