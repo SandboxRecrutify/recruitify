@@ -55,8 +55,8 @@ export class CandidatesPageFacade {
   // candidateList$ = this.candidatesService.getCandidates();
   candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<Candidate[]>([]);
 
-  isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
-  isManager: boolean = this.userService.checkRole(UserRole.manager);
+  isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
+  isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 
