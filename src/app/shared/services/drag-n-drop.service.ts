@@ -1,3 +1,4 @@
+import { EmailService } from './../pages/calendar-page/email.service';
 import { CalendarPageFacade } from './../pages/calendar-page/calendar-page.facade';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
@@ -10,10 +11,12 @@ export class DragNDropService {
   subs = new Subscription();
   candidatesTimeTable: any = [];
   dragedCandidate: any;
+  assignedCandidates: any = [];
 
   constructor(
     private dragulaService: DragulaService,
-    private calendarPageFacade: CalendarPageFacade
+    private calendarPageFacade: CalendarPageFacade,
+    private emailService: EmailService
   ) {
     calendarPageFacade.displayedCandidates$.subscribe((responce) => {
       this.candidatesTimeTable = responce;
@@ -27,7 +30,6 @@ export class DragNDropService {
       dragulaService
         .dropModel('calendar')
         .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-          // console.log(sourceModel);
           this.calendarPageFacade.displayedCandidates$.next(sourceModel);
         })
     );
@@ -74,10 +76,13 @@ export class DragNDropService {
   onCandidateDrop(el: Element, target: Element) {
     if (target.classList.contains('markedByInterviewer')) {
       el.classList.add('d-none');
-      this.calendarPageFacade.isSaveBtnVisible$.next(true);
-    }
-    console.log(this.dragedCandidate);
+      this.assignedCandidates = [
+        ...this.assignedCandidates,
+        this.dragedCandidate,
+      ];
 
+      this.emailService.candidatesToSendEmail$.next(this.assignedCandidates);
+    }
     this.calendarPageFacade.dragedCandidate$.next({});
   }
 

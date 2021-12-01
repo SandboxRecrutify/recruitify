@@ -1,3 +1,4 @@
+import { EmailService } from './../email.service';
 import { CandidateCalendar } from './../../../models/CandidateCalendar';
 import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { CalendarPageFacade } from './../calendar-page.facade';
@@ -20,7 +21,12 @@ export class DropItemComponent implements OnInit {
   assignedCandidate!: any;
   dragedCandidate!: CandidateCalendar;
 
-  constructor(private calendarPageFacade: CalendarPageFacade) {}
+  assignedCandidatesToSendEmail: any;
+
+  constructor(
+    private calendarPageFacade: CalendarPageFacade,
+    private emailService: EmailService
+  ) {}
 
   ngOnInit(): void {
     this.calendarPageFacade.assignedCandidate$.subscribe(
@@ -38,6 +44,10 @@ export class DropItemComponent implements OnInit {
     this.calendarPageFacade.dragedCandidate$.subscribe((response) => {
       this.dragedCandidate = response;
     });
+
+    this.emailService.candidatesToSendEmail$.subscribe(
+      (response) => (this.assignedCandidatesToSendEmail = response)
+    );
   }
 
   setDragulaValue(assignedCandidateArr: any): string {
@@ -80,8 +90,13 @@ export class DropItemComponent implements OnInit {
       this.isPopVisible = false;
 
       if (item.candidate[0] && item.candidate[0].id === assignedCandiate.id) {
+        const result = this.assignedCandidatesToSendEmail.filter(
+          (item: any) => {
+            return item.id !== assignedCandiate.id;
+          }
+        );
+        this.emailService.candidatesToSendEmail$.next(result);
         item.candidate.pop();
-
         this.calendarPageFacade.displayedCandidates$.next([
           ...this.displayedCandidates,
           assignedCandiate,

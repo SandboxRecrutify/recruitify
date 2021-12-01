@@ -1,7 +1,6 @@
 import { QueryParams } from './../../services/api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { Project } from 'src/app/shared/models/Project';
-import { ProjectsPageFacade } from './../projects-page/projects-page.facade';
 import { Component, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
 
@@ -13,10 +12,7 @@ import * as dayjs from 'dayjs';
 export class InternshipsComponent implements OnInit {
   activeProjects!: Project[];
 
-  constructor(
-    private projectsPageFacade: ProjectsPageFacade,
-    private projectsService: ProjectsService
-  ) {}
+  constructor(private projectsService: ProjectsService) {}
 
   ngOnInit(): void {
     this.projectsService

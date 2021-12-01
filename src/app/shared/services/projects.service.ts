@@ -21,6 +21,10 @@ export class ProjectsService extends ApiService {
     // return super.get({mock: '/projects.json'})
   }
 
+  // getShortProjects(): Observable<Project[]> {
+  //   return super.get<Project[]>();
+  // }
+
   //get create project modal data
   getCreateProjectData(): Observable<CreateProject> {
     return super.get<CreateProject>({ path: '/primary_skills_and_staff' });

@@ -39,6 +39,7 @@ export class FillFormComponent implements OnInit {
     englishLevel: ['', Validators.required],
     projectLanguage: ['', Validators.required],
     primarySkill: ['', Validators.required],
+    // primarySkillId: ['', Validators.required],
     goingToExadel: ['', Validators.required],
     additionalInfo: [''],
     additionalQuestions: [''],

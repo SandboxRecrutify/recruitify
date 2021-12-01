@@ -1,3 +1,5 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { EmailService } from './../email.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,16 +12,29 @@ import { Component, OnInit } from '@angular/core';
 export class CalendarForRecruitersComponent implements OnInit {
   datepickerValue!: Date;
   isBtnSaveVisible: boolean = false;
+  candidatesToSendEmail: string[] = [];
 
   constructor(
     public calendarService: CalendarService,
-    private calendarPageFacade: CalendarPageFacade
+    private calendarPageFacade: CalendarPageFacade,
+    private emailService: EmailService,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
+    this.emailService.candidatesToSendEmail$.subscribe((repsonse) => {
+      repsonse.length > 0
+        ? this.calendarPageFacade.isSaveBtnVisible$.next(true)
+        : this.calendarPageFacade.isSaveBtnVisible$.next(false);
+    });
+
     this.calendarPageFacade.datepickerValue$.subscribe((response) => {
       this.datepickerValue = response;
     });
+
+    this.emailService.candidatesToSendEmail$.subscribe(
+      (response) => (this.candidatesToSendEmail = response)
+    );
 
     this.calendarPageFacade.isSaveBtnVisible$.subscribe(
       (response) => (this.isBtnSaveVisible = response)
@@ -43,5 +58,7 @@ export class CalendarForRecruitersComponent implements OnInit {
 
   onSaveConfirm() {
     this.isBtnSaveVisible = false;
+    this.emailService.sendEmails();
+    this.message.success('Email successfully sent');
   }
 }
