@@ -3,8 +3,8 @@ import { CandidatesService } from './../../shared/services/candidates.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { EnumToArrayPipe } from 'src/app/shared/pipes/enumToArray.pipe';
 import { FillFormFacade } from './fill-form.facade';
 import { PrimarySkill } from 'src/app/shared/models/Project';
@@ -20,6 +20,13 @@ export class FillFormComponent implements OnInit {
   currentProjectSkills!: PrimarySkill[];
   currnetProjectId!: string;
   englishLevel$: Observable<any>;
+  isLoading: boolean = false;
+
+  goingToExadelError: boolean = false;
+  projectLanguageError: boolean = false;
+  isAnyErrorInForm: boolean = false;
+
+  contactFields: number[] = [];
 
   candidateForm = this.fb.group({
     name: ['', Validators.required],
@@ -27,10 +34,8 @@ export class FillFormComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     skype: ['', Validators.required],
     phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]{12}')]],
-    location: this.fb.group({
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-    }),
+    city: ['', Validators.required],
+    country: ['', Validators.required],
     englishLevel: ['', Validators.required],
     projectLanguage: ['', Validators.required],
     primarySkill: ['', Validators.required],
@@ -69,8 +74,6 @@ export class FillFormComponent implements OnInit {
     });
   }
 
-  contactFields: number[] = [];
-
   onAddClick() {
     if (this.contactFields.length < 5) {
       this.contactFields.push(1);
@@ -78,21 +81,42 @@ export class FillFormComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.candidateForm);
+
+    this.candidateForm.controls.goingToExadel.errors
+      ? (this.goingToExadelError = true)
+      : (this.goingToExadelError = false);
+    this.candidateForm.controls.projectLanguage.errors
+      ? (this.projectLanguageError = true)
+      : (this.projectLanguageError = false);
+
     const candidateToSend = this.fillFormFacade.createCandidateObjToSend(
       this.candidateForm
     );
+
     if (this.candidateForm.valid) {
+      this.isLoading = true;
       this.candidatesService
         .createCandidate$(candidateToSend, this.currnetProjectId)
         .subscribe(
           (response) => {
             console.log(response);
+            this.isLoading = false;
           },
           () => {
             this.message.error('Something went wrong :(');
+            this.isLoading = false;
           }
         );
       this.candidateForm.reset();
+    } else {
+      Object.values(this.candidateForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+          this.isAnyErrorInForm = true;
+        }
+      });
     }
   }
 }
