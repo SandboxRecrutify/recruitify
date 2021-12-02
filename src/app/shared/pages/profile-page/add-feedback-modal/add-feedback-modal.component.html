@@ -12,7 +12,7 @@
       <div nz-col [nzSpan]="12">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="feedbackType">
-            Add Feedback as
+            Feedback Type
           </nz-form-label>
           <nz-form-control nzErrorTip="Please enter feedback type">
             <nz-select
@@ -23,9 +23,9 @@
               id="feedbackType"
             >
               <nz-option
-                *ngFor="let role of roles"
-                [nzValue]="role.feedbackType"
-                [nzLabel]="role.roleName"
+                *ngFor="let feedback of feedbackSelects"
+                [nzValue]="feedback.feedbackType"
+                [nzLabel]="feedback.feedbackName"
               >
               </nz-option>
             </nz-select>

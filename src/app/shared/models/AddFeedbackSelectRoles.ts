@@ -1,6 +1,7 @@
+import { CandidatesPageFacade } from '../pages/candidates-page/candidates-page.facade';
 import { Role } from './UserRoles';
 
 export interface FeedbackSelectRole {
   feedbackType: number;
-  roleName: keyof typeof Role;
+  feedbackName: string;
 }

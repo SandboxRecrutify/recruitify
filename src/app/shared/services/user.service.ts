@@ -8,6 +8,7 @@ type Roles = keyof typeof Role;
   providedIn: 'root',
 })
 export class UserService {
+  private readonly globalRoleId = 'a6cc25ba-3e12-11ec-9bbc-0242ac130002';
   constructor(private localstorage: LocalStorageService) {}
 
   getUserRoles(): UserRoles[] {
@@ -17,9 +18,28 @@ export class UserService {
       return [];
     }
   }
-  checkRole(role: Roles): boolean {
-    const roles = this.getUserRoles()[0].roles;
-    return roles.includes(role);
+  getGlobalRoles(): Roles[] | undefined {
+    const roles = this.getUserRoles();
+    return roles.find((r) => r.projectId === this.globalRoleId)?.roles;
+  }
+
+  checkGlobalRole(role: Roles | Roles[]): boolean {
+    const globalRoles = this.getGlobalRoles();
+    if (Array.isArray(role)) {
+      let count = 0;
+      role.forEach((r) => {
+        if (globalRoles?.includes(r)) {
+          ++count;
+        }
+      });
+      console.log(count);
+      return count === role.length;
+    } else {
+      if (globalRoles) {
+        return globalRoles.includes(role);
+      }
+    }
+    return false;
   }
 
   checkRoleInProject(projectId: string, role: Roles): boolean {

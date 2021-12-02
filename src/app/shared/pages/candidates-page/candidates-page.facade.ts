@@ -10,6 +10,7 @@ import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
 import { UserService } from './../../services/user.service';
 import { candidatesQueries } from './candidates-page.component';
+import { CreateFeedbackParams } from '../../models/CreateFeedbackParams';
 
 @Injectable()
 export class CandidatesPageFacade {
@@ -57,8 +58,8 @@ export class CandidatesPageFacade {
     Candidate[]
   >([]);
 
-  isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
-  isManager: boolean = this.userService.checkRole(UserRole.manager);
+  isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
+  isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 
@@ -68,7 +69,11 @@ export class CandidatesPageFacade {
     private projectsService: ProjectsService
   ) {}
 
-  getProjectData$(projectId: string): Observable<Project> {
+  createFeedback$(params:CreateFeedbackParams){
+    return this.candidatesService.createFeedback$(params)
+  }
+
+ getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
   }
 
