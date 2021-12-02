@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
@@ -9,13 +10,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DropdownMenuComponent implements OnInit {
   @Input() menuVisible: any;
+  @Input() projectId!: string;
+
   isReasonSelectVisible: boolean = false;
+
   selectedStatus: string = '';
   selectedReason: string = '';
 
+  testResult: string = '';
+
+  setOfCandidatesId: Set<string> = new Set();
+
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private http: HttpClient
   ) {}
 
   isRecruiter: boolean = this.candidatesPageFacade.isRecruiter;
@@ -25,7 +34,32 @@ export class DropdownMenuComponent implements OnInit {
   candidateStatusesForManager: string[] =
     this.candidatesPageFacade.candidateStatusesForManager;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.candidatesPageFacade.checkedCandidatesIdSet$.subscribe((response) => {
+      this.setOfCandidatesId = response;
+    });
+  }
+
+  testResultSubmit() {
+    if (this.setOfCandidatesId.size) {
+      const reqBody = {
+        rating: this.testResult,
+        candidatesIds: [...this.setOfCandidatesId],
+        projectId: this.projectId,
+      };
+      this.http
+        .put(
+          `testrecruitifytest.herokuapp.com/api/candidates/bulk/test_feedbacks?projectId=${this.projectId}`,
+          { reqBody }
+        )
+        .subscribe((response) => {
+          console.log(response);
+        });
+
+      this.testResult = '';
+      this.message.success('Test result has been successfully updated');
+    }
+  }
 
   setReasonVisibility(event: any) {
     console.log(event.target);
@@ -38,15 +72,35 @@ export class DropdownMenuComponent implements OnInit {
     console.log(value);
   }
 
-  submitStatus() {
-    this.selectedStatus ? this.printStatusSubmitMessage('success') : null;
-    this.selectedStatus = '';
+  statusSubmit() {
+    let status;
+    if (this.selectedStatus === 'Accepted') {
+      status = 0;
+    } else if (this.selectedStatus === 'Denied') {
+      status = 1;
+    } else {
+      status = 2;
+    }
+
+    const reqBody = {
+      status: status,
+      reason: this.selectedReason,
+      candidatesIds: [...this.setOfCandidatesId],
+      projectId: this.projectId,
+    };
+    this.http
+      .put(
+        `testrecruitifytest.herokuapp.com/api/candidates/bulk/test_feedbacks?projectId=${this.projectId}`,
+        { reqBody }
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    this.selectedStatus;
     this.selectedReason = '';
     this.isReasonSelectVisible = false;
-  }
-
-  printStatusSubmitMessage(type: string): void {
-    this.message.create(type, `Status was successfully set`);
+    this.message.success('Test result has been successfully updated');
   }
 
   printEmailModal() {

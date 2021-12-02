@@ -41,7 +41,10 @@
       <div class="candidates_filter-btn" (click)="openDrawer()"></div>
     </div>
   </div>
-  <app-dropdown-menu *ngIf="menuVisible"></app-dropdown-menu>
+  <app-dropdown-menu
+    *ngIf="menuVisible"
+    [projectId]="currentProjectId"
+  ></app-dropdown-menu>
   <app-candidates-table
     [isLoading]="isLoading"
     [currentProjectId]="currentProjectId"

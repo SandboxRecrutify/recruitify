@@ -53,10 +53,11 @@ export class CandidatesPageFacade {
   ];
   candidateStatusesForManager = ['Accepted', 'Denied', 'Waiting list'];
 
-  // candidateList$ = this.candidatesService.getCandidates();
   candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<
     Candidate[]
   >([]);
+
+  checkedCandidatesIdSet$ = new BehaviorSubject(new Set<string>());
 
   isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
   isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
@@ -69,11 +70,11 @@ export class CandidatesPageFacade {
     private projectsService: ProjectsService
   ) {}
 
-  createFeedback$(params:CreateFeedbackParams){
-    return this.candidatesService.createFeedback$(params)
+  createFeedback$(params: CreateFeedbackParams) {
+    return this.candidatesService.createFeedback$(params);
   }
 
- getProjectData$(projectId: string): Observable<Project> {
+  getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
   }
 

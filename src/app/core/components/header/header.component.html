@@ -22,6 +22,7 @@
               ></use>
             </svg>
           </a>
+          <!-- *ngIf="isAdmin" -->
           <a
             class="menu_link"
             [routerLink]="['/', 'candidates']"
@@ -30,13 +31,13 @@
             nzPopoverContent="Candidates"
             nzPopoverPlacement="bottom"
           >
-            <!-- <svg class="menu_icon" *ngIf="isAdmin"> -->
             <svg class="menu_icon">
               <use
                 xlink:href="/assets/images/nav-icons/navSprite.svg#candidates"
               ></use>
             </svg>
           </a>
+          <!-- *ngIf="isInterviewer" -->
           <a
             class="menu_link"
             [routerLink]="['/', 'calendar']"
@@ -53,7 +54,7 @@
           </a>
         </div>
         <div class="menu_user">
-          <p class="menu_user-name">{{ user?.email }}</p>
+          <p class="menu_user-name">{{ user?.name }}</p>
           <button
             nz-popconfirm
             nzPopconfirmTitle="Are you sure to logout?"

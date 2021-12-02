@@ -11,6 +11,9 @@ import { UserRole } from 'src/app/shared/models/UserRole';
 })
 export class HeaderComponent implements OnInit {
   isAdmin: boolean = this.userService.checkGlobalRole(UserRole.admin);
+  isInterviewer: boolean = this.userService.checkGlobalRole(
+    UserRole.interviewer
+  );
   user: User | undefined;
   constructor(private appFacade: AppFacade, private userService: UserService) {}
 

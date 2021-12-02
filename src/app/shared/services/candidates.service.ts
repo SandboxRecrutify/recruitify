@@ -38,4 +38,8 @@ export class CandidatesService extends ApiService {
   ): Observable<Candidate> {
     return super.post({ path: `?projectId=${projectId}` }, candidate);
   }
+
+  setTestResult() {
+    // return super.put()
+  }
 }

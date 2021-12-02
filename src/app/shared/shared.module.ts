@@ -85,7 +85,8 @@ import { AddFeedbackModalComponent } from './pages/profile-page/add-feedback-mod
 import { SendEmailModalComponent } from './pages/candidates-page/send-email-modal/send-email-modal.component';
 import { FinishPageComponent } from './pages/finish-page/finish-page.component';
 import { DropItemComponent } from './pages/calendar-page/drop-item/drop-item.component';
-
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,8 @@ import { DropItemComponent } from './pages/calendar-page/drop-item/drop-item.com
     NzPopconfirmModule,
     DragulaModule.forRoot(),
     NzSpinModule,
+    NzTagModule,
+    NzInputNumberModule,
   ],
   exports: [RatingStarsComponent, EnumToArrayPipe],
   providers: [
