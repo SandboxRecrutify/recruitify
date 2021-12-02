@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesService } from './../../shared/services/candidates.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
@@ -18,7 +20,7 @@ import { PrimarySkill } from 'src/app/shared/models/Project';
 export class FillFormComponent implements OnInit {
   bestTimeToContact: number[] = this.fillFormFacade.bestTimeToContact;
   currentProjectSkills!: PrimarySkill[];
-  currnetProjectId!: string;
+  currentProjectId!: string;
   englishLevel$: Observable<any>;
   isLoading: boolean = false;
 
@@ -38,8 +40,7 @@ export class FillFormComponent implements OnInit {
     country: ['', Validators.required],
     englishLevel: ['', Validators.required],
     projectLanguage: ['', Validators.required],
-    primarySkill: ['', Validators.required],
-    // primarySkillId: ['', Validators.required],
+    primarySkillId: ['', Validators.required],
     goingToExadel: ['', Validators.required],
     additionalInfo: [''],
     additionalQuestions: [''],
@@ -61,17 +62,32 @@ export class FillFormComponent implements OnInit {
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
     private candidatesService: CandidatesService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private http: HttpClient
   ) {
     this.englishLevel$ = fillFormFacade.englishLevel$;
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.currnetProjectId = params.id;
+      this.currentProjectId = params.id;
       this.projectsService.getProjectById(params.id).subscribe((response) => {
         this.currentProjectSkills = response.primarySkills;
       });
+
+      // this.http
+      //   .get(
+      //     'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+      //   )
+      //   .pipe(map((d: any) => d.value))
+      //   .subscribe((response) => {
+      //     const currentProject = response.find((project: any) => {
+      //       return project.id === params.id;
+      //     });
+      //     this.currentProjectSkills = currentProject.primarySkills;
+      //     console.log(currentProject);
+      //     console.log(this.currentProjectSkills);
+      //   });
     });
   }
 
@@ -80,6 +96,8 @@ export class FillFormComponent implements OnInit {
       this.contactFields.push(1);
     }
   }
+
+  requestError: boolean = false;
 
   submitForm() {
     console.log(this.candidateForm);
@@ -98,13 +116,14 @@ export class FillFormComponent implements OnInit {
     if (this.candidateForm.valid) {
       this.isLoading = true;
       this.candidatesService
-        .createCandidate$(candidateToSend, this.currnetProjectId)
+        .createCandidate$(candidateToSend, this.currentProjectId)
         .subscribe(
           (response) => {
             console.log(response);
             this.isLoading = false;
           },
           () => {
+            this.requestError = true;
             this.message.error('Something went wrong :(');
             this.isLoading = false;
           }

@@ -1,3 +1,5 @@
+import { CalendarForRecruitersComponent } from './shared/pages/calendar-page/calendar-for-recruiters/calendar-for-recruiters.component';
+import { CalendarForInterviewersComponent } from './shared/pages/calendar-page/calendar-for-interviewers/calendar-for-interviewers.component';
 import { InternshipsComponent } from './shared/pages/internships/internships.component';
 import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NgModule } from '@angular/core';
@@ -24,9 +26,9 @@ const mainRouter: Routes = [
     component: LoginPageComponent,
     canActivate: [AuthGuard],
   },
-  { path: paths.start, component: StartPageComponent }, //
-  { path: paths.internships, component: InternshipsComponent }, //
-  { path: `${paths.fillForm}/:id`, component: FillFormComponent }, //
+  { path: paths.start, component: StartPageComponent },
+  { path: paths.internships, component: InternshipsComponent },
+  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
   { path: paths.finish, component: FinishPageComponent },
   {
     path: paths.projects,
@@ -50,11 +52,17 @@ const mainRouter: Routes = [
   },
   {
     path: paths.calendar,
-    component: CalendarPageComponent,
+    component: CalendarForInterviewersComponent,
+    // component: CalendarPageComponent,
     canActivate: [AppGuard],
   },
   {
-    //
+    path: paths.calendarRecruiter,
+    component: CalendarForRecruitersComponent,
+    // component: CalendarPageComponent,
+    canActivate: [AppGuard],
+  },
+  {
     path: paths.fof,
     component: FourOFourComponent,
   },
@@ -80,9 +88,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
-  { path: paths.start, component: StartPageComponent },
-  { path: paths.internships, component: InternshipsComponent },
-  { path: `${paths.fillForm}/:id`, component: FillFormComponent },
+  // { path: paths.start, component: StartPageComponent },
+  // { path: paths.internships, component: InternshipsComponent },
+  // { path: `${paths.fillForm}/:id`, component: FillFormComponent },
 ];
 
 @NgModule({

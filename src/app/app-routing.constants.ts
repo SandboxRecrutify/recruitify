@@ -13,4 +13,5 @@ export const paths = {
   rest: '**',
   slash: '/',
   calendar: 'calendar',
+  calendarRecruiter: 'calendar-recruiter',
 };

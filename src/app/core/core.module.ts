@@ -1,3 +1,4 @@
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MainLayoutFacade } from './main-layout/main-layout.facade';
 
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzSelectModule } from 'ng-zorro-antd/select'
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
@@ -33,6 +34,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzSelectModule,
     NzRadioModule,
     NzPopconfirmModule,
+    NzPopoverModule,
   ],
   providers: [MainLayoutFacade],
 })

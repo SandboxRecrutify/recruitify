@@ -24,9 +24,9 @@ export class CandidatesPageFacade {
   ];
 
   declineReasons = [
-    'Bad feedback from the Recruiter',
-    'Bad feedback from the Interviewer',
-    'Bad feedback from the Mentor',
+    "Bad Recruiter's feedback",
+    "Bad Interviewer's feedback",
+    "Bad Mentor's feedback",
     'Wrong location',
     'Russian language knowledge',
     'Bad test result',
@@ -50,10 +50,12 @@ export class CandidatesPageFacade {
     'TechInterviewSecondStep',
     'Mentor',
   ];
-  candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
+  candidateStatusesForManager = ['Accepted', 'Denied', 'Waiting list'];
 
   // candidateList$ = this.candidatesService.getCandidates();
-  candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<Candidate[]>([]);
+  candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<
+    Candidate[]
+  >([]);
 
   isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
   isManager: boolean = this.userService.checkRole(UserRole.manager);
@@ -66,15 +68,14 @@ export class CandidatesPageFacade {
     private projectsService: ProjectsService
   ) {}
 
- getProjectData$(projectId: string): Observable<Project> {
+  getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
   }
-
 
   getProjectCandidates$(filters?: candidatesQueries): Observable<Candidate[]> {
     return this.candidatesService.getCandidatesByProjectId(<QueryParams>{
       odata: {
-        projectId: filters?.id
+        projectId: filters?.id,
       },
     });
   }
@@ -84,23 +85,23 @@ export class CandidatesPageFacade {
       property: filters?.query,
       value: `contains(tolower(name), '${filters?.query}') or contains(tolower(surname), '${filters?.query}')`,
     };
-    const candidatesSort = filters?.orderBy ? {
-      names: [filters.orderBy.map(el => `${el.property} ${el.order}`)],
-      // order: [filters.orderBy.map(el => `${el.order}`)]
-    } : {}
-    const filter = [searchText]
-    console.log(candidatesSort)
+    const candidatesSort = filters?.orderBy
+      ? {
+          names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
+          // order: [filters.orderBy.map(el => `${el.order}`)]
+        }
+      : {};
+    const filter = [searchText];
+    console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {
           orderby: candidatesSort,
-          filter
+          filter,
         },
       })
-      .subscribe(
-        (candidates) => {
-          this.candidatesList$.next(candidates);
-        }
-      );
+      .subscribe((candidates) => {
+        this.candidatesList$.next(candidates);
+      });
   }
 }

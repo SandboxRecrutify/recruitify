@@ -1,5 +1,7 @@
-<div class="menu" *ngIf="isRecruiter || isManager">
-  <div class="menu_email" *ngIf="isRecruiter">
+<!-- *ngIf="isRecruiter || isManager" -->
+<div class="menu">
+  <!-- *ngIf="isRecruiter" -->
+  <div class="menu_email">
     <button
       nz-button
       nzSize="small"
@@ -9,7 +11,8 @@
       Send test task
     </button>
   </div>
-  <div class="menu_test" *ngIf="isRecruiter">
+  <!-- *ngIf="isRecruiter" -->
+  <div class="menu_test">
     <button nz-button nzSize="small" nzType="primary">Set test result</button>
     <input nz-input nzSize="small" class="menu_test-input" />
   </div>
@@ -30,11 +33,12 @@
     </nz-select>
 
     <ng-template #selectForManager>
+      <!-- *ngIf="isManager" -->
       <nz-select
+        nzSize="small"
         class="menu_status-select"
         id="status"
         nzPlaceHolder="Set status"
-        *ngIf="isManager"
         [(ngModel)]="selectedStatus"
         (ngModelChange)="setReasonSelectVisibility($event)"
       >
@@ -44,11 +48,13 @@
           nzLabel="{{ status }}"
         ></nz-option>
       </nz-select>
+      <!-- *ngIf="isManager && isReasonSelectVisible" -->
       <nz-select
         class="menu_status-select"
         id="reason"
         nzPlaceHolder="Set reason"
-        *ngIf="isManager && isReasonSelectVisible"
+        nzSize="small"
+        *ngIf="isReasonSelectVisible"
         [(ngModel)]="selectedReason"
       >
         <nz-option
