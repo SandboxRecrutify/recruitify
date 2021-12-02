@@ -1,5 +1,5 @@
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -62,11 +62,16 @@ export abstract class ApiService {
     );
   }
 
-  post<T, B>(params: QueryParams, body: B): Observable<T> {
+  post<T, B>(
+    params: QueryParams,
+    body: B,
+    options: { headers: { [header: string]: string } } = {} as any
+  ): Observable<T> {
     return this.wrapRequest<T>(
       this.http.post<T>(
         this.getApiUrl(params) + this.getQueryOptions(params),
-        body
+        body,
+        options
       ),
       CREATE
     );
