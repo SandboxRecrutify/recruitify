@@ -369,7 +369,10 @@
 
       <nz-form-item style="position: relative" class="btn">
         <small
-          *ngIf="isAnyErrorInForm"
+          *ngIf="
+            (isAnyErrorInForm && candidateForm.untouched) ||
+            (candidateForm.invalid && candidateForm.touched)
+          "
           style="position: absolute; top: -17px; color: #ff4d4f"
         >
           Please, fill in all required fields
