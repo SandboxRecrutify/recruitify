@@ -1,7 +1,7 @@
 <div
   (mousedown)="getItemDay()"
   [ngClass]="{
-    'time-grid_item--last': day < today,
-    'time-grid_item': day >= today
+    'time-grid_item--last': day < yesterday || isFuture,
+    'time-grid_item': day >= today || !isFuture
   }"
 ></div>

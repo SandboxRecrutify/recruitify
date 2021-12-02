@@ -228,14 +228,14 @@
             <nz-form-label nzNoColon nzRequired>Primary skill</nz-form-label>
             <nz-form-control [nzErrorTip]="requiredError">
               <nz-select
-                formControlName="primarySkill"
+                formControlName="primarySkillId"
                 nzRequired
                 nzAllowClear
                 nzPlaceHolder="Choose your Primary skill"
                 required
               >
                 <nz-option
-                  [nzValue]="{ id: primarySkill.id }"
+                  [nzValue]="primarySkill.id"
                   *ngFor="let primarySkill of currentProjectSkills"
                   [nzLabel]="primarySkill.name"
                 ></nz-option>
@@ -369,7 +369,10 @@
 
       <nz-form-item style="position: relative" class="btn">
         <small
-          *ngIf="isAnyErrorInForm"
+          *ngIf="
+            (isAnyErrorInForm && candidateForm.untouched) ||
+            (candidateForm.invalid && candidateForm.touched)
+          "
           style="position: absolute; top: -17px; color: #ff4d4f"
         >
           Please, fill in all required fields
@@ -380,7 +383,9 @@
           nz-button
           (click)="submitForm()"
           [nzLoading]="isLoading"
-          [routerLink]="this.candidateForm.valid ? ['/finish'] : null"
+          [routerLink]="
+            this.candidateForm.valid && !requestError ? ['/finish'] : null
+          "
         >
           Submit
         </button>

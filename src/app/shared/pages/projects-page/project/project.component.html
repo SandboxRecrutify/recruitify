@@ -1,9 +1,10 @@
 <nz-card
   class="project-card"
   [nzTitle]="titleTemplate"
-  [nzExtra]="extraTemplate"
   [nzHoverable]="true"
+  [ngClass]="{ closedProject: !card.isActive }"
 >
+  <!-- [nzExtra]="extraTemplate" -->
   <div class="project-info">
     <div class="description">
       <p class="skills">
@@ -35,22 +36,23 @@
   nzPlacement="right"
   nzTitle="Project staff"
   (nzOnClose)="switchStaff()"
+  nzWidth="350px"
 >
   <ng-container *nzDrawerContent>
     <nz-collapse nzGhost>
-      <nz-collapse-panel [nzHeader]="'Managers'" nzActive="isVisible">
+      <nz-collapse-panel [nzHeader]="Managers" nzActive="isVisible">
         <p *ngFor="let panel of card.managers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Interviewers'" nzActive="isVisible">
+      <nz-collapse-panel [nzHeader]="Interviewers" nzActive="isVisible">
         <p *ngFor="let panel of card.interviewers">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Recruiters'" nzActive="isVisible">
+      <nz-collapse-panel [nzHeader]="Recruiters" nzActive="isVisible">
         <p *ngFor="let panel of card.recruiters">{{ panel.userName }}</p>
       </nz-collapse-panel>
 
-      <nz-collapse-panel [nzHeader]="'Mentors'" nzActive="isVisible">
+      <nz-collapse-panel [nzHeader]="Mentors" nzActive="isVisible">
         <p *ngFor="let panel of card.mentors">{{ panel.userName }}</p>
       </nz-collapse-panel>
     </nz-collapse>
@@ -58,9 +60,30 @@
 </nz-drawer>
 
 <ng-template #extraTemplate>
-  <button nz-button nzType="primary" (click)="switchStaff()">View Staff</button>
+  <button nz-button nzType="default" nzSize="small" (click)="switchStaff()">
+    View Staff
+  </button>
 </ng-template>
 
 <ng-template #titleTemplate>
-  <p class="card-title">{{ card.name }}</p>
+  <div class="card_heading">
+    <p class="card-title">{{ card.name }}</p>
+
+    <button nz-button nzType="default" nzSize="small" (click)="switchStaff()">
+      View Staff
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #Managers>
+  <span style="font-weight: 600">Managers</span>
+</ng-template>
+<ng-template #Interviewers>
+  <span style="font-weight: 600">Interviewers</span>
+</ng-template>
+<ng-template #Recruiters>
+  <span style="font-weight: 600">Recruiters</span>
+</ng-template>
+<ng-template #Mentors>
+  <span style="font-weight: 600">Mentors</span>
 </ng-template>

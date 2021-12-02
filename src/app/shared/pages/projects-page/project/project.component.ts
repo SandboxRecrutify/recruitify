@@ -20,7 +20,9 @@ export class ProjectComponent implements OnInit {
     private projectsFacade: ProjectsPageFacade
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.card);
+  }
 
   showCandidates() {
     this.router.navigate([paths.candidates]);

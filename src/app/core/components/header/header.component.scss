@@ -1,5 +1,6 @@
 @use "../../../../globals/" as *;
 .header {
+  position: relative;
   background: #ffffff;
   color: $primaryColor;
   .logo {
@@ -61,6 +62,32 @@
       width: 20px;
       height: 20px;
       stroke: #949494;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .menu_user-name {
+      display: none;
+    }
+
+    .menu {
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .logo {
+      display: none;
+    }
+
+    &-container {
+      justify-content: center;
+    }
+
+    .logut_btn {
+      position: absolute;
+      top: 20px;
+      right: 15px;
     }
   }
 }

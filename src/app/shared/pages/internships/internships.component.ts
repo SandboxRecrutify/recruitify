@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { QueryParams } from './../../services/api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { Project } from 'src/app/shared/models/Project';
@@ -12,14 +14,29 @@ import * as dayjs from 'dayjs';
 export class InternshipsComponent implements OnInit {
   activeProjects!: Project[];
 
-  constructor(private projectsService: ProjectsService) {}
+  constructor(
+    private projectsService: ProjectsService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    this.projectsService
-      .getProjects(<QueryParams>{ odata: { status } })
+    this.http
+      .get(
+        'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+      )
+      .pipe(map((d: any) => d.value))
       .subscribe((response) => {
-        this.activeProjects = response.filter((project) => project.isActive);
+        this.activeProjects = response.filter(
+          (project: any) => project.isActive
+        );
+        console.log(this.activeProjects);
       });
+
+    // this.projectsService
+    //   .getProjects(<QueryParams>{ odata: { status } })
+    //   .subscribe((response) => {
+    //     this.activeProjects = response.filter((project) => project.isActive);
+    //   });
   }
 
   getProjectDuration(start: string | Date, end: string | Date) {
