@@ -28,16 +28,8 @@ export class TimeGridItemComponent implements OnInit {
     const itemMin = +itemTimeArr[1];
 
     const itemDate = dayjs(this.day);
-    this.isFuture = itemDate.isSame(dayjs(), 'day') && currHour > itemHour;
+    this.isFuture = itemDate.isSame(dayjs(), 'day') && currHour + 1 > itemHour;
     console.log(this.isFuture);
-
-    // console.log(this.time[0].split(':').map((item) => +item));
-    // console.log(this.time.split(':').map((item) => +item));
-    // const date = dayjs();
-    // const currHour = date.hour().toString().padStart(2, '0');
-    // const currMin = date.minute().toString().padStart(2, '0');
-    // const currTime = `${currHour}:${currMin}`;
-    // console.log(currTime);
   }
 
   getItemDay() {

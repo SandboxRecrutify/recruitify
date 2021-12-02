@@ -2,9 +2,9 @@
   <div class="header">
     <div class="header-container">
       <div class="logo">
-        <a routerLink="/"
-          ><img src="/assets/images/RecruitifyLogo.png" alt="logo"
-        /></a>
+        <a routerLink="/">
+          <img src="/assets/images/RecruitifyLogo.png" alt="logo" />
+        </a>
       </div>
       <div class="menu">
         <div class="menu_nav">
@@ -12,6 +12,9 @@
             class="menu_link"
             [routerLink]="['/', 'projects']"
             routerLinkActive="active"
+            nz-popover
+            nzPopoverContent="Projects"
+            nzPopoverPlacement="bottom"
           >
             <svg class="menu_icon">
               <use
@@ -23,6 +26,9 @@
             class="menu_link"
             [routerLink]="['/', 'candidates']"
             routerLinkActive="active"
+            nz-popover
+            nzPopoverContent="Candidates"
+            nzPopoverPlacement="bottom"
           >
             <!-- <svg class="menu_icon" *ngIf="isAdmin"> -->
             <svg class="menu_icon">
@@ -35,6 +41,9 @@
             class="menu_link"
             [routerLink]="['/', 'calendar']"
             routerLinkActive="active"
+            nz-popover
+            nzPopoverContent="Calendar"
+            nzPopoverPlacement="bottom"
           >
             <svg class="menu_icon">
               <use
