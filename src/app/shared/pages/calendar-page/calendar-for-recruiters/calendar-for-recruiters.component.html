@@ -29,8 +29,8 @@
     nzType="primary"
     nzSize="small"
     nz-popconfirm
-    nzPopconfirmTitle="Сonfirm sending email to (n) candidates"
-    nzPopconfirmPlacement="right"
+    [nzPopconfirmTitle]="popTitleEmail"
+    nzPopconfirmPlacement="leftTop"
     (nzOnConfirm)="onSaveConfirm()"
   >
     Save
@@ -43,8 +43,8 @@
     nz-button
     nzType="link"
     nz-popconfirm
-    nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
-    nzPopconfirmPlacement="left"
+    [nzPopconfirmTitle]="popTitle"
+    nzPopconfirmPlacement="bottomLeft"
     (nzOnConfirm)="onPreviousDayButtonClick()"
     ><<<</a
   >
@@ -55,9 +55,22 @@
     nz-button
     nzType="link"
     nz-popconfirm
-    nzPopconfirmTitle="Are you sure? Your last changes will not be saved"
-    nzPopconfirmPlacement="left"
+    [nzPopconfirmTitle]="popTitle"
+    nzPopconfirmPlacement="bottomRight"
     (nzOnConfirm)="onNextDayButtonClick()"
     >>>></a
   >
+</ng-template>
+
+<ng-template #popTitle>
+  <i nz-icon nzType="warning" nzTheme="outline"></i>
+  <p style="margin: 0; padding-left: 20px">Are you sure?</p>
+  <small>Your last changes will not be saved</small>
+</ng-template>
+
+<ng-template #popTitleEmail>
+  <i nz-icon nzType="check" nzTheme="outline"></i>
+  <p style="margin: 0; padding-left: 20px">
+    Сonfirm sending email to {{ candidatesToSendEmail.length }} candidates
+  </p>
 </ng-template>
