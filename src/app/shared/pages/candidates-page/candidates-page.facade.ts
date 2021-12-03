@@ -98,7 +98,7 @@ export class CandidatesPageFacade {
         }
       : {};
     const filter = [searchText];
-    console.log(candidatesSort);
+    // console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {

@@ -139,7 +139,7 @@ export abstract class ApiService {
     );
 
     url += this.buildODataPath(this.buildFilterParams(filter), 'filter');
-    console.log(url);
+    // console.log(url);
     return url;
   }
 
@@ -153,7 +153,7 @@ export abstract class ApiService {
           ? el.value
           : undefined;
       });
-    console.log(filterParams);
+    // console.log(filterParams);
     return filterParams?.filter((el) => !!el).join(' and ');
   }
 

@@ -98,7 +98,7 @@ export class CandidatesTableComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams) {
-    console.log(params);
+    // console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
     const currentSort: CandidatesOrderBy[] = sort
       .filter((item) => item.value !== null)
@@ -106,7 +106,7 @@ export class CandidatesTableComponent implements OnInit {
         property: el.key,
         order: el.value !== null ? el.value.slice(0, -3) : '',
       }));
-    console.log(currentSort);
+    // console.log(currentSort);
     const filters: CandidatesFilters = {
       orderBy: currentSort,
     };

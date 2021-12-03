@@ -90,7 +90,7 @@ export class FillFormComponent implements OnInit {
   }
 
   onAddClick() {
-    if (this.contactFields.length < 5) {
+    if (this.contactFields.length < 4) {
       this.contactFields.push(1);
     }
   }

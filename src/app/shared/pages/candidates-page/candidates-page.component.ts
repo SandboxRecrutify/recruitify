@@ -37,9 +37,6 @@ export class CandidatesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.candidatesPageFacade.isRecruiter);
-    console.log(this.candidatesPageFacade.isManager);
-
     this.route.params.subscribe((params: Params) => {
       this.currentProjectId = params.id;
       if (params.id) {

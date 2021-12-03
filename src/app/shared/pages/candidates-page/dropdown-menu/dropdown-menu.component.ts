@@ -1,3 +1,5 @@
+import { CandidatesService } from './../../../services/candidates.service';
+import { CandidateService } from './../../../services/candidate.service';
 import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesPageFacade } from './../candidates-page.facade';
@@ -12,19 +14,19 @@ export class DropdownMenuComponent implements OnInit {
   @Input() menuVisible: any;
   @Input() projectId!: string;
 
-  isReasonSelectVisible: boolean = false;
-
   selectedStatus: string = '';
   selectedReason: string = '';
+  isReasonSelectVisible: boolean = false;
 
   testResult: string = '';
+  daysForTestTask: string = '';
 
   setOfCandidatesId: Set<string> = new Set();
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
-    private message: NzMessageService,
-    private http: HttpClient
+    private candidatesService: CandidatesService,
+    private message: NzMessageService
   ) {}
 
   isRecruiter: boolean = this.candidatesPageFacade.isRecruiter;
@@ -40,6 +42,17 @@ export class DropdownMenuComponent implements OnInit {
     });
   }
 
+  setReasonSelectVisibility(value: any) {
+    value === 'Denied'
+      ? (this.isReasonSelectVisible = true)
+      : (this.isReasonSelectVisible = false);
+    console.log(value);
+  }
+
+  // printEmailModal() {
+  //   this.candidatesPageFacade.isEmailModalVisible$.next(true);
+  // }
+
   testResultSubmit() {
     if (this.setOfCandidatesId.size) {
       const reqBody = {
@@ -47,11 +60,9 @@ export class DropdownMenuComponent implements OnInit {
         candidatesIds: [...this.setOfCandidatesId],
         projectId: this.projectId,
       };
-      this.http
-        .put(
-          `testrecruitifytest.herokuapp.com/api/candidates/bulk/test_feedbacks?projectId=${this.projectId}`,
-          { reqBody }
-        )
+
+      this.candidatesService
+        .setTestResult(this.projectId, { ...reqBody })
         .subscribe((response) => {
           console.log(response);
         });
@@ -59,17 +70,6 @@ export class DropdownMenuComponent implements OnInit {
       this.testResult = '';
       this.message.success('Test result has been successfully updated');
     }
-  }
-
-  setReasonVisibility(event: any) {
-    console.log(event.target);
-  }
-
-  setReasonSelectVisibility(value: any) {
-    value === 'Denied'
-      ? (this.isReasonSelectVisible = true)
-      : (this.isReasonSelectVisible = false);
-    console.log(value);
   }
 
   statusSubmit() {
@@ -88,11 +88,9 @@ export class DropdownMenuComponent implements OnInit {
       candidatesIds: [...this.setOfCandidatesId],
       projectId: this.projectId,
     };
-    this.http
-      .put(
-        `testrecruitifytest.herokuapp.com/api/candidates/bulk/test_feedbacks?projectId=${this.projectId}`,
-        { reqBody }
-      )
+
+    this.candidatesService
+      .setStatus(this.projectId, { ...reqBody })
       .subscribe((response) => {
         console.log(response);
       });
@@ -101,9 +99,5 @@ export class DropdownMenuComponent implements OnInit {
     this.selectedReason = '';
     this.isReasonSelectVisible = false;
     this.message.success('Test result has been successfully updated');
-  }
-
-  printEmailModal() {
-    this.candidatesPageFacade.isEmailModalVisible$.next(true);
   }
 }
