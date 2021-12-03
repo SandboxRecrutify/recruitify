@@ -16,9 +16,9 @@ export class CandidatesService extends ApiService {
     return super.get(filters).pipe(map((d: any) => d.value));
   }
 
-  getCandidatesByProjectId(filters: QueryParams): Observable<Candidate[]> {
-    return super.get(filters).pipe(map((d: any) => d.value));
-  }
+  // getCandidatesByProjectId(filters: QueryParams): Observable<Candidate[]> {
+  //   return super.get(filters).pipe(map((d: any) => d.value));
+  // }
 
   createCandidate$(
     candidate: Candidate,
