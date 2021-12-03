@@ -70,19 +70,12 @@ export class CandidatesPageFacade {
     private projectsService: ProjectsService
   ) {}
 
-<<<<<<< HEAD
-  createFeedback$(params: CreateFeedbackParams) {
-    return this.candidatesService.createFeedback$(params);
-  }
-
-=======
->>>>>>> main
   getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
   }
 
-  createFeedback$(params:CreateFeedbackParams){
-    return this.candidatesService.createFeedback$(params)
+  createFeedback$(params: CreateFeedbackParams) {
+    return this.candidatesService.createFeedback$(params);
   }
 
   getAllCandidates(filters?: candidatesQueries) {
@@ -111,30 +104,23 @@ export class CandidatesPageFacade {
       value: `contains(tolower(name), '${filters?.query}') or contains(tolower(surname), '${filters?.query}')`,
     };
     const candidatesSort = filters?.orderBy
-    ? {
+      ? {
           names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
         }
-<<<<<<< HEAD
       : {};
-    const filter = [searchText];
-    // console.log(candidatesSort);
-=======
-        : {};
-        const filter = [searchText, location, englishLevel, status, primarySkill];
-        console.log(candidatesSort);
->>>>>>> main
+    const filter = [searchText, location, englishLevel, status, primarySkill];
+    console.log(candidatesSort);
     this.candidatesService
-    .getCandidates(<QueryParams>{
-      odata: {
-        projectId: filters?.id,
-        orderby: candidatesSort,
-        filter,
-      },
-    })
-    .subscribe((candidates) => {
-      this.candidatesList$.next(candidates);
-    });
-
+      .getCandidates(<QueryParams>{
+        odata: {
+          projectId: filters?.id,
+          orderby: candidatesSort,
+          filter,
+        },
+      })
+      .subscribe((candidates) => {
+        this.candidatesList$.next(candidates);
+      });
   }
 }
 
