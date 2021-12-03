@@ -38,4 +38,22 @@ export class CandidatesService extends ApiService {
   ): Observable<Candidate> {
     return super.post({ path: `?projectId=${projectId}` }, candidate);
   }
+
+  setTestResult(projectId: string, body: any) {
+    return super.put(
+      {
+        path: `bulk/test_feedbacks?projectId=${projectId}`,
+      },
+      body
+    );
+  }
+
+  setStatus(projectId: string, body: any) {
+    return super.put(
+      {
+        path: `bulk/update_status_reason?projectId=${projectId}`,
+      },
+      body
+    );
+  }
 }

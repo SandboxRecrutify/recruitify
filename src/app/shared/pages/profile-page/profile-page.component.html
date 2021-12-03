@@ -42,9 +42,14 @@
           <p class="location">
             {{ candidate?.location?.city }}, {{ candidate?.location?.country }}
           </p>
-          <p *ngFor="let contact of candidate?.contacts">
+
+          <p>
+            <span>skype: </span>
+            <a href="#">{{ skypeLogin }}</a>
+          </p>
+          <p *ngFor="let contact of socLinks">
             <span>{{ contact.type }}: </span>
-            <a href="#">{{ contact.value }}</a>
+            <a href="{{ contact.value }}" target="_blank">Link</a>
           </p>
           <p>
             <span>Email:</span>
@@ -75,7 +80,7 @@
             <!-- {{candidate &&  candidateStatuses[candidate?.projectResults?.[0]?.status!] }} -->
           </p>
           <div>
-            <span>Previous projects:</span>
+            <!-- <span>Previous projects:</span> -->
             <!-- TODO map name and link to projects -->
             <!-- <p>{{ candidate?.projectResults ? candidate?.projectResults : "none" }}</p> -->
           </div>

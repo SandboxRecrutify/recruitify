@@ -1,3 +1,6 @@
+import { CandidatesService } from './../../../services/candidates.service';
+import { CandidateService } from './../../../services/candidate.service';
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
@@ -9,12 +12,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DropdownMenuComponent implements OnInit {
   @Input() menuVisible: any;
-  isReasonSelectVisible: boolean = false;
+  @Input() projectId!: string;
+
   selectedStatus: string = '';
   selectedReason: string = '';
+  isReasonSelectVisible: boolean = false;
+
+  testResult: string = '';
+  daysForTestTask: string = '';
+
+  setOfCandidatesId: Set<string> = new Set();
 
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
+    private candidatesService: CandidatesService,
     private message: NzMessageService
   ) {}
 
@@ -25,10 +36,10 @@ export class DropdownMenuComponent implements OnInit {
   candidateStatusesForManager: string[] =
     this.candidatesPageFacade.candidateStatusesForManager;
 
-  ngOnInit(): void {}
-
-  setReasonVisibility(event: any) {
-    console.log(event.target);
+  ngOnInit(): void {
+    this.candidatesPageFacade.checkedCandidatesIdSet$.subscribe((response) => {
+      this.setOfCandidatesId = response;
+    });
   }
 
   setReasonSelectVisibility(value: any) {
@@ -38,18 +49,55 @@ export class DropdownMenuComponent implements OnInit {
     console.log(value);
   }
 
-  submitStatus() {
-    this.selectedStatus ? this.printStatusSubmitMessage('success') : null;
-    this.selectedStatus = '';
+  // printEmailModal() {
+  //   this.candidatesPageFacade.isEmailModalVisible$.next(true);
+  // }
+
+  testResultSubmit() {
+    if (this.setOfCandidatesId.size) {
+      const reqBody = {
+        rating: this.testResult,
+        candidatesIds: [...this.setOfCandidatesId],
+        projectId: this.projectId,
+      };
+
+      this.candidatesService
+        .setTestResult(this.projectId, { ...reqBody })
+        .subscribe((response) => {
+          console.log(response);
+        });
+
+      this.testResult = '';
+      this.message.success('Test result has been successfully updated');
+    }
+  }
+
+  statusSubmit() {
+    let status;
+    if (this.selectedStatus === 'Accepted') {
+      status = 0;
+    } else if (this.selectedStatus === 'Denied') {
+      status = 1;
+    } else {
+      status = 2;
+    }
+
+    const reqBody = {
+      status: status,
+      reason: this.selectedReason,
+      candidatesIds: [...this.setOfCandidatesId],
+      projectId: this.projectId,
+    };
+
+    this.candidatesService
+      .setStatus(this.projectId, { ...reqBody })
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    this.selectedStatus;
     this.selectedReason = '';
     this.isReasonSelectVisible = false;
-  }
-
-  printStatusSubmitMessage(type: string): void {
-    this.message.create(type, `Status was successfully set`);
-  }
-
-  printEmailModal() {
-    this.candidatesPageFacade.isEmailModalVisible$.next(true);
+    this.message.success('Test result has been successfully updated');
   }
 }

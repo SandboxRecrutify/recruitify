@@ -1,7 +1,6 @@
 import { CandidateLocation } from './../../../models/CandidateLocation';
 import { Observable, of } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Component, Input, OnInit } from '@angular/core';
 import { Status } from 'src/app/shared/models/CandidatesStatus';
 import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
 import { PrimarySkill } from 'src/app/shared/models/Project';
@@ -12,17 +11,17 @@ import { Candidate } from './../../../models/Candidate';
 import { UserService } from './../../../services/user.service';
 
 export interface CandidatesTableFilters {
-location?: string []
-date?: (string | Date)[]
-englishLevel?: string[]
-primarySkill?: PrimarySkill[]
-status?: string[]
-test?: number[]
-recruiter?: number[]
-entryInterview?: number[]
-mentor?: number[]
-finalInterview?: number[]
-//englishLevel?: EnglishLevel[] | undefined
+  location?: string[];
+  date?: (string | Date)[];
+  englishLevel?: string[];
+  primarySkill?: PrimarySkill[];
+  status?: string[];
+  test?: number[];
+  recruiter?: number[];
+  entryInterview?: number[];
+  mentor?: number[];
+  finalInterview?: number[];
+  //englishLevel?: EnglishLevel[] | undefined
 }
 @Component({
   selector: 'app-filter-drawer',
@@ -34,31 +33,47 @@ export class FilterDrawerComponent implements OnInit {
   @Input() candidatesList!: Candidate[];
 
   @Output() onCandidatesFilters: EventEmitter<CandidatesTableFilters> =
-  new EventEmitter<CandidatesTableFilters>();
+    new EventEmitter<CandidatesTableFilters>();
 
-  isAdmin = this.userService.checkRole(UserRole.admin);
+  // isAdmin = this.userService.checkRole(UserRole.admin);
+  isAdmin = this.userService.isAdmin();
 
   // englishLevel = Object.entries(EnglishLevel);
-  englishLevel = ['Beginner','PreIntermediate','Intermediate','Advanced','Native']
+  englishLevel = [
+    'Beginner',
+    'PreIntermediate',
+    'Intermediate',
+    'Advanced',
+    'Native',
+  ];
   // status = Object.entries(Status)
-  status = [ 'New','Test','RecruiterInterview','TechInterviewOneStep','TechInterviewSecondStep','Accepted','Declined','WaitingList']
-  rate = [1,2,3,4]
-  test = [1,2,3,4,5,6,7,8,9,10]
+  status = [
+    'New',
+    'Test',
+    'RecruiterInterview',
+    'TechInterviewOneStep',
+    'TechInterviewSecondStep',
+    'Accepted',
+    'Declined',
+    'WaitingList',
+  ];
+  rate = [1, 2, 3, 4];
+  test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   primarySkills: PrimarySkill[] | undefined;
-  locations: string[] | undefined
-  registrationDates: (string | Date)[] | undefined
+  locations: string[] | undefined;
+  registrationDates: (string | Date)[] | undefined;
 
-  locationsSelect: string[] = []
-  registrationDatesSelect: (string | Date)[] = []
+  locationsSelect: string[] = [];
+  registrationDatesSelect: (string | Date)[] = [];
   englishLevelSelect: string[] = [];
-  primarySkillsSelect: PrimarySkill[] = []
-  statusSelect: string[] = []
-  testResultSelect: number[] = []
-  recruiterRateSelect: number[] = []
-  entryInterviewRateSelect: number[] = []
-  mentorRateSelect: number[] = []
-  finalInterviewRateSelect: number[] = []
+  primarySkillsSelect: PrimarySkill[] = [];
+  statusSelect: string[] = [];
+  testResultSelect: number[] = [];
+  recruiterRateSelect: number[] = [];
+  entryInterviewRateSelect: number[] = [];
+  mentorRateSelect: number[] = [];
+  finalInterviewRateSelect: number[] = [];
 
   constructor(
     private userService: UserService,
@@ -67,20 +82,27 @@ export class FilterDrawerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    this.projectsService.getPrimarySkills().subscribe(response => {
-      this.primarySkills = response
-    })
+    this.projectsService.getPrimarySkills().subscribe((response) => {
+      this.primarySkills = response;
+    });
     //to fix by new endpoint
-    this.candidatesPageFacade.candidatesList$.subscribe(response => {
-      this.candidatesList = response
-      if(!this.locations || this.locations.length === 0) {
-        this.locations = [...new Set(this.candidatesList.map(el => `${el.location.country}, ${el.location.city}`))]
+    this.candidatesPageFacade.candidatesList$.subscribe((response) => {
+      this.candidatesList = response;
+      if (!this.locations || this.locations.length === 0) {
+        this.locations = [
+          ...new Set(
+            this.candidatesList.map(
+              (el) => `${el.location.country}, ${el.location.city}`
+            )
+          ),
+        ];
       }
-      if(!this.registrationDates || this.registrationDates.length === 0) {
-        this.registrationDates = [...new Set(this.candidatesList.map(el => el.registrationDate))]
+      if (!this.registrationDates || this.registrationDates.length === 0) {
+        this.registrationDates = [
+          ...new Set(this.candidatesList.map((el) => el.registrationDate)),
+        ];
       }
-    })
+    });
   }
 
   closeDrawer(): void {
@@ -88,20 +110,20 @@ export class FilterDrawerComponent implements OnInit {
   }
 
   onSubmit() {
-const CandidatesTableFilters: CandidatesTableFilters  = {
-  location: this.locationsSelect,
-  date: this.registrationDatesSelect,
-  englishLevel: this.englishLevelSelect,
-  primarySkill: this.primarySkillsSelect,
-  status: this.statusSelect,
-  test: this.testResultSelect,
-  recruiter: this.recruiterRateSelect,
-  entryInterview: this.entryInterviewRateSelect,
-  mentor: this.mentorRateSelect,
-  finalInterview: this.finalInterviewRateSelect
-}
-console.log(CandidatesTableFilters)
-this.onCandidatesFilters.emit(CandidatesTableFilters);
-this.closeDrawer()
+    const CandidatesTableFilters: CandidatesTableFilters = {
+      location: this.locationsSelect,
+      date: this.registrationDatesSelect,
+      englishLevel: this.englishLevelSelect,
+      primarySkill: this.primarySkillsSelect,
+      status: this.statusSelect,
+      test: this.testResultSelect,
+      recruiter: this.recruiterRateSelect,
+      entryInterview: this.entryInterviewRateSelect,
+      mentor: this.mentorRateSelect,
+      finalInterview: this.finalInterviewRateSelect,
+    };
+    console.log(CandidatesTableFilters);
+    this.onCandidatesFilters.emit(CandidatesTableFilters);
+    this.closeDrawer();
   }
 }

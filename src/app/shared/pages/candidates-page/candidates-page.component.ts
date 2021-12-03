@@ -2,7 +2,6 @@ import { CandidatesFilters } from './candidates-table/candidates-table.component
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { paths } from 'src/app/app-routing.constants';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
 import { CandidatesTableFilters } from './filter-drawer/filter-drawer.component';

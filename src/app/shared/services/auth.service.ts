@@ -19,7 +19,9 @@ export class AuthService extends ApiService {
       .set('username', user.email)
       .set('password', user.password)
       .set('grant_type', 'password');
-    return super.post<UserResponse, any>({ login: true }, body.toString());
+    return super.post<UserResponse, any>({ login: true }, body.toString(), {
+      headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+    });
   }
   logout(): Observable<{}> {
     return of({});

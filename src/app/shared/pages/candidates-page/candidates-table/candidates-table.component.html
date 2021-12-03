@@ -89,13 +89,21 @@
       ></td>
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
       <td>
-        <p >
-          {{ candidate.projectResults[0] ? candidate.projectResults[0].primarySkill.name : 'none' }}
+        <p>
+          {{
+            candidate.projectResults[0]
+              ? candidate.projectResults[0].primarySkill.name
+              : "none"
+          }}
         </p>
       </td>
       <td>
         <p>
-          {{ candidate.projectResults[0] ? candidate.projectResults[0].status : 'none' }}
+          {{
+            candidate.projectResults[0]
+              ? candidate.projectResults[0].status
+              : "none"
+          }}
         </p>
       </td>
       <td>
