@@ -89,19 +89,22 @@
       ></td>
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
       <td>
-        <p *ngFor="let skill of candidate.projectResults">
-          {{ skill.primarySkill.name }}
+        <p>
+          {{
+            candidate.projectResults[0]
+              ? candidate.projectResults[0].primarySkill.name
+              : "none"
+          }}
         </p>
       </td>
       <td>
-        <p *ngFor="let status of candidate.projectResults">
-          {{ status.status }}
+        <p>
+          {{
+            candidate.projectResults[0]
+              ? candidate.projectResults[0].status
+              : "none"
+          }}
         </p>
-        <!-- {{
-          candidate.projectResults[0]
-            ? candidateStatuses[candidate.projectResults[0].status]
-            : "none"
-        }} -->
       </td>
       <td>
         {{ getFeedbackRate(candidate, "Test") }}

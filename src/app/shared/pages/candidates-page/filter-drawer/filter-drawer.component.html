@@ -7,17 +7,19 @@
   (nzOnClose)="closeDrawer()"
 >
   <ng-container *nzDrawerContent>
+    <form>
     <div class="drawer-container">
       <div class="drawer-inputs">
         <nz-form-item class="drawer-item">
           <nz-form-control>
-            <!-- [(ngModel)]="tagValue" -->
             <nz-select
               nzSize="small"
               nzMode="tags"
               [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Location"
+              [(ngModel)]="locationsSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
                 *ngFor="let item of locations"
@@ -34,7 +36,9 @@
               nzMode="tags"
               [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Date"
+              nzPlaceHolder="Registration Date"
+              [(ngModel)]="registrationDatesSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
                 *ngFor="let item of registrationDates"
@@ -52,11 +56,13 @@
               [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="English level"
+              [(ngModel)]="englishLevelSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
-                *ngFor="let option of englishLevel | enumToArray"
-                [nzValue]="+option[0]"
-                [nzLabel]="option[1]"
+                *ngFor="let option of englishLevel"
+                [nzValue]="option"
+                [nzLabel]="option"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -68,7 +74,9 @@
               nzMode="tags"
               [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
-              nzPlaceHolder="Skill"
+              nzPlaceHolder="Primary Skills"
+              [(ngModel)]="primarySkillsSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
                 *ngFor="let option of primarySkills"
@@ -86,11 +94,13 @@
               [nzMaxTagCount]="1"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Status"
+              [(ngModel)]="statusSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
-                *ngFor="let option of status | enumToArray"
-                [nzValue]="+option[0]"
-                [nzLabel]="option[1]"
+                *ngFor="let option of status"
+                [nzValue]="option"
+                [nzLabel]="option"
               ></nz-option>
             </nz-select>
           </nz-form-control>
@@ -103,6 +113,8 @@
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Test result"
+              [(ngModel)]="testResultSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option
                 *ngFor="let item of test"
@@ -120,9 +132,11 @@
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Recruiter Feedback"
+              [(ngModel)]="recruiterRateSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
               <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
-                <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+                <nz-rate nzCount="4" [ngModel]="item" [ngModelOptions]="{ standalone: true }" nzDisabled></nz-rate>
               </nz-option>
             </nz-select>
           </nz-form-control>
@@ -135,9 +149,11 @@
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Entry Interview"
+              [(ngModel)]="entryInterviewRateSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
             <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
-              <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+              <nz-rate nzCount="4" [ngModel]="item" [ngModelOptions]="{ standalone: true }" nzDisabled></nz-rate>
             </nz-option>
             </nz-select>
           </nz-form-control>
@@ -150,9 +166,11 @@
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Mentor Feedback"
+              [(ngModel)]="mentorRateSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
             <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
-                <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+                <nz-rate nzCount="4" [ngModel]="item" [ngModelOptions]="{ standalone: true }" nzDisabled></nz-rate>
               </nz-option>
             </nz-select>
           </nz-form-control>
@@ -165,9 +183,11 @@
               [nzMaxTagCount]="2"
               [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
               nzPlaceHolder="Final Interview"
+              [(ngModel)]="finalInterviewRateSelect"
+              [ngModelOptions]="{ standalone: true }"
             >
             <nz-option nzCustomContent *ngFor="let item of rate" [nzValue]="item" [nzLabel]="item">
-              <nz-rate nzCount="4" [ngModel]="item" nzDisabled></nz-rate>
+              <nz-rate nzCount="4" [ngModel]="item" [ngModelOptions]="{ standalone: true }" nzDisabled></nz-rate>
             </nz-option>
             </nz-select>
           </nz-form-control>
@@ -177,12 +197,18 @@
         <button nz-button nzType="primary" nzSize="small" *ngIf="isAdmin">
           Create a report
         </button>
-        <button nz-button nzType="default" nzSize="small">Show results</button>
+        <button nz-button nzType="default" nzSize="small" (click)="onSubmit()">Show results</button>
         <button nz-button nzType="default" nzSize="small">Clear filters</button>
       </div>
     </div>
+  </form>
   </ng-container>
   <ng-template #nzMaxTagPlaceholder let-selectedList
     >+{{ selectedList.length }}
   </ng-template>
 </nz-drawer>
+
+<!--
+*ngFor="let option of englishLevel | enumToArray"
+[nzValue]="+option[0]"
+[nzLabel]="option[1]" -->

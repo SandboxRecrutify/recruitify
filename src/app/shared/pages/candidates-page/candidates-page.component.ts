@@ -4,10 +4,22 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Candidate } from './../../models/Candidate';
 import { CandidatesPageFacade } from './candidates-page.facade';
+import { CandidatesTableFilters } from './filter-drawer/filter-drawer.component';
+import { PrimarySkill } from '../../models/Project';
 
 export interface candidatesQueries extends CandidatesFilters {
   id?: string;
   query?: string;
+  location?: string[];
+  date?: (string | Date)[];
+  englishLevel?: string[];
+  primarySkill?: PrimarySkill[];
+  status?: string[];
+  test?: number[];
+  recruiter?: number[];
+  entryInterview?: number[];
+  mentor?: number[];
+  finalInterview?: number[];
 }
 @Component({
   selector: 'app-candidates-page',
@@ -41,19 +53,13 @@ export class CandidatesPageComponent implements OnInit {
       this.currentProjectId = params.id;
       if (params.id) {
         this.isLoading = true;
-        this.candidatesPageFacade
-          .getProjectCandidates$(<candidatesQueries>{
-            id: params.id,
-          })
-          .subscribe(
-            (candidates) => {
-              this.candidatesList = candidates;
-              this.isLoading = false;
-            },
-            () => {
-              this.isLoading = false;
-            }
-          );
+        this.candidatesPageFacade.getAllCandidates(<candidatesQueries>{
+          id: params.id,
+        });
+        this.candidatesPageFacade.candidatesList$.subscribe((response) => {
+          this.candidatesList = response;
+          this.isLoading = false;
+        });
 
         this.candidatesPageFacade
           .getProjectData$(params.id)
@@ -76,10 +82,26 @@ export class CandidatesPageComponent implements OnInit {
     this.drawerVisible = !this.drawerVisible;
   }
 
-  applyCandidatesFilters(filters: CandidatesFilters) {
-    this.filters = { ...this.filters, ...filters };
+  applyCandidatesFilters(filters: candidatesQueries) {
+    this.filters = { ...this.filters, ...filters, id: this.currentProjectId };
     this.candidatesPageFacade.getAllCandidates(this.filters);
-    // this.candidatesPageFacade.getProjectCandidates$(this.filters)
+  }
+
+  showFiltersResults(drawerFilters: candidatesQueries) {
+    this.filters = {
+      ...this.filters,
+      location: drawerFilters.location,
+      date: drawerFilters.date,
+      englishLevel: drawerFilters.englishLevel,
+      primarySkill: drawerFilters.primarySkill,
+      status: drawerFilters.status,
+      test: drawerFilters.test,
+      recruiter: drawerFilters.recruiter,
+      entryInterview: drawerFilters.entryInterview,
+      mentor: drawerFilters.mentor,
+      finalInterview: drawerFilters.finalInterview,
+    };
+    this.candidatesPageFacade.getAllCandidates(this.filters);
   }
 
   onSearchChange(search: candidatesQueries) {
