@@ -158,6 +158,7 @@ export abstract class ApiService {
   ): string {
     return parameter ? this.buildODataQuery(path, parameter) : EMPTY_STRING;
   }
+  
   private buildODataCandidatesPath(
     parameter: string | undefined,
     path: string

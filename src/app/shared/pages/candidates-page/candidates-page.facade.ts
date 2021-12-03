@@ -69,44 +69,68 @@ export class CandidatesPageFacade {
     private projectsService: ProjectsService
   ) {}
 
+  getProjectData$(projectId: string): Observable<Project> {
+    return this.projectsService.getProjectById(projectId);
+  }
+
   createFeedback$(params:CreateFeedbackParams){
     return this.candidatesService.createFeedback$(params)
   }
 
- getProjectData$(projectId: string): Observable<Project> {
-    return this.projectsService.getProjectById(projectId);
-  }
-
-  getProjectCandidates$(filters?: candidatesQueries): Observable<Candidate[]> {
-    return this.candidatesService.getCandidatesByProjectId(<QueryParams>{
-      odata: {
-        projectId: filters?.id,
-      },
-    });
-  }
-
   getAllCandidates(filters?: candidatesQueries) {
+    console.log(filters);
+    const location = filters?.location?.map((location) => {
+      const arr = location.split(', ');
+      return {
+        property: location,
+        value: `location/country eq '${arr[0]}' and location/city eq '${arr[1]}'`,
+      };
+    });
+    const englishLevel = filters?.englishLevel?.map((level) => ({
+      property: level,
+      value: `englishLevel eq '${level}'`,
+    }));
+    const status = filters?.status?.map((status) => ({
+      property: status,
+      value: `projectResults/any(p: p/status eq '${status}')`,
+    }));
+    const primarySkill = filters?.primarySkill?.map((skill) => ({
+      property: skill,
+      value: `projectResults/any(p: p/primarySkill/name eq '${skill}')`,
+    }));
     const searchText = {
       property: filters?.query,
       value: `contains(tolower(name), '${filters?.query}') or contains(tolower(surname), '${filters?.query}')`,
     };
     const candidatesSort = filters?.orderBy
-      ? {
+    ? {
           names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
-          // order: [filters.orderBy.map(el => `${el.order}`)]
         }
-      : {};
-    const filter = [searchText];
-    console.log(candidatesSort);
+        : {};
+        const filter = [searchText, location, englishLevel, status, primarySkill];
+        console.log(candidatesSort);
     this.candidatesService
-      .getCandidates(<QueryParams>{
-        odata: {
-          orderby: candidatesSort,
-          filter,
-        },
-      })
-      .subscribe((candidates) => {
-        this.candidatesList$.next(candidates);
-      });
+    .getCandidates(<QueryParams>{
+      odata: {
+        projectId: filters?.id,
+        orderby: candidatesSort,
+        filter,
+      },
+    })
+    .subscribe((candidates) => {
+      this.candidatesList$.next(candidates);
+    });
+
   }
 }
+
+// getProjectCandidates$(filters?: candidatesQueries) {
+//   this.candidatesService.getCandidates(<QueryParams>{
+//     odata: {
+//       projectId: filters?.id
+//     },
+//   }).subscribe( (candidates) => {
+//     this.candidatesList$.next(candidates);
+//     console.log(candidates)
+//   })
+// }

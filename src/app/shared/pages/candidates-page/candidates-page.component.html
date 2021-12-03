@@ -52,5 +52,6 @@
   <app-filter-drawer
     [drawerVisible]="drawerVisible"
     [candidatesList]="candidatesList"
+    (onCandidatesFilters)="showFiltersResults($event)"
   ></app-filter-drawer>
 </div>
