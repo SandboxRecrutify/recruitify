@@ -10,8 +10,8 @@ import { UserRole } from '../../models/UserRole';
 export class CalendarPageComponent implements OnInit {
   constructor(private userService: UserService) {}
 
-  isInterviewer = this.userService.checkRole(UserRole.interviewer);
-  isRecruiter = this.userService.checkRole(UserRole.recruiter);
+  isInterviewer = this.userService.checkGlobalRole(UserRole.interviewer);
+  isRecruiter = this.userService.checkGlobalRole(UserRole.recruiter);
 
   ngOnInit(): void {}
 }

@@ -10,6 +10,7 @@ import { Candidate } from './../../models/Candidate';
 import { CandidatesService } from './../../services/candidates.service';
 import { UserService } from './../../services/user.service';
 import { candidatesQueries } from './candidates-page.component';
+import { CreateFeedbackParams } from '../../models/CreateFeedbackParams';
 
 @Injectable()
 export class CandidatesPageFacade {
@@ -24,9 +25,9 @@ export class CandidatesPageFacade {
   ];
 
   declineReasons = [
-    'Bad feedback from the Recruiter',
-    'Bad feedback from the Interviewer',
-    'Bad feedback from the Mentor',
+    "Bad Recruiter's feedback",
+    "Bad Interviewer's feedback",
+    "Bad Mentor's feedback",
     'Wrong location',
     'Russian language knowledge',
     'Bad test result',
@@ -50,15 +51,15 @@ export class CandidatesPageFacade {
     'TechInterviewSecondStep',
     'Mentor',
   ];
-  candidateStatusesForManager = ['Accepted', 'Denied', 'Questionable'];
+  candidateStatusesForManager = ['Accepted', 'Denied', 'Waiting list'];
 
   // candidateList$ = this.candidatesService.getCandidates();
   candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<
     Candidate[]
   >([]);
 
-  isRecruiter: boolean = this.userService.checkRole(UserRole.recruiter);
-  isManager: boolean = this.userService.checkRole(UserRole.manager);
+  isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
+  isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
 
   isEmailModalVisible$ = new BehaviorSubject(false);
 
@@ -70,6 +71,10 @@ export class CandidatesPageFacade {
 
   getProjectData$(projectId: string): Observable<Project> {
     return this.projectsService.getProjectById(projectId);
+  }
+
+  createFeedback$(params:CreateFeedbackParams){
+    return this.candidatesService.createFeedback$(params)
   }
 
   getAllCandidates(filters?: candidatesQueries) {
@@ -115,6 +120,7 @@ export class CandidatesPageFacade {
     .subscribe((candidates) => {
       this.candidatesList$.next(candidates);
     });
+
   }
 }
 

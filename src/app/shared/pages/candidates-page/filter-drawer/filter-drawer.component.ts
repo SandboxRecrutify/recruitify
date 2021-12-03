@@ -1,14 +1,15 @@
 import { CandidateLocation } from './../../../models/CandidateLocation';
 import { Observable, of } from 'rxjs';
-import { UserService } from './../../../services/user.service';
-import { Candidate } from './../../../models/Candidate';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserRole } from 'src/app/shared/models/UserRole';
-import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
+import { Component, Input, OnInit } from '@angular/core';
 import { Status } from 'src/app/shared/models/CandidatesStatus';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
+import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
 import { PrimarySkill } from 'src/app/shared/models/Project';
+import { UserRole } from 'src/app/shared/models/UserRole';
+import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { CandidatesPageFacade } from '../candidates-page.facade';
+import { Candidate } from './../../../models/Candidate';
+import { UserService } from './../../../services/user.service';
 
 export interface CandidatesTableFilters {
 location?: string []
@@ -48,7 +49,6 @@ export class FilterDrawerComponent implements OnInit {
   locations: string[] | undefined
   registrationDates: (string | Date)[] | undefined
 
-
   locationsSelect: string[] = []
   registrationDatesSelect: (string | Date)[] = []
   englishLevelSelect: string[] = [];
@@ -60,11 +60,14 @@ export class FilterDrawerComponent implements OnInit {
   mentorRateSelect: number[] = []
   finalInterviewRateSelect: number[] = []
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private projectsService: ProjectsService,
-    private candidatesPageFacade: CandidatesPageFacade) {}
+    private candidatesPageFacade: CandidatesPageFacade
+  ) {}
 
   ngOnInit(): void {
+
     this.projectsService.getPrimarySkills().subscribe(response => {
       this.primarySkills = response
     })
@@ -77,7 +80,6 @@ export class FilterDrawerComponent implements OnInit {
       if(!this.registrationDates || this.registrationDates.length === 0) {
         this.registrationDates = [...new Set(this.candidatesList.map(el => el.registrationDate))]
       }
-
     })
   }
 
