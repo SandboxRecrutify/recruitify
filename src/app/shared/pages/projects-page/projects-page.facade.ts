@@ -37,7 +37,7 @@ export class ProjectsPageFacade {
       ? {
           names: [`${filters?.orderBy?.property} ${filters?.orderBy?.order}`],
         }
-      : { names: ['StartDate desc']};
+      : { names: ['StartDate desc'] };
 
     const filter = [skills, status, searchText];
 
@@ -94,4 +94,3 @@ export class ProjectsPageFacade {
     };
   }
 }
-
