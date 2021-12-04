@@ -79,7 +79,6 @@ export class CandidatesPageFacade {
   }
 
   getAllCandidates(filters?: candidatesQueries) {
-    console.log(filters);
     const location = filters?.location?.map((location) => {
       const arr = location.split(', ');
       return {
@@ -87,6 +86,13 @@ export class CandidatesPageFacade {
         value: `location/country eq '${arr[0]}' and location/city eq '${arr[1]}'`,
       };
     });
+    const registrationDate = filters?.date
+      ? {
+          property: filters?.date[0],
+          value: `registrationDate ge ${filters?.date[0]} and registrationDate le ${filters?.date[1]}`,
+        }
+      : undefined;
+
     const englishLevel = filters?.englishLevel?.map((level) => ({
       property: level,
       value: `englishLevel eq '${level}'`,
@@ -99,6 +105,26 @@ export class CandidatesPageFacade {
       property: skill,
       value: `projectResults/any(p: p/primarySkill/name eq '${skill}')`,
     }));
+    const test = filters?.test?.map((item) => ({
+      property: item,
+      value: `projectResults/any(p: p/feedbacks/any(f: f/type eq 'Test' and f/rating eq ${item}))`,
+    }));
+    const entryInterview = filters?.entryInterview?.map((item) => ({
+      property: item,
+      value: `projectResults/any(p: p/feedbacks/any(f: f/type eq 'TechInterviewOneStep' and f/rating eq ${item}))`,
+    }));
+    const finalInterview = filters?.finalInterview?.map((item) => ({
+      property: item,
+      value: `projectResults/any(p: p/feedbacks/any(f: f/type eq 'TechInterviewSecondStep' and f/rating eq ${item}))`,
+    }));
+    const recruiter = filters?.recruiter?.map((item) => ({
+      property: item,
+      value: `projectResults/any(p: p/feedbacks/any(f: f/type eq 'Interview' and f/rating eq ${item}))`,
+    }));
+    const mentor = filters?.mentor?.map((item) => ({
+      property: item,
+      value: `projectResults/any(p: p/feedbacks/any(f: f/type eq 'Mentor' and f/rating eq ${item}))`,
+    }));
     const searchText = {
       property: filters?.query,
       value: `contains(tolower(name), '${filters?.query}') or contains(tolower(surname), '${filters?.query}')`,
@@ -108,7 +134,20 @@ export class CandidatesPageFacade {
           names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
         }
       : {};
-    const filter = [searchText, location, englishLevel, status, primarySkill];
+    
+    const filter = [
+      searchText,
+      location,
+      englishLevel,
+      status,
+      primarySkill,
+      registrationDate,
+      test,
+      entryInterview,
+      finalInterview,
+      recruiter,
+      mentor,
+    ];
     console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
