@@ -51,15 +51,13 @@ const mainRouter: Routes = [
     canActivate: [AppGuard],
   },
   {
-    path: paths.calendar,
-    component: CalendarForInterviewersComponent,
-    // component: CalendarPageComponent,
+    path: `${paths.calendar}/:id`,
+    component: CalendarPageComponent,
     canActivate: [AppGuard],
   },
   {
-    path: paths.calendarRecruiter,
-    component: CalendarForRecruitersComponent,
-    // component: CalendarPageComponent,
+    path: paths.calendar,
+    component: CalendarPageComponent,
     canActivate: [AppGuard],
   },
   {

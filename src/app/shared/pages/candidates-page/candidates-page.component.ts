@@ -60,7 +60,7 @@ export class CandidatesPageComponent implements OnInit {
           this.candidatesList = response;
           this.isLoading = false;
         });
-
+        // TODO use new endpoint to get project name
         this.candidatesPageFacade
           .getProjectData$(params.id)
           .subscribe((project) => {

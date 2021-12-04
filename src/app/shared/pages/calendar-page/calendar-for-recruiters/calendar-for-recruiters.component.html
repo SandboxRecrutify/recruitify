@@ -1,43 +1,41 @@
-<div class="page_container calendar-wrapp">
-  <div style="min-width: 1160px">
-    <div class="menu">
-      <a
-        nz-button
-        nzType="link"
-        *ngIf="!isBtnSaveVisible; else prevBtnWithPop"
-        (click)="onPreviousDayButtonClick()"
-        ><<<</a
-      >
-      <nz-date-picker
-        nzSize="small"
-        nzFormat="dd.MM.yyyy"
-        [(ngModel)]="datepickerValue"
-        (ngModelChange)="onCalendarDateChange($event)"
-      ></nz-date-picker>
-      <a
-        nz-button
-        nzType="link"
-        *ngIf="!isBtnSaveVisible; else nextBtnWithPop"
-        (click)="onNextDayButtonClick()"
-        >>>></a
-      >
-    </div>
-
-    <button
-      class="save-btn"
-      *ngIf="isBtnSaveVisible"
+<div style="min-width: 1160px">
+  <div class="menu">
+    <a
       nz-button
-      nzType="primary"
-      nzSize="small"
-      nz-popconfirm
-      [nzPopconfirmTitle]="popTitleEmail"
-      nzPopconfirmPlacement="leftTop"
-      (nzOnConfirm)="onSaveConfirm()"
+      nzType="link"
+      *ngIf="!isBtnSaveVisible; else prevBtnWithPop"
+      (click)="onPreviousDayButtonClick()"
+      ><<<</a
     >
-      Save
-    </button>
-    <app-skills-tabset></app-skills-tabset>
+    <nz-date-picker
+      nzSize="small"
+      nzFormat="dd.MM.yyyy"
+      [(ngModel)]="datepickerValue"
+      (ngModelChange)="onCalendarDateChange($event)"
+    ></nz-date-picker>
+    <a
+      nz-button
+      nzType="link"
+      *ngIf="!isBtnSaveVisible; else nextBtnWithPop"
+      (click)="onNextDayButtonClick()"
+      >>>></a
+    >
   </div>
+
+  <button
+    class="save-btn"
+    *ngIf="isBtnSaveVisible"
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    nz-popconfirm
+    [nzPopconfirmTitle]="popTitleEmail"
+    nzPopconfirmPlacement="leftTop"
+    (nzOnConfirm)="onSaveConfirm()"
+  >
+    Save
+  </button>
+  <app-skills-tabset></app-skills-tabset>
 </div>
 
 <ng-template #prevBtnWithPop>
