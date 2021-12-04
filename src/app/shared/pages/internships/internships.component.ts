@@ -20,25 +20,25 @@ export class InternshipsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.http
-    //   .get(
-    //     'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
-    //   )
-    //   .pipe(map((d: any) => d.value))
-    //   .subscribe((response) => {
-    //     this.activeProjects = response.filter((project: any) => {
-    //       console.log(project);
-    //       return project.isActive;
-    //     });
-    //     // console.log(this.activeProjects);
-    //   });
-
-    this.projectsService
-      .getProjects(<QueryParams>{ odata: { status } })
+    this.http
+      .get(
+        'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+      )
+      .pipe(map((d: any) => d.value))
       .subscribe((response) => {
-        console.log(response);
-        this.activeProjects = response.filter((project) => project.isActive);
+        this.activeProjects = response.filter((project: any) => {
+          console.log(project);
+          return project.isActive;
+        });
+        // console.log(this.activeProjects);
       });
+
+    // this.projectsService
+    //   .getProjects(<QueryParams>{ odata: { status } })
+    //   .subscribe((response) => {
+    //     console.log(response);
+    //     this.activeProjects = response.filter((project) => project.isActive);
+    //   });
   }
 
   getProjectDuration(start: string | Date, end: string | Date) {

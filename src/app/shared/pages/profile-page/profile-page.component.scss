@@ -68,6 +68,23 @@
       }
     }
   }
+
+  @media (max-width: 900px) {
+    .profile_info {
+      flex-direction: column;
+    }
+
+    .main-info {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .add-info {
+      width: 100%;
+    }
+  }
 }
 
 .goback-btn {

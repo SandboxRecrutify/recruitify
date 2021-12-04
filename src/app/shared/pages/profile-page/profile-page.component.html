@@ -39,50 +39,59 @@
               }}
             </p>
           </div>
-          <p class="location">
-            {{ candidate?.location?.city }}, {{ candidate?.location?.country }}
-          </p>
 
-          <p>
-            <span>skype: </span>
-            <a href="#">{{ skypeLogin }}</a>
-          </p>
-          <p *ngFor="let contact of socLinks">
-            <span>{{ contact.type }}: </span>
-            <a href="{{ contact.value }}" target="_blank">Link</a>
-          </p>
-          <p>
-            <span>Email:</span>
-            <a href="mailto:{{ candidate?.email }}"> {{ candidate?.email }}</a>
-          </p>
-          <p>
-            <span>Phone number:</span>
-            <a href="tel:+{{ candidate?.phoneNumber }}">
-              {{ candidate?.phoneNumber }}</a
-            >
-          </p>
-          <p>
-            <span>English level:</span>
-            {{ candidate ? englishLvls[candidate.englishLevel] : null }}
-          </p>
-          <p>
-            <span>Language:</span>
-            {{ candidate ? projectLanguages[candidate.projectLanguage] : null }}
-          </p>
-          <p><span>Test result:</span> {{ testResult || "none" }}</p>
-          <p>
-            <span>Status:</span>
-            {{
-              candidatesCurrentProject
-                ? candidateStatuses[candidatesCurrentProject.status]
-                : null
-            }}
-            <!-- {{candidate &&  candidateStatuses[candidate?.projectResults?.[0]?.status!] }} -->
-          </p>
+          <!-- <div style="display: flex"> -->
           <div>
-            <!-- <span>Previous projects:</span> -->
-            <!-- TODO map name and link to projects -->
-            <!-- <p>{{ candidate?.projectResults ? candidate?.projectResults : "none" }}</p> -->
+            <p class="location">
+              {{ candidate?.location?.city }},
+              {{ candidate?.location?.country }}
+            </p>
+
+            <p>
+              <span>skype: </span>
+              <a href="#">{{ skypeLogin }}</a>
+            </p>
+            <p *ngFor="let contact of socLinks">
+              <span>{{ contact.type }}: </span>
+              <a href="{{ contact.value }}" target="_blank">Link</a>
+            </p>
+            <p>
+              <span>Email:</span>
+              <a href="mailto:{{ candidate?.email }}">
+                {{ candidate?.email }}</a
+              >
+            </p>
+            <p>
+              <span>Phone number:</span>
+              <a href="tel:+{{ candidate?.phoneNumber }}">
+                {{ candidate?.phoneNumber }}</a
+              >
+            </p>
+            <p>
+              <span>English level:</span>
+              {{ candidate ? englishLvls[candidate.englishLevel] : null }}
+            </p>
+            <p>
+              <span>Language:</span>
+              {{
+                candidate ? projectLanguages[candidate.projectLanguage] : null
+              }}
+            </p>
+            <p><span>Test result:</span> {{ testResult || "none" }}</p>
+            <p>
+              <span>Status:</span>
+              {{
+                candidatesCurrentProject
+                  ? candidateStatuses[candidatesCurrentProject.status]
+                  : null
+              }}
+              <!-- {{candidate &&  candidateStatuses[candidate?.projectResults?.[0]?.status!] }} -->
+            </p>
+            <div>
+              <!-- <span>Previous projects:</span> -->
+              <!-- TODO map name and link to projects -->
+              <!-- <p>{{ candidate?.projectResults ? candidate?.projectResults : "none" }}</p> -->
+            </div>
           </div>
         </div>
 
