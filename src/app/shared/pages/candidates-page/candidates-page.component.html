@@ -1,21 +1,9 @@
 <div class="page_container candidates_container">
   <div class="candidates_heading">
     <div class="candidates_count">{{ candidatesList.length }}</div>
+
     <h3 class="candidates_title">
       {{ currentProjectName || "" }}
-
-      <a
-        *ngIf="currentProjectName"
-        class="menu_link"
-        [routerLink]="['/', 'calendar-recruiter']"
-        routerLinkActive="active"
-      >
-        <svg class="menu_icon">
-          <use
-            xlink:href="/assets/images/nav-icons/navSprite.svg#calendar"
-          ></use>
-        </svg>
-      </a>
     </h3>
 
     <div class="candidates_filter-wrap">
@@ -39,6 +27,18 @@
         ></i>
       </ng-template>
       <div class="candidates_filter-btn" (click)="openDrawer()"></div>
+
+      <a
+        class="menu_link"
+        [routerLink]="['/', 'calendar-recruiter']"
+        routerLinkActive="active"
+      >
+        <svg class="menu_icon">
+          <use
+            xlink:href="/assets/images/nav-icons/navSprite.svg#calendar"
+          ></use>
+        </svg>
+      </a>
     </div>
   </div>
   <app-dropdown-menu

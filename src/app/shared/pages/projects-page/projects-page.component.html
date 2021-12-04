@@ -1,6 +1,11 @@
 <div class="projects page_container">
   <div class="projects_head">
-    <button nz-button nzType="primary" (click)="handleToggle(true)">
+    <button
+      *ngIf="isAdmin"
+      nz-button
+      nzType="primary"
+      (click)="handleToggle(true)"
+    >
       Create Project
     </button>
     <div class="search">

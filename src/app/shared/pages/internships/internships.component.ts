@@ -26,10 +26,11 @@ export class InternshipsComponent implements OnInit {
       )
       .pipe(map((d: any) => d.value))
       .subscribe((response) => {
-        this.activeProjects = response.filter(
-          (project: any) => project.isActive
-        );
-        console.log(this.activeProjects);
+        this.activeProjects = response.filter((project: any) => {
+          console.log(project);
+          return project.isActive;
+        });
+        // console.log(this.activeProjects);
       });
 
     // this.projectsService

@@ -22,8 +22,8 @@
               ></use>
             </svg>
           </a>
-          <!-- *ngIf="isAdmin" -->
           <a
+            *ngIf="isAdmin"
             class="menu_link"
             [routerLink]="['/', 'candidates']"
             routerLinkActive="active"
@@ -37,8 +37,8 @@
               ></use>
             </svg>
           </a>
-          <!-- *ngIf="isInterviewer" -->
           <a
+            *ngIf="isInterviewer"
             class="menu_link"
             [routerLink]="['/', 'calendar']"
             routerLinkActive="active"

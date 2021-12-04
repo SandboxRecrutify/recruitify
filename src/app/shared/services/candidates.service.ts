@@ -42,7 +42,7 @@ export class CandidatesService extends ApiService {
   setTestResult(projectId: string, body: any) {
     return super.put(
       {
-        path: `bulk/test_feedbacks?projectId=${projectId}`,
+        path: `/bulk/test_feedbacks?projectId=${projectId}`,
       },
       body
     );
@@ -51,7 +51,16 @@ export class CandidatesService extends ApiService {
   setStatus(projectId: string, body: any) {
     return super.put(
       {
-        path: `bulk/update_status_reason?projectId=${projectId}`,
+        path: `/bulk/update_status_reason?projectId=${projectId}`,
+      },
+      body
+    );
+  }
+
+  senTestTask(projectId: string, body: any) {
+    return super.put(
+      {
+        path: `/bulk/send_test_emails?projectId=${projectId}`,
       },
       body
     );

@@ -69,7 +69,7 @@
             <span>Language:</span>
             {{ candidate ? projectLanguages[candidate.projectLanguage] : null }}
           </p>
-          <p><span>Test result:</span> {{ getTestResult() }}</p>
+          <p><span>Test result:</span> {{ testResult || "none" }}</p>
           <p>
             <span>Status:</span>
             {{
@@ -90,7 +90,7 @@
           <p class="add-info_title">Additional information</p>
           <p>
             <span>Date of application: </span
-            >{{ candidate?.registrationDate | date }}
+            >{{ candidate?.registrationDate | date: "dd.MM.yyyy" }}
           </p>
           <p>
             <span>Best time to contact:</span>

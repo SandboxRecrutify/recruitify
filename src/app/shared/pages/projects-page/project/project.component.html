@@ -36,7 +36,13 @@
         [required]="card.plannedApplicationsCount"
         [routerLink]="['/projects', card.id]"
       ></app-participants>
-      <button nz-button (click)="onEdit()" nzType="primary" class="edit-btn">
+      <button
+        *ngIf="isAdmin"
+        nz-button
+        (click)="onEdit()"
+        nzType="primary"
+        class="edit-btn"
+      >
         Edit project
       </button>
     </div>

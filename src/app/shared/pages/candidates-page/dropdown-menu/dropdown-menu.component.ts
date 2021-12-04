@@ -1,6 +1,5 @@
+import { UserService } from './../../../services/user.service';
 import { CandidatesService } from './../../../services/candidates.service';
-import { CandidateService } from './../../../services/candidate.service';
-import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
@@ -26,11 +25,13 @@ export class DropdownMenuComponent implements OnInit {
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private candidatesService: CandidatesService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private userService: UserService
   ) {}
 
   isRecruiter: boolean = this.candidatesPageFacade.isRecruiter;
   isManager: boolean = this.candidatesPageFacade.isManager;
+
   declineReasons: string[] = this.candidatesPageFacade.declineReasons;
   candidateStatuses: string[] = this.candidatesPageFacade.candidateStatuses;
   candidateStatusesForManager: string[] =
@@ -52,6 +53,21 @@ export class DropdownMenuComponent implements OnInit {
   // printEmailModal() {
   //   this.candidatesPageFacade.isEmailModalVisible$.next(true);
   // }
+
+  sendTestTask() {
+    const reqBody = {
+      candidatesIds: [...this.setOfCandidatesId],
+      projectId: this.projectId,
+    };
+
+    this.candidatesService
+      .senTestTask(this.projectId, { ...reqBody })
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    console.log(reqBody);
+  }
 
   testResultSubmit() {
     if (this.setOfCandidatesId.size) {
