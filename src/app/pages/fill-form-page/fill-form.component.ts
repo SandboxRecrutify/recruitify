@@ -2,7 +2,6 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesService } from './../../shared/services/candidates.service';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -27,6 +26,7 @@ export class FillFormComponent implements OnInit {
   goingToExadelError: boolean = false;
   projectLanguageError: boolean = false;
   isAnyErrorInForm: boolean = false;
+  requestError: boolean = false;
 
   contactFields: number[] = [];
 
@@ -60,7 +60,6 @@ export class FillFormComponent implements OnInit {
     private fb: FormBuilder,
     private fillFormFacade: FillFormFacade,
     private route: ActivatedRoute,
-    private projectsService: ProjectsService,
     private candidatesService: CandidatesService,
     private message: NzMessageService,
     private http: HttpClient
@@ -71,33 +70,30 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.currentProjectId = params.id;
-      this.projectsService.getProjectById(params.id).subscribe((response) => {
-        this.currentProjectSkills = response.primarySkills;
-      });
-
-      // this.http
-      //   .get(
-      //     'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
-      //   )
-      //   .pipe(map((d: any) => d.value))
-      //   .subscribe((response) => {
-      //     const currentProject = response.find((project: any) => {
-      //       return project.id === params.id;
-      //     });
-      //     this.currentProjectSkills = currentProject.primarySkills;
-      //     console.log(currentProject);
-      //     console.log(this.currentProjectSkills);
+      //   this.projectsService.getProjectById(params.id).subscribe((response) => {
+      //     this.currentProjectSkills = response.primarySkills;
       //   });
+
+      // TODO: move to projects.service
+      this.http
+        .get(
+          'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+        )
+        .pipe(map((d: any) => d.value))
+        .subscribe((response) => {
+          const currentProject = response.find((project: any) => {
+            return project.id === params.id;
+          });
+          this.currentProjectSkills = currentProject.primarySkills;
+        });
     });
   }
 
   onAddClick() {
-    if (this.contactFields.length < 5) {
+    if (this.contactFields.length < 4) {
       this.contactFields.push(1);
     }
   }
-
-  requestError: boolean = false;
 
   submitForm() {
     console.log(this.candidateForm);

@@ -23,13 +23,14 @@
     .skills {
       min-height: 2.75rem;
       font-weight: 600;
+      margin: 0;
     }
   }
 
   app-participants {
-    margin-bottom: 50%;
-    display: flex;
-    align-self: center;
+    // margin-bottom: 50%;
+    // display: flex;
+    // align-self: center;
     transition: 0.3s;
     &:hover {
       transform: scale(1.1);
@@ -40,7 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     .edit-btn {
       font-size: 0.8rem;

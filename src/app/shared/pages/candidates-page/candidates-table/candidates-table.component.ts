@@ -4,7 +4,6 @@ import { Candidate } from './../../../models/Candidate';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
-
 export interface CandidatesOrderBy {
   property: string;
   order: string;
@@ -22,7 +21,8 @@ export class CandidatesTableComponent implements OnInit {
   @Input() currentProjectId!: string;
   @Input() isLoading: boolean = false;
 
-  @Output() onFilters: EventEmitter<CandidatesFilters> = new EventEmitter<CandidatesFilters>();
+  @Output() onFilters: EventEmitter<CandidatesFilters> =
+    new EventEmitter<CandidatesFilters>();
 
   paths = paths;
   checked = false;
@@ -30,6 +30,7 @@ export class CandidatesTableComponent implements OnInit {
   setOfCheckedId = new Set<string>();
   candidateStatuses: string[] = [];
   feedbackTypes: string[] = [];
+
   constructor(private candidatesPageFacade: CandidatesPageFacade) {
     this.candidateStatuses = this.candidatesPageFacade.candidateStatuses;
     this.feedbackTypes = this.candidatesPageFacade.feedbackTypes;
@@ -63,46 +64,52 @@ export class CandidatesTableComponent implements OnInit {
   updateCheckedSet(id: string, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);
+      this.candidatesPageFacade.checkedCandidatesIdSet$.next(
+        this.setOfCheckedId
+      );
     } else {
       this.setOfCheckedId.delete(id);
+      this.candidatesPageFacade.checkedCandidatesIdSet$.next(
+        this.setOfCheckedId
+      );
     }
   }
 
   onAllChecked(value: boolean): void {
-    this.candidatesList.forEach((item) =>
-      this.updateCheckedSet(item.id, value)
-    );
+    this.candidatesList.forEach((item) => {
+      this.updateCheckedSet(item.id, value);
+    });
     this.refreshCheckedStatus();
   }
 
   onItemChecked(id: string, checked: boolean): void {
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
-    console.log(id);
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.candidatesList.every((item) =>
-      this.setOfCheckedId.has(item.id)
-    );
+    this.checked = this.candidatesList.every((item) => {
+      this.setOfCheckedId.has(item.id);
+    });
     this.indeterminate =
       this.candidatesList.some((item) => this.setOfCheckedId.has(item.id)) &&
       !this.checked;
+    this.candidatesPageFacade.checkedCandidatesIdSet$.next(this.setOfCheckedId);
   }
 
   onQueryParamsChange(params: NzTableQueryParams) {
-    console.log(params);
+    // console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
-    const currentSort: CandidatesOrderBy[] = sort.filter(item => item.value !== null).map((el => ({
-            property: el.key,
-            order: el.value !== null ? el.value.slice(0, -3) : ''
-          }
-      )))
-    console.log(currentSort)
-    const filters: CandidatesFilters  = {
-      orderBy: currentSort
-    }
+    const currentSort: CandidatesOrderBy[] = sort
+      .filter((item) => item.value !== null)
+      .map((el) => ({
+        property: el.key,
+        order: el.value !== null ? el.value.slice(0, -3) : '',
+      }));
+    // console.log(currentSort);
+    const filters: CandidatesFilters = {
+      orderBy: currentSort,
+    };
     this.onFilters.emit(filters);
   }
-
 }

@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Project } from '../../models/Project';
@@ -20,8 +21,12 @@ export class ProjectsPageComponent implements OnInit {
   filters: any = {};
   subscription: Subscription | null = null;
 
+  isAdmin: boolean = this.userService.isAdmin();
 
-  constructor(public projectsPageFacade: ProjectsPageFacade) {}
+  constructor(
+    public projectsPageFacade: ProjectsPageFacade,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.projectsPageFacade.getProjectsList();
@@ -54,8 +59,8 @@ export class ProjectsPageComponent implements OnInit {
   }
 
   onSearchClear() {
-    this.searchText = ''
+    this.searchText = '';
     this.filters = { ...this.filters, query: this.searchText };
-    this.projectsPageFacade.getProjectsList(this.filters)
+    this.projectsPageFacade.getProjectsList(this.filters);
   }
 }

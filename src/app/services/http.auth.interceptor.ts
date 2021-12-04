@@ -25,9 +25,11 @@ export class AuthInterceptor implements HttpInterceptor {
       if (user) {
         headers = req.headers.set('Authorization', 'Bearer ' + user.token);
       } else {
-        headers = req.headers
-          .set('authorization', 'Basic cmVjcnVpdGlmeV9hcGk6')
-          .set('Content-type', 'application/x-www-form-urlencoded');
+        headers = req.headers.set(
+          'authorization',
+          'Basic cmVjcnVpdGlmeV9hcGk6'
+        );
+        // .set('Content-type', 'application/x-www-form-urlencoded');
       }
 
       req = req.clone({ headers });

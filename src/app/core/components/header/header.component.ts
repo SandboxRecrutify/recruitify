@@ -10,7 +10,9 @@ import { UserRole } from 'src/app/shared/models/UserRole';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAdmin: boolean = this.userService.checkGlobalRole(UserRole.admin);
+  isAdmin: boolean = this.userService.isAdmin();
+  isInterviewer: boolean = this.userService.isInterviewer();
+
   user: User | undefined;
   constructor(private appFacade: AppFacade, private userService: UserService) {}
 

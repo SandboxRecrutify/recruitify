@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { paths } from 'src/app/app-routing.constants';
@@ -14,10 +15,13 @@ export class ProjectComponent implements OnInit {
 
   isVisible = false;
 
+  isAdmin: boolean = this.userService.isAdmin();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectsFacade: ProjectsPageFacade
+    private projectsFacade: ProjectsPageFacade,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {

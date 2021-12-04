@@ -23,7 +23,7 @@ import { ProfilePageFacade } from './profile-page.facade';
   ],
 })
 export class ProfilePageComponent implements OnInit {
-  candidate: Candidate | undefined = undefined;
+  candidate!: Candidate;
   projectLanguages: string[] = [];
   englishLvls: string[] = [];
   candidateStatuses: string[] = [];
@@ -32,6 +32,11 @@ export class ProfilePageComponent implements OnInit {
   isLoading = false;
 
   candidatesCurrentProject!: any;
+
+  skypeLogin: string | undefined = '';
+  socLinks!: any;
+
+  testResult!: number | undefined;
 
   constructor(
     private profilePageFacade: ProfilePageFacade,
@@ -54,7 +59,9 @@ export class ProfilePageComponent implements OnInit {
             this.isLoading = false;
             this.candidate = candidate;
             console.log('candidate', candidate);
-            this.candidatesCurrentProject = candidate.projectResults[0];
+
+            this.setContacts(candidate);
+            this.getTestResult(candidate);
           },
           () => {
             this.isLoading = false;
@@ -68,17 +75,44 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  printCandidatePrimarySkills(candidate?: Candidate) {
-    // return candidate?.primarySkills.map((skill) => skill.name).join(' | ');
-    // return candidate?.projectResults.map((skill) => console.log(skill.name));
+  setContacts(candidate: Candidate) {
+    this.candidatesCurrentProject = candidate.projectResults[0];
+
+    this.skypeLogin = this.candidate.contacts.find(
+      (item) => item.type === 'Skype'
+    )?.value;
+
+    const candidateContactsWithoutSkype = this.candidate.contacts.filter(
+      (item) => {
+        return item.type !== 'Skype';
+      }
+    );
+
+    this.socLinks = candidateContactsWithoutSkype.map((item) => {
+      const parsedLink = item.type.split('.');
+      let itemType;
+      if (parsedLink.length === 3) {
+        itemType = parsedLink[1];
+      } else if (parsedLink.length === 2) {
+        parsedLink[0] === 't'
+          ? (itemType = 'telegram')
+          : (itemType = parsedLink[0]);
+      } else if (parsedLink[0] === 't') {
+        itemType = 'Telegram';
+      }
+      return { type: itemType, value: item.value };
+    });
   }
 
-  getTestResult() {
-    return (
-      this.candidate?.projectResults[0].feedbacks.find((feedback) => {
-        //feedback type 0 is test result
-        // return feedback.type === 0;
-      })?.rating || 'none'
+  getTestResult(candidate: Candidate) {
+    const currentProjectResults = candidate.projectResults.find((item) => {
+      return (item.projectId = this.currentProjectId);
+    });
+    console.log(currentProjectResults);
+
+    const testResult = currentProjectResults?.feedbacks.find(
+      (item) => item.type === 0
     );
+    this.testResult = testResult?.rating;
   }
 }

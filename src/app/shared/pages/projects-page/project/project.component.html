@@ -8,14 +8,27 @@
   <div class="project-info">
     <div class="description">
       <p class="skills">
-        Primary skills:
+        <nz-tag *ngFor="let item of card.primarySkills" nzColor="blue">
+          {{ item.name }}
+        </nz-tag>
+        <!-- Primary skills:
+        <nz-tag [nzColor]="'blue'">blue</nz-tag>
         <span *ngFor="let item of card.primarySkills; index as i">
           {{ item.name + (card.primarySkills.length - 1 === i ? "" : " | ") }}
-        </span>
+        </span> -->
       </p>
-      <p>Status: {{ card.isActive ? "Active" : "Closed" }}</p>
-      <p>Start: {{ card.startDate | date }}</p>
-      <p>Finish: {{ card.endDate | date }}</p>
+      <p style="margin: 0">
+        <span style="font-weight: 600">Status:</span>
+        {{ card.isActive ? "Active" : "Closed" }}
+      </p>
+      <p style="margin: 0">
+        <span style="font-weight: 600">Start:</span>
+        {{ card.startDate | date: "dd.MM.yyyy" }}
+      </p>
+      <p style="margin: 0">
+        <span style="font-weight: 600">Finish:</span>
+        {{ card.endDate | date: "dd.MM.yyyy" }}
+      </p>
     </div>
     <div class="project-buttons">
       <app-participants
@@ -23,7 +36,13 @@
         [required]="card.plannedApplicationsCount"
         [routerLink]="['/projects', card.id]"
       ></app-participants>
-      <button nz-button (click)="onEdit()" nzType="primary" class="edit-btn">
+      <button
+        *ngIf="isAdmin"
+        nz-button
+        (click)="onEdit()"
+        nzType="primary"
+        class="edit-btn"
+      >
         Edit project
       </button>
     </div>

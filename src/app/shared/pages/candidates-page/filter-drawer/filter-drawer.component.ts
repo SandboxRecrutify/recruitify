@@ -21,6 +21,7 @@ recruiter?: number[]
 entryInterview?: number[]
 mentor?: number[]
 finalInterview?: number[]
+
 }
 @Component({
   selector: 'app-filter-drawer',
@@ -33,18 +34,34 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   @Input() currentProjectId!: string;
 
   @Output() onCandidatesFilters: EventEmitter<CandidatesTableFilters> =
-  new EventEmitter<CandidatesTableFilters>();
-
-  isAdmin = this.userService.checkGlobalRole(UserRole.admin);
+    new EventEmitter<CandidatesTableFilters>();
 
   subscription!: Subscription;
 
+  isAdmin = this.userService.isAdmin();
+
+
   // englishLevel = Object.entries(EnglishLevel);
-  englishLevel = ['Beginner','PreIntermediate','Intermediate','Advanced','Native']
+  englishLevel = [
+    'Beginner',
+    'PreIntermediate',
+    'Intermediate',
+    'Advanced',
+    'Native',
+  ];
   // status = Object.entries(Status)
-  status = [ 'New','Test','RecruiterInterview','TechInterviewOneStep','TechInterviewSecondStep','Accepted','Declined','WaitingList']
-  rate = [1,2,3,4]
-  test = [1,2,3,4,5,6,7,8,9,10]
+  status = [
+    'New',
+    'Test',
+    'RecruiterInterview',
+    'TechInterviewOneStep',
+    'TechInterviewSecondStep',
+    'Accepted',
+    'Declined',
+    'WaitingList',
+  ];
+  rate = [1, 2, 3, 4];
+  test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   primarySkills: PrimarySkill[] | undefined;
   locations: string[] | undefined
@@ -53,13 +70,13 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   locationsSelect: string[] = []
   filterDates: string[] = []
   englishLevelSelect: string[] = [];
-  primarySkillsSelect: PrimarySkill[] = []
-  statusSelect: string[] = []
-  testResultSelect: number[] = []
-  recruiterRateSelect: number[] = []
-  entryInterviewRateSelect: number[] = []
-  mentorRateSelect: number[] = []
-  finalInterviewRateSelect: number[] = []
+  primarySkillsSelect: PrimarySkill[] = [];
+  statusSelect: string[] = [];
+  testResultSelect: number[] = [];
+  recruiterRateSelect: number[] = [];
+  entryInterviewRateSelect: number[] = [];
+  mentorRateSelect: number[] = [];
+  finalInterviewRateSelect: number[] = [];
 
 
 
@@ -70,10 +87,9 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   ) {}
 
   ngOnInit(): void {
-
-    this.projectsService.getPrimarySkills().subscribe(response => {
-      this.primarySkills = response
-    })
+    this.projectsService.getPrimarySkills().subscribe((response) => {
+      this.primarySkills = response;
+    });
     //to fix by new endpoint
     this.subscription = this.candidatesPageFacade.candidatesList$.subscribe(response => {
       this.candidatesList = response
@@ -92,6 +108,7 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   }
 
   onSubmit() {
+
     const CandidatesTableFilters: CandidatesTableFilters  = {
       location: this.locationsSelect,
       date: this.filterDates,
@@ -107,6 +124,7 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
     this.onCandidatesFilters.emit(CandidatesTableFilters);
     this.closeDrawer()
   }
+
   clearFilters() {
     this.locationsSelect = [],
     this.filterDates = [],

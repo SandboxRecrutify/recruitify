@@ -1,76 +1,76 @@
-<!-- *ngIf="isRecruiter || isManager" -->
-<div class="menu">
-  <!-- *ngIf="isRecruiter" -->
-  <div class="menu_email">
+<div class="menu" *ngIf="isRecruiter || isManager">
+  <div class="menu_email" *ngIf="isRecruiter">
     <button
       nz-button
       nzSize="small"
       nzType="primary"
-      (click)="printEmailModal()"
+      nz-popconfirm
+      [nzPopconfirmTitle]="testTaskTitle"
+      nzPopconfirmPlacement="bottom"
+      nzIcon="none"
+      (nzOnConfirm)="sendTestTask()"
     >
+      <!-- (click)="printEmailModal()" -->
       Send test task
     </button>
   </div>
-  <!-- *ngIf="isRecruiter" -->
-  <div class="menu_test">
-    <button nz-button nzSize="small" nzType="primary">Set test result</button>
-    <input nz-input nzSize="small" class="menu_test-input" />
+
+  <div class="menu_test" *ngIf="isRecruiter">
+    <nz-input-number
+      style="width: 50px"
+      [(ngModel)]="testResult"
+      [nzMin]="1"
+      [nzMax]="10"
+      [nzStep]="1"
+      nzSize="small"
+    ></nz-input-number>
+    <button
+      nz-button
+      nzSize="small"
+      nzType="primary"
+      (click)="testResultSubmit()"
+    >
+      Set test result
+    </button>
   </div>
 
   <div class="menu_status">
     <nz-select
-      *ngIf="isRecruiter; else selectForManager"
+      *ngIf="isManager"
       nzSize="small"
       class="menu_status-select"
       id="status"
       nzPlaceHolder="Set status"
+      [(ngModel)]="selectedStatus"
+      (ngModelChange)="setReasonSelectVisibility($event)"
     >
       <nz-option
-        *ngFor="let status of candidateStatuses"
+        *ngFor="let status of candidateStatusesForManager"
         nzValue="{{ status }}"
         nzLabel="{{ status }}"
       ></nz-option>
     </nz-select>
-
-    <ng-template #selectForManager>
-      <!-- *ngIf="isManager" -->
-      <nz-select
-        nzSize="small"
-        class="menu_status-select"
-        id="status"
-        nzPlaceHolder="Set status"
-        [(ngModel)]="selectedStatus"
-        (ngModelChange)="setReasonSelectVisibility($event)"
-      >
-        <nz-option
-          *ngFor="let status of candidateStatusesForManager"
-          nzValue="{{ status }}"
-          nzLabel="{{ status }}"
-        ></nz-option>
-      </nz-select>
-      <!-- *ngIf="isManager && isReasonSelectVisible" -->
-      <nz-select
-        class="menu_status-select"
-        id="reason"
-        nzPlaceHolder="Set reason"
-        nzSize="small"
-        *ngIf="isReasonSelectVisible"
-        [(ngModel)]="selectedReason"
-      >
-        <nz-option
-          *ngFor="let reason of declineReasons"
-          nzValue="{{ reason }}"
-          nzLabel="{{ reason }}"
-        ></nz-option>
-      </nz-select>
-    </ng-template>
+    <nz-select
+      class="menu_status-select"
+      id="reason"
+      nzPlaceHolder="Set reason"
+      nzSize="small"
+      *ngIf="isReasonSelectVisible"
+      [(ngModel)]="selectedReason"
+    >
+      <nz-option
+        *ngFor="let reason of declineReasons"
+        nzValue="{{ reason }}"
+        nzLabel="{{ reason }}"
+      ></nz-option>
+    </nz-select>
 
     <button
       nzSize="small"
       nz-button
       class="menu_status-btn"
       nzType="primary"
-      (click)="submitStatus()"
+      (click)="statusSubmit()"
     >
       Submit status
     </button>
@@ -78,3 +78,21 @@
 </div>
 
 <app-send-email-modal></app-send-email-modal>
+
+<ng-template #testTaskTitle>
+  <div
+    style="display: flex; flex-direction: column; align-items: center; gap: 5px"
+  >
+    <div style="max-width: 220px">Days to complete task</div>
+    <nz-input-number
+      style="width: 50px"
+      [(ngModel)]="daysForTestTask"
+      [nzMin]="1"
+      [nzMax]="10"
+      [nzStep]="1"
+      nzSize="small"
+    ></nz-input-number>
+    <div style="max-width: 220px">Employee email</div>
+    <input nz-input nzSize="small" />
+  </div>
+</ng-template>
