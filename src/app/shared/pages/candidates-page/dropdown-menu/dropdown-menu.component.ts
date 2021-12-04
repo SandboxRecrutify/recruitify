@@ -38,6 +38,10 @@ export class DropdownMenuComponent implements OnInit {
     this.candidatesPageFacade.candidateStatusesForManager;
 
   ngOnInit(): void {
+    console.log(
+      this.userService.checkRoleInProject(this.projectId, 'Recruiter')
+    );
+
     this.candidatesPageFacade.checkedCandidatesIdSet$.subscribe((response) => {
       this.setOfCandidatesId = response;
     });

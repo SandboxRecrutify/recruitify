@@ -1,3 +1,4 @@
+import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -62,7 +63,8 @@ export class FillFormComponent implements OnInit {
     private route: ActivatedRoute,
     private candidatesService: CandidatesService,
     private message: NzMessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private projectsService: ProjectsService
   ) {
     this.englishLevel$ = fillFormFacade.englishLevel$;
   }
@@ -70,22 +72,22 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.currentProjectId = params.id;
-      //   this.projectsService.getProjectById(params.id).subscribe((response) => {
-      //     this.currentProjectSkills = response.primarySkills;
-      //   });
+      this.projectsService.getProjectById(params.id).subscribe((response) => {
+        this.currentProjectSkills = response.primarySkills;
+      });
 
       // TODO: move to projects.service
-      this.http
-        .get(
-          'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
-        )
-        .pipe(map((d: any) => d.value))
-        .subscribe((response) => {
-          const currentProject = response.find((project: any) => {
-            return project.id === params.id;
-          });
-          this.currentProjectSkills = currentProject.primarySkills;
-        });
+      // this.http
+      //   .get(
+      //     'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+      //   )
+      //   .pipe(map((d: any) => d.value))
+      //   .subscribe((response) => {
+      //     const currentProject = response.find((project: any) => {
+      //       return project.id === params.id;
+      //     });
+      //     this.currentProjectSkills = currentProject.primarySkills;
+      //   });
     });
   }
 
