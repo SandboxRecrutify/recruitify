@@ -1,7 +1,6 @@
 import { CandidateLocation } from './../../../models/CandidateLocation';
-import { Observable, of } from 'rxjs';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { Observable, of, Subscription } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Status } from 'src/app/shared/models/CandidatesStatus';
 import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
 import { PrimarySkill } from 'src/app/shared/models/Project';
@@ -22,21 +21,23 @@ recruiter?: number[]
 entryInterview?: number[]
 mentor?: number[]
 finalInterview?: number[]
-//englishLevel?: EnglishLevel[] | undefined
 }
 @Component({
   selector: 'app-filter-drawer',
   templateUrl: './filter-drawer.component.html',
   styleUrls: ['./filter-drawer.component.scss'],
 })
-export class FilterDrawerComponent implements OnInit {
+export class FilterDrawerComponent implements OnInit, OnDestroy  {
   @Input() drawerVisible: any;
   @Input() candidatesList!: Candidate[];
+  @Input() currentProjectId!: string;
 
   @Output() onCandidatesFilters: EventEmitter<CandidatesTableFilters> =
   new EventEmitter<CandidatesTableFilters>();
 
-  isAdmin = this.userService.checkRole(UserRole.admin);
+  isAdmin = this.userService.checkGlobalRole(UserRole.admin);
+
+  subscription!: Subscription;
 
   // englishLevel = Object.entries(EnglishLevel);
   englishLevel = ['Beginner','PreIntermediate','Intermediate','Advanced','Native']
@@ -47,10 +48,10 @@ export class FilterDrawerComponent implements OnInit {
 
   primarySkills: PrimarySkill[] | undefined;
   locations: string[] | undefined
-  registrationDates: (string | Date)[] | undefined
+
 
   locationsSelect: string[] = []
-  registrationDatesSelect: (string | Date)[] = []
+  filterDates: string[] = []
   englishLevelSelect: string[] = [];
   primarySkillsSelect: PrimarySkill[] = []
   statusSelect: string[] = []
@@ -59,6 +60,8 @@ export class FilterDrawerComponent implements OnInit {
   entryInterviewRateSelect: number[] = []
   mentorRateSelect: number[] = []
   finalInterviewRateSelect: number[] = []
+
+
 
   constructor(
     private userService: UserService,
@@ -72,14 +75,11 @@ export class FilterDrawerComponent implements OnInit {
       this.primarySkills = response
     })
     //to fix by new endpoint
-    this.candidatesPageFacade.candidatesList$.subscribe(response => {
+    this.subscription = this.candidatesPageFacade.candidatesList$.subscribe(response => {
       this.candidatesList = response
-      if(!this.locations || this.locations.length === 0) {
+      // if(!this.locations || this.locations.length === 0) {
         this.locations = [...new Set(this.candidatesList.map(el => `${el.location.country}, ${el.location.city}`))]
-      }
-      if(!this.registrationDates || this.registrationDates.length === 0) {
-        this.registrationDates = [...new Set(this.candidatesList.map(el => el.registrationDate))]
-      }
+      // }
     })
   }
 
@@ -87,21 +87,41 @@ export class FilterDrawerComponent implements OnInit {
     this.drawerVisible = !this.drawerVisible;
   }
 
-  onSubmit() {
-const CandidatesTableFilters: CandidatesTableFilters  = {
-  location: this.locationsSelect,
-  date: this.registrationDatesSelect,
-  englishLevel: this.englishLevelSelect,
-  primarySkill: this.primarySkillsSelect,
-  status: this.statusSelect,
-  test: this.testResultSelect,
-  recruiter: this.recruiterRateSelect,
-  entryInterview: this.entryInterviewRateSelect,
-  mentor: this.mentorRateSelect,
-  finalInterview: this.finalInterviewRateSelect
-}
-console.log(CandidatesTableFilters)
-this.onCandidatesFilters.emit(CandidatesTableFilters);
-this.closeDrawer()
+  onDateChange(period: Date[]) {
+    return this.filterDates = period.map(el => el.toISOString())
   }
+
+  onSubmit() {
+    const CandidatesTableFilters: CandidatesTableFilters  = {
+      location: this.locationsSelect,
+      date: this.filterDates,
+      englishLevel: this.englishLevelSelect,
+      primarySkill: this.primarySkillsSelect,
+      status: this.statusSelect,
+      test: this.testResultSelect,
+      recruiter: this.recruiterRateSelect,
+      entryInterview: this.entryInterviewRateSelect,
+      mentor: this.mentorRateSelect,
+      finalInterview: this.finalInterviewRateSelect
+  }
+    this.onCandidatesFilters.emit(CandidatesTableFilters);
+    this.closeDrawer()
+  }
+  clearFilters() {
+    this.locationsSelect = [],
+    this.filterDates = [],
+    this.englishLevelSelect = [],
+    this.primarySkillsSelect = [],
+    this.statusSelect = [],
+    this.testResultSelect = [],
+    this.recruiterRateSelect = [],
+    this.entryInterviewRateSelect = [],
+    this.mentorRateSelect = [],
+    this.finalInterviewRateSelect = []
+  }
+
+
+  ngOnDestroy() {
+   this.subscription.unsubscribe();
+   }
 }

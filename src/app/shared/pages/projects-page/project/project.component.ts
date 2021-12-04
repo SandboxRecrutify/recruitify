@@ -21,7 +21,7 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.card);
+    // console.log(this.card);
   }
 
   showCandidates() {
