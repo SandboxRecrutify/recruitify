@@ -9,12 +9,12 @@ export class CalendarService {
   constructor(private http: HttpClient) {}
 
   getInterviewersTimeTable() {
-    return this.http.get('/assets/interviewer-calendar.json');
+    return this.http.get('assets/interviewer-calendar.json');
   }
 
-  // getCandidatesTimeTable() {
-  //   return this.http.get('/assets/candidates-contact-time.json');
-  // }
+  getCandidatesTimeTable() {
+    return this.http.get('assets/candidates-contact-time.json');
+  }
 
   getCandidatesForRecruiter$(projectId: string) {
     return this.http
