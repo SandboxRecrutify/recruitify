@@ -3,7 +3,8 @@
     <div class="timetable_staff">
       {{ interviewer.name }}, {{ interviewer.skill }}
     </div>
-    <div class="timetable_grid" *ngIf="isWeekDay; else weekendRow">
+    <!-- *ngIf="isWeekDay; else weekendRow" -->
+    <div class="timetable_grid">
       <div
         class="timetable_grid-item"
         *ngFor="let time of interviewer.calendar[0].timetable"
@@ -17,6 +18,6 @@
   </div>
 </div>
 
-<ng-template #weekendRow>
+<!-- <ng-template #weekendRow>
   <div class="weekend-row">🥳 no interview for today! 🥳</div>
-</ng-template>
+</ng-template> -->

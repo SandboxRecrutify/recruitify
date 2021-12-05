@@ -26,6 +26,7 @@ export class CandidatesGridComponent implements OnInit {
         .getCandidatesForRecruiter$(this.currentProjectId)
         .subscribe((response) => {
           this.displayedCandidates = response;
+          this.calendarPageFacade.displayedCandidates$.next(response);
           console.log(response);
         });
     });

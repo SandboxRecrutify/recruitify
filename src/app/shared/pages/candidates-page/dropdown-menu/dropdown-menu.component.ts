@@ -3,6 +3,7 @@ import { CandidatesService } from './../../../services/candidates.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesPageFacade } from './../candidates-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-dropdown-menu',
@@ -22,6 +23,9 @@ export class DropdownMenuComponent implements OnInit {
 
   setOfCandidatesId: Set<string> = new Set();
 
+  finishTestDate!: Date;
+  employeeEmail: string = '';
+
   constructor(
     private candidatesPageFacade: CandidatesPageFacade,
     private candidatesService: CandidatesService,
@@ -38,13 +42,17 @@ export class DropdownMenuComponent implements OnInit {
     this.candidatesPageFacade.candidateStatusesForManager;
 
   ngOnInit(): void {
-    console.log(
-      this.userService.checkRoleInProject(this.projectId, 'Recruiter')
-    );
+    const date = dayjs();
+
+    // console.log(date.);
 
     this.candidatesPageFacade.checkedCandidatesIdSet$.subscribe((response) => {
       this.setOfCandidatesId = response;
     });
+  }
+
+  onDateChange(date: Date): void {
+    console.log('onChange: ', date.toUTCString());
   }
 
   setReasonSelectVisibility(value: any) {
@@ -54,23 +62,21 @@ export class DropdownMenuComponent implements OnInit {
     console.log(value);
   }
 
-  // printEmailModal() {
-  //   this.candidatesPageFacade.isEmailModalVisible$.next(true);
-  // }
-
   sendTestTask() {
     const reqBody = {
       candidatesIds: [...this.setOfCandidatesId],
       projectId: this.projectId,
+      personToContactEmail: this.employeeEmail,
+      testDeadlineDate: this.finishTestDate,
     };
+
+    console.log(reqBody);
 
     this.candidatesService
       .senTestTask(this.projectId, { ...reqBody })
       .subscribe((response) => {
         console.log(response);
       });
-
-    console.log(reqBody);
   }
 
   testResultSubmit() {

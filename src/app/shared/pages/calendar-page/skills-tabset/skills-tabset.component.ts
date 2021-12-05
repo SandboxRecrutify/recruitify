@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,13 +15,25 @@ export class SkillsTabsetComponent implements OnInit {
 
   constructor(
     private calendarService: CalendarService,
-    private calendarPageFacade: CalendarPageFacade
+    private calendarPageFacade: CalendarPageFacade,
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.calendarService.getCandidatesTimeTable().subscribe((response) => {
-      this.candidatesTimeTable = response;
+    this.route.params.subscribe((params) => {
+      this.calendarService
+        .getCandidatesForRecruiter$(params.id)
+        .subscribe((response) => {
+          this.candidatesTimeTable = response;
+          console.log(response);
+        });
     });
+
+    // this.calendarService.getCandidatesTimeTable().subscribe((response) => {
+    //   this.candidatesTimeTable = response;
+    // });
+
     this.calendarService.getInterviewersTimeTable().subscribe((response) => {
       this.interviewersTimeTable = response;
       this.setRecruiterAndAllCandidates();

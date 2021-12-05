@@ -80,19 +80,14 @@
 <app-send-email-modal></app-send-email-modal>
 
 <ng-template #testTaskTitle>
-  <div
-    style="display: flex; flex-direction: column; align-items: center; gap: 5px"
-  >
-    <div style="max-width: 220px">Days to complete task</div>
-    <nz-input-number
-      style="width: 50px"
-      [(ngModel)]="daysForTestTask"
-      [nzMin]="1"
-      [nzMax]="10"
-      [nzStep]="1"
+  <div style="display: flex; flex-direction: column; gap: 5px">
+    <div>Days to complete task</div>
+    <nz-date-picker
+      [(ngModel)]="finishTestDate"
       nzSize="small"
-    ></nz-input-number>
-    <div style="max-width: 220px">Employee email</div>
-    <input nz-input nzSize="small" />
+      style="width: 100%"
+    ></nz-date-picker>
+    <div>Employee email</div>
+    <input nz-input nzSize="small" [(ngModel)]="employeeEmail" />
   </div>
 </ng-template>
