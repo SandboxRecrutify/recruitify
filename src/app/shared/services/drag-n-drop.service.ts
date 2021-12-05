@@ -66,15 +66,10 @@ export class DragNDropService {
   }
 
   onCandidateDrag(el: Element) {
-    console.log(this.candidatesTimeTable);
-
     this.dragedCandidate = this.candidatesTimeTable.find((item: any) => {
-      console.log(item.id === el.id);
-      return item.id === el.id;
-      // +item.id === +el.id;
+      return +item.id === +el.id;
     });
     this.calendarPageFacade.dragedCandidate$.next(this.dragedCandidate);
-    console.log(this.dragedCandidate);
   }
 
   onCandidateDrop(el: Element, target: Element) {

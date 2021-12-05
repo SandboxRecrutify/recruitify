@@ -21,18 +21,9 @@ export class SkillsTabsetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.calendarService
-        .getCandidatesForRecruiter$(params.id)
-        .subscribe((response) => {
-          this.candidatesTimeTable = response;
-          console.log(response);
-        });
+    this.calendarService.getCandidatesTimeTable().subscribe((response) => {
+      this.candidatesTimeTable = response;
     });
-
-    // this.calendarService.getCandidatesTimeTable().subscribe((response) => {
-    //   this.candidatesTimeTable = response;
-    // });
 
     this.calendarService.getInterviewersTimeTable().subscribe((response) => {
       this.interviewersTimeTable = response;
@@ -66,16 +57,13 @@ export class SkillsTabsetComponent implements OnInit {
   }
 
   setInterviewersAndCandidatesBySkill(tabName: any) {
-    this.calendarPageFacade.displayedInterviewers$.next(
-      this.interviewersTimeTable.filter(
-        (interviewer: any) => interviewer.skill === tabName
-      )
+    const interviewers = this.interviewersTimeTable.filter(
+      (interviewer: any) => interviewer.skill === tabName
     );
-
-    this.calendarPageFacade.displayedCandidates$.next(
-      this.candidatesTimeTable.filter(
-        (interviewer: any) => interviewer.skill === tabName
-      )
+    const candidates = this.candidatesTimeTable.filter(
+      (interviewer: any) => interviewer.skill === tabName
     );
+    this.calendarPageFacade.displayedInterviewers$.next(interviewers);
+    this.calendarPageFacade.displayedCandidates$.next(candidates);
   }
 }

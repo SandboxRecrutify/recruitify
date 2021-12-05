@@ -23,12 +23,18 @@ export class DropItemComponent implements OnInit {
 
   assignedCandidatesToSendEmail: any;
 
+  datePickerValue!: Date;
+
   constructor(
     private calendarPageFacade: CalendarPageFacade,
     private emailService: EmailService
   ) {}
 
   ngOnInit(): void {
+    this.calendarPageFacade.datepickerValue$.subscribe((response) => {
+      this.datePickerValue = response;
+    });
+
     this.calendarPageFacade.assignedCandidate$.subscribe(
       (response) => (this.assignedCandidate = response)
     );

@@ -26,7 +26,7 @@
 
 <ng-template #popTitle>
   <div class="pop-title">
-    <p>{{ assignedCandidate.assignedDate | date: "EE, dd.mm" }}</p>
+    <p>{{ datePickerValue | date: "EE, dd.MM" }}</p>
     <p>{{ assignedCandidate.assignedDate | date: "HH:mm" }}</p>
   </div>
 </ng-template>

@@ -42,10 +42,6 @@ export class DropdownMenuComponent implements OnInit {
     this.candidatesPageFacade.candidateStatusesForManager;
 
   ngOnInit(): void {
-    const date = dayjs();
-
-    // console.log(date.);
-
     this.candidatesPageFacade.checkedCandidatesIdSet$.subscribe((response) => {
       this.setOfCandidatesId = response;
     });
@@ -63,20 +59,30 @@ export class DropdownMenuComponent implements OnInit {
   }
 
   sendTestTask() {
-    const reqBody = {
-      candidatesIds: [...this.setOfCandidatesId],
-      projectId: this.projectId,
-      personToContactEmail: this.employeeEmail,
-      testDeadlineDate: this.finishTestDate,
-    };
+    if (
+      this.employeeEmail &&
+      this.finishTestDate &&
+      this.setOfCandidatesId.size
+    ) {
+      const reqBody = {
+        candidatesIds: [...this.setOfCandidatesId],
+        projectId: this.projectId,
+        personToContactEmail: this.employeeEmail,
+        testDeadlineDate: this.finishTestDate,
+      };
 
-    console.log(reqBody);
+      this.candidatesService
+        .senTestTask(this.projectId, { ...reqBody })
+        .subscribe((response) => {
+          console.log(response);
+        });
 
-    this.candidatesService
-      .senTestTask(this.projectId, { ...reqBody })
-      .subscribe((response) => {
-        console.log(response);
-      });
+      window.location.reload();
+    } else if (!this.setOfCandidatesId.size) {
+      this.message.warning('Please choose at least one candidate');
+    } else if (!this.employeeEmail && !this.finishTestDate) {
+      this.message.warning('Please fill all fields');
+    }
   }
 
   testResultSubmit() {
@@ -124,6 +130,6 @@ export class DropdownMenuComponent implements OnInit {
     this.selectedStatus;
     this.selectedReason = '';
     this.isReasonSelectVisible = false;
-    this.message.success('Test result has been successfully updated');
+    this.message.success('Status has been successfully updated');
   }
 }
