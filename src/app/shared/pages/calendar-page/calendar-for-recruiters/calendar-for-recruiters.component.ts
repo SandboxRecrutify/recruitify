@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EmailService } from './../email.service';
 import { CalendarPageFacade } from './../calendar-page.facade';
@@ -13,12 +15,14 @@ export class CalendarForRecruitersComponent implements OnInit {
   datepickerValue!: Date;
   isBtnSaveVisible: boolean = false;
   candidatesToSendEmail: string[] = [];
+  currentProjectId: string = '';
 
   constructor(
     public calendarService: CalendarService,
     private calendarPageFacade: CalendarPageFacade,
     private emailService: EmailService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

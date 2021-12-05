@@ -3,7 +3,7 @@
     <div class="candidates_count">{{ candidatesList.length }}</div>
 
     <h3 class="candidates_title">
-      {{ currentProjectName || "" }}
+      {{ currentProjectName }}
     </h3>
 
     <div class="candidates_filter-wrap">
@@ -30,7 +30,7 @@
 
       <a
         class="menu_link"
-        [routerLink]="['/', 'calendar-recruiter']"
+        [routerLink]="['/calendar', currentProjectId]"
         routerLinkActive="active"
       >
         <svg class="menu_icon">

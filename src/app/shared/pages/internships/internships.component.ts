@@ -36,6 +36,7 @@ export class InternshipsComponent implements OnInit {
     // this.projectsService
     //   .getProjects(<QueryParams>{ odata: { status } })
     //   .subscribe((response) => {
+    //     console.log(response);
     //     this.activeProjects = response.filter((project) => project.isActive);
     //   });
   }
