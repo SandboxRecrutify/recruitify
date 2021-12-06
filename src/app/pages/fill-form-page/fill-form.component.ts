@@ -1,9 +1,10 @@
+import { paths } from 'src/app/app-routing.constants';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CandidatesService } from './../../shared/services/candidates.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -61,6 +62,7 @@ export class FillFormComponent implements OnInit {
     private fb: FormBuilder,
     private fillFormFacade: FillFormFacade,
     private route: ActivatedRoute,
+    private router: Router,
     private candidatesService: CandidatesService,
     private message: NzMessageService,
     private http: HttpClient,
@@ -119,6 +121,7 @@ export class FillFormComponent implements OnInit {
           (response) => {
             console.log(response);
             this.isLoading = false;
+            this.router.navigate([paths.finish]);
           },
           () => {
             this.requestError = true;

@@ -383,9 +383,6 @@
           nz-button
           (click)="submitForm()"
           [nzLoading]="isLoading"
-          [routerLink]="
-            this.candidateForm.valid && !requestError ? ['/finish'] : null
-          "
         >
           Submit
         </button>

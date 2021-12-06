@@ -64,5 +64,11 @@ export class CalendarForRecruitersComponent implements OnInit {
     this.isBtnSaveVisible = false;
     this.emailService.sendEmails();
     this.message.success('Email successfully sent');
+    this.candidatesToSendEmail.length = 0;
+    this.emailService.candidatesToSendEmail$.next(this.candidatesToSendEmail);
+  }
+
+  open() {
+    console.log('opened');
   }
 }

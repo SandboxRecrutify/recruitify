@@ -1,8 +1,15 @@
 <div class="timetable">
   <div class="timetable_row" *ngFor="let interviewer of displayedInterviewers">
-    <div class="timetable_staff">
-      {{ interviewer.name }}, {{ interviewer.skill }}
+    <div class="timetable_staff" *ngIf="isRecruiter; else interviewerName">
+      {{ recruiterName }}
     </div>
+
+    <ng-template #interviewerName>
+      <div class="timetable_staff">
+        {{ interviewer.name }}, {{ interviewer.skill }}
+      </div>
+    </ng-template>
+
     <div class="timetable_grid" *ngIf="isWeekDay; else weekendRow">
       <div
         class="timetable_grid-item"

@@ -1,6 +1,5 @@
+import { EmailService } from './../email.service';
 import { LocalStorageService } from './../../../../services/local-storage.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CalendarPageFacade } from '../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';

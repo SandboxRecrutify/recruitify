@@ -6,9 +6,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class EmailService {
-  candidatesToSendEmail$: BehaviorSubject<[]> = new BehaviorSubject([]);
+  candidatesToSendEmail$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor() {}
 
-  sendEmails() {}
+  sendEmails() {
+    this.candidatesToSendEmail$.subscribe((response) => {
+      response.forEach((candidate: any) => {
+        console.log(`Email succefuly sent to ${candidate.email}`);
+      });
+    });
+  }
 }

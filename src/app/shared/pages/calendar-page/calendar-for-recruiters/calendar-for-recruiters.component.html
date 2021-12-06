@@ -5,13 +5,15 @@
       nzType="link"
       *ngIf="!isBtnSaveVisible; else prevBtnWithPop"
       (click)="onPreviousDayButtonClick()"
-      ><<<</a
     >
+      <<<
+    </a>
     <nz-date-picker
       nzSize="small"
       nzFormat="dd.MM.yyyy"
       [(ngModel)]="datepickerValue"
       (ngModelChange)="onCalendarDateChange($event)"
+      (nzOnOpenChange)="open()"
     ></nz-date-picker>
     <a
       nz-button
