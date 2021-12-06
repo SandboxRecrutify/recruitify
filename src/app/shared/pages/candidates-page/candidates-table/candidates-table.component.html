@@ -1,9 +1,11 @@
 <nz-table
-  [nzLoading]="isLoading"
-  #nzTable
-  [nzData]="candidatesList"
-  nzTableLayout="fixed"
-  (nzQueryParams)="onQueryParamsChange($event)"
+nzShowSizeChanger
+[nzLoading]="isLoading"
+#nzTable
+[nzData]="candidatesList"
+nzTableLayout="fixed"
+(nzQueryParams)="onQueryParamsChange($event)"
+[nzSize]="'middle'"
 >
   <thead>
     <tr>

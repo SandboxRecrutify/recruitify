@@ -225,7 +225,7 @@
           </nz-form-item>
         </div>
         <div class="drawer-btns">
-          <button nz-button nzType="primary" nzSize="small" *ngIf="isAdmin">
+          <button nz-button nzType="primary" nzSize="small" *ngIf="isAdmin" (click)="export()">
             Create a report
           </button>
           <button
