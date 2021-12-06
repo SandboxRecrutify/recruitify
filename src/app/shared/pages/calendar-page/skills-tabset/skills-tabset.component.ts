@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,13 +15,16 @@ export class SkillsTabsetComponent implements OnInit {
 
   constructor(
     private calendarService: CalendarService,
-    private calendarPageFacade: CalendarPageFacade
+    private calendarPageFacade: CalendarPageFacade,
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.calendarService.getCandidatesTimeTable().subscribe((response) => {
       this.candidatesTimeTable = response;
     });
+
     this.calendarService.getInterviewersTimeTable().subscribe((response) => {
       this.interviewersTimeTable = response;
       this.setRecruiterAndAllCandidates();
@@ -52,16 +57,13 @@ export class SkillsTabsetComponent implements OnInit {
   }
 
   setInterviewersAndCandidatesBySkill(tabName: any) {
-    this.calendarPageFacade.displayedInterviewers$.next(
-      this.interviewersTimeTable.filter(
-        (interviewer: any) => interviewer.skill === tabName
-      )
+    const interviewers = this.interviewersTimeTable.filter(
+      (interviewer: any) => interviewer.skill === tabName
     );
-
-    this.calendarPageFacade.displayedCandidates$.next(
-      this.candidatesTimeTable.filter(
-        (interviewer: any) => interviewer.skill === tabName
-      )
+    const candidates = this.candidatesTimeTable.filter(
+      (interviewer: any) => interviewer.skill === tabName
     );
+    this.calendarPageFacade.displayedInterviewers$.next(interviewers);
+    this.calendarPageFacade.displayedCandidates$.next(candidates);
   }
 }

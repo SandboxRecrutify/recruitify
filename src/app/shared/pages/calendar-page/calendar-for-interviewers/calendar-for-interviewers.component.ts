@@ -1,3 +1,6 @@
+import { LocalStorageService } from './../../../../services/local-storage.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { HttpClient } from '@angular/common/http';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CalendarPageFacade } from '../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-for-interviewers.component.scss'],
 })
 export class CalendarForInterviewersComponent implements OnInit {
+  public readonly USER_KEY = 'user';
+  interviewersName = this.lsService.getItem(this.USER_KEY).name;
+
   today = new Date();
   isBtnSaveVisible: boolean = false;
   isWorkingWeekends!: boolean;
@@ -16,7 +22,8 @@ export class CalendarForInterviewersComponent implements OnInit {
 
   constructor(
     private calendarPageFacade: CalendarPageFacade,
-    private popMessage: NzMessageService
+    private popMessage: NzMessageService,
+    private lsService: LocalStorageService
   ) {}
 
   ngOnInit(): void {

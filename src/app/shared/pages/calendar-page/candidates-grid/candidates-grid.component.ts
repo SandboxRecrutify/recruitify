@@ -1,7 +1,7 @@
 import { CalendarService } from './../../../services/calendar.service';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -20,18 +20,8 @@ export class CandidatesGridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.currentProjectId = params.id;
-      this.calendarService
-        .getCandidatesForRecruiter$(this.currentProjectId)
-        .subscribe((response) => {
-          this.displayedCandidates = response;
-          console.log(response);
-        });
+    this.calendarPageFacade.displayedCandidates$.subscribe((response) => {
+      this.displayedCandidates = response;
     });
-
-    // this.calendarPageFacade.displayedCandidates$.subscribe((response) => {
-    //   this.displayedCandidates = response;
-    // });
   }
 }

@@ -38,6 +38,14 @@
         Status
       </th>
       <th
+        [nzSortDirections]="['ascend', 'descend', null]"
+        nzColumnKey="recruiter"
+        [nzSortFn]="true"
+        [nzSortPriority]="true"
+      >
+        Recruiter
+      </th>
+      <th
         nzWidth="90px"
         [nzSortDirections]="['ascend', 'descend', null]"
         nzColumnKey="test"
@@ -70,14 +78,7 @@
       >
         Finish Interview
       </th>
-      <th
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="recruiter"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Recruiter
-      </th>
+
       <th nzWidth="60px"></th>
     </tr>
   </thead>
@@ -107,14 +108,15 @@
         </p>
       </td>
       <td>
-        {{ getFeedbackRate(candidate, "Test") }}
-      </td>
-      <td>
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'Interview')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
+      <td>
+        {{ getFeedbackRate(candidate, "Test") }}
+      </td>
+
       <td>
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'TechInterviewOneStep')"
@@ -143,5 +145,3 @@
     </tr>
   </tbody>
 </nz-table>
-
-

@@ -8,10 +8,10 @@
     *ngFor="let candidate of displayedCandidates"
     id="{{ candidate.id }}"
   >
-    <div class="candidate_skill">
+    <!-- <div class="candidate_skill">
       {{ candidate.projectResult.primarySkill.name }}
-    </div>
-    <!-- <div class="candidate_skill">{{ candidate.skill }}</div> -->
+    </div> -->
+    <div class="candidate_skill">{{ candidate.skill }}</div>
     <p>{{ candidate.name }} {{ candidate.surname }}</p>
     <p>
       {{ candidate.bestTimeToConnect.join(", ") }}

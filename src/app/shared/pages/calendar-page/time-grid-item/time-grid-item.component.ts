@@ -29,7 +29,6 @@ export class TimeGridItemComponent implements OnInit {
 
     const itemDate = dayjs(this.day);
     this.isFuture = itemDate.isSame(dayjs(), 'day') && currHour + 1 > itemHour;
-    console.log(this.isFuture);
   }
 
   getItemDay() {

@@ -15,12 +15,4 @@ export class CalendarService {
   getCandidatesTimeTable() {
     return this.http.get('assets/candidates-contact-time.json');
   }
-
-  getCandidatesForRecruiter$(projectId: string) {
-    return this.http
-      .get(
-        `https://testrecruitifytest.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${projectId}`
-      )
-      .pipe(map((d: any) => d.value));
-  }
 }

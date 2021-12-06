@@ -1,6 +1,5 @@
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { QueryParams } from './../../services/api.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { Project } from 'src/app/shared/models/Project';
 import { Component, OnInit } from '@angular/core';
@@ -27,10 +26,8 @@ export class InternshipsComponent implements OnInit {
       .pipe(map((d: any) => d.value))
       .subscribe((response) => {
         this.activeProjects = response.filter((project: any) => {
-          console.log(project);
           return project.isActive;
         });
-        // console.log(this.activeProjects);
       });
 
     // this.projectsService
