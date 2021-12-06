@@ -15,6 +15,8 @@ export class CalendarPageFacade {
 
   datepickerValue$ = new BehaviorSubject(new Date());
 
+  isMouseDown$ = new BehaviorSubject(false);
+
   timeLine = [
     '09:00',
     '09:30',
@@ -53,7 +55,6 @@ export class CalendarPageFacade {
       );
       daysArr.push(nextDay);
     }
-    console.log(daysArr);
     return daysArr;
   }
 
