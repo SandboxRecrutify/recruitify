@@ -112,4 +112,5 @@ export class CandidatesTableComponent implements OnInit {
     };
     this.onFilters.emit(filters);
   }
+
 }

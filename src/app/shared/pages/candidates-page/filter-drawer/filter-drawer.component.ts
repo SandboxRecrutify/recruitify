@@ -9,6 +9,7 @@ import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { CandidatesPageFacade } from '../candidates-page.facade';
 import { Candidate } from './../../../models/Candidate';
 import { UserService } from './../../../services/user.service';
+import { ExportService } from 'src/app/shared/services/export.service';
 
 export interface CandidatesTableFilters {
 location?: string []
@@ -83,7 +84,8 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   constructor(
     private userService: UserService,
     private projectsService: ProjectsService,
-    private candidatesPageFacade: CandidatesPageFacade
+    private candidatesPageFacade: CandidatesPageFacade,
+    private exportService: ExportService
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +138,10 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
     this.entryInterviewRateSelect = [],
     this.mentorRateSelect = [],
     this.finalInterviewRateSelect = []
+  }
+
+  export() {
+    this.exportService.exportToExcel(this.candidatesList, 'candidates');
   }
 
 
