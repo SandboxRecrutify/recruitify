@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { CreateProject } from '../models/CreateProject';
 import { Project } from '../models/Project';
 import { PrimarySkill } from './../models/Project';
-import { ApiService, OData, QueryParams } from './api.service';
+import { ApiService, QueryParams } from './api.service';
 
 const API_PATH = '/Projects';
 
