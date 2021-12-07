@@ -21,7 +21,9 @@
         !displayedInterviewerIsRecruiter
     }"
   >
-    <div class="candidate_skill">{{ candidate.skill }}</div>
+    <div class="candidate_skill">
+      {{ candidate.projectResult.primarySkill.name }}
+    </div>
     <p>{{ candidate.name }} {{ candidate.surname }}</p>
     <p>
       {{ candidate.bestTimeToConnect.join(", ") }}
