@@ -1,1 +1,2 @@
-export const swager = 'testrecruitifytest';
+export const swager = 'recruitifyexadel';
+// export const swager = 'testrecruitifytest';
