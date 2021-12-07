@@ -25,6 +25,7 @@
             >
               <nz-option
                 *ngFor="let feedback of feedbackSelects"
+                [nzDisabled]="isDisabled(feedback.feedbackType)"
                 [nzValue]="feedback.feedbackType"
                 [nzLabel]="feedback.feedbackName"
               >

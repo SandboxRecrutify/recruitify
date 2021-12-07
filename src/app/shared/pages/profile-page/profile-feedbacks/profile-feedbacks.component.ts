@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { Feedback, FeedbackTab } from 'src/app/shared/models/Feedback';
-import { Role, UserRoles } from 'src/app/shared/models/UserRoles';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CandidatesPageFacade } from '../../candidates-page/candidates-page.facade';
 

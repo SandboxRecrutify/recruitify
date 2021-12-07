@@ -47,6 +47,7 @@
   </div>
 </ng-template>
 <app-add-feedback-modal
+  [feedbacks]="feedbacks"
   [visible]="isModalVisible"
   (toggleModal)="toggleModal($event)"
 ></app-add-feedback-modal>
