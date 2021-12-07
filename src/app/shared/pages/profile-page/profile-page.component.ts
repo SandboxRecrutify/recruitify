@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CandidatesPageFacade } from '../candidates-page/candidates-page.facade';
 import { Candidate } from './../../models/Candidate';
 import { ProfilePageFacade } from './profile-page.facade';
@@ -40,7 +40,6 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
     private profilePageFacade: ProfilePageFacade,
-    private router: Router,
     private route: ActivatedRoute,
     private candidatesFacade: CandidatesPageFacade
   ) {
@@ -52,21 +51,19 @@ export class ProfilePageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.currentProjectId = params.projectId;
       this.isLoading = true;
-      this.profilePageFacade
-        .getCandidateById$(params.id, params.projectId)
-        .subscribe(
-          (candidate) => {
-            this.isLoading = false;
-            this.candidate = candidate;
-            console.log('candidate', candidate);
+      this.profilePageFacade.getCandidateById(params.id, params.projectId);
 
-            this.setContacts(candidate);
-            this.getTestResult(candidate);
-          },
-          () => {
-            this.isLoading = false;
-          }
-        );
+      this.profilePageFacade.candidateData$.subscribe(
+        (candidate) => {
+          this.isLoading = false;
+          this.candidate = candidate;
+          this.setContacts(candidate);
+          this.getTestResult(candidate);
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
       this.profilePageFacade
         .getPrevProjects$(params.id)
         .subscribe((prevProjects) => {
@@ -108,8 +105,6 @@ export class ProfilePageComponent implements OnInit {
     const currentProjectResults = candidate.projectResults.find((item) => {
       return (item.projectId = this.currentProjectId);
     });
-    console.log(currentProjectResults);
-
     const testResult = currentProjectResults?.feedbacks.find(
       (item) => item.type === 0
     );

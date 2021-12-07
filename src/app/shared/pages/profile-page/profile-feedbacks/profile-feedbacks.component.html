@@ -1,6 +1,11 @@
 <div class="feedbacks">
   <div nz-row nzJustify="end">
-    <button nz-button (click)="toggleModal(true)" nzType="primary">
+    <button
+      nz-button
+      *ngIf="addButtonVisible()"
+      (click)="toggleModal(true)"
+      nzType="primary"
+    >
       add feedback
     </button>
   </div>

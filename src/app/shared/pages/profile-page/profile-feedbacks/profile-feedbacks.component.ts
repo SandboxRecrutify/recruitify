@@ -18,7 +18,7 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
   tabs: FeedbackTab[] = [
     { label: 'Recruiter', value: 'Interview' },
     { label: 'Entry interview', value: 'TechInterviewOneStep' },
-    { label: 'Finish interview', value: 'TechInterviewSecondStep' },
+    { label: 'Final interview', value: 'TechInterviewSecondStep' },
     { label: 'Mentor', value: 'Mentor' },
   ];
 
@@ -69,6 +69,25 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
     }
   }
 
+  addButtonVisible(): boolean {
+    if (this.projectId) {
+      const isMentor = this.userService.checkRoleInProject(
+        this.projectId,
+        'Mentor'
+      );
+      const isInterviewer = this.userService.checkRoleInProject(
+        this.projectId,
+        'Interviewer'
+      );
+      const isRecruiter = this.userService.checkRoleInProject(
+        this.projectId,
+        'Recruiter'
+      );
+      return isMentor || isInterviewer || isRecruiter;
+    }
+    return false;
+  }
+
   ngOnChanges(): void {
     if (this.feedbacks.length > 0) {
       this.feedbacks.forEach((feedback) => {
@@ -82,7 +101,6 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
           }
         });
       });
-      console.log(this.tabs);
     }
   }
 }

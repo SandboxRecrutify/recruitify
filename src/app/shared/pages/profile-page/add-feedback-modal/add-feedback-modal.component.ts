@@ -16,6 +16,7 @@ import { Feedback } from 'src/app/shared/models/Feedback';
 import { UserRole } from 'src/app/shared/models/UserRole';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CandidatesPageFacade } from '../../candidates-page/candidates-page.facade';
+import { ProfilePageFacade } from '../profile-page.facade';
 
 @Component({
   selector: 'app-add-feedback-modal',
@@ -38,6 +39,7 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
   constructor(
     private candidatesFacade: CandidatesPageFacade,
     private userService: UserService,
+    private profilePageFacade: ProfilePageFacade,
     private route: ActivatedRoute,
     private message: NzMessageService
   ) {
@@ -58,6 +60,7 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
     this.candidatesFacade.editingFeedback$.next(null);
     this.form.reset();
   }
+
   isDisabled(feedbackType: number) {
     let result = false;
     for (let i = 0; i < this.feedbacks.length; i++) {
@@ -69,6 +72,7 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
     }
     return result;
   }
+
   onSubmit() {
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
@@ -90,6 +94,10 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
             this.message.success('Feedback successfully added');
             this.isFeedbackSubmitting = false;
             this.toggleModal.emit(false);
+            this.profilePageFacade.getCandidateById(
+              this.candidateId,
+              this.projectId
+            );
             console.log(data);
           },
           () => {
@@ -125,8 +133,8 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
         currentProjectRoles?.forEach((role) => {
           if (role === UserRole.interviewer) {
             this.feedbackSelects.push(
-              { feedbackName: 'Tech. interview one', type: 2 },
-              { feedbackName: 'Tech. interview two', type: 3 }
+              { feedbackName: 'Entry Interview', type: 2 },
+              { feedbackName: 'Final Interview', type: 3 }
             );
           }
           if (role === UserRole.mentor) {
