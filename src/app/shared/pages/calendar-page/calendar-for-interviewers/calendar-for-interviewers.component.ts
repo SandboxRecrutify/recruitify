@@ -6,6 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CalendarPageFacade } from '../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
+import { swager } from '../constants';
 
 @Component({
   selector: 'app-calendar-for-interviewers',
@@ -64,7 +65,7 @@ export class CalendarForInterviewersComponent implements OnInit {
 
     this.http
       .get(
-        `https://testrecruitifytest.herokuapp.com/api/schedules/current_user?date=${dateToSend}&daysNum=${daysNum}`
+        `https://${swager}.herokuapp.com/api/schedules/current_user?date=${dateToSend}&daysNum=${daysNum}`
       )
       .subscribe((response: any) => {
         console.log(response.scheduleSlots);
@@ -110,7 +111,7 @@ export class CalendarForInterviewersComponent implements OnInit {
 
   onSaveBtnClick(): void {
     this.http
-      .put('https://testrecruitifytest.herokuapp.com/api/schedules', [
+      .put(`https://${swager}.herokuapp.com/api/schedules`, [
         ...this.datesToSend,
       ])
       .subscribe((r) => console.log(r));

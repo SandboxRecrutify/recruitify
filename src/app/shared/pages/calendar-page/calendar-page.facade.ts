@@ -17,6 +17,8 @@ export class CalendarPageFacade {
 
   isMouseDown$ = new BehaviorSubject(false);
 
+  recruiterScheduleSlots$ = new BehaviorSubject([]);
+
   timeLine = [
     '09:00',
     '09:30',

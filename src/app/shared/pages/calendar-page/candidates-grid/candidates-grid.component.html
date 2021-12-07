@@ -22,7 +22,11 @@
     }"
   >
     <div class="candidate_skill">
-      {{ candidate.projectResult.primarySkill.name }}
+      {{
+        candidate.projectResult
+          ? candidate.projectResult.primarySkill.name
+          : candidate.skill
+      }}
     </div>
     <p>{{ candidate.name }} {{ candidate.surname }}</p>
     <p>

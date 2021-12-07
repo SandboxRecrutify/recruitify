@@ -1,11 +1,11 @@
 <nz-table
-nzShowSizeChanger
-[nzLoading]="isLoading"
-#nzTable
-[nzData]="candidatesList"
-nzTableLayout="fixed"
-(nzQueryParams)="onQueryParamsChange($event)"
-[nzSize]="'middle'"
+  nzShowSizeChanger
+  [nzLoading]="isLoading"
+  #nzTable
+  [nzData]="candidatesList"
+  nzTableLayout="fixed"
+  (nzQueryParams)="onQueryParamsChange($event)"
+  [nzSize]="'middle'"
 >
   <thead>
     <tr>
@@ -100,7 +100,7 @@ nzTableLayout="fixed"
           }}
         </p>
       </td>
-      <td >
+      <td>
         <p>
           {{
             candidate.projectResults[0]
@@ -141,8 +141,13 @@ nzTableLayout="fixed"
       <td>
         <button
           class="profile-btn"
-          [routerLink]="['/' + paths.profile, candidate.id, currentProjectId]"
+          [routerLink]="[
+            '/' + paths.profile,
+            candidate.id,
+            candidate.projectResults[0].projectId
+          ]"
         ></button>
+        <!-- [routerLink]="['/' + paths.profile, candidate.id, currentProjectId]" -->
       </td>
     </tr>
   </tbody>

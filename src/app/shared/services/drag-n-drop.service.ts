@@ -67,7 +67,11 @@ export class DragNDropService {
 
   onCandidateDrag(el: Element) {
     this.dragedCandidate = this.candidatesTimeTable.find((item: any) => {
-      return item.id === el.id;
+      if (typeof item.id === 'string') {
+        return item.id === el.id;
+      } else {
+        return +item.id === +el.id;
+      }
     });
     this.calendarPageFacade.dragedCandidate$.next(this.dragedCandidate);
   }
@@ -77,7 +81,7 @@ export class DragNDropService {
       el.classList.add('d-none');
       this.assignedCandidates = [
         ...this.assignedCandidates,
-        this.dragedCandidate,
+        { ...this.dragedCandidate, time: target.id },
       ];
 
       this.emailService.candidatesToSendEmail$.next(this.assignedCandidates);

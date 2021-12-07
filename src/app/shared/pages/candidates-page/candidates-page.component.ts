@@ -41,6 +41,8 @@ export class CandidatesPageComponent implements OnInit {
   currentProjectId = '';
   currentProjectName: string = '';
 
+  isRecruiter: boolean = this.candidatesPageFacade.isRecruiter;
+
   constructor(
     public candidatesPageFacade: CandidatesPageFacade,
     private route: ActivatedRoute,

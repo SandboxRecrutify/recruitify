@@ -48,7 +48,7 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
         Validators.minLength(10),
         Validators.maxLength(500),
       ]),
-      feedbackType: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
     });
   }
 
@@ -125,20 +125,21 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
         currentProjectRoles?.forEach((role) => {
           if (role === UserRole.interviewer) {
             this.feedbackSelects.push(
-              { feedbackName: 'Tech. interview one', feedbackType: 2 },
-              { feedbackName: 'Tech. interview two', feedbackType: 3 }
+              { feedbackName: 'Tech. interview one', type: 2 },
+              { feedbackName: 'Tech. interview two', type: 3 }
             );
           }
           if (role === UserRole.mentor) {
             this.feedbackSelects.push({
               feedbackName: 'Mentor feedback',
-              feedbackType: 4,
+              type: 4,
+              // feedbackType: 4,
             });
           }
           if (role === UserRole.recruiter) {
             this.feedbackSelects.push({
               feedbackName: 'Recruiter feedback',
-              feedbackType: 2,
+              type: 1,
             });
           }
         });
