@@ -1,6 +1,14 @@
+import { CandidatesService } from './../../../services/candidates.service';
 import { CandidateLocation } from './../../../models/CandidateLocation';
 import { Observable, of, Subscription } from 'rxjs';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Status } from 'src/app/shared/models/CandidatesStatus';
 import { EnglishLevel } from 'src/app/shared/models/EnglishLevel';
 import { PrimarySkill } from 'src/app/shared/models/Project';
@@ -10,26 +18,26 @@ import { CandidatesPageFacade } from '../candidates-page.facade';
 import { Candidate } from './../../../models/Candidate';
 import { UserService } from './../../../services/user.service';
 import { ExportService } from 'src/app/shared/services/export.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface CandidatesTableFilters {
-location?: string []
-date?: (string | Date)[]
-englishLevel?: string[]
-primarySkill?: PrimarySkill[]
-status?: string[]
-test?: number[]
-recruiter?: number[]
-entryInterview?: number[]
-mentor?: number[]
-finalInterview?: number[]
-
+  location?: string[];
+  date?: (string | Date)[];
+  englishLevel?: string[];
+  primarySkill?: PrimarySkill[];
+  status?: string[];
+  test?: number[];
+  recruiter?: number[];
+  entryInterview?: number[];
+  mentor?: number[];
+  finalInterview?: number[];
 }
 @Component({
   selector: 'app-filter-drawer',
   templateUrl: './filter-drawer.component.html',
   styleUrls: ['./filter-drawer.component.scss'],
 })
-export class FilterDrawerComponent implements OnInit, OnDestroy  {
+export class FilterDrawerComponent implements OnInit, OnDestroy {
   @Input() drawerVisible: any;
   @Input() candidatesList!: Candidate[];
   @Input() currentProjectId!: string;
@@ -40,7 +48,6 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   subscription!: Subscription;
 
   isAdmin = this.userService.isAdmin();
-
 
   // englishLevel = Object.entries(EnglishLevel);
   englishLevel = [
@@ -65,11 +72,10 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   primarySkills: PrimarySkill[] | undefined;
-  locations: string[] | undefined
+  locations: string[] | undefined;
 
-
-  locationsSelect: string[] = []
-  filterDates: string[] = []
+  locationsSelect: string[] = [];
+  filterDates: string[] = [];
   englishLevelSelect: string[] = [];
   primarySkillsSelect: PrimarySkill[] = [];
   statusSelect: string[] = [];
@@ -79,26 +85,21 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   mentorRateSelect: number[] = [];
   finalInterviewRateSelect: number[] = [];
 
-
-
   constructor(
     private userService: UserService,
-    private projectsService: ProjectsService,
-    private candidatesPageFacade: CandidatesPageFacade,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private candidatesService: CandidatesService
   ) {}
 
   ngOnInit(): void {
-    this.projectsService.getPrimarySkills().subscribe((response) => {
-      this.primarySkills = response;
-    });
-    //to fix by new endpoint
-    this.subscription = this.candidatesPageFacade.candidatesList$.subscribe(response => {
-      this.candidatesList = response
-      // if(!this.locations || this.locations.length === 0) {
-        this.locations = [...new Set(this.candidatesList.map(el => `${el.location.country}, ${el.location.city}`))]
-      // }
-    })
+    this.subscription = this.candidatesService
+      .getFiltersValues(this.currentProjectId)
+      .subscribe((response) => {
+        this.primarySkills = response.primarySkills;
+        this.locations = response.locations?.map(
+          (el) => `${el.country}, ${el.city}`
+        ).sort();
+      });
   }
 
   closeDrawer(): void {
@@ -106,12 +107,11 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
   }
 
   onDateChange(period: Date[]) {
-    return this.filterDates = period.map(el => el.toISOString())
+    return (this.filterDates = period.map((el) => el.toISOString()));
   }
 
   onSubmit() {
-
-    const CandidatesTableFilters: CandidatesTableFilters  = {
+    const CandidatesTableFilters: CandidatesTableFilters = {
       location: this.locationsSelect,
       date: this.filterDates,
       englishLevel: this.englishLevelSelect,
@@ -121,31 +121,30 @@ export class FilterDrawerComponent implements OnInit, OnDestroy  {
       recruiter: this.recruiterRateSelect,
       entryInterview: this.entryInterviewRateSelect,
       mentor: this.mentorRateSelect,
-      finalInterview: this.finalInterviewRateSelect
-  }
+      finalInterview: this.finalInterviewRateSelect,
+    };
     this.onCandidatesFilters.emit(CandidatesTableFilters);
-    this.closeDrawer()
+    this.closeDrawer();
   }
 
   clearFilters() {
-    this.locationsSelect = [],
-    this.filterDates = [],
-    this.englishLevelSelect = [],
-    this.primarySkillsSelect = [],
-    this.statusSelect = [],
-    this.testResultSelect = [],
-    this.recruiterRateSelect = [],
-    this.entryInterviewRateSelect = [],
-    this.mentorRateSelect = [],
-    this.finalInterviewRateSelect = []
+    (this.locationsSelect = []),
+      (this.filterDates = []),
+      (this.englishLevelSelect = []),
+      (this.primarySkillsSelect = []),
+      (this.statusSelect = []),
+      (this.testResultSelect = []),
+      (this.recruiterRateSelect = []),
+      (this.entryInterviewRateSelect = []),
+      (this.mentorRateSelect = []),
+      (this.finalInterviewRateSelect = []);
   }
 
   export() {
     this.exportService.exportToExcel(this.candidatesList, 'candidates');
   }
 
-
   ngOnDestroy() {
-   this.subscription.unsubscribe();
-   }
+    this.subscription.unsubscribe();
+  }
 }

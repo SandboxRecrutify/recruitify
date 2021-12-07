@@ -1,7 +1,7 @@
-// .drawer-container {
-//   display: grid;
-//   grid-template-columns: 70% 30%;
-// }
+.drawer-container {
+width: 1200px;
+margin: 0 auto;
+}
 
 .drawer-inputs {
   margin-bottom: 10px;
@@ -29,4 +29,8 @@
 .drawer-item {
   // width: 300px;
   margin: 0;
+}
+
+.date {
+  width: 100%;
 }

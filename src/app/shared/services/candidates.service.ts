@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService, QueryParams } from './api.service';
 import { CreateFeedbackParams } from '../models/CreateFeedbackParams';
+import { CandidatesFiltersValues } from '../models/CandidatesFilters';
 
 const CANDIDATE_API = '/Candidates';
 @Injectable()
@@ -27,10 +28,6 @@ export class CandidatesService extends ApiService {
   getCandidates(filters: QueryParams): Observable<Candidate[]> {
     return super.get(filters).pipe(map((d: any) => d.value));
   }
-
-  // getCandidatesByProjectId(filters: QueryParams): Observable<Candidate[]> {
-  //   return super.get(filters).pipe(map((d: any) => d.value));
-  // }
 
   createCandidate$(
     candidate: Candidate,
@@ -63,6 +60,14 @@ export class CandidatesService extends ApiService {
         path: `/bulk/send_test_emails?projectId=${projectId}`,
       },
       body
+    );
+  }
+
+  getFiltersValues(projectId?: string): Observable<CandidatesFiltersValues> {
+    return super.get<CandidatesFiltersValues>(
+      projectId
+        ? { path: `/candidates_project_info?projectId=${projectId}` }
+        : { path: `/candidates_project_info` }
     );
   }
 }
