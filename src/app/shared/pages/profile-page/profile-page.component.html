@@ -126,6 +126,7 @@
         </div>
       </div>
       <app-profile-feedbacks
+        [projectId]="currentProjectId"
         [feedbacks]="candidate?.projectResults?.[0]?.feedbacks || []"
       ></app-profile-feedbacks>
     </div>

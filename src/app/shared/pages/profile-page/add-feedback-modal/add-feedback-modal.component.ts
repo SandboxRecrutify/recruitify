@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { FeedbackSelectRole as FeedbackSelects } from 'src/app/shared/models/AddFeedbackSelectRoles';
 import { UserRole } from 'src/app/shared/models/UserRole';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -23,8 +24,8 @@ import { CandidatesPageFacade } from '../../candidates-page/candidates-page.faca
 export class AddFeedbackModalComponent implements OnInit, OnDestroy {
   @Input() visible: boolean = false;
   @Output() toggleModal = new EventEmitter<boolean>();
-  @Input() editing: boolean = false;
 
+  editing: boolean = false;
   candidateId: string = '';
   projectId: string = '';
   form: FormGroup;
@@ -51,6 +52,9 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
 
   onClose() {
     this.toggleModal.emit(false);
+    this.editing = false;
+    this.candidatesFacade.editingFeedback$.next(null);
+    this.form.reset();
   }
 
   onSubmit() {
@@ -87,6 +91,17 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.subscriptions.push(
+      this.candidatesFacade.editingFeedback$
+        .pipe(filter((f) => !!f))
+        .subscribe((data) => {
+          if (data) {
+            console.log(data);
+            this.form.patchValue({ ...data, textFeedback: data.feedbackText });
+          }
+        })
+    );
+
+    this.subscriptions.push(
       this.route.params.subscribe((params) => {
         this.candidateId = params.id;
         this.projectId = params.projectId;
@@ -115,10 +130,6 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
             });
           }
         });
-
-        this.form.controls.feedbackType.setValue(
-          this.feedbackSelects[0].feedbackType
-        );
       })
     );
   }

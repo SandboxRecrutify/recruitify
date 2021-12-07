@@ -3,6 +3,7 @@
   [nzTitle]="editing ? editHead : createHead"
   (nzOnCancel)="onClose()"
   (nzOnOk)="onSubmit()"
+  [nzOkLoading]="isFeedbackSubmitting"
   [nzOkText]="editing ? 'Save' : 'Submit'"
 >
   <ng-template #editHead>Update your feedback</ng-template>

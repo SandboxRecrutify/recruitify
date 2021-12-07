@@ -28,7 +28,15 @@
             {{ tab.textFeedback }}
           </div>
         </div>
-        <button nz-button nzSize="default" nzType="primary">edit</button>
+        <button
+          nz-button
+          nzSize="default"
+          (click)="onEdit(tab)"
+          nzType="primary"
+          *ngIf="canEdit(tab.value)"
+        >
+          edit
+        </button>
       </ng-container>
     </nz-tab>
   </nz-tabset>
