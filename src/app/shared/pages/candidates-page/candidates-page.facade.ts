@@ -1,7 +1,7 @@
 import { filter } from 'rxjs/operators';
 import { CandidatesFilters } from './candidates-table/candidates-table.component';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Project } from '../../models/Project';
 import { UserRole } from '../../models/UserRole';
 import { QueryParams } from '../../services/api.service';
@@ -58,6 +58,8 @@ export class CandidatesPageFacade {
   >([]);
 
   checkedCandidatesIdSet$ = new BehaviorSubject(new Set<string>());
+
+  editingFeedback$ = new Subject<Pick<CreateFeedbackParams,'feedbackText'| "rating" | "feedbackType" > | null >();
 
   isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
   isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
@@ -148,7 +150,7 @@ export class CandidatesPageFacade {
       recruiter,
       mentor,
     ];
-    console.log(candidatesSort);
+    // console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {

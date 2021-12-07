@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { Feedback, FeedbackTab } from 'src/app/shared/models/Feedback';
+import { UserService } from 'src/app/shared/services/user.service';
 import { CandidatesPageFacade } from '../../candidates-page/candidates-page.facade';
 
 @Component({
@@ -10,6 +11,7 @@ import { CandidatesPageFacade } from '../../candidates-page/candidates-page.faca
 })
 export class ProfileFeedbacksComponent implements OnInit, OnChanges {
   @Input() feedbacks!: Feedback[];
+  @Input() projectId: string | undefined;
 
   feedbackTypes: string[] = [];
   isModalVisible = false;
@@ -20,7 +22,10 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
     { label: 'Mentor', value: 'Mentor' },
   ];
 
-  constructor(private candidatesFacade: CandidatesPageFacade) {
+  constructor(
+    private candidatesFacade: CandidatesPageFacade,
+    private userService: UserService
+  ) {
     this.feedbackTypes = this.candidatesFacade.feedbackTypes;
   }
 
@@ -28,13 +33,47 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
     this.isModalVisible = visible;
   }
 
+  onEdit(tabData: FeedbackTab) {
+    this.toggleModal(true);
+    this.candidatesFacade.editingFeedback$.next({
+      feedbackText: tabData.textFeedback!,
+      feedbackType: tabData.type!,
+      rating: tabData.rating!,
+    });
+  }
+
   ngOnInit(): void {}
+
+  canEdit(feedbackType: string): boolean {
+    if (!this.projectId) {
+      return false;
+    }
+    switch (feedbackType) {
+      case 'Interview':
+        return this.userService.checkRoleInProject(
+          this.projectId,
+          'Interviewer'
+        );
+
+      case 'TechInterviewOneStep' || 'TechInterviewSecondStep':
+        return this.userService.checkRoleInProject(
+          this.projectId,
+          'Interviewer'
+        );
+
+      case 'Mentor':
+        return this.userService.checkRoleInProject(this.projectId, 'Mentor');
+
+      default:
+        return false;
+    }
+  }
 
   ngOnChanges(): void {
     if (this.feedbacks.length > 0) {
       this.feedbacks.forEach((feedback) => {
         this.tabs.forEach((tab, index) => {
-          if (this.feedbackTypes[feedback.rating!] === tab.value) {
+          if (this.feedbackTypes[feedback.type!] === tab.value) {
             Object.assign(this.tabs[index], {
               ...feedback,
               createdOn: dayjs(feedback.createdOn).format('DD.MM.YYYY'),

@@ -46,13 +46,13 @@ export class CandidatesTableComponent implements OnInit {
       );
 
       const feedback = candidateProjectResults?.feedbacks.find(
-        (feedback) => feedback.type === feedbackType
+        (feedback) => feedback.type === (feedbackType as any)
       );
       return feedback?.rating;
     } else {
       try {
         const feedback = candidate.projectResults[0].feedbacks.find(
-          (feedback) => feedback.type === feedbackType
+          (feedback) => feedback.type === (feedbackType as any)
         );
         return feedback?.rating;
       } catch (error) {
@@ -112,5 +112,4 @@ export class CandidatesTableComponent implements OnInit {
     };
     this.onFilters.emit(filters);
   }
-
 }

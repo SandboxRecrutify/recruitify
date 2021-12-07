@@ -10,7 +10,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { FeedbackSelectRole as FeedbackSelects } from 'src/app/shared/models/AddFeedbackSelectRoles';
+import { Feedback } from 'src/app/shared/models/Feedback';
 import { UserRole } from 'src/app/shared/models/UserRole';
 import { UserService } from 'src/app/shared/services/user.service';
 import { CandidatesPageFacade } from '../../candidates-page/candidates-page.facade';
@@ -23,8 +25,9 @@ import { CandidatesPageFacade } from '../../candidates-page/candidates-page.faca
 export class AddFeedbackModalComponent implements OnInit, OnDestroy {
   @Input() visible: boolean = false;
   @Output() toggleModal = new EventEmitter<boolean>();
-  @Input() editing: boolean = false;
+  @Input() feedbacks!: Feedback[];
 
+  editing: boolean = false;
   candidateId: string = '';
   projectId: string = '';
   form: FormGroup;
@@ -51,8 +54,21 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
 
   onClose() {
     this.toggleModal.emit(false);
+    this.editing = false;
+    this.candidatesFacade.editingFeedback$.next(null);
+    this.form.reset();
   }
-
+  isDisabled(feedbackType: number) {
+    let result = false;
+    for (let i = 0; i < this.feedbacks.length; i++) {
+      const element = this.feedbacks[i];
+      if (element.type === feedbackType) {
+        result = true;
+        return result;
+      }
+    }
+    return result;
+  }
   onSubmit() {
     for (const i in this.form.controls) {
       if (this.form.controls.hasOwnProperty(i)) {
@@ -71,7 +87,7 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
         })
         .subscribe(
           (data) => {
-            this.message.success('Feedback successfully added ');
+            this.message.success('Feedback successfully added');
             this.isFeedbackSubmitting = false;
             this.toggleModal.emit(false);
             console.log(data);
@@ -86,6 +102,17 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
     // this.onClose()
   }
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.candidatesFacade.editingFeedback$
+        .pipe(filter((f) => !!f))
+        .subscribe((data) => {
+          if (data) {
+            console.log(data);
+            this.form.patchValue({ ...data, textFeedback: data.feedbackText });
+          }
+        })
+    );
+
     this.subscriptions.push(
       this.route.params.subscribe((params) => {
         this.candidateId = params.id;
@@ -115,10 +142,6 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
             });
           }
         });
-
-        this.form.controls.feedbackType.setValue(
-          this.feedbackSelects[0].feedbackType
-        );
       })
     );
   }

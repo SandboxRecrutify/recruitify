@@ -30,9 +30,10 @@
         </div>
         <button
           nz-button
-          *ngIf="tab.textFeedback"
           nzSize="default"
+          (click)="onEdit(tab)"
           nzType="primary"
+          *ngIf="canEdit(tab.value)"
         >
           edit
         </button>
@@ -46,6 +47,7 @@
   </div>
 </ng-template>
 <app-add-feedback-modal
+  [feedbacks]="feedbacks"
   [visible]="isModalVisible"
   (toggleModal)="toggleModal($event)"
 ></app-add-feedback-modal>
