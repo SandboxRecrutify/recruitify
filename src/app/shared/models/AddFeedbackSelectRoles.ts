@@ -2,6 +2,7 @@ import { CandidatesPageFacade } from '../pages/candidates-page/candidates-page.f
 import { Role } from './UserRoles';
 
 export interface FeedbackSelectRole {
-  feedbackType: number;
+  // feedbackType: number;
+  type: number;
   feedbackName: string;
 }

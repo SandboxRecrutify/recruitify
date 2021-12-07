@@ -20,13 +20,13 @@
               [nzLoading]="false"
               [nzShowArrow]="true"
               nz-input
-              formControlName="feedbackType"
+              formControlName="type"
               id="feedbackType"
             >
               <nz-option
                 *ngFor="let feedback of feedbackSelects"
-                [nzDisabled]="isDisabled(feedback.feedbackType)"
-                [nzValue]="feedback.feedbackType"
+                [nzDisabled]="isDisabled(feedback.type)"
+                [nzValue]="feedback.type"
                 [nzLabel]="feedback.feedbackName"
               >
               </nz-option>

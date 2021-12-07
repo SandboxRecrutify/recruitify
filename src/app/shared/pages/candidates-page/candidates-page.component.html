@@ -29,6 +29,7 @@
       <div class="candidates_filter-btn" (click)="openDrawer()"></div>
 
       <a
+        *ngIf="isRecruiter"
         class="menu_link"
         [routerLink]="['/calendar', currentProjectId]"
         routerLinkActive="active"

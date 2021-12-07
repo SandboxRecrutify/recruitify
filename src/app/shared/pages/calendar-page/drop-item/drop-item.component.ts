@@ -1,8 +1,10 @@
+import { SkillsTabsetComponent } from './../skills-tabset/skills-tabset.component';
 import { EmailService } from './../email.service';
 import { CandidateCalendar } from './../../../models/CandidateCalendar';
 import { InterviewerCalendar } from './../../../models/InterviewerCalendar';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { Component, Input, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-drop-item',
@@ -25,19 +27,33 @@ export class DropItemComponent implements OnInit {
 
   datePickerValue!: Date;
 
+  isAssigned: boolean = false;
+  assignedCandidateFromBack!: any;
+
   constructor(
     private calendarPageFacade: CalendarPageFacade,
-    private emailService: EmailService
+    private emailService: EmailService,
+    private skillsTabsetComponent: SkillsTabsetComponent
   ) {}
 
+  timeIdForItem: string = '';
+
   ngOnInit(): void {
+    const itemTime = dayjs(this.timetableTime.time).format('HH:mm');
+    const currentDay = dayjs(this.datePickerValue).format('YYYY-MM-DD');
+    const resultDate = dayjs(`${currentDay} ${itemTime}`).toISOString();
+    this.timeIdForItem = resultDate;
+    // console.log(resultDate);
+
     this.calendarPageFacade.datepickerValue$.subscribe((response) => {
       this.datePickerValue = response;
     });
 
-    this.calendarPageFacade.assignedCandidate$.subscribe(
-      (response) => (this.assignedCandidate = response)
-    );
+    this.calendarPageFacade.assignedCandidate$.subscribe((response) => {
+      if (Object.keys(response).length !== 0) {
+        this.assignedCandidate = response;
+      }
+    });
 
     this.calendarPageFacade.displayedInterviewers$.subscribe((response) => {
       this.displayedInterviewers = response;
@@ -51,14 +67,31 @@ export class DropItemComponent implements OnInit {
       this.dragedCandidate = response;
     });
 
-    this.emailService.candidatesToSendEmail$.subscribe(
-      (response) => (this.assignedCandidatesToSendEmail = response)
-    );
+    this.emailService.candidatesToSendEmail$.subscribe((response) => {
+      // console.log(response);
+      this.assignedCandidatesToSendEmail = response;
+    });
+
+    // this.skillsTabsetComponent.recruiterScheduleSlots$.subscribe((resp) => {
+    this.calendarPageFacade.recruiterScheduleSlots$.subscribe((resp) => {
+      // console.log(resp);
+      let time: any = resp.find((item: any) => {
+        return dayjs(resultDate).isSame(dayjs(item.availableTime));
+      });
+
+      if (time && time.scheduleCandidateInfo !== null) {
+        this.assignedCandidateFromBack = time.scheduleCandidateInfo;
+        this.isAssigned = true;
+      } else {
+        this.assignedCandidateFromBack = '';
+        this.isAssigned = false;
+      }
+    });
   }
 
   setDragulaValue(assignedCandidateArr: any): string {
     const isCandidateAssigned = !assignedCandidateArr.length;
-    return isCandidateAssigned ? 'calendar' : '';
+    return isCandidateAssigned && !this.isAssigned ? 'calendar' : '';
   }
 
   setIsAvaliableToDrop(interviewerTime: number, dragedCandidateTime: number[]) {
@@ -73,7 +106,7 @@ export class DropItemComponent implements OnInit {
   }
 
   setPopTrigger(candidate: any) {
-    return candidate ? 'click' : null;
+    return candidate || this.isAssigned ? 'click' : null;
   }
 
   onItemClick(candidate: any, time: number, interviewerId: number) {

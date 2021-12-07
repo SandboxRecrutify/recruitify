@@ -17,8 +17,8 @@ export class ProfileFeedbacksComponent implements OnInit, OnChanges {
   isModalVisible = false;
   tabs: FeedbackTab[] = [
     { label: 'Recruiter', value: 'Interview' },
-    { label: 'Tech. interview one', value: 'TechInterviewOneStep' },
-    { label: 'Tech. interview two', value: 'TechInterviewSecondStep' },
+    { label: 'Entry interview', value: 'TechInterviewOneStep' },
+    { label: 'Finish interview', value: 'TechInterviewSecondStep' },
     { label: 'Mentor', value: 'Mentor' },
   ];
 

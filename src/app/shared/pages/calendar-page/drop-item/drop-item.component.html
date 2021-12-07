@@ -18,16 +18,17 @@
       timetableTime.time,
       dragedCandidate.bestTimeToConnect
     ),
-    assigned: timetableTime.candidate[0]
+    assigned: timetableTime.candidate[0] || isAssigned
   }"
   [dragula]="setDragulaValue(timetableTime.candidate)"
   [(dragulaModel)]="timetableTime.candidate"
+  [id]="timeIdForItem"
 ></div>
 
 <ng-template #popTitle>
   <div class="pop-title">
     <p>{{ datePickerValue | date: "EE, dd.MM" }}</p>
-    <p>{{ assignedCandidate.assignedDate | date: "HH:mm" }}</p>
+    <p>{{ timeIdForItem | date: "HH:mm" }}</p>
   </div>
 </ng-template>
 
@@ -40,19 +41,44 @@
         style="font-size: 12px; margin: 0; padding: 0; margin-right: 10px"
         [routerLink]="[
           '/' + 'profile',
-          'd66d9d10-3775-11ec-9f7d-f7d443b3f4f3',
-          'dd49fe8f-d697-41a5-be23-7066563b85a6'
+          assignedCandidate
+            ? assignedCandidate.id
+            : assignedCandidateFromBack.id,
+          assignedCandidate
+            ? assignedCandidate.projectId
+            : assignedCandidateFromBack.projectResult.projectId
         ]"
-        >{{ assignedCandidate.name }} {{ assignedCandidate.surname }}</a
+        >{{
+          assignedCandidate
+            ? assignedCandidate.name
+            : assignedCandidateFromBack.name
+        }}
+        {{
+          assignedCandidate
+            ? assignedCandidate.surname
+            : assignedCandidateFromBack.surname
+        }}</a
       >
-      {{ assignedCandidate.skill }}
+      {{
+        assignedCandidate
+          ? assignedCandidate.skill
+          : assignedCandidateFromBack.projectResult.primarySkill.name
+      }}
     </p>
-    <p>Project: {{ assignedCandidate.project }}</p>
-    <p>Status: New</p>
-    <p>E-mail: {{ assignedCandidate.email }}</p>
-    <p>Skype: {{ assignedCandidate.skype }}</p>
+    <!-- <p>Project: {{ assignedCandidate ? assignedCandidate.project :  }}</p> -->
+    <p>Status: Test</p>
+    <p>
+      E-mail:
+      {{
+        assignedCandidate
+          ? assignedCandidate.email
+          : assignedCandidateFromBack.email
+      }}
+    </p>
+    <!-- <p>Skype: {{ assignedCandidate.skype }}</p> -->
+    <!-- *ngIf="assignedCandidatesToSendEmail.length" -->
     <button
-      *ngIf="assignedCandidatesToSendEmail.length"
+      *ngIf="!isAssigned"
       nz-button
       nzType="primary"
       nzSize="small"

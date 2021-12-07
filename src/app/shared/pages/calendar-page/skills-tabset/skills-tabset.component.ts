@@ -4,6 +4,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
+import { swager } from '../constants';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-skills-tabset',
@@ -14,6 +16,8 @@ export class SkillsTabsetComponent implements OnInit {
   interviewersTimeTable: any = [];
   candidatesTimeTable: any = [];
   datepickerValue: any;
+
+  recruiterScheduleSlots$ = new BehaviorSubject([]);
 
   constructor(
     private calendarService: CalendarService,
@@ -30,7 +34,7 @@ export class SkillsTabsetComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.http
         .get(
-          `https://testrecruitifytest.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
+          `https://${swager}.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
         )
         .pipe(map((d: any) => d.value))
         .subscribe((resp) => {
@@ -73,34 +77,38 @@ export class SkillsTabsetComponent implements OnInit {
 
     this.http
       .get(
-        `https://testrecruitifytest.herokuapp.com/api/schedules/current_user?date=${this.datepickerValue.toISOString()}&daysNum=${1}`
+        `https://${swager}.herokuapp.com/api/schedules/current_user?date=${this.datepickerValue.toISOString()}&daysNum=${1}`
       )
-      .subscribe((resp) => {
+      .subscribe((resp: any) => {
+        this.calendarPageFacade.recruiterScheduleSlots$.next(
+          resp.scheduleSlots
+        );
         console.log(resp);
       });
 
     this.route.params.subscribe((params) => {
       this.http
         .get(
-          `https://testrecruitifytest.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
+          `https://${swager}.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
         )
         .pipe(map((d: any) => d.value))
         .subscribe((resp) => {
           this.calendarPageFacade.displayedCandidates$.next(resp);
         });
     });
-
-    // this.calendarPageFacade.displayedCandidates$.next(this.candidatesTimeTable);
   }
 
   setInterviewersAndCandidatesBySkill(tabName: any) {
+    this.calendarService.getCandidatesTimeTable().subscribe((response: any) => {
+      this.calendarPageFacade.displayedCandidates$.next(
+        response.filter((candidate: any) => candidate.skill === tabName)
+      );
+    });
     const interviewers = this.interviewersTimeTable.filter(
       (interviewer: any) => interviewer.skill === tabName
     );
-    const candidates = this.candidatesTimeTable.filter(
-      (interviewer: any) => interviewer.skill === tabName
-    );
+
     this.calendarPageFacade.displayedInterviewers$.next(interviewers);
-    this.calendarPageFacade.displayedCandidates$.next(candidates);
+    this.calendarPageFacade.recruiterScheduleSlots$.next([]);
   }
 }
