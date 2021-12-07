@@ -136,7 +136,7 @@ export class CandidatesPageFacade {
           names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
         }
       : {};
-    
+
     const filter = [
       searchText,
       location,
@@ -150,7 +150,7 @@ export class CandidatesPageFacade {
       recruiter,
       mentor,
     ];
-    // console.log(candidatesSort);
+    console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {
@@ -165,13 +165,3 @@ export class CandidatesPageFacade {
   }
 }
 
-// getProjectCandidates$(filters?: candidatesQueries) {
-//   this.candidatesService.getCandidates(<QueryParams>{
-//     odata: {
-//       projectId: filters?.id
-//     },
-//   }).subscribe( (candidates) => {
-//     this.candidatesList$.next(candidates);
-//     console.log(candidates)
-//   })
-// }

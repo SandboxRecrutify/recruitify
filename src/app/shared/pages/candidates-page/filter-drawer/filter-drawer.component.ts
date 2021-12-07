@@ -18,7 +18,7 @@ import { CandidatesPageFacade } from '../candidates-page.facade';
 import { Candidate } from './../../../models/Candidate';
 import { UserService } from './../../../services/user.service';
 import { ExportService } from 'src/app/shared/services/export.service';
-import { ActivatedRoute } from '@angular/router';
+
 
 export interface CandidatesTableFilters {
   location?: string[];
@@ -49,7 +49,6 @@ export class FilterDrawerComponent implements OnInit, OnDestroy {
 
   isAdmin = this.userService.isAdmin();
 
-  // englishLevel = Object.entries(EnglishLevel);
   englishLevel = [
     'Beginner',
     'PreIntermediate',
@@ -57,7 +56,7 @@ export class FilterDrawerComponent implements OnInit, OnDestroy {
     'Advanced',
     'Native',
   ];
-  // status = Object.entries(Status)
+ 
   status = [
     'New',
     'Test',

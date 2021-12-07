@@ -1,4 +1,5 @@
 <nz-table
+  [nzHideOnSinglePage]="true"
   nzShowSizeChanger
   [nzLoading]="isLoading"
   #nzTable
@@ -15,71 +16,14 @@
         [nzIndeterminate]="indeterminate"
         (nzCheckedChange)="onAllChecked($event)"
       ></th>
-      <th
-        nzColumnKey="name"
-        [nzSortFn]="true"
-        [nzSortDirections]="['ascend', 'descend', null]"
-        [nzSortPriority]="true"
-      >
-        Name
-      </th>
-      <th
-        nzColumnKey="primarySkill"
-        [nzSortFn]="true"
-        [nzSortDirections]="['ascend', 'descend', null]"
-        [nzSortPriority]="true"
-      >
-        Primary skill
-      </th>
-      <th
-        nzColumnKey="status"
-        [nzSortFn]="true"
-        [nzSortDirections]="['ascend', 'descend', null]"
-        [nzSortPriority]="true"
-      >
-        Status
-      </th>
-      <th
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="recruiter"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Recruiter
-      </th>
-      <th
-        nzWidth="90px"
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="test"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Test
-      </th>
-      <th
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="entryInterview"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Entry Interview
-      </th>
-      <th
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="mentor"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Mentor
-      </th>
-      <th
-        [nzSortDirections]="['ascend', 'descend', null]"
-        nzColumnKey="finishInterview"
-        [nzSortFn]="true"
-        [nzSortPriority]="true"
-      >
-        Finish Interview
-      </th>
+      <th [nzAlign]="'center'">Name</th>
+      <th [nzAlign]="'center'">Primary skill</th>
+      <th [nzAlign]="'center'">Status</th>
+      <th [nzAlign]="'center'">Recruiter</th>
+      <th [nzAlign]="'center'" nzWidth="90px">Test</th>
+      <th [nzAlign]="'center'">Entry Interview</th>
+      <th [nzAlign]="'center'">Mentor</th>
+      <th [nzAlign]="'center'">Final Interview</th>
 
       <th nzWidth="60px"></th>
     </tr>
@@ -91,47 +35,47 @@
         (nzCheckedChange)="onItemChecked(candidate.id, $event)"
       ></td>
       <td>{{ candidate.name }} {{ candidate.surname }}</td>
-      <td>
+      <td [nzAlign]="'center'">
         <p>
           {{
             candidate.projectResults[0]
-              ? candidate.projectResults[0].primarySkill.name
+              ? getFormatName(candidate.projectResults[0].primarySkill.name)
               : "none"
           }}
         </p>
       </td>
-      <td>
+      <td [nzAlign]="'center'">
         <p>
           {{
             candidate.projectResults[0]
-              ? candidate.projectResults[0].status
+              ? getFormatName(candidate.projectResults[0].status)
               : "none"
           }}
         </p>
       </td>
-      <td>
+      <td [nzAlign]="'center'">
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'Interview')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
-      <td>
+      <td [nzAlign]="'center'">
         {{ getFeedbackRate(candidate, "Test") }}
       </td>
 
-      <td>
+      <td [nzAlign]="'center'">
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'TechInterviewOneStep')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
-      <td>
+      <td [nzAlign]="'center'">
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'Mentor')"
           [isDisabled]="true"
         ></app-rating-stars>
       </td>
-      <td>
+      <td [nzAlign]="'center'">
         <app-rating-stars
           [rate]="getFeedbackRate(candidate, 'TechInterviewSecondStep')"
           [isDisabled]="true"
@@ -147,7 +91,6 @@
             candidate.projectResults[0].projectId
           ]"
         ></button>
-        <!-- [routerLink]="['/' + paths.profile, candidate.id, currentProjectId]" -->
       </td>
     </tr>
   </tbody>

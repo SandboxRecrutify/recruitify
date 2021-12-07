@@ -98,7 +98,6 @@ export class CandidatesTableComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams) {
-    // console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
     const currentSort: CandidatesOrderBy[] = sort
       .filter((item) => item.value !== null)
@@ -106,10 +105,13 @@ export class CandidatesTableComponent implements OnInit {
         property: el.key,
         order: el.value !== null ? el.value.slice(0, -3) : '',
       }));
-    // console.log(currentSort);
     const filters: CandidatesFilters = {
       orderBy: currentSort,
     };
     this.onFilters.emit(filters);
+  }
+
+  getFormatName(name: any): string {
+   return name === 'JavaScript' ? name : name.split(/(?=[A-Z])/).join(' ');
   }
 }
