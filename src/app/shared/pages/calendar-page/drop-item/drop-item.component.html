@@ -34,7 +34,17 @@
 <ng-template #popBody>
   <div class="pop-body">
     <p class="pop-body_name">
-      {{ assignedCandidate.name }} {{ assignedCandidate.surname }},
+      <a
+        nz-button
+        nzType="link"
+        style="font-size: 12px; margin: 0; padding: 0; margin-right: 10px"
+        [routerLink]="[
+          '/' + 'profile',
+          'd66d9d10-3775-11ec-9f7d-f7d443b3f4f3',
+          'dd49fe8f-d697-41a5-be23-7066563b85a6'
+        ]"
+        >{{ assignedCandidate.name }} {{ assignedCandidate.surname }}</a
+      >
       {{ assignedCandidate.skill }}
     </p>
     <p>Project: {{ assignedCandidate.project }}</p>
@@ -42,6 +52,7 @@
     <p>E-mail: {{ assignedCandidate.email }}</p>
     <p>Skype: {{ assignedCandidate.skype }}</p>
     <button
+      *ngIf="assignedCandidatesToSendEmail.length"
       nz-button
       nzType="primary"
       nzSize="small"

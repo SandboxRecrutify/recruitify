@@ -1,9 +1,11 @@
-import { LocalStorageService } from './../../../../services/local-storage.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { EmailService } from './../email.service';
+import { LocalStorageService } from './../../../../services/local-storage.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CalendarPageFacade } from '../calendar-page.facade';
 import { Component, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-calendar-for-interviewers',
@@ -23,10 +25,26 @@ export class CalendarForInterviewersComponent implements OnInit {
   constructor(
     private calendarPageFacade: CalendarPageFacade,
     private popMessage: NzMessageService,
-    private lsService: LocalStorageService
+    private lsService: LocalStorageService,
+    private http: HttpClient
   ) {}
 
+  scheduleSlots$ = new BehaviorSubject([]);
+  dateArrToSend$: BehaviorSubject<any> = new BehaviorSubject([]);
+  datesToSend!: string[];
+
+  currMonday = this.calendarPageFacade.nearestMonday;
+
   ngOnInit(): void {
+    console.log(this.currMonday);
+    console.log(new Date(this.currMonday.getTime() + 24 * 7 * 60 * 60 * 1000));
+
+    this.getInterviewersSchedule(this.currMonday);
+
+    this.dateArrToSend$.subscribe((resp) => {
+      this.datesToSend = resp;
+    });
+
     this.calendarPageFacade.isSaveBtnVisible$.subscribe(
       (response) => (this.isBtnSaveVisible = response)
     );
@@ -41,7 +59,34 @@ export class CalendarForInterviewersComponent implements OnInit {
     });
   }
 
+  getInterviewersSchedule(startDate: Date, daysNum: number = 8) {
+    const dateToSend = startDate.toISOString();
+
+    this.http
+      .get(
+        `https://testrecruitifytest.herokuapp.com/api/schedules/current_user?date=${dateToSend}&daysNum=${daysNum}`
+      )
+      .subscribe((response: any) => {
+        console.log(response.scheduleSlots);
+        this.scheduleSlots$.next(response.scheduleSlots);
+
+        this.dateArrToSend$.next(
+          response.scheduleSlots.map((item: any) => {
+            return dayjs(item.availableTime).toJSON();
+          })
+        );
+      });
+  }
+
   onNextBtnClick(): void {
+    this.currMonday = new Date(
+      this.currMonday.getTime() + 24 * 7 * 60 * 60 * 1000
+    );
+    // const nextMonday = new Date(
+    //   this.currMonday.getTime() + 24 * 7 * 60 * 60 * 1000
+    // );
+    this.getInterviewersSchedule(this.currMonday);
+
     this.displayedWeekDays = this.calendarPageFacade.getNextWeekDays(
       this.displayedWeekDays
     );
@@ -49,6 +94,14 @@ export class CalendarForInterviewersComponent implements OnInit {
   }
 
   onPreviousBtnClick(): void {
+    this.currMonday = new Date(
+      this.currMonday.getTime() - 24 * 7 * 60 * 60 * 1000
+    );
+    // const prevMonday = new Date(
+    //   this.currMonday.getTime() - 24 * 7 * 60 * 60 * 1000
+    // );
+    this.getInterviewersSchedule(this.currMonday);
+
     this.displayedWeekDays = this.calendarPageFacade.getPreviousWeekDays(
       this.displayedWeekDays
     );
@@ -56,8 +109,15 @@ export class CalendarForInterviewersComponent implements OnInit {
   }
 
   onSaveBtnClick(): void {
+    this.http
+      .put('https://testrecruitifytest.herokuapp.com/api/schedules', [
+        ...this.datesToSend,
+      ])
+      .subscribe((r) => console.log(r));
+
     this.popMessage.success('Changes saved');
     this.calendarPageFacade.isSaveBtnVisible$.next(false);
+    this.dateArrToSend$.next([]);
   }
 
   printWeekends() {

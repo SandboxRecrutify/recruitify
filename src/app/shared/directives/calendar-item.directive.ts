@@ -22,16 +22,19 @@ export class CalendarItemDirective {
   @HostListener('mousedown', ['$event']) onMouseDown(event: Event | any) {
     const isFuture = this.clickedItemDay >= this.today;
     const isNotChecked = !event.target.style.background;
-    const isItem = event.target.classList.contains('time-grid_item');
+    // const isItem = event.target.classList.contains('time-grid_item');
+    const isItem = event.target.className === 'time-grid_item';
     if (event.which === 1 && isNotChecked && isItem && isFuture) {
       this.render.setStyle(event.target, 'background', '#CADDC0');
       this.isMouseDown = true;
+      this.calendarPageFacade.isMouseDown$.next(true);
       this.calendarPageFacade.isSaveBtnVisible$.next(true);
     }
   }
 
   @HostListener('mouseup') onMouseUp() {
     this.isMouseDown = false;
+    this.calendarPageFacade.isMouseDown$.next(false);
   }
 
   @HostListener('mouseover', ['$event.target']) onMouseEnter(

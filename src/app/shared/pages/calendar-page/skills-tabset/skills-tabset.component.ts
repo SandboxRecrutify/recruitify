@@ -1,5 +1,6 @@
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
 import { CalendarService } from './../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class SkillsTabsetComponent implements OnInit {
   interviewersTimeTable: any = [];
   candidatesTimeTable: any = [];
+  datepickerValue: any;
 
   constructor(
     private calendarService: CalendarService,
@@ -21,9 +23,25 @@ export class SkillsTabsetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.calendarService.getCandidatesTimeTable().subscribe((response) => {
-      this.candidatesTimeTable = response;
+    this.calendarPageFacade.datepickerValue$.subscribe((resp) => {
+      this.datepickerValue = resp;
     });
+
+    this.route.params.subscribe((params) => {
+      this.http
+        .get(
+          `https://testrecruitifytest.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
+        )
+        .pipe(map((d: any) => d.value))
+        .subscribe((resp) => {
+          this.candidatesTimeTable = resp;
+          this.calendarPageFacade.displayedCandidates$.next(resp);
+        });
+    });
+
+    // this.calendarService.getCandidatesTimeTable().subscribe((response) => {
+    //   this.candidatesTimeTable = response;
+    // });
 
     this.calendarService.getInterviewersTimeTable().subscribe((response) => {
       this.interviewersTimeTable = response;
@@ -53,7 +71,26 @@ export class SkillsTabsetComponent implements OnInit {
       )
     );
 
-    this.calendarPageFacade.displayedCandidates$.next(this.candidatesTimeTable);
+    this.http
+      .get(
+        `https://testrecruitifytest.herokuapp.com/api/schedules/current_user?date=${this.datepickerValue.toISOString()}&daysNum=${1}`
+      )
+      .subscribe((resp) => {
+        console.log(resp);
+      });
+
+    this.route.params.subscribe((params) => {
+      this.http
+        .get(
+          `https://testrecruitifytest.herokuapp.com/odata/Schedules/GetCandidatesPassedTest?projectId=${params.id}`
+        )
+        .pipe(map((d: any) => d.value))
+        .subscribe((resp) => {
+          this.calendarPageFacade.displayedCandidates$.next(resp);
+        });
+    });
+
+    // this.calendarPageFacade.displayedCandidates$.next(this.candidatesTimeTable);
   }
 
   setInterviewersAndCandidatesBySkill(tabName: any) {

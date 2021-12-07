@@ -1,7 +1,7 @@
 import { CalendarService } from './../../../services/calendar.service';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -10,8 +10,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CandidatesGridComponent implements OnInit {
   currentProjectId: string = '';
-  displayedCandidates: any = [];
+  displayedCandidates: any;
   candidatePrimarySkillName: string = '';
+  displayedInterviewerIsRecruiter!: boolean;
 
   constructor(
     private calendarPageFacade: CalendarPageFacade,
@@ -22,6 +23,13 @@ export class CandidatesGridComponent implements OnInit {
   ngOnInit(): void {
     this.calendarPageFacade.displayedCandidates$.subscribe((response) => {
       this.displayedCandidates = response;
+    });
+
+    this.calendarPageFacade.displayedInterviewers$.subscribe((response) => {
+      if (response.length) {
+        this.displayedInterviewerIsRecruiter =
+          response[0].skill === 'Recruiter';
+      }
     });
   }
 }

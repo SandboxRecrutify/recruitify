@@ -67,7 +67,7 @@ export class DragNDropService {
 
   onCandidateDrag(el: Element) {
     this.dragedCandidate = this.candidatesTimeTable.find((item: any) => {
-      return +item.id === +el.id;
+      return item.id === el.id;
     });
     this.calendarPageFacade.dragedCandidate$.next(this.dragedCandidate);
   }

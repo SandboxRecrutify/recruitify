@@ -77,7 +77,11 @@ export class DropdownMenuComponent implements OnInit {
           console.log(response);
         });
 
-      window.location.reload();
+      this.message.success('Test task has been successfully sent');
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } else if (!this.setOfCandidatesId.size) {
       this.message.warning('Please choose at least one candidate');
     } else if (!this.employeeEmail && !this.finishTestDate) {
@@ -86,7 +90,7 @@ export class DropdownMenuComponent implements OnInit {
   }
 
   testResultSubmit() {
-    if (this.setOfCandidatesId.size) {
+    if (this.setOfCandidatesId.size && this.testResult) {
       const reqBody = {
         rating: this.testResult,
         candidatesIds: [...this.setOfCandidatesId],
@@ -101,6 +105,12 @@ export class DropdownMenuComponent implements OnInit {
 
       this.testResult = '';
       this.message.success('Test result has been successfully updated');
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else if (!this.setOfCandidatesId.size) {
+      this.message.warning('Please choose at least one candidate');
     }
   }
 
