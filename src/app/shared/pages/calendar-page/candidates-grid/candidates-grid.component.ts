@@ -1,7 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { CalendarService } from './../../../services/calendar.service';
-import { ActivatedRoute } from '@angular/router';
 import { CalendarPageFacade } from './../calendar-page.facade';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-candidates-grid',
@@ -16,7 +15,6 @@ export class CandidatesGridComponent implements OnInit {
 
   constructor(
     private calendarPageFacade: CalendarPageFacade,
-    private route: ActivatedRoute,
     public calendarService: CalendarService
   ) {}
 
