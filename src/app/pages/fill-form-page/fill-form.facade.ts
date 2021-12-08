@@ -77,8 +77,6 @@ export class FillFormFacade {
     delete candidateToSend.city;
     delete candidateToSend.country;
 
-    console.log(candidateToSend);
-
     return candidateToSend;
   }
 }

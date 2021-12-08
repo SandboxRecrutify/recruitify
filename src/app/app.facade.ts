@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core'
-import { Router } from '@angular/router'
-import { NzMessageService } from 'ng-zorro-antd/message'
-import { BehaviorSubject, Observable, of } from 'rxjs'
-import { catchError, map } from 'rxjs/operators'
-import { paths } from './app-routing.constants'
-import { LocalStorageService } from './services/local-storage.service'
-import { User, UserData, UserResponse } from './shared/models/User'
-import { AuthService } from './shared/services/auth.service'
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { paths } from './app-routing.constants';
+import { LocalStorageService } from './services/local-storage.service';
+import { User, UserData, UserResponse } from './shared/models/User';
+import { AuthService } from './shared/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppFacade {
@@ -47,7 +47,7 @@ export class AppFacade {
     this.auth.login(user).subscribe(
       (response: UserResponse) => {
         const decodedUser: User = this.auth.jwtDecode(response.access_token);
-        console.log(decodedUser);
+        // console.log(decodedUser);
         this.user = {
           email: user.email,
           token: response.access_token,
@@ -72,7 +72,7 @@ export class AppFacade {
     this.auth.logout().subscribe(() => {
       this.lsService.removeItem(this.USER_KEY);
       this.router.navigate([paths.login]);
-      this.user = undefined
+      this.user = undefined;
     });
   }
 }

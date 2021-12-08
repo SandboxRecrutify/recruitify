@@ -98,7 +98,6 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
               this.candidateId,
               this.projectId
             );
-            console.log(data);
           },
           () => {
             this.message.error('Something went wrong');
@@ -115,7 +114,6 @@ export class AddFeedbackModalComponent implements OnInit, OnDestroy {
         .pipe(filter((f) => !!f))
         .subscribe((data) => {
           if (data) {
-            console.log(data);
             this.form.patchValue({ ...data, textFeedback: data.feedbackText });
           }
         })

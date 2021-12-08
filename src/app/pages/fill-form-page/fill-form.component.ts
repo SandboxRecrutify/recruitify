@@ -100,8 +100,6 @@ export class FillFormComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.candidateForm);
-
     this.candidateForm.controls.goingToExadel.errors
       ? (this.goingToExadelError = true)
       : (this.goingToExadelError = false);
@@ -119,7 +117,6 @@ export class FillFormComponent implements OnInit {
         .createCandidate$(candidateToSend, this.currentProjectId)
         .subscribe(
           (response) => {
-            console.log(response);
             this.isLoading = false;
             this.router.navigate([paths.finish]);
           },

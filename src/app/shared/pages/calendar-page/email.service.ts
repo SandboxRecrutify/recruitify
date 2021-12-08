@@ -13,7 +13,7 @@ export class EmailService {
   sendEmails() {
     this.candidatesToSendEmail$.subscribe((response) => {
       response.forEach((candidate: any) => {
-        console.log(`Email succefuly sent to ${candidate.email}`);
+        // console.log(`Email succefuly sent to ${candidate.email}`);
       });
     });
   }

@@ -48,7 +48,7 @@ export class DropdownMenuComponent implements OnInit {
   }
 
   onDateChange(date: Date): void {
-    console.log('onChange: ', date.toUTCString());
+    // console.log('onChange: ', date.toUTCString());
   }
 
   setReasonSelectVisibility(value: any) {
@@ -74,7 +74,7 @@ export class DropdownMenuComponent implements OnInit {
       this.candidatesService
         .senTestTask(this.projectId, { ...reqBody })
         .subscribe((response) => {
-          console.log(response);
+          // console.log(response);
         });
 
       this.message.success('Test task has been successfully sent');
@@ -100,7 +100,7 @@ export class DropdownMenuComponent implements OnInit {
       this.candidatesService
         .setTestResult(this.projectId, { ...reqBody })
         .subscribe((response) => {
-          console.log(response);
+          // console.log(response);
         });
 
       this.testResult = '';
@@ -136,7 +136,7 @@ export class DropdownMenuComponent implements OnInit {
     this.candidatesService
       .setStatus(this.projectId, { ...reqBody })
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
       });
 
     this.selectedStatus;
