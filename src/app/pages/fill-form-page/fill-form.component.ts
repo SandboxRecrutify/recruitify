@@ -119,6 +119,7 @@ export class FillFormComponent implements OnInit {
           (response) => {
             this.isLoading = false;
             this.router.navigate([paths.finish]);
+            this.candidateForm.reset();
           },
           () => {
             this.requestError = true;
@@ -126,7 +127,6 @@ export class FillFormComponent implements OnInit {
             this.isLoading = false;
           }
         );
-      this.candidateForm.reset();
     } else {
       Object.values(this.candidateForm.controls).forEach((control) => {
         if (control.invalid) {
