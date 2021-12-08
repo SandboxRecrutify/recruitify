@@ -83,7 +83,7 @@ export class TimeGridItemComponent implements OnInit {
     });
     if (avaliableTime && avaliableTime.scheduleCandidateInfo) {
       this.assignedCandidate = avaliableTime.scheduleCandidateInfo;
-      console.log(this.assignedCandidate);
+      // console.log(this.assignedCandidate);
       this.isAssigned = true;
     }
   }
@@ -119,7 +119,7 @@ export class TimeGridItemComponent implements OnInit {
         this.dateArrToSend
       );
 
-      console.log(this.dateArrToSend);
+      // console.log(this.dateArrToSend);
     }
   }
 
@@ -135,7 +135,7 @@ export class TimeGridItemComponent implements OnInit {
         this.dateArrToSend
       );
 
-      console.log(this.dateArrToSend);
+      // console.log(this.dateArrToSend);
     }
   }
 

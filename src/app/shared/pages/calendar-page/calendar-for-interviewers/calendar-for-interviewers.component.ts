@@ -37,8 +37,8 @@ export class CalendarForInterviewersComponent implements OnInit {
   currMonday = this.calendarPageFacade.nearestMonday;
 
   ngOnInit(): void {
-    console.log(this.currMonday);
-    console.log(new Date(this.currMonday.getTime() + 24 * 7 * 60 * 60 * 1000));
+    // console.log(this.currMonday);
+    // console.log(new Date(this.currMonday.getTime() + 24 * 7 * 60 * 60 * 1000));
 
     this.getInterviewersSchedule(this.currMonday);
 
@@ -68,7 +68,7 @@ export class CalendarForInterviewersComponent implements OnInit {
         `https://${swager}.herokuapp.com/api/schedules/current_user?date=${dateToSend}&daysNum=${daysNum}`
       )
       .subscribe((response: any) => {
-        console.log(response.scheduleSlots);
+        // console.log(response.scheduleSlots);
         this.scheduleSlots$.next(response.scheduleSlots);
 
         this.dateArrToSend$.next(

@@ -68,7 +68,9 @@ export class CalendarForRecruitersComponent implements OnInit {
       this.http
         .put(`https://${swager}.herokuapp.com/api/schedules`, this.timeTable)
         .subscribe(
-          (r) => console.log(r),
+          (r) => {
+            // console.log(r);
+          },
           (err) => {
             if (err.status === 500) {
               console.log('all days are avaliable');
@@ -89,7 +91,7 @@ export class CalendarForRecruitersComponent implements OnInit {
         const resultDate = dayjs(`${currentDay} ${time}`).toISOString();
         return resultDate;
       });
-      console.log(this.timeTable);
+      // console.log(this.timeTable);
 
       this.http
         .put(`https://${swager}.herokuapp.com/api/schedules`, this.timeTable)
@@ -110,7 +112,7 @@ export class CalendarForRecruitersComponent implements OnInit {
           this.calendarPageFacade.recruiterScheduleSlots$.next(
             resp.scheduleSlots
           );
-          console.log(resp);
+          // console.log(resp);
         });
     });
   }
@@ -131,7 +133,7 @@ export class CalendarForRecruitersComponent implements OnInit {
         `https://${swager}.herokuapp.com/api/schedules/current_user?date=${this.datepickerValue.toISOString()}&daysNum=${1}`
       )
       .subscribe((resp: any) => {
-        console.log(resp);
+        // console.log(resp);
 
         const candidatesToSend = this.candidatesToSendEmail.map((item: any) => {
           const objToSend = {
@@ -149,7 +151,7 @@ export class CalendarForRecruitersComponent implements OnInit {
             candidatesToSend
           )
           .subscribe((r) => console.log(r));
-        console.log(candidatesToSend);
+        // console.log(candidatesToSend);
       });
 
     this.message.success('Email was succesfuly sent');

@@ -19,12 +19,12 @@ export class SendEmailModalComponent implements OnInit {
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
+    // console.log('Button cancel clicked!');
     this.isModalVisible = false;
   }
 
   sendEmail() {
-    console.log('Send Email!');
+    // console.log('Send Email!');
     this.isModalVisible = false;
   }
 }

@@ -158,7 +158,7 @@ export class CandidatesPageFacade {
       recruiter,
       mentor,
     ];
-    console.log(candidatesSort);
+    // console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {

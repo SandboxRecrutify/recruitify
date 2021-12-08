@@ -83,7 +83,7 @@ export class SkillsTabsetComponent implements OnInit {
         this.calendarPageFacade.recruiterScheduleSlots$.next(
           resp.scheduleSlots
         );
-        console.log(resp);
+        // console.log(resp);
       });
 
     this.route.params.subscribe((params) => {
