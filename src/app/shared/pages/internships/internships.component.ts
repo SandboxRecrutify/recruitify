@@ -21,7 +21,7 @@ export class InternshipsComponent implements OnInit {
   ngOnInit(): void {
     this.http
       .get(
-        'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+        'https://recruitifyexadel.herokuapp.com/odata/Projects/GetShortProjects'
       )
       .pipe(map((d: any) => d.value))
       .subscribe((response) => {

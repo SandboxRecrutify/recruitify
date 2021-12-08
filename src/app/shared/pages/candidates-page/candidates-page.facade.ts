@@ -52,6 +52,11 @@ export class CandidatesPageFacade {
     'Mentor',
   ];
   candidateStatusesForManager = ['Accepted', 'Denied', 'Waiting list'];
+  // candidateStatusesForManager = [
+  //   { type: 'Accepted', num: 5 },
+  //   { type: 'Denied', num: 6 },
+  //   { type: 'Waiting list', num: 7 },
+  // ];
 
   candidatesList$: BehaviorSubject<Candidate[]> = new BehaviorSubject<
     Candidate[]
@@ -59,7 +64,10 @@ export class CandidatesPageFacade {
 
   checkedCandidatesIdSet$ = new BehaviorSubject(new Set<string>());
 
-  editingFeedback$ = new Subject<Pick<CreateFeedbackParams,'feedbackText'| "rating" | "feedbackType" > | null >();
+  editingFeedback$ = new Subject<Pick<
+    CreateFeedbackParams,
+    'feedbackText' | 'rating' | 'feedbackType'
+  > | null>();
 
   isRecruiter: boolean = this.userService.checkGlobalRole(UserRole.recruiter);
   isManager: boolean = this.userService.checkGlobalRole(UserRole.manager);
@@ -136,7 +144,7 @@ export class CandidatesPageFacade {
           names: [filters.orderBy.map((el) => `${el.property} ${el.order}`)],
         }
       : {};
-    
+
     const filter = [
       searchText,
       location,
@@ -150,7 +158,7 @@ export class CandidatesPageFacade {
       recruiter,
       mentor,
     ];
-    // console.log(candidatesSort);
+    console.log(candidatesSort);
     this.candidatesService
       .getCandidates(<QueryParams>{
         odata: {
@@ -165,13 +173,3 @@ export class CandidatesPageFacade {
   }
 }
 
-// getProjectCandidates$(filters?: candidatesQueries) {
-//   this.candidatesService.getCandidates(<QueryParams>{
-//     odata: {
-//       projectId: filters?.id
-//     },
-//   }).subscribe( (candidates) => {
-//     this.candidatesList$.next(candidates);
-//     console.log(candidates)
-//   })
-// }

@@ -81,7 +81,7 @@ export class FillFormComponent implements OnInit {
       // TODO: move to projects.service
       this.http
         .get(
-          'https://testrecruitifytest.herokuapp.com/odata/Projects/GetShortProjects'
+          'https://recruitifyexadel.herokuapp.com/odata/Projects/GetShortProjects'
         )
         .pipe(map((d: any) => d.value))
         .subscribe((response) => {

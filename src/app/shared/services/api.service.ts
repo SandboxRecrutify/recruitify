@@ -33,7 +33,6 @@ export interface OData {
 }
 interface OrderBy {
   names?: string[];
-  // order?: 'asc' | 'desc' | '';
 }
 
 interface Filter {
@@ -133,13 +132,13 @@ export abstract class ApiService {
 
     url += this.buildODataPath(
       orderby && orderby.names
-        ? orderby.names.join(',') //+ ' ' + orderby.order
+        ? orderby.names.join(',')
         : undefined,
       'orderby'
     );
 
     url += this.buildODataPath(this.buildFilterParams(filter), 'filter');
-    // console.log(url);
+
     return url;
   }
 
@@ -153,7 +152,7 @@ export abstract class ApiService {
           ? el.value
           : undefined;
       });
-    // console.log(filterParams);
+  
     return filterParams?.filter((el) => !!el).join(' and ');
   }
 
@@ -163,7 +162,7 @@ export abstract class ApiService {
   ): string {
     return parameter ? this.buildODataQuery(path, parameter) : EMPTY_STRING;
   }
-  
+
   private buildODataCandidatesPath(
     parameter: string | undefined,
     path: string

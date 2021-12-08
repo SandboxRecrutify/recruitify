@@ -38,7 +38,7 @@ export class DropdownMenuComponent implements OnInit {
 
   declineReasons: string[] = this.candidatesPageFacade.declineReasons;
   candidateStatuses: string[] = this.candidatesPageFacade.candidateStatuses;
-  candidateStatusesForManager: string[] =
+  candidateStatusesForManager: any[] =
     this.candidatesPageFacade.candidateStatusesForManager;
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class DropdownMenuComponent implements OnInit {
     value === 'Denied'
       ? (this.isReasonSelectVisible = true)
       : (this.isReasonSelectVisible = false);
-    console.log(value);
+    // console.log(value);
   }
 
   sendTestTask() {
@@ -117,11 +117,11 @@ export class DropdownMenuComponent implements OnInit {
   statusSubmit() {
     let status;
     if (this.selectedStatus === 'Accepted') {
-      status = 0;
+      status = 5;
     } else if (this.selectedStatus === 'Denied') {
-      status = 1;
+      status = 6;
     } else {
-      status = 2;
+      status = 7;
     }
 
     const reqBody = {
@@ -130,6 +130,8 @@ export class DropdownMenuComponent implements OnInit {
       candidatesIds: [...this.setOfCandidatesId],
       projectId: this.projectId,
     };
+
+    // console.log(reqBody);
 
     this.candidatesService
       .setStatus(this.projectId, { ...reqBody })
